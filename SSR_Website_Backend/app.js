@@ -19,9 +19,9 @@ app.use('/feed', feedRoutes);
 
 mongoose
   .connect(
-    'mongodb+srv://ritikgupta:ZU5DvtmxnizGbPsu@cluster0-mzunh.mongodb.net/platform?retryWrites=true&w=majority'
+    'mongodb+srv://ritikgupta:ZU5DvtmxnizGbPsu@cluster0-mzunh.mongodb.net/coding_round?retryWrites=true&w=majority'
   )
   .then(result => {
-    app.listen(8080);
+    app.listen(8000);
   })
   .catch(err => console.log(err));

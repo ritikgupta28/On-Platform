@@ -8,7 +8,7 @@ class AdminFeed extends Component {
 	}
 
 	componentDidMount() {
-		fetch('http://localhost:8080/feed/questions')
+		fetch('http://localhost:8000/feed/questions')
 			.then(res => res.json())
 			.then(resData=> {
 				this.setState({

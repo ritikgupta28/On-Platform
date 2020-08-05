@@ -12,10 +12,10 @@ export default class Admin extends React.Component {
 			<div className='Adm'>
 				<Header />
 				<Router>
-				<div>
-				<Route path='/Addques' component={Addques}/>
-				<Route path='/Admin' component={Main} />
-				</div>
+					<div>
+						<Route path='/Addques' component={Addques}/>
+						<Route path='/Admin' component={Main} />
+					</div>
 				</Router>
 				<Footer />
 			</div>

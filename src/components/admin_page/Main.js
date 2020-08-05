@@ -8,11 +8,11 @@ class Main extends React.Component {
 		return (
 			<div className='mainc'>
 			  <Link to='/Addques'> 
-			  <button className='butt' value='add'>Add Question</button>
+			  	<button className='butt' value='add'>Add Question</button>
 			  </Link>
-			   <div>
-				<AdminFeed />
-				<PCON />
+			  <div>
+					<AdminFeed />
+					<PCON />
 			   </div>
 			</div>
 		)

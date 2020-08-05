@@ -14,7 +14,7 @@ class Addques extends React.Component {
   }
 
 	handle = (e) => {
-    fetch('http://localhost:8080/feed/question', {
+    fetch('http://localhost:8000/feed/question', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
