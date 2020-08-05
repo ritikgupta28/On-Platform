@@ -1,0 +1,44 @@
+.dsc {
+	padding: 10px 120px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 0px;
+    flex: 1 1 0;
+    -webkit-overflow-scrolling: touch;
+}
+.tit {
+	font-size: 20px;
+    color: rgb(33, 33, 33);
+    font-weight: 600;
+    margin-bottom: 10px;
+	padding: 1em 0px;
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+.con {
+	margin: 1em 0;
+	font-size: 18px;
+    color: #263238;
+}
+pre {
+	display: block;
+	font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+	margin-top: 0;
+    margin-bottom: 1em;
+    overflow: auto;
+	white-space: pre-wrap;
+    background: #f0f0fa;
+    padding: 10px 15px;
+    color: #263238;
+    line-height: 2;
+    font-size: 14px;
+    border-radius: 3px;
+}
+code {
+    color: #546e7a;
+    background-color: #f7f9fa;
+    padding: 2px 4px;
+    font-size: 13px;
+    border-radius: 3px;
+    font-family: monospace;
+}

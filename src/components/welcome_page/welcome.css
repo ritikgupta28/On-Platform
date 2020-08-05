@@ -1,0 +1,91 @@
+.home {
+    padding: 0px;
+    margin: 0px;
+}
+.logo {
+    float: left;
+    margin-left: 80px;
+    margin-top: 2px;
+    width : 90px;
+    height : 90px;
+}
+.header{
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(7, 2, 15);
+    width: 100%;
+    color: white;
+}
+.heading{
+    font-size: 3em;
+}
+.main{
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    color: rgb(7, 2, 15);
+    font-family:Courier New;
+    font-size: 2em;
+}
+input[type=text] {
+    width: 30%;
+    margin-top:10px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border: 5px solid rgb(7, 2, 15);
+    border-radius: 14px;
+
+  }
+::placeholder{
+    color: rgb(7, 2, 15);
+    font-size: 1em;
+}
+
+.button{
+    color: rgb(255, 255, 255);
+    width: 12%;
+    padding: 12px 20px;
+    margin: 10px;
+    box-sizing: border-box;
+    border: 5px solid rgb(7, 2, 15);
+    border-radius: 14px;
+    background-color: rgb(7, 2, 15);
+}
+.footer{
+	margin: 0px;
+    padding: 1px;
+    width: 100%;
+    color: aliceblue;
+    font-size: 2vmin;
+    background-color: rgb(7, 2, 15);
+    text-align: center;
+}
+input:hover {
+    background-color: rgb(185, 204, 121);
+}
+.form {
+    text-align: center;
+    padding: 75px;
+    padding-top: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 190px;
+    margin-right: 190px;
+    border: 2px solid;
+    border-radius: 10px;
+}
+
+.userAdmin {
+    margin: 15px;
+    padding: 2px;
+    font-size: 20px;
+}
+
+.but {
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 10px;
+}

@@ -1,0 +1,94 @@
+.Adm {
+    padding: 0px;
+    margin: 0px;
+}
+.head {
+    background-color: rgb(7, 2, 15);
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.headi {
+    font-size: 3em;
+}
+.mainc {
+    width: 100%;
+    font-size: 4vmin;
+    color: rgb(7, 2, 15);
+}
+.foot {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    font-size: 3vmin;
+    background-color: rgb(7, 2, 15);
+}
+.log {
+    float: left;
+    margin-left: 80px;
+    margin-top: 2px;
+    width : 90px;
+    height : 90px;
+}
+
+.pcon {
+    background-color: aliceblue;
+    float: right;
+    margin: 80px;
+    padding-top: 2px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 250px;
+    font-size: 20px;
+    color: black;
+    border: 5px solid;
+}
+.ques { 
+    margin: 15px;
+    padding: 15px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+.butt {
+    float: left;
+    margin: 100px;
+    padding: 10px;
+}
+.but {
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 10px;
+}
+.fo {
+    background-color: aliceblue;
+    font-size: 23px;
+    text-align: center;
+    padding: 20px;
+    margin: 3px;
+    border : 2px solid black;  
+}
+
+.content {
+    font-size: 30px;
+    width: 700px;
+    height: 200px;
+}
+.title {
+    font-size: 30px;
+    width: 400px;
+    height: 50px;
+}
+
+.sio {
+    width: 200px;
+    height: 80px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}

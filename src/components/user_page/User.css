@@ -1,0 +1,28 @@
+.wel {
+	font-size: 25px;
+}
+.CodeMirror { 
+	height: 400px;
+	text-align: left;
+ }
+
+.con {
+	margin-right: 180px;
+	margin-left: 180px;
+}
+.bu {
+	margin-top: 5px;
+	font-size: 15px;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding: 5px; 
+	padding-left: 8px;
+	padding-right: 8px; 
+	border-radius: 8px;
+}
+.bu:hover {
+	background-color: aliceblue;
+}
+.code {
+	font-size: 20px;
+}
