@@ -1,6 +1,6 @@
 .na {
 	background-color: blue;
- 	font-size: 25px;
+ 	font-size: 20px;
 }
 
 .one {
@@ -10,11 +10,13 @@
 }
 
 li {
-	padding: 20px;
+	padding: 15px;
 	text-decoration: none;
 	color: white;
 }
 
-.push {
-	margin-left: auto;
+
+.coc {
+	padding: 10px;
+	background-color: white;
 }
