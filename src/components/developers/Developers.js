@@ -5,7 +5,7 @@ import Header from './Header'
 export default class Developers extends React.Component {
 	render() {
 		return (
-			<div>
+			<div className='cc'>
 				<Header />
 				<Cardlist />
 			</div>
