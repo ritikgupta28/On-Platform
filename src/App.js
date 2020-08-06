@@ -1,25 +1,59 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import React, { Component, Fragment } from 'react';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 
-import Welcome from './components/welcome_page/welcome';
+import Welcome from './components/welcome_page/Welcome';
 import Admin from './components/admin_page/Admin'
 import Ide from './components/user_page/User'
 import Developers from './components/developers/Developers'
 
 
-class App extends React.Component {
+class App extends Component {
   render() {
+    let routes = (
+      <Switch>
+        <Route
+          path="/"
+          exact
+          render = {props => (
+            <Welcome
+              {...props}
+            />
+          )}
+        />
+        <Route
+          path="/admin/questions"
+          exact
+          render = {props => (
+            <Admin
+              {...props}
+            />
+          )}
+        />
+        <Route
+          path="/ide"
+          exact
+          render = {props => (
+            <Ide
+              {...props}
+            />
+          )}
+        />
+        <Route
+          path="/developers"
+          exact
+          render = {props => (
+            <Developers />
+          )}
+        />
+        <Redirect to="/" />
+      </Switch>
+    );
     return (
-    	<Router>
-    	<div>
-    	<Route path='/' exact component={Welcome}/>
-    	<Route path='/Admin' exact component={Admin}/>
-    	<Route path='/Ide' exact component={Ide}/>
-        <Route path='/Developers' exact component={Developers} />
-    	</div>
-    	</Router>
+    	<Fragment>
+        {routes}
+    	</Fragment>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

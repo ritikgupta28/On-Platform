@@ -93,7 +93,7 @@ class Addques extends React.Component {
 				<label>Input File: <input type='file' name='Input File' /></label>
 			    <label>Output File: <input type='file' name='Output File' /></label>
 			    </div>
-			    <Link to='/Admin'> 
+			    <Link to='/admin/questions'> 
 			    <button className='but' value='pcon' type='submit' onClick={this.handle}>ADD Question</button>
 			    </Link>
 			   </form>

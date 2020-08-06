@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 
-import Question from './Question.js';
-
-class AdminFeed extends Component {
+class AllQuestions extends Component {
 	state = {
 		questions: []
 	}
@@ -22,18 +21,13 @@ class AdminFeed extends Component {
 		return (
 			<div style={{ textAlign: 'center', marginTop: '20px' }}>
 				{this.state.questions.map(question => (
-          <Question
-          	key={question._id}
-          	id={question._id}
-          	title={question.title}
-          	content={question.content}
-          	sinput={question.sinput}
-          	soutput={question.soutput}
-          />
+          <h4 key={question._id}>
+          	<Link to={`/question/${question._id}`}>{question.title}</Link>
+          </h4>
         ))}
       </div>
 		)
 	}
 }
 
-export default AdminFeed;
+export default AllQuestions;

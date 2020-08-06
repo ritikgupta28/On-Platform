@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Card = ({ name, email, src, ext }) => {
-	
 	return (
        <div className='card'>
          <img src={src} alt='Developer'/>

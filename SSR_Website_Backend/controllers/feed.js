@@ -3,7 +3,7 @@ const Question = require('../models/question');
 exports.getQuestions = (req, res, next) => {
   Question.find()
     .then(result => {
-      res.status(201).json({
+      res.status(200).json({
         message: 'Fetched questions successfully!',
         questions: result
       });
@@ -30,6 +30,20 @@ exports.createQuestion = (req, res, next) => {
       res.status(201).json({
         message: 'Post created successfully!',
         post: result
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+exports.getQuestion = (req, res, next) => {
+  const questionId = req.params.questionId;
+  Question.findById(questionId)
+    .then(result => {
+      res.status(200).json({
+        message: 'Fetched question successfully!',
+        question: result
       });
     })
     .catch(err => {

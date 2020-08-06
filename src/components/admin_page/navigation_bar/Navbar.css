@@ -1,5 +1,5 @@
 .na {
-	background-color: blue;
+	background-color: black;
  	font-size: 20px;
 }
 
@@ -15,6 +15,11 @@ li {
 	color: white;
 }
 
+.log {
+	width: 80px;
+  	height: 80px;
+  	border-radius: 80%;
+}
 
 .coc {
 	padding: 10px;

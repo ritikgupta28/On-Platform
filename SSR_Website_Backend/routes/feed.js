@@ -10,4 +10,6 @@ router.get('/questions', feedController.getQuestions);
 // POST /feed/question
 router.post('/question', feedController.createQuestion);
 
+router.get('/question/:questionId', feedController.getQuestion);
+
 module.exports = router;

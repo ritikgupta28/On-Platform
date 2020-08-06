@@ -1,6 +1,7 @@
 import React from 'react'
-import './welcome.css'
-import { Link } from 'react-router-dom' 
+import { Link } from 'react-router-dom'
+
+import './Welcome.css'
 
 class Main extends React.Component {
    constructor(props) {
@@ -72,10 +73,10 @@ class Main extends React.Component {
                 </select>
                 </label>
                 <br />
-                <Link to="/Admin">
+                <Link to="/admin/questions">
                 <input className = "button" type="button" value="Admin" onClick={this.handleChange}/>
                 </Link>
-                <Link to='/Ide'> 
+                <Link to="/ide"> 
                 <input className = "button" type="button" value="Ide" onClick={this.handleChange}/>
                 </Link>
             </form>
