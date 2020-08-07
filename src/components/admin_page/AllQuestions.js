@@ -19,8 +19,8 @@ class AllQuestions extends Component {
 
 	render() {
 		return (
-			<div style={{ textAlign: 'center', marginTop: '20px' }}>
-				{this.state.questions.map(question => (
+	   <div style={{ float: 'left', margin: '20px', marginLeft: '30px' }}>
+		{this.state.questions.map(question => (
           <h4 key={question._id}>
           	<Link to={`/question/${question._id}`}>{question.title}</Link>
           </h4>

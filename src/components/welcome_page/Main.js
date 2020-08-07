@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import './Welcome.css'
-
 class Main extends React.Component {
    constructor(props) {
     super(props);

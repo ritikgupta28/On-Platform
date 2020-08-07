@@ -16,19 +16,19 @@ export default class Navbar extends React.Component {
 			    <ul className='one'>
 				    <Link to='/admin/questions'>
 					    <li value='ques'>Questions</li>
-			  	  </Link>
+			  	    </Link>
 			    	<Link to='/admin/addquestion'>
-							<li value='Addques'>Add Question</li>
-						</Link>
-						<Link to='/admin/previouscontest'>
+						<li value='Addques'>Add Question</li>
+					</Link>
+					<Link to='/admin/previouscontest'>
 				    	<li value='PCON'>Previous Contests</li>
 				    </Link>
-						<Link to='/admin/about'>
-							<li value='about'><img className = 'log' alt='logo' src= {logo}></img></li>
+					<Link to='/admin/about'>
+						<li value='about'><img className = 'log' alt='logo' src= {logo}></img></li>
 				    </Link>
 				    <Link to='/'>
-    	        <button className='but' type="submit" value='Signout'>Sign Out</button>
-      	    </Link>
+    	                <button className='but' type="submit" value='Signout'>Sign Out</button>
+      	            </Link>
 		    	</ul>
 			    <div className='coc'>
 			    	<Switch>

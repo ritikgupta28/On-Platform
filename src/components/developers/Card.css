@@ -4,13 +4,13 @@
 }
 img {
 	padding: 25px;
+	width: 150px;
 	height: 180px;
 }
 .h {
 	text-align: center;
     padding: 2px;
     background-color: rgb(7, 2, 15);
-    width: 100%;
     color: white;
 }
 .he {
@@ -33,7 +33,7 @@ img {
 	margin: 22px;
 }
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px 0 rgba(0,0,0,0.2);
 }
 .ne {
 	text-align: center;
