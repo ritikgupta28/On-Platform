@@ -3,7 +3,7 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 
 import Welcome from './components/welcome_page/Welcome';
 import Admin from './components/admin_page/Admin'
-import Ide from './components/ide/User'
+import Ide from './components/ide/Ide'
 import Developers from './components/developers/Developers'
 
 

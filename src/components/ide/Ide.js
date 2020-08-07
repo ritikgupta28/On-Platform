@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import Dropdown from './Dropdown';
 import Output from './Output';
-import './User.css';
+import './Ide.css';
 
 class App extends React.Component {
   constructor(props) {
