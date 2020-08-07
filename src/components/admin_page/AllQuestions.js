@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import Card from './Card';
 
 class AllQuestions extends Component {
 	state = {
@@ -19,11 +19,12 @@ class AllQuestions extends Component {
 
 	render() {
 		return (
-	   <div style={{ float: 'left', margin: '20px', marginLeft: '30px' }}>
+	   <div>
 		{this.state.questions.map(question => (
-          <h4 key={question._id}>
-          	<Link to={`/question/${question._id}`}>{question.title}</Link>
-          </h4>
+            <Card
+             id={question._id}
+             title={question.title}
+            />
         ))}
       </div>
 		)

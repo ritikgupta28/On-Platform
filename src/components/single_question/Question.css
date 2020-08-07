@@ -1,5 +1,5 @@
 .dsc {
-	padding: 10px 120px;
+    margin: 0px 30px;
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-box-flex: 1;
@@ -8,22 +8,21 @@
     -webkit-overflow-scrolling: touch;
 }
 .tit {
+    padding-left: 25px;
 	font-size: 20px;
     color: rgb(33, 33, 33);
     font-weight: 600;
     margin-bottom: 10px;
-	padding: 1em 0px;
-    border-bottom: 1px solid rgb(238, 238, 238);
+	margin: 20px 0px;
+    border-bottom: 2px solid black;
 }
 .con {
-	margin: 1em 0;
-	font-size: 18px;
+	font-size: 25px;
     color: #263238;
 }
 pre {
 	display: block;
 	font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-	margin-top: 0;
     margin-bottom: 1em;
     overflow: auto;
 	white-space: pre-wrap;
@@ -31,7 +30,7 @@ pre {
     padding: 10px 15px;
     color: #263238;
     line-height: 2;
-    font-size: 14px;
+    font-size: 16px;
     border-radius: 3px;
 }
 code {

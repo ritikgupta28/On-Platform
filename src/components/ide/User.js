@@ -6,7 +6,6 @@ import 'codemirror/mode/python/python';
 import 'codemirror/mode/clike/clike';
 import axios from 'axios';
 
-import Welcome from './Welcome';
 import Dropdown from './Dropdown';
 import Output from './Output';
 import './User.css';
@@ -43,7 +42,7 @@ class App extends React.Component {
     else language = 'cpp';
     let stdin = e.target.elements.input.value;
 
-    this.state.result = await axios.post('http://localhost:8000', {
+    this.state.result = await axios.post('http://localhost:8000/ide', {
       script,
       language,
       stdin
@@ -61,7 +60,6 @@ class App extends React.Component {
     };
     return (
       <div style={{ textAlign: 'center', paddingLeft: '150px', paddingRight: '150px'}}>
-        <Welcome />
         <div className="con">
           <Dropdown sendData={this.getData.bind(this)} />
           <hr />
@@ -75,22 +73,27 @@ class App extends React.Component {
             {' '}
             <br />
             <textarea
-              rows="4"
-              cols="50"
+              style={{ float: 'left' }}
+              rows="5"
+              cols="60"
               name="input"
-              placeholder="Enter input here..."
+              placeholder="Enter input here.."
             />{' '}
-            <br />
             <button className="bu">Compile</button>
             <button className="bu">Submit</button>
           </form>
           <br />
-
-          {this.state.output ? (
+          {
+            this.state.output 
+            ? 
+            (
             <div>
-              <hr /> <Output result={this.state.result} />
+              <hr/>
+              <Output result={this.state.result} />
             </div>
-          ) : null}
+            ) 
+            : null
+          }
         </div>
       </div>
     );

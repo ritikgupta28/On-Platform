@@ -35,7 +35,7 @@ class Dropdown extends Component {
         }) => (
           <div style={{ marginLeft: '200px', marginRight: '200px' }}>
             <label
-              style={{ marginTop: '1rem', display: 'block' }}
+              style={{ display: 'block' }}
               {...getLabelProps()}
             />{' '}
             <br />

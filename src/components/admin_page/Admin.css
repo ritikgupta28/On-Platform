@@ -91,3 +91,10 @@
     margin-right: 10px;
     margin-left: 10px;
 }
+
+.quescard {
+    margin-left: 50px;
+    padding-left: 20px; 
+    width: 70%;
+    border-bottom: 2px solid black;
+}

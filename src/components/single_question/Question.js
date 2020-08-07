@@ -1,5 +1,6 @@
 import React from 'react'
 import './Question.css'
+import User from '../ide/User'
 
 class Question extends React.Component {
 	state = {
@@ -39,6 +40,7 @@ class Question extends React.Component {
 					  <p>{this.state.soutput}</p>
 					</pre>
 				</div>
+				<User />
 			</div>
 		)
 	}

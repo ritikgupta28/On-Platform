@@ -3,8 +3,9 @@ import React from 'react';
 export default function Output(props) {
   let result = props.result.data.body.output;
   return (
-    <div>
-      <p className="display-3"> Output</p>
+    <div className='out'>
+      <h2>Output: </h2>
+      <hr/>
       {result}
     </div>
   );

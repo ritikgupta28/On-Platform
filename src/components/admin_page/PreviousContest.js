@@ -6,7 +6,7 @@ export default class PreviosContest extends React.Component {
 			<div className='pcon'>
 				<h1>Previous Contests</h1>
 				<hr />
-				<p>data goes here</p>
+				<p>Data goes here..</p>
 			</div>
 		)
 	}

@@ -1,11 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const feedRoutes = require('./routes/feed');
+const outputRoutes = require('./routes/output') 
 
 const app = express();
 
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -16,6 +20,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/feed', feedRoutes);
+app.use(outputRoutes);
 
 mongoose
   .connect(
