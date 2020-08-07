@@ -9,6 +9,9 @@ import AllQuestions from '../AllQuestions'
 import Question from '../../single_question/Question'
 
 export default class Navbar extends React.Component {
+	handler = () => {
+		this.props.onRouteChange('welcome');
+	}
 	render() {
 		return (
 			<Router>
@@ -27,8 +30,8 @@ export default class Navbar extends React.Component {
 						<li value='about'><img className = 'log' alt='logo' src= {logo}></img></li>
 				    </Link>
 				    <Link to='/'>
-    	                <button className='but' type="submit" value='Signout'>Sign Out</button>
-      	            </Link>
+    	            <button className='but' type="submit" value='Signout' onClick={this.handler}>Sign Out</button>
+    	            </Link>
 		    	</ul>
 			    <div className='coc'>
 			    	<Switch>

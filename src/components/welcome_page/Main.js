@@ -26,6 +26,9 @@ class Main extends React.Component {
   onC3 = (event) => {
     this.setState({ userAdmin: event.target.value})
   }
+  onC = () => {
+    this.props.onRouteChange('admin');
+  }
 
   render() {
     return (
@@ -72,10 +75,10 @@ class Main extends React.Component {
                 </label>
                 <br />
                 <Link to="/admin/questions">
-                <input className = "button" type="button" value="Admin" onClick={this.handleChange}/>
+                <input className = "button" type="button" value="Admin" onClick={this.onC}/>
                 </Link>
                 <Link to="/ide"> 
-                <input className = "button" type="button" value="Ide" onClick={this.handleChange}/>
+                <input className = "button" type="button" value="Ide" on />
                 </Link>
             </form>
         </div>

@@ -5,10 +5,10 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer'
 
-const Welcome = props => (
+const Welcome = ({onRouteChange}) => (
 	<div className = "home">
-    <Header/>
-    <Main />
+    <Header />
+    <Main onRouteChange={onRouteChange}/>
     <Footer/>
   </div>
 );

@@ -22,6 +22,7 @@ class AllQuestions extends Component {
 	   <div>
 		{this.state.questions.map(question => (
             <Card
+            key={question._id}
              id={question._id}
              title={question.title}
             />
