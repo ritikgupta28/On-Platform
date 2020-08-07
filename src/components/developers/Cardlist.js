@@ -2,7 +2,7 @@ import React from 'react';
 
 import Card from './Card';
 import './Card.css'
-import logo from '../images/logo1.jpeg'
+import logo from '../images/logo1.jpg'
 
 const Cardlist = () => {
 	 return (

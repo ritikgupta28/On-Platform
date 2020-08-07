@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Link, Switch, BrowserRouter as Router } from 'react-router-dom'
 
 import './Navbar.css'
-import logo from '../../images/logo1.jpeg'
+import logo from '../../images/logo1.jpg'
 import PreviousContest from '../PreviousContest'
 import AddQuestion from '../AddQuestion'
 import AllQuestions from '../AllQuestions'
