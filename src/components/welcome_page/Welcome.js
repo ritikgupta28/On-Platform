@@ -5,12 +5,15 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer'
 
-const Welcome = ({onRouteChange}) => (
-	<div className = "home">
-    <Header />
-    <Main onRouteChange={onRouteChange}/>
-    <Footer/>
-  </div>
-);
 
-export default Welcome;
+export default class Welcome extends React.Component {
+   render() {
+		return (
+			<div className = "home">
+            <Header />
+            <Main onSignup={this.props.onsignup} onlogin={this.props.onlogin} />
+            <Footer/>
+            </div>
+   		)
+	}
+};

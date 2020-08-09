@@ -18,6 +18,11 @@ const questionSchema = new Schema(
     soutput: {
       type: Object,
       required: String
+    },
+    adminId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Admin',
+      required: true
     }
   },
   { timestamps: true }

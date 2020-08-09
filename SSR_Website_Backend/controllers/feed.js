@@ -1,4 +1,6 @@
 const Question = require('../models/question');
+const Admin = require('../models/admin');
+const ObjectId = require('mongodb').ObjectID;
 
 exports.getQuestions = (req, res, next) => {
   Question.find()
@@ -22,13 +24,14 @@ exports.createQuestion = (req, res, next) => {
     title: title,
     content: content,
     sinput: sinput,
-    soutput: soutput
+    soutput: soutput,
+    adminId: req.admin
   });
   question
     .save()
     .then(result => {
       res.status(201).json({
-        message: 'Post created successfully!',
+        message: 'Question created successfully!',
         post: result
       });
     })
@@ -48,5 +51,53 @@ exports.getQuestion = (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
+    });
+};
+
+exports.postContest = (req, res, next) => {
+  const quesId = req.body.questionId;
+  const qId = ObjectId(quesId);
+  Question.findById(qId)
+    .then(result => {
+      return req.admin.addToContest(result);
+    })
+    .then(resData => {
+      console.log(resData);
+      res.status(201).json({
+        message: 'Add question successfully!'
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+exports.getContest = (req, res, next) => {
+  req.admin
+    .populate('contest.items.questionId')
+    .execPopulate()
+    .then(admin => {
+      const questions = admin.contest.items;
+      res.status(200).json({
+        questions: questions
+      });
+    })
+    .catch(err => {
+      console.log(err)
+    });
+};
+
+exports.postContestDeleteQuestion = (req, res, next) => {
+  const quesId = req.body.questionId;
+  const qId = ObjectId(quesId);
+  req.admin
+    .removeFromContest(qId)
+    .then(result => {
+      res.status(201).json({
+        message: 'Remove question successfully!'
+      })
+    })
+    .catch(err => {
+      console.log(err)
     });
 };

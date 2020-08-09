@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 class Main extends React.Component {
    constructor(props) {
@@ -25,9 +24,6 @@ class Main extends React.Component {
 
   onC3 = (event) => {
     this.setState({ userAdmin: event.target.value})
-  }
-  onC = () => {
-    this.props.onRouteChange('admin');
   }
 
   render() {
@@ -74,12 +70,8 @@ class Main extends React.Component {
                 </select>
                 </label>
                 <br />
-                <Link to="/admin/questions">
-                <input className = "button" type="button" value="Admin" onClick={this.onC}/>
-                </Link>
-                <Link to="/ide"> 
-                <input className = "button" type="button" value="Ide" on />
-                </Link>
+                <button className = "button" type="submit" value="Signup" onClick={e => this.props.onSignup(e, this.state)} >Sign Up</button>  
+                <button className = "button" type="button" value="login" onClick={e => this.props.onlogin(e, this.state)} >login</button>
             </form>
         </div>
     )

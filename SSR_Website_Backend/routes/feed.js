@@ -12,4 +12,10 @@ router.post('/question', feedController.createQuestion);
 
 router.get('/question/:questionId', feedController.getQuestion);
 
+router.post('/contest', feedController.postContest);
+
+router.get('/contest', feedController.getContest);
+
+router.post('/contest-delete-question', feedController.postContestDeleteQuestion)
+
 module.exports = router;

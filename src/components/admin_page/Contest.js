@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import Card from './Card';
 
-class AllQuestions extends Component {
-	constructor(props) {
-    super(props);
-    this.state = {
-			questions: []
-		}
-  };
+class Contest extends Component {
+	state = {
+		questions: []
+	}
 
 	handle = (e) => {
-    fetch('http://localhost:8000/feed/contest', {
+    fetch('http://localhost:8000/feed/contest-delete-question', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -20,10 +17,12 @@ class AllQuestions extends Component {
     .then(response => response.json())
     .catch(err => console.log(err));
   }
+
 	componentDidMount() {
-		fetch('http://localhost:8000/feed/questions')
+		fetch('http://localhost:8000/feed/contest')
 			.then(res => res.json())
 			.then(resData=> {
+				console.log(resData);
 				this.setState({
 					questions: resData.questions
 				});
@@ -33,14 +32,14 @@ class AllQuestions extends Component {
 
 	render() {
 		return (
-	   <div>
-		{this.state.questions.map(q => (
-            <Card
-             sign={'+'}
+	   	<div >
+			{this.state.questions.map(q => (
+			<Card
+			 sign={'-'}
              handle={this.handle}
-             key={q._id}
-             id={q._id}
-             title={q.title}
+             key={q.questionId._id}
+             id={q.questionId._id}
+             title={q.questionId.title}
             />
         ))}
       </div>
@@ -48,4 +47,4 @@ class AllQuestions extends Component {
 	}
 }
 
-export default AllQuestions;
+export default Contest;
