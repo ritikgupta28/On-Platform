@@ -36,11 +36,49 @@ export default class Navbar extends React.Component {
 		    	</ul>
 			    <div className='coc'>
 			    	<Switch>
-			    	    <Route path="/admin/contest" exact component={Contest} />
-					    <Route path="/admin/questions" exact component={AllQuestions} />
-					    <Route path="/admin/previouscontest" exact component={PreviousContest} />
-					    <Route path="/admin/addquestion" exact component={AddQuestion} />
-					    <Route path="/question/:id" component={Question} />
+			    	    <Route path="/admin/contest"
+			    	    	exact
+			    	    	render = {props => (
+			    	    		<Contest
+			    	    			token = {this.props.token}
+			    	    		/>
+			    	    	)}
+			    	    />
+					    <Route
+					    	path="/admin/questions"
+					    	exact
+					    	render = {props => (
+					    		<AllQuestions
+										token = {this.props.token}
+					    		/>
+					    	)}
+					    />
+					    <Route
+					    	path="/admin/previouscontest"
+					    	exact
+					    	render = {props => (
+					    		<PreviousContest
+										token = {this.props.token}
+					    		/>
+					    	)}
+					    />
+					    <Route
+					    	path="/admin/addquestion"
+					    	exact
+					    	render = {props => (
+					    		<AddQuestion
+					    			token = {this.props.token}
+					    		/>
+					    	)}
+					    />
+					    <Route
+					    	path="/question/:id"
+					    	render = {props => (
+					    		<Question
+					    			token = {this.props.token}
+					    		/>
+					    	)}
+					    />
 				    </Switch>
 		    	</div>
 				</div>

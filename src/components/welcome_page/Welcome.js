@@ -11,7 +11,7 @@ export default class Welcome extends React.Component {
 		return (
 			<div className = "home">
             <Header />
-            <Main onSignup={this.props.onsignup} onlogin={this.props.onlogin} />
+            <Main onsignup={this.props.onsignup} onlogin={this.props.onlogin} />
             <Footer/>
             </div>
    		)

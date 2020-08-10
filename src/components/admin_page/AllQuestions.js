@@ -12,7 +12,10 @@ class AllQuestions extends Component {
 	handle = (e) => {
     fetch('http://localhost:8000/feed/contest', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         questionId: e.target.value
     	})
@@ -20,8 +23,15 @@ class AllQuestions extends Component {
     .then(response => response.json())
     .catch(err => console.log(err));
   }
+
 	componentDidMount() {
-		fetch('http://localhost:8000/feed/questions')
+    console.log(this.props.token);
+		fetch('http://localhost:8000/feed/questions', {
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+        'Content-Type': 'application/json'
+      }
+    })
 			.then(res => res.json())
 			.then(resData=> {
 				this.setState({
@@ -36,11 +46,11 @@ class AllQuestions extends Component {
 	   <div>
 		{this.state.questions.map(q => (
             <Card
-             sign={'+'}
-             handle={this.handle}
-             key={q._id}
-             id={q._id}
-             title={q.title}
+              sign={'+'}
+              handle={this.handle}
+              key={q._id}
+              id={q._id}
+              title={q.title}
             />
         ))}
       </div>

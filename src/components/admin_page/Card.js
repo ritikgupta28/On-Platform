@@ -7,10 +7,10 @@ export default class Card extends React.Component {
 		return (
 			<div className='quescard'>
 				<Link to={`/question/${this.props.id}`}>
-				<p>{this.props.title}</p>
+					<p>{this.props.title}</p>
 				</Link>
 				<Link to="/admin/contest">
-				<button className='but' value={this.props.id} onClick={this.props.handle}> {this.props.sign} </button> 
+					<button className='but' value={this.props.id} onClick={this.props.handle}> {this.props.sign} </button> 
 				</Link>
 			</div>
 		)

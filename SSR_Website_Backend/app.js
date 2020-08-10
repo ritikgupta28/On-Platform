@@ -6,7 +6,7 @@ const cors = require('cors');
 const feedRoutes = require('./routes/feed');
 const outputRoutes = require('./routes/output');
 const authUserRoutes = require('./routes/authUser');
-//const authAdminRoutes = require('./routes/authAdmin');
+const authAdminRoutes = require('./routes/authAdmin');
 const Admin = require('./models/admin');
 
 const app = express();
@@ -22,38 +22,17 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use((req, res, next) => {
-  Admin.findById('5f2e5cc801c6442fd0d01c45')
-    .then(admin => {
-      req.admin = admin;
-      next();
-    })
-    .catch(err => console.log(err));
-});
-
 app.use('/feed', feedRoutes);
-app.use(outputRoutes);
 app.use('/authUser', authUserRoutes);
-// app.use('/authAdmin', authAdminRoutes);
+app.use('/authAdmin', authAdminRoutes);
+app.use(outputRoutes);
+// app.use(authAdmin);
 
 mongoose
   .connect(
     'mongodb+srv://ritikgupta:ZU5DvtmxnizGbPsu@cluster0-mzunh.mongodb.net/coding_round?retryWrites=true&w=majority'
   )
   .then(result => {
-    Admin.findOne().then(admin => {
-      if(!admin) {
-        const admin = new Admin({
-          name: 'test',
-          email: 'test@test.com',
-          password: 'tester',
-          cart: {
-            questions: []
-          }
-        });
-        admin.save()
-      }
-    });
     app.listen(8000);
   })
   .catch(err => console.log(err));

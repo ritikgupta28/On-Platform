@@ -9,7 +9,10 @@ class Contest extends Component {
 	handle = (e) => {
     fetch('http://localhost:8000/feed/contest-delete-question', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         questionId: e.target.value
     	})
@@ -19,7 +22,12 @@ class Contest extends Component {
   }
 
 	componentDidMount() {
-		fetch('http://localhost:8000/feed/contest')
+		fetch('http://localhost:8000/feed/contest', {
+			headers: {
+        Authorization: 'Bearer ' + this.props.token,
+        'Content-Type': 'application/json'
+      }
+		})
 			.then(res => res.json())
 			.then(resData=> {
 				console.log(resData);

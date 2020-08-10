@@ -3,6 +3,7 @@ const Admin = require('../models/admin');
 const ObjectId = require('mongodb').ObjectID;
 
 exports.getQuestions = (req, res, next) => {
+  // console.log(req.adminId);
   Question.find()
     .then(result => {
       res.status(200).json({
@@ -25,7 +26,7 @@ exports.createQuestion = (req, res, next) => {
     content: content,
     sinput: sinput,
     soutput: soutput,
-    adminId: req.admin
+    adminId: req.adminId
   });
   question
     .save()
@@ -57,9 +58,20 @@ exports.getQuestion = (req, res, next) => {
 exports.postContest = (req, res, next) => {
   const quesId = req.body.questionId;
   const qId = ObjectId(quesId);
+  console.log(req.adminId);
+  let admin;
+  Admin.findById(req.adminId)
+    .then(result => {
+      admin = result;
+    });
+  console.log(admin);
   Question.findById(qId)
     .then(result => {
-      return req.admin.addToContest(result);
+      console.log(result);
+      return result;
+    })
+    .then(result => {
+      return admin.addToContest(result);
     })
     .then(resData => {
       console.log(resData);
@@ -73,11 +85,19 @@ exports.postContest = (req, res, next) => {
 };
 
 exports.getContest = (req, res, next) => {
-  req.admin
+  // let admin;
+  // Admin.findById(req.adminId)
+  //   .then(result => {
+  //     admin = result;
+  //   });
+
+  // const admin = Admin.findById(req.userId);
+  // req.adminId
+  admin
     .populate('contest.items.questionId')
     .execPopulate()
-    .then(admin => {
-      const questions = admin.contest.items;
+    .then(admn => {
+      const questions = admn.contest.items;
       res.status(200).json({
         questions: questions
       });

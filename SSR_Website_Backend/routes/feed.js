@@ -1,21 +1,22 @@
 const express = require('express');
 
 const feedController = require('../controllers/feed');
+const isAuthAdmin = require('../middleware/is-authAdmin');
 
 const router = express.Router();
 
 // GET /feed/questions
-router.get('/questions', feedController.getQuestions);
+router.get('/questions', isAuthAdmin, feedController.getQuestions);
 
 // POST /feed/question
-router.post('/question', feedController.createQuestion);
+router.post('/question', isAuthAdmin, feedController.createQuestion);
 
-router.get('/question/:questionId', feedController.getQuestion);
+router.get('/question/:questionId', isAuthAdmin, feedController.getQuestion);
 
-router.post('/contest', feedController.postContest);
+router.post('/contest', isAuthAdmin, feedController.postContest);
 
-router.get('/contest', feedController.getContest);
+router.get('/contest', isAuthAdmin, feedController.getContest);
 
-router.post('/contest-delete-question', feedController.postContestDeleteQuestion)
+router.post('/contest-delete-question', isAuthAdmin, feedController.postContestDeleteQuestion)
 
 module.exports = router;

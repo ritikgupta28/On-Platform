@@ -28,52 +28,52 @@ class Main extends React.Component {
 
   render() {
     return (
-        <div className = "main">
-            <form className = "form">
-             <h3>Sign Up</h3>
-             <hr />
-              <label>
-                Name: 
-                <input 
-                  placeholder="Name"
-                  name = "name"
-                  type = "text"
-                  value = {this.state.name}
-                  onChange = {this.handler}/>
-                </label>
-                <br />
-                <label>
-                Email: 
-                <input 
-                  placeholder="user@ssr.com" 
-                  name = "email"
-                  type = "text"
-                  value = {this.state.email}
-                  onChange = {this.handler}/>
-                </label>
-                <br />
-                <label>
-                Password: 
-                <input 
-                  placeholder="password"
-                  name = "password"
-                  type = "text"
-                  value = {this.state.password}
-                  onChange = {this.handler}/>
-                </label>
-                <br/>
-                <label>
-                As a:
-                <select className='userAdmin' value={this.state.userAdmin} onChange={this.onC3}>
-                <option value="Admin">Admin</option>
-                <option value="User">User</option>
-                </select>
-                </label>
-                <br />
-                <button className = "button" type="submit" value="Signup" onClick={e => this.props.onSignup(e, this.state)} >Sign Up</button>  
-                <button className = "button" type="button" value="login" onClick={e => this.props.onlogin(e, this.state)} >login</button>
-            </form>
-        </div>
+      <div className = "main">
+        <form className = "form">
+          <h3>Sign Up</h3>
+          <hr />
+          <label>
+            Name: 
+            <input 
+              placeholder="Name"
+              name = "name"
+              type = "text"
+              value = {this.state.name}
+              onChange = {this.handler}/>
+          </label>
+          <br />
+          <label>
+            Email: 
+            <input 
+              placeholder="user@ssr.com" 
+              name = "email"
+              type = "text"
+              value = {this.state.email}
+              onChange = {this.handler}/>
+          </label>
+          <br />
+          <label>
+            Password: 
+            <input 
+              placeholder="password"
+              name = "password"
+              type = "text"
+              value = {this.state.password}
+              onChange = {this.handler}/>
+          </label>
+          <br/>
+          <label>
+            As a:
+            <select className='userAdmin' value={this.state.userAdmin} onChange={this.onC3}>
+              <option value="Admin">Admin</option>
+              <option value="User">User</option>
+            </select>
+          </label>
+          <br />
+          <button className = "button" type="submit" value="signup" onClick={e => this.props.onsignup(e, this.state)} >Sign Up</button>  
+          <button className = "button" type="button" value="login" onClick={e => this.props.onlogin(e, this.state)} >Login</button>
+        </form>
+      </div>
     )
   }
 }

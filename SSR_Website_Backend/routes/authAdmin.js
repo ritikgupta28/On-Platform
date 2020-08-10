@@ -17,15 +17,17 @@ router.put('/signup', [
 			})
 		})
 		.normalizeEmail(),
-	body('password')
+		body('password')
 		.trim()
 		.isLength({ min: 6 }),
-	body('name')
+		body('name')
 		.trim()
 		.not()
 		.isEmpty()
-], 
-authAdminController.signup
+	], 
+	authAdminController.signup
 );
+
+router.post('/login', authAdminController.login);
 
 module.exports = router;

@@ -8,7 +8,7 @@ export default class Admin extends React.Component {
 	render() {
 		return (
 			<div className='Adm'>
-				<Navbar />
+				<Navbar token = {this.props.token} />
 				<Footer />
 			</div>
 		)
