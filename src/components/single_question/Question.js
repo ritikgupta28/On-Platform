@@ -15,6 +15,7 @@ class Question extends React.Component {
     fetch('http://localhost:8000/feed/question/' + questionId)
       .then(res => res.json())
       .then(resData => {
+      	console.log(resData);
         this.setState({
           title: resData.question.title,
           content: resData.question.content,

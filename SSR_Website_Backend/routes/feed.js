@@ -11,7 +11,7 @@ router.get('/questions', isAuthAdmin, feedController.getQuestions);
 // POST /feed/question
 router.post('/question', isAuthAdmin, feedController.createQuestion);
 
-router.get('/question/:questionId', isAuthAdmin, feedController.getQuestion);
+router.get('/question/:questionId', feedController.getQuestion);
 
 router.post('/contest', isAuthAdmin, feedController.postContest);
 

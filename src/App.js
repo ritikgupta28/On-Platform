@@ -16,6 +16,23 @@ class App extends Component {
     token: null
   };
 
+  componentDidMount() {
+    const token = localStorage.getItem('token');
+    const expiryDate = localStorage.getItem('expiryDate');
+    if (!token || !expiryDate) {
+      return;
+    }
+    if (new Date(expiryDate) <= new Date()) {
+      this.logoutHandler();
+      return;
+    }
+    const adminId = localStorage.getItem('adminId');
+    const remainingMilliseconds =
+      new Date(expiryDate).getTime() - new Date().getTime();
+    this.setState({ isAdminAuth: true, token: token, adminId: adminId });
+    this.setAutoLogout(remainingMilliseconds);
+  }
+
   signupHandler = (event, authData) => {
     event.preventDefault();
     fetch('http://localhost:8000/authAdmin/signup', {
@@ -100,6 +117,19 @@ class App extends Component {
           error: err
         });
       });
+  };
+
+   setAutoLogout = milliseconds => {
+    setTimeout(() => {
+      this.logoutHandler();
+    }, milliseconds);
+  };
+
+  logoutHandler = () => {
+    this.setState({ isAdminAuth: false, token: null });
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiryDate');
+    localStorage.removeItem('userId');
   };
 
   // signupHandler = (event, authData) => {
@@ -210,6 +240,7 @@ class App extends Component {
             exact
             render = {props => (
               <Admin
+                logout={this.logoutHandler}
                 token = {this.state.token}
               />
             )}
