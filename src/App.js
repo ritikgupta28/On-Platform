@@ -4,12 +4,14 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import Welcome from './components/welcome_page/Welcome';
 import Admin from './components/admin_page/Admin'
 import Developers from './components/developers/Developers'
+import Ide from './components/ide/Ide'
 
 
 class App extends Component {
   state = {
     isUserAuth: false,
     isAdminAuth: false,
+    userAdmin: 'admin',
     error: null,
     userId: null,
     adminId: null,
@@ -27,13 +29,26 @@ class App extends Component {
       return;
     }
     const adminId = localStorage.getItem('adminId');
+    const userId = localStorage.getItem('userId')
     const remainingMilliseconds =
       new Date(expiryDate).getTime() - new Date().getTime();
-    this.setState({ isAdminAuth: true, token: token, adminId: adminId });
+    this.setState({ token: token });
+    if(adminId != null) {
+      this.setState({ isAdminAuth: true, adminId: adminId });
+    }
+    if(userId != null) {
+      this.setState({ isUserAuth: true, userId: userId });
+    }
     this.setAutoLogout(remainingMilliseconds);
   }
 
-  signupHandler = (event, authData) => {
+  onChangeUserAdmin = (text) => {
+    this.setState({
+      userAdmin: text
+    })
+  }
+
+  signupAdminHandler = (event, authData) => {
     event.preventDefault();
     fetch('http://localhost:8000/authAdmin/signup', {
       method: 'PUT',
@@ -71,7 +86,7 @@ class App extends Component {
       });
   };
 
-  loginHandler = (event, authData) => {
+  loginAdminHandler = (event, authData) => {
     event.preventDefault();
     fetch('http://localhost:8000/authAdmin/login', {
       method: 'POST',
@@ -126,86 +141,86 @@ class App extends Component {
   };
 
   logoutHandler = () => {
-    this.setState({ isAdminAuth: false, token: null });
+    this.setState({ isAdminAuth: false, isUserAuth: false, token: null });
     localStorage.removeItem('token');
     localStorage.removeItem('expiryDate');
     localStorage.removeItem('userId');
   };
 
-  // signupHandler = (event, authData) => {
-  //   event.preventDefault();
-  //   fetch('http://localhost:8000/authUser/signup', {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       email: authData.email,
-  //       password: authData.password,
-  //       name: authData.name
-  //     })
-  //   })
-  //     .then(resData => {
-  //       console.log(resData);
-  //       this.setState({ isUserAuth: false });
-  //       this.props.history.replace('/');
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //       this.setState({
-  //         isUserAuth: false,
-  //         error: err
-  //       });
-  //     });
-  // };
+  signupUserHandler = (event, authData) => {
+    event.preventDefault();
+    fetch('http://localhost:8000/authUser/signup', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: authData.email,
+        password: authData.password,
+        name: authData.name
+      })
+    })
+      .then(resData => {
+        console.log(resData);
+        this.setState({ isUserAuth: false });
+        this.props.history.replace('/');
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          isUserAuth: false,
+          error: err
+        });
+      });
+  };
 
-  // loginHandler = (event, authData) => {
-  //   event.preventDefault();
-  //   fetch('http://localhost:8000/authUser/login', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       name: authData.name,
-  //       email: authData.email,
-  //       password: authData.password
-  //     })
-  //   })
-  //     .then(res => {
-  //       if (res.status === 422) {
-  //         console.log(res.status);
-  //         //throw new Error('Validation failed.');
-  //       }
-  //       if (res.status !== 200 && res.status !== 201) {
-  //         console.log('Error!');
-  //         //throw new Error('Could not authenticate you!');
-  //       }
-  //       return res.json();
-  //     })
-  //     .then(resData => {
-  //       console.log(resData);
-  //       this.setState({
-  //         isUserAuth: true,
-  //         token: resData.token,
-  //         userId: resData.userId
-  //       });
-  //       localStorage.setItem('token', resData.token);
-  //       localStorage.setItem('userId', resData.userId);
-  //       const remainingMilliseconds = 60 * 60 * 1000;
-  //       const expiryDate = new Date(
-  //         new Date().getTime() + remainingMilliseconds
-  //       );
-  //       localStorage.setItem('expiryDate', expiryDate.toISOString());
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //       this.setState({
-  //         isUserAuth: false,
-  //         error: err
-  //       });
-  //     });
-  // };
+  loginUserHandler = (event, authData) => {
+    event.preventDefault();
+    fetch('http://localhost:8000/authUser/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: authData.name,
+        email: authData.email,
+        password: authData.password
+      })
+    })
+      .then(res => {
+        if (res.status === 422) {
+          console.log(res.status);
+          //throw new Error('Validation failed.');
+        }
+        if (res.status !== 200 && res.status !== 201) {
+          console.log('Error!');
+          //throw new Error('Could not authenticate you!');
+        }
+        return res.json();
+      })
+      .then(resData => {
+        console.log(resData);
+        this.setState({
+          isUserAuth: true,
+          token: resData.token,
+          userId: resData.userId
+        });
+        localStorage.setItem('token', resData.token);
+        localStorage.setItem('userId', resData.userId);
+        const remainingMilliseconds = 60 * 60 * 1000;
+        const expiryDate = new Date(
+          new Date().getTime() + remainingMilliseconds
+        );
+        localStorage.setItem('expiryDate', expiryDate.toISOString());
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          isUserAuth: false,
+          error: err
+        });
+      });
+  };
 
   render() {
     let 
@@ -217,8 +232,11 @@ class App extends Component {
           render = {props => (
             <Welcome
               {...props}
-              onsignup={this.signupHandler}
-              onlogin={this.loginHandler}
+              onChangeUserAdmin={this.onChangeUserAdmin}
+              onUsersignup={this.signupUserHandler}
+              onAdminsignup={this.signupAdminHandler}
+              onUserlogin={this.loginUserHandler}
+              onAdminlogin={this.loginAdminHandler}
             />
           )}
         />
@@ -282,6 +300,23 @@ class App extends Component {
           />
           <Redirect to="/admin/questions" />
         </Switch>
+      );
+    }
+    if(this.state.isUserAuth) {
+      routes = (
+        <Switch>
+          <Route
+            path="/ide"
+            exact
+            render = {props => (
+              <Ide
+               logoutHandler={this.logoutHandler}
+                token = {this.state.token}
+              />
+            )}
+          />
+          <Redirect to="/ide" />
+          </Switch>
       );
     }
 

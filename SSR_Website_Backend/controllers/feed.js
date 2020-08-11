@@ -85,26 +85,21 @@ exports.postContest = (req, res, next) => {
 };
 
 exports.getContest = (req, res, next) => {
-  // let admin;
-  // Admin.findById(req.adminId)
-  //   .then(result => {
-  //     admin = result;
-  //   });
-
-  // const admin = Admin.findById(req.userId);
-  // req.adminId
-  admin
-    .populate('contest.items.questionId')
-    .execPopulate()
-    .then(admn => {
-      const questions = admn.contest.items;
-      res.status(200).json({
-        questions: questions
-      });
+  const aid=ObjectId(req.adminId);
+  Admin.findById(aid)
+    .then(admin => {
+      admin.populate('contest.items.questionId')
+      .execPopulate()
+      .then(admin => {
+        //console.log('1', admin);
+        const questions = admin.contest.items;
+        //console.log('2', questions);
+        res.status(200).json({
+          questions: questions
+        });
+      })
     })
-    .catch(err => {
-      console.log(err)
-    });
+    .catch(err => console.log(err))
 };
 
 exports.postContestDeleteQuestion = (req, res, next) => {

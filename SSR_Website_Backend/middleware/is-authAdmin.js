@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 
+const Admin = require('../models/admin');
+
 module.exports = (req, res, next) => {
   const authHeader = req.get('Authorization');
   if (!authHeader) {
@@ -7,7 +9,6 @@ module.exports = (req, res, next) => {
     error.statusCode = 401;
     throw error;
   }
-  console.log('1');
   const token = authHeader.split(' ')[1];
   let decodedToken;
   try {
@@ -23,7 +24,5 @@ module.exports = (req, res, next) => {
     throw error;
   }
   req.adminId = decodedToken.adminId;
-  console.log('1');
-  // req.isAdminAuth = true;
   next();
 };

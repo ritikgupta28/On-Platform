@@ -7,7 +7,7 @@ class Main extends React.Component {
       email : "",
       name : "",
       password: "",
-      userAdmin: 'Admin'
+      userAdmin: 'admin'
     };
     this.handler = this.handler.bind(this);
   }
@@ -22,8 +22,11 @@ class Main extends React.Component {
     });
   }
 
-  onC3 = (event) => {
-    this.setState({ userAdmin: event.target.value})
+  onC3 = (e) => {
+    this.setState({
+      userAdmin: e.target.value
+    })
+    this.props.onChangeUserAdmin(e.target.value);
   }
 
   render() {
@@ -65,13 +68,24 @@ class Main extends React.Component {
           <label>
             As a:
             <select className='userAdmin' value={this.state.userAdmin} onChange={this.onC3}>
-              <option value="Admin">Admin</option>
-              <option value="User">User</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
             </select>
           </label>
           <br />
-          <button className = "button" type="submit" value="signup" onClick={e => this.props.onsignup(e, this.state)} >Sign Up</button>  
-          <button className = "button" type="button" value="login" onClick={e => this.props.onlogin(e, this.state)} >Login</button>
+          {
+          this.state.userAdmin === 'admin'
+          ?
+          <div>
+          <button className = "button" type="submit" value="signup" onClick={e => this.props.onAdminsignup(e, this.state)} >Sign Up</button>  
+          <button className = "button" type="button" value="login" onClick={e => this.props.onAdminlogin(e, this.state)} >Login</button>
+          </div>
+          :
+          <div>
+          <button className = "button" type="submit" value="signup" onClick={e => this.props.onUsersignup(e, this.state)} >Sign Up</button>  
+          <button className = "button" type="button" value="login" onClick={e => this.props.onUserlogin(e, this.state)} >Login</button>
+          </div>
+        }
         </form>
       </div>
     )
