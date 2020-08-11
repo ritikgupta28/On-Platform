@@ -25,7 +25,6 @@ class AllQuestions extends Component {
   }
 
 	componentDidMount() {
-    console.log(this.props.token);
 		fetch('http://localhost:8000/feed/questions', {
       headers: {
         Authorization: 'Bearer ' + this.props.token,

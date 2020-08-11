@@ -41,9 +41,9 @@ exports.login = (req, res, next) => {
 	.then(user => {
 		if (!user) {
 			console.log(user);
-			// const error = new Error('User not found');
-			// error.statusCode = 401;
-			// throw error;
+			const error = new Error('User not found');
+			error.statusCode = 401;
+			throw error;
 		}
 		loadedUser = user;
 		return bcrypt.compare(password, user.password);
@@ -51,9 +51,9 @@ exports.login = (req, res, next) => {
 	.then(isEqual => {
 		if (!isEqual) {
 			console.log(isEqual);
-			// const error = new Error('Wrong password');
-			// error.statusCode = 401;
-			// throw error;
+			const error = new Error('Wrong password');
+			error.statusCode = 401;
+			throw error;
 		}
 		const token = jwt.sign({
 			email: loadedUser.email,

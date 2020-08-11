@@ -30,7 +30,6 @@ class Contest extends Component {
 		})
 			.then(res => res.json())
 			.then(resData=> {
-				console.log(resData);
 				this.setState({
 					questions: resData.questions
 				});

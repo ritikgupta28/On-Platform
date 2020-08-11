@@ -144,6 +144,7 @@ class App extends Component {
     this.setState({ isAdminAuth: false, isUserAuth: false, token: null });
     localStorage.removeItem('token');
     localStorage.removeItem('expiryDate');
+    localStorage.removeItem('adminId');
     localStorage.removeItem('userId');
   };
 

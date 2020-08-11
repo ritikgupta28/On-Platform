@@ -56,11 +56,11 @@ exports.login = (req, res, next) => {
 			throw error;
 		}
 		const token = jwt.sign({
-				email: loadedAdmin.email,
-				adminId: loadedAdmin._id.toString()
-			}, 
-			'somesupersecretsecret', 
-			{ expiresIn: '1h' }
+			email: loadedAdmin.email,
+			adminId: loadedAdmin._id.toString()
+		}, 
+		'somesupersecretsecret', 
+		{ expiresIn: '1h' }
 		);
 		res.status(200).json({ token: token, adminId: loadedAdmin._id.toString() });
 	}) 
