@@ -1,18 +1,22 @@
 const Question = require('../models/question');
 const Admin = require('../models/admin');
+const AllContest = require('../models/allcontest');
 const ObjectId = require('mongodb').ObjectID;
 
 exports.getQuestions = (req, res, next) => {
-  Question.find()
-    .then(result => {
-      res.status(200).json({
-        message: 'Fetched questions successfully!',
-        questions: result
-      });
+  Admin.findById(req.adminId)
+    .then(admin => {
+      admin.populate('questions')
+      .execPopulate()
+      .then(admin => {
+        const questions = admin.questions;
+        res.status(200).json({
+          questions: questions
+        });
+      })
+      .catch(err => console.log(err));
     })
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(err => console.log(err));
 };
 
 exports.createQuestion = (req, res, next) => {
@@ -30,9 +34,16 @@ exports.createQuestion = (req, res, next) => {
   question
     .save()
     .then(result => {
+      return Admin.findById(req.adminId)
+      .then(admin => {
+        admin.questions.push(question);
+        return admin.save();
+      })
+    })
+    .then(result => {
       res.status(201).json({
         message: 'Question created successfully!',
-        post: result
+        question: question
       });
     })
     .catch(err => {
@@ -103,3 +114,39 @@ exports.postContestDeleteQuestion = (req, res, next) => {
     })
     .catch(err => console.log(err));
 };
+
+exports.postAllContest = (req, res, next) => {
+  Admin.findById(req.adminId)
+  .then(admin1 => {
+    admin.populate('contest.items.questionId')
+    .execPopulate()
+    .then(admin => {
+      const questions = admin.contest.items.map(i => {
+        return { quantity: i.quantity , question: { ...i.questionId._doc } };
+      });
+      const allcontest = new AllContest({
+        admin: {
+          name: admin1.name,
+          adminId: req.adminId
+        },
+        questions: questions
+      });
+      return allcontest.save();
+    })
+    .then(result => {
+      return admin1.clearContest();
+    })
+    .catch(err => console.log(err));
+  })
+  .catch(err => console.log(err));
+}
+
+exports.getAllContest = (req, res, next) => {
+  AllContest.find({ "admin.adminId ": req.adminId })
+  .then(contests => {
+    res.status(200).json({
+      allcontest: contests
+    })
+  })
+  .catch(err => console.log(err));
+}

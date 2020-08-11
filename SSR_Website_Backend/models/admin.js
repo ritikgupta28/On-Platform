@@ -15,16 +15,23 @@ const adminSchema = new Schema({
     type: String,
     required: true
   },
+  questions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Question',
+        required: true
+      }
+  ],
   contest: {
     items: [
-      {
-        questionId: {
-          type: Schema.Types.ObjectId,
-          ref: 'Question',
-          required: true
-        },
-        quantity: { type: Number, required: true }
-      }
+     {
+      questionId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Question',
+        required: true
+      },
+      quantity: { type: Number, required: true }
+     }
     ]
   }
 });
@@ -60,5 +67,10 @@ adminSchema.methods.removeFromContest = function(questionId) {
   this.contest.items = updatedContestItems;
   return this.save();
 };
+
+adminSchema.methods.clearContest = function() {
+  this.contest = { items: [] };
+  return this.save();
+}
 
 module.exports = mongoose.model('Admin', adminSchema);
