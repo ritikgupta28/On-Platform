@@ -21,6 +21,18 @@ class Contest extends Component {
     .catch(err => console.log(err));
   }
 
+  handler = (e) => {
+		fetch('http://localhost:8000/feed/allcontest', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .catch(err => console.log(err));
+	} 
+
 	componentDidMount() {
 		fetch('http://localhost:8000/feed/contest', {
 			headers: {
@@ -39,16 +51,17 @@ class Contest extends Component {
 
 	render() {
 		return (
-	   	<div >
+	   	<div>
+	   	<button className='but' value='s' style={{ marginBottom: '10px' }} onClick={this.handler}>Add to All Contest</button>
 			{this.state.questions.map(q => (
 			<Card
 			 sign={'-'}
-             handle={this.handle}
-             key={q.questionId._id}
-             id={q.questionId._id}
-             title={q.questionId.title}
-            />
-        ))}
+       handle={this.handle}
+       key={q.questionId._id}
+       id={q.questionId._id}
+       title={q.questionId.title}
+       />
+      ))}
       </div>
 		)
 	}

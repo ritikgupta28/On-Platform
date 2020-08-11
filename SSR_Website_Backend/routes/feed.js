@@ -19,4 +19,8 @@ router.get('/contest', isAuthAdmin, feedController.getContest);
 
 router.post('/contest-delete-question', isAuthAdmin, feedController.postContestDeleteQuestion)
 
+router.get('/allcontest', isAuthAdmin, feedController.getAllContest);
+
+router.post('/allcontest', isAuthAdmin, feedController.postAllContest);
+
 module.exports = router;

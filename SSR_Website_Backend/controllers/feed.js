@@ -118,9 +118,10 @@ exports.postContestDeleteQuestion = (req, res, next) => {
 exports.postAllContest = (req, res, next) => {
   Admin.findById(req.adminId)
   .then(admin1 => {
-    admin.populate('contest.items.questionId')
+    admin1.populate('contest.items.questionId')
     .execPopulate()
     .then(admin => {
+      console.log(admin);
       const questions = admin.contest.items.map(i => {
         return { quantity: i.quantity , question: { ...i.questionId._doc } };
       });
@@ -142,11 +143,12 @@ exports.postAllContest = (req, res, next) => {
 }
 
 exports.getAllContest = (req, res, next) => {
-  AllContest.find({ "admin.adminId ": req.adminId })
+  AllContest.find({ 'admin.adminId': req.adminId })
   .then(contests => {
     res.status(200).json({
-      allcontest: contests
-    })
+        message: 'Fetched question successfully!',
+        allcontest: contests
+    });
   })
   .catch(err => console.log(err));
 }
