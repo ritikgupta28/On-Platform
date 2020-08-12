@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Link, Switch, BrowserRouter as Router } from 'react-router-dom'
+import { Route, Redirect, Link, Switch, BrowserRouter as Router } from 'react-router-dom'
 
 import './Navbar.css'
 import logo from '../../images/logo1.jpg'
@@ -97,6 +97,7 @@ export default class Navbar extends React.Component {
 			    	   		/>
 			    	   	)}
 			    	  />
+			    	  <Redirect to="/admin/questions" />
 				    </Switch>
 		    	</div>
 				</div>

@@ -2,10 +2,9 @@ import React, { Component, Fragment } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 
 import Welcome from './components/welcome_page/Welcome';
-import Admin from './components/admin_page/Admin'
-import Developers from './components/developers/Developers'
-import Ide from './components/ide/Ide'
-
+import Admin from './components/admin_page/Admin';
+import User from './components/user_page/User';
+import Developers from './components/developers/Developers';
 
 class App extends Component {
   state = {
@@ -307,17 +306,35 @@ class App extends Component {
       routes = (
         <Switch>
           <Route
-            path="/ide"
+            path="/user/contest"
             exact
             render = {props => (
-              <Ide
-               logoutHandler={this.logoutHandler}
+              <User
+                logout={this.logoutHandler}
                 token = {this.state.token}
               />
             )}
           />
-          <Redirect to="/ide" />
-          </Switch>
+          <Route
+            path="/user/allcontests"
+            exact
+            render = {props => (
+              <User
+                token = {this.state.token}
+              />
+            )}
+          />
+          <Route
+            path="/user/about"
+            exact
+            render = {props => (
+              <User
+                token = {this.state.token}
+              />
+            )}
+          />
+          <Redirect to="/user/contest" />
+        </Switch>
       );
     }
 
