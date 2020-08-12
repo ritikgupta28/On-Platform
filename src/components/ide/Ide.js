@@ -60,12 +60,6 @@ class App extends React.Component {
     };
     return (
       <div style={{ textAlign: 'center', paddingLeft: '150px', paddingRight: '150px'}}>
-      <button 
-      value='signout' 
-      style={{ float: 'right', padding: '10px', marginTop: '10px'}} 
-      onClick={this.props.logoutHandler}>
-      Sign Out
-      </button>
         <div className="con">
           <Dropdown sendData={this.getData.bind(this)} />
           <hr />

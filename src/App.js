@@ -86,6 +86,7 @@ class App extends Component {
   };
 
   loginAdminHandler = (event, authData) => {
+    console.log(authData);
     event.preventDefault();
     fetch('http://localhost:8000/authAdmin/login', {
       method: 'POST',
@@ -93,7 +94,6 @@ class App extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: authData.name,
         email: authData.email,
         password: authData.password
       })
@@ -155,9 +155,9 @@ class App extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        name: authData.name,
         email: authData.email,
-        password: authData.password,
-        name: authData.name
+        password: authData.password
       })
     })
       .then(resData => {
@@ -182,19 +182,16 @@ class App extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: authData.name,
         email: authData.email,
         password: authData.password
       })
     })
       .then(res => {
         if (res.status === 422) {
-          console.log(res.status);
-          //throw new Error('Validation failed.');
+          throw new Error('Validation failed.');
         }
         if (res.status !== 200 && res.status !== 201) {
-          console.log('Error!');
-          //throw new Error('Could not authenticate you!');
+          throw new Error('Could not authenticate you!');
         }
         return res.json();
       })

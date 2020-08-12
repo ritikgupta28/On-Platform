@@ -33,14 +33,12 @@ exports.signup = (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-	const name = req.body.name;
 	const email = req.body.email;
 	const password = req.body.password;
 	let loadedUser; 
 	User.findOne({ email: email })
 	.then(user => {
 		if (!user) {
-			console.log(user);
 			const error = new Error('User not found');
 			error.statusCode = 401;
 			throw error;
@@ -50,7 +48,6 @@ exports.login = (req, res, next) => {
 	})
 	.then(isEqual => {
 		if (!isEqual) {
-			console.log(isEqual);
 			const error = new Error('Wrong password');
 			error.statusCode = 401;
 			throw error;

@@ -9,7 +9,7 @@
     width : 90px;
     height : 90px;
 }
-.header{
+.header {
     text-align: center;
     display: flex;
     justify-content: space-between;
@@ -18,10 +18,10 @@
     width: 100%;
     color: white;
 }
-.heading{
+.heading {
     font-size: 3em;
 }
-.main{
+.main {
     padding: 0px;
     margin: 0px;
     width: 100%;
@@ -29,7 +29,7 @@
     font-family:Courier New;
     font-size: 2em;
 }
-input[type=text] {
+input {
     width: 30%;
     margin-top:10px;
     padding: 10px 15px;
@@ -43,17 +43,17 @@ input[type=text] {
     font-size: 1em;
 }
 
-.button{
+.button {
     color: rgb(255, 255, 255);
     width: 12%;
-    padding: 12px 20px;
-    margin: 10px;
+    padding: 8px 25px;
+    margin: 5px;
     box-sizing: border-box;
     border: 5px solid rgb(7, 2, 15);
     border-radius: 14px;
     background-color: rgb(7, 2, 15);
 }
-.footer{
+.footer {
 	margin: 0px;
     padding: 1px;
     width: 100%;
@@ -67,12 +67,8 @@ input:hover {
 }
 .form {
     text-align: center;
-    padding: 75px;
-    padding-top: 10px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    margin-left: 190px;
-    margin-right: 190px;
+    padding: 20px 50px;
+    margin: 25px 250px;
     border: 2px solid;
     border-radius: 10px;
 }
