@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import Card from './Card';
 
 class Contest extends Component {
@@ -42,6 +44,7 @@ class Contest extends Component {
 		})
 			.then(res => res.json())
 			.then(resData=> {
+        console.log(resData.questions);
 				this.setState({
 					questions: resData.questions
 				});
@@ -51,17 +54,21 @@ class Contest extends Component {
 
 	render() {
 		return (
-	   	<div>
-	   	<button className='but' value='s' style={{ marginBottom: '10px' }} onClick={this.handler}>Add to All Contest</button>
-			{this.state.questions.map(q => (
-			<Card
-			 sign={'-'}
-       handle={this.handle}
-       key={q.questionId._id}
-       id={q.questionId._id}
-       title={q.questionId.title}
-       />
-      ))}
+      <div>
+	   	  <Link to='/admin/previouscontest'>
+          <button className='but' value='s' style={{ marginBottom: '10px' }} onClick={this.handler}>Add to All Contest</button>
+        </Link>
+        <div>
+			    {this.state.questions.map(q => (
+			      <Card
+			        sign={'-'}
+              handle={this.handle}
+              key={q.questionId._id}
+              id={q.questionId._id}
+              title={q.questionId.title}
+            />
+          ))}
+        </div>
       </div>
 		)
 	}

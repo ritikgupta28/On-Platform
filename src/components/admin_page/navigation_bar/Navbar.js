@@ -4,10 +4,12 @@ import { Route, Link, Switch, BrowserRouter as Router } from 'react-router-dom'
 import './Navbar.css'
 import logo from '../../images/logo1.jpg'
 import Contest from '../Contest'
+import FinalContest from '../FinalContest'
 import PreviousContest from '../PreviousContest'
 import AddQuestion from '../AddQuestion'
 import AllQuestions from '../AllQuestions'
 import Question from '../../single_question/Question'
+import Ide from '../../ide/Ide'
 
 export default class Navbar extends React.Component {
 	render() {
@@ -36,28 +38,11 @@ export default class Navbar extends React.Component {
 		    	</ul>
 			    <div className='coc'>
 			    	<Switch>
-			    	    <Route path="/admin/contest"
-			    	    	exact
-			    	    	render = {props => (
-			    	    		<Contest
-			    	    			token = {this.props.token}
-			    	    		/>
-			    	    	)}
-			    	    />
 					    <Route
 					    	path="/admin/questions"
 					    	exact
 					    	render = {props => (
 					    		<AllQuestions
-										token = {this.props.token}
-					    		/>
-					    	)}
-					    />
-					    <Route
-					    	path="/admin/previouscontest"
-					    	exact
-					    	render = {props => (
-					    		<PreviousContest
 										token = {this.props.token}
 					    		/>
 					    	)}
@@ -71,6 +56,23 @@ export default class Navbar extends React.Component {
 					    		/>
 					    	)}
 					    />
+			    	  <Route path="/admin/contest"
+			    	   	exact
+			    	   	render = {props => (
+			    	   		<Contest
+			    	   			token = {this.props.token}
+			    	  		/>
+			    	   	)}
+			    	  />
+					    <Route
+					    	path="/admin/previouscontest"
+					    	exact
+					    	render = {props => (
+					    		<PreviousContest
+										token = {this.props.token}
+					    		/>
+					    	)}
+					    />
 					    <Route
 					    	path="/question/:id"
 					    	render = {props => (
@@ -80,6 +82,21 @@ export default class Navbar extends React.Component {
 					    		/>
 					    	)}
 					    />
+					    <Route path="/contest/:id"
+			    	   	render = {props => (
+			    	   		<FinalContest
+			    	   		  {...props}
+			    	   			token = {this.props.token}
+			    	   		/>
+			    	   	)}
+			    	  />
+			    	  <Route path="/ide"
+			    	   	render = {props => (
+			    	   		<Ide
+			    	   			token = {this.props.token}
+			    	   		/>
+			    	   	)}
+			    	  />
 				    </Switch>
 		    	</div>
 				</div>

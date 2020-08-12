@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from './Card'
+import CardContests from './CardContests'
 
 export default class PreviosContest extends React.Component {
 	constructor(props) {
@@ -16,9 +16,8 @@ export default class PreviosContest extends React.Component {
 				'Content-Type': 'application/json'
       }
     })
-	.then(res => res.json())
+			.then(res => res.json())
 			.then(resData=> {
-				console.log(resData.allcontest);
 				this.setState({
 					allcontest: resData.allcontest
 				});
@@ -29,18 +28,18 @@ export default class PreviosContest extends React.Component {
 	render() {
 		return (
 			<div className='pcon'>
-				<h1>All Contest</h1>
+				<h1>All Contests</h1>
 				<hr />
-				{
-					this.state.allcontest.map(i => (
-						<Card
+				{this.state.allcontest.map(contest => ( 
+					<CardContests
 						sign={'Host'}
-						key={i._id}
-						title={i._id}
-						id={i._id}
-						/>
-					))
-				}
+						key={contest._id}
+						title={contest._id}
+						id={contest._id}
+						questions={contest.questions}
+						admin={contest.admin.name}
+					/>
+				))}
 			</div>
 		)
 	}

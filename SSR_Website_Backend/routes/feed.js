@@ -23,4 +23,6 @@ router.get('/allcontest', isAuthAdmin, feedController.getAllContest);
 
 router.post('/allcontest', isAuthAdmin, feedController.postAllContest);
 
+router.get('/allcontest/questions/:contestId', isAuthAdmin, feedController.getAllContestquestions);
+
 module.exports = router;

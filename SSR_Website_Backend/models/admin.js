@@ -16,22 +16,22 @@ const adminSchema = new Schema({
     required: true
   },
   questions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Question',
-        required: true
-      }
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Question',
+      required: true
+    }
   ],
   contest: {
     items: [
-     {
-      questionId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Question',
-        required: true
-      },
-      quantity: { type: Number, required: true }
-     }
+      {
+        questionId: {
+          type: Schema.Types.ObjectId,
+          ref: 'Question',
+          required: true
+        },
+        quantity: { type: Number, required: true }
+      }
     ]
   }
 });
@@ -43,11 +43,11 @@ adminSchema.methods.addToContest = function(question) {
   let newQuantity = 1;
   const updatedContestItems = [...this.contest.items];
 
-  if(contestQuestionIndex >= 0) {
-    newQuantity = this.contest.items[contestQuestionIndex].quantity + 1;
-    updatedContestItems[contestQuestionIndex].quantity = newQuantity;
-  }
-  else {
+  // if(contestQuestionIndex >= 0) {
+  //   newQuantity = this.contest.items[contestQuestionIndex].quantity + 1;
+  //   updatedContestItems[contestQuestionIndex].quantity = newQuantity;
+  // }
+  if(contestQuestionIndex < 0) {
     updatedContestItems.push({
       questionId: question._id,
       quantity: newQuantity

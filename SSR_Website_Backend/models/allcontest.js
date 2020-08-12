@@ -4,11 +4,14 @@ const Schema = mongoose.Schema;
 
 const allContestSchema = new Schema({
 	questions: [
-	  {
-	  	question: { type: Object, required: true },
-	  	quantity: { type: Number, required: true }
-	  }
-	],
+    {
+      questionId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Question',
+        required: true
+      }
+    }
+  ],
 	admin: {
 		name: {
 			type: String,

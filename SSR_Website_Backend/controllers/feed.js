@@ -117,17 +117,16 @@ exports.postContestDeleteQuestion = (req, res, next) => {
 
 exports.postAllContest = (req, res, next) => {
   Admin.findById(req.adminId)
-  .then(admin1 => {
-    admin1.populate('contest.items.questionId')
+  .then(admn => {
+    admn.populate('contest.items.questionId')
     .execPopulate()
     .then(admin => {
-      console.log(admin);
       const questions = admin.contest.items.map(i => {
-        return { quantity: i.quantity , question: { ...i.questionId._doc } };
+        return { questionId: { ...i.questionId } };
       });
       const allcontest = new AllContest({
         admin: {
-          name: admin1.name,
+          name: admn.name,
           adminId: req.adminId
         },
         questions: questions
@@ -135,7 +134,7 @@ exports.postAllContest = (req, res, next) => {
       return allcontest.save();
     })
     .then(result => {
-      return admin1.clearContest();
+      return admn.clearContest();
     })
     .catch(err => console.log(err));
   })
@@ -149,6 +148,24 @@ exports.getAllContest = (req, res, next) => {
         message: 'Fetched question successfully!',
         allcontest: contests
     });
+  })
+  .catch(err => console.log(err));
+}
+
+exports.getAllContestquestions = (req, res, next) => {
+  const contestId = req.params.contestId;
+  AllContest.findById(contestId)
+  .then(contest => {
+    contest.populate('questions.questionId')
+    .execPopulate()
+    .then(contest => {
+      const questions = contest.questions;
+      res.status(200).json({
+        message: 'Fetched Contest Questions Successfully',
+        questions: questions
+      });
+    })
+    .catch(err => console.log(err)); 
   })
   .catch(err => console.log(err));
 }

@@ -44,63 +44,63 @@ class Addques extends React.Component {
   }
 	render() {
 		return (
-			 <div className='ques'>
+			<div className='ques'>
 			  <form className='fo'>
-			  <label>
-			   Title:
-			   <br />
-			   <textarea 
-			   placeholder='Enter title here...'
-			   className='title'
-			   type="text" 
-			   name="title"
-			   value = {this.state.title}
-               onChange = {this.handler}
-                />
-			   </label>
-			   <br />
-			   <label>
-			    Content:
-			    <br />
-				<textarea 
-				placeholder='Enter Question here...'
-				className='content' 
-				type="text" 
-				name="content" 
-				value = {this.state.content}
-                onChange = {this.handler}
-                />
-				</label>
-				<br />
-				<label>
-				Input:
-				<textarea 
-				placeholder='Sample Input...'
-				className='sio'
-				type="text" 
-				name="sinput" 
-				value = {this.state.sinput}
-                onChange = {this.handler}
-				/> 
-				Output:
-				<textarea
-				placeholder='Sample Output...'
-				className='sio'
-				type="text" 
-				name="soutput" 
-				value = {this.state.soutput}
-                onChange = {this.handler}
-                />
-				</label>
-				<div style={{ padding: '5px', margin: '20px'}}>
-				<label>Input File: <input type='file' name='Input File' /></label>
-			    <label>Output File: <input type='file' name='Output File' /></label>
-			    </div>
-			    <Link to='/admin/questions'> 
-			    <button className='but' value='pcon' type='submit' onClick={this.handle}>ADD Question</button>
-			    </Link>
-			   </form>
-			 </div>
+				  <label>
+				    Title:
+				    <br />
+				    <textarea 
+			  	    placeholder='Enter title here...'
+			    	  className='title'
+			      	type="text"
+				      name="title"
+				      value = {this.state.title}
+    	        onChange = {this.handler}
+      	    />
+			  	</label>
+			  	<br />
+				  <label>
+				    Content:
+				    <br />
+		  			<textarea 
+			  		  placeholder='Enter Question here...'
+				  	  className='content' 
+				    	type="text"
+					    name="content" 
+					    value = {this.state.content}
+    	        onChange = {this.handler}
+      	  	/>
+					</label>
+					<br />
+					<label>
+					  Input:
+					  <textarea 
+					    placeholder='Sample Input...'
+				  	  className='sio'
+				    	type="text"
+					    name="sinput" 
+					    value = {this.state.sinput}
+    	        onChange = {this.handler}
+						/> 
+					  Output:
+				  	<textarea
+					    placeholder='Sample Output...'
+					    className='sio'
+					    type="text" 
+					    name="soutput" 
+					    value = {this.state.soutput}
+          	  onChange = {this.handler}
+          	/>
+					</label>
+					<div style={{ padding: '5px', margin: '20px'}}>
+					  <label>Input File: <input type='file' name='Input File' /></label>
+				    <label>Output File: <input type='file' name='Output File' /></label>
+			  	</div>
+				  <Link to='/admin/questions'> 
+				  	<button className='but' value='pcon' type='submit' onClick={this.handle}>ADD Question</button>
+				  </Link>
+			  </form>
+			</div>
 		)
 	}
 }
