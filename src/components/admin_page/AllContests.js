@@ -1,7 +1,7 @@
 import React from 'react'
-import PCardContests from './PCardContests'
+import AllContestsCard from './AllContestsCard'
 
-export default class PreviosContest extends React.Component {
+export default class AllContests extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,7 @@ export default class PreviosContest extends React.Component {
 	};
 
 	componentDidMount() {
-		fetch('http://localhost:8000/feed/allcontest', {
+		fetch('http://localhost:8000/feed/allcontests', {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -28,10 +28,8 @@ export default class PreviosContest extends React.Component {
 	render() {
 		return (
 			<div className='pcon'>
-				<h1>All Contests</h1>
-				<hr />
 				{this.state.allcontest.map(contest => ( 
-					<PCardContests
+					<AllContestsCard
 						sign={'Host'}
 						key={contest._id}
 						title={contest._id}

@@ -10,7 +10,7 @@ class AllQuestions extends Component {
   };
 
 	handle = (e) => {
-    fetch('http://localhost:8000/feed/contest', {
+    fetch('http://localhost:8000/feed/newcontest', {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + this.props.token,

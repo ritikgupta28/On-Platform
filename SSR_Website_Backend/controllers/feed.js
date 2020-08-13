@@ -66,7 +66,7 @@ exports.getQuestion = (req, res, next) => {
     });
 };
 
-exports.postContest = (req, res, next) => {
+exports.postNewContest = (req, res, next) => {
   const quesId = req.body.questionId;
   Question.findById(quesId)
     .then(result => {
@@ -85,7 +85,7 @@ exports.postContest = (req, res, next) => {
     });
 };
 
-exports.getContest = (req, res, next) => {
+exports.getNewContest = (req, res, next) => {
   Admin.findById(req.adminId)
     .then(admin => {
       admin.populate('contest.items.questionId')
@@ -101,7 +101,7 @@ exports.getContest = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
-exports.postContestDeleteQuestion = (req, res, next) => {
+exports.postNewContestDeleteQuestion = (req, res, next) => {
   const quesId = req.body.questionId;
   Admin.findById(req.adminId)
     .then(admin => {
@@ -171,7 +171,7 @@ exports.getFinalContestQuestions = (req, res, next) => {
   .catch(err => console.log(err));
 }
 
-exports.postAllContest = (req, res, next) => {
+exports.postAllContests = (req, res, next) => {
   const contestId = req.body.contestId;
   FinalContest.findById(contestId)
   .then(contst => {
@@ -195,7 +195,7 @@ exports.postAllContest = (req, res, next) => {
   .catch(err => console.log(err));
 }
 
-exports.getAllContest = (req, res, next) => {
+exports.getAllContests = (req, res, next) => {
   AllContest.find({ 'admin.adminId': req.adminId })
   .then(contests => {
     res.status(200).json({
@@ -206,7 +206,7 @@ exports.getAllContest = (req, res, next) => {
   .catch(err => console.log(err));
 }
 
-exports.getAllContestquestions = (req, res, next) => {
+exports.getAllContestsQuestions = (req, res, next) => {
   const contestId = req.params.contestId;
   AllContest.findById(contestId)
   .then(contest => {

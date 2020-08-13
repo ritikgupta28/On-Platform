@@ -3,13 +3,13 @@ import { Route, Redirect, Link, Switch, BrowserRouter as Router } from 'react-ro
 
 import './Navbar.css'
 import logo from '../../images/logo1.jpg'
-import Contest from '../Contest'
-import FinalContest from '../FinalContest'
-import FContest from '../FContest'
-import FContestQuestion from '../FContestQuestion'
-import PreviousContest from '../PreviousContest'
-import AddQuestion from '../AddQuestion'
 import AllQuestions from '../AllQuestions'
+import AddQuestion from '../AddQuestion'
+import NewContest from '../NewContest'
+import FinalContest from '../FinalContest'
+import FinalContestQuestions from '../FinalContestQuestions'
+import AllContests from '../AllContests'
+import AllContestsQuestions from '../AllContestsQuestions'
 import Question from '../../single_question/Question'
 import Ide from '../../ide/Ide'
 
@@ -25,13 +25,13 @@ export default class Navbar extends React.Component {
 			    	<Link to='/admin/addquestion'>
 							<li value='Addques'>Add Question</li>
 						</Link>
-						<Link to='/admin/contest'>
-				    	<li value='contest'>Contest</li>
+						<Link to='/admin/newcontest'>
+				    	<li value='contest'>New Contest</li>
 				    </Link>
-						<Link to='/admin/fcontest'>
-				    	<li value='PCON'>F Contest</li>
+						<Link to='/admin/finalcontest'>
+				    	<li value='PCON'>Final Contest</li>
 				    </Link>
-						<Link to='/admin/previouscontest'>
+						<Link to='/admin/allcontests'>
 				    	<li value='PCON'>All Contests</li>
 				    </Link>
 						<Link to='/admin/about'>
@@ -48,6 +48,7 @@ export default class Navbar extends React.Component {
 					    	exact
 					    	render = {props => (
 					    		<AllQuestions
+					    			{...props}
 										token = {this.props.token}
 					    		/>
 					    	)}
@@ -61,33 +62,57 @@ export default class Navbar extends React.Component {
 					    		/>
 					    	)}
 					    />
-			    	  <Route path="/admin/contest"
+			    	  <Route path="/admin/newcontest"
 			    	   	exact
 			    	   	render = {props => (
-			    	   		<Contest
+			    	   		<NewContest
 			    	   			token = {this.props.token}
 			    	  		/>
 			    	   	)}
 			    	  />
 					    <Route
-					    	path="/admin/fcontest"
+					    	path="/admin/finalcontest"
 					    	exact
 					    	render = {props => (
-					    		<FContest
+					    		<FinalContest
 					    			{...props}
 										token = {this.props.token}
 					    		/>
 					    	)}
 					    />
+					    <Route path="/finalcontest/questions/:id"
+			    	   	render = {props => (
+			    	   		<FinalContestQuestions
+			    	   		  {...props}
+			    	   			token = {this.props.token}
+			    	   		/>
+			    	   	)}
+			    	  />
 					    <Route
-					    	path="/admin/previouscontest"
+					    	path="/admin/allcontests"
 					    	exact
 					    	render = {props => (
-					    		<PreviousContest
+					    		<AllContests
+					    			{...props}
 										token = {this.props.token}
 					    		/>
 					    	)}
 					    />
+					    <Route path="/allcontests/questions/:id"
+			    	   	render = {props => (
+			    	   		<AllContestsQuestions
+			    	   		  {...props}
+			    	   			token = {this.props.token}
+			    	   		/>
+			    	   	)}
+			    	  />
+			    	  <Route path="/admin/about"
+			    	   	render = {props => (
+			    	   		<Ide
+			    	   			token = {this.props.token}
+			    	   		/>
+			    	   	)}
+			    	  />
 					    <Route
 					    	path="/question/:id"
 					    	render = {props => (
@@ -97,22 +122,6 @@ export default class Navbar extends React.Component {
 					    		/>
 					    	)}
 					    />
-					    <Route path="/finalcontest/:id"
-			    	   	render = {props => (
-			    	   		<FContestQuestion
-			    	   		  {...props}
-			    	   			token = {this.props.token}
-			    	   		/>
-			    	   	)}
-			    	  />
-					    <Route path="/contest/:id"
-			    	   	render = {props => (
-			    	   		<FinalContest
-			    	   		  {...props}
-			    	   			token = {this.props.token}
-			    	   		/>
-			    	   	)}
-			    	  />
 			    	  <Route path="/ide"
 			    	   	render = {props => (
 			    	   		<Ide

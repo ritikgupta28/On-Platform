@@ -1,50 +1,60 @@
-import React, { Component } from 'react';
-import Card from './Card';
+import React from 'react'
+import FinalContestCard from './FinalContestCard'
 
-class Contest extends Component {
-  state = {
-    questions: []
-  };
+export default class FinalContest extends React.Component {
+	constructor(props) {
+    super(props);
+    this.state = {
+			finalcontest: []
+		}
+	};
 
-  componentDidMount() {
-    const contestId = this.props.match.params.id;
-    fetch('http://localhost:8000/feed/allcontest/questions/' + contestId, {
+	handler = (e) => {
+		fetch('http://localhost:8000/feed/allcontests', {
+      method: 'POST',
       headers: {
         Authorization: 'Bearer ' + this.props.token,
         'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        contestId: e.target.value
+    	})
+    })
+    .then(response => response.json())
+    .catch(err => console.log(err));
+	}
+
+	componentDidMount() {
+		fetch('http://localhost:8000/feed/finalcontest', {
+			headers: {
+				'Content-Type': 'application/json'
       }
-      })
-      .then(res => res.json())
-      .then(resData => {
-      	console.log(resData.questions);
-        this.setState({
-          questions: resData.questions
-        });
-      })
-      .catch(err => { console.log(err); });
-  }
+    })
+			.then(res => res.json())
+			.then(resData=> {
+				console.log(resData);
+				this.setState({
+					finalcontest: resData.finalcontest
+				});
+			})
+			.catch(err => console.log(err));
+	};
 
-  handle = (e) => {
-    console.log(e.target.value);
-  }
-
-  render() {
-    return (
-      <div>
-        {
-          this.state.questions.map(q=> (
-            <Card
-            sign={'view'}
-            handle={this.handle}
-            key={q.questionId._id}
-            id={q.questionId._id}
-            title={q.questionId.title}
-          />
-          ))
-        }
-      </div>
-    )
-  }
+	render() {
+		return (
+			<div className='pcon'>
+				{this.state.finalcontest.map(contest => (
+					<FinalContestCard
+						sign={'.'}
+						handle={this.handler}
+						key={contest._id}
+						title={contest._id}
+						id={contest._id}
+						questions={contest.questions}
+						admin={contest.admin.name}
+					/>
+				))}
+			</div>
+		)
+	}
 }
-
-export default Contest;

@@ -9,7 +9,7 @@ class Contest extends Component {
 	}
 
 	handle = (e) => {
-    fetch('http://localhost:8000/feed/contest-delete-question', {
+    fetch('http://localhost:8000/feed/newcontest-delete-question', {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + this.props.token,
@@ -36,7 +36,7 @@ class Contest extends Component {
 	}
 
 	componentDidMount() {
-		fetch('http://localhost:8000/feed/contest', {
+		fetch('http://localhost:8000/feed/newcontest', {
 			headers: {
         Authorization: 'Bearer ' + this.props.token,
         'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ class Contest extends Component {
 	render() {
 		return (
       <div>
-	   	  <Link to='/admin/fcontest'>
+	   	  <Link to='/admin/finalcontest'>
           <button className='but' value='s' style={{ marginBottom: '10px' }} onClick={this.handler}>Host</button>
         </Link>
         <div>

@@ -3,6 +3,9 @@ import { Route, Link, Redirect, Switch, BrowserRouter as Router } from 'react-ro
 
 import './Navbar.css'
 import logo from '../../images/logo1.jpg'
+import FinalContest from '../FinalContest'
+import FinalContestQuestions from '../FinalContestQuestions'
+import Question from '../../single_question/Question'
 import Ide from '../../ide/Ide'
 
 export default class Navbar extends React.Component {
@@ -11,11 +14,8 @@ export default class Navbar extends React.Component {
 			<Router >
 				<div className='na'>
 			    <ul className='one'>
-						<Link to='/user/contest'>
+						<Link to='/user/finalcontest'>
 				    	<li value='contest'>Contest</li>
-				    </Link>
-						<Link to='/user/previouscontest'>
-				    	<li value='PCON'>Previous Contests</li>
 				    </Link>
 						<Link to='/user/about'>
 							<li value='about'><img className = 'log' alt='logo' src= {logo}></img></li>
@@ -24,18 +24,27 @@ export default class Navbar extends React.Component {
     	        <button className='but' type="submit" value='Signout' onClick={this.props.logout}>Sign Out</button>
             </Link>
 			   	</ul>
-		 	   <div className='coc'>
+		 	    <div className='coc'>
 			    	<Switch>
-			    	  <Route path="/user/contest"
+			    	  <Route path="/user/finalcontest"
 			    	   	exact
 			    	   	render = {props => (
-			    	   		<Ide
+			    	   		<FinalContest
+			    	   			{...props}
+			    	   			token = {this.props.token}
+			    	   		/>
+			    	   	)}
+			    	  />
+					    <Route path="/finalcontest/questions/:id"
+			    	   	render = {props => (
+			    	   		<FinalContestQuestions
+			    	   		  {...props}
 			    	   			token = {this.props.token}
 			    	   		/>
 			    	   	)}
 			    	  />
 					    <Route
-					    	path="/user/previouscontest"
+					    	path="/user/about"
 					    	exact
 					    	render = {props => (
 					    		<Ide
@@ -46,13 +55,14 @@ export default class Navbar extends React.Component {
 					    <Route
 					    	path="/question/:id"
 					    	render = {props => (
-					    		<Ide
+					    		<Question
+					    			{...props}
 			    	   			token = {this.props.token}
 			    	   		/>
 					    	)}
 					    />
 					    <Route
-					    	path="/user/about"
+					    	path="/ide"
 					    	exact
 					    	render = {props => (
 					    		<Ide
@@ -60,7 +70,7 @@ export default class Navbar extends React.Component {
 			    	   		/>
 					    	)}
 					    />
-			    	  <Redirect to="/user/contest" />
+			    	  <Redirect to="/user/finalcontest" />
 				    </Switch>
 		    	</div>
 				</div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Card from './Card';
 
-class Contest extends Component {
+class FinalContestQuestions extends Component {
   state = {
     questions: []
   };
@@ -16,16 +16,11 @@ class Contest extends Component {
       })
       .then(res => res.json())
       .then(resData => {
-      	console.log(resData.questions);
         this.setState({
           questions: resData.questions
         });
       })
       .catch(err => { console.log(err); });
-  }
-
-  handle = (e) => {
-    console.log(e.target.value);
   }
 
   render() {
@@ -34,8 +29,6 @@ class Contest extends Component {
         {
           this.state.questions.map(q=> (
             <Card
-            sign={'view'}
-            handle={this.handle}
             key={q.questionId._id}
             id={q.questionId._id}
             title={q.questionId.title}
@@ -47,4 +40,4 @@ class Contest extends Component {
   }
 }
 
-export default Contest;
+export default FinalContestQuestions;

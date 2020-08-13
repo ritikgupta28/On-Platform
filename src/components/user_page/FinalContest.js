@@ -1,28 +1,13 @@
 import React from 'react'
-import CardContests from './CardContests'
+import FinalContestCard from './FinalContestCard'
 
-export default class FContest extends React.Component {
+export default class FinalContest extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
 			finalcontest: []
 		}
 	};
-
-	handler = (e) => {
-		fetch('http://localhost:8000/feed/allcontest', {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + this.props.token,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        contestId: e.target.value
-    	})
-    })
-    .then(response => response.json())
-    .catch(err => console.log(err));
-	}
 
 	componentDidMount() {
 		fetch('http://localhost:8000/feed/finalcontest', {
@@ -32,7 +17,6 @@ export default class FContest extends React.Component {
     })
 			.then(res => res.json())
 			.then(resData=> {
-				console.log(resData);
 				this.setState({
 					finalcontest: resData.finalcontest
 				});
@@ -44,9 +28,7 @@ export default class FContest extends React.Component {
 		return (
 			<div className='pcon'>
 				{this.state.finalcontest.map(contest => (
-					<CardContests
-						sign={'Host'}
-						handle={this.handler}
+					<FinalContestCard
 						key={contest._id}
 						title={contest._id}
 						id={contest._id}

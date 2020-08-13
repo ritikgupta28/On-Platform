@@ -13,11 +13,11 @@ router.post('/question', isAuthAdmin, feedController.createQuestion);
 
 router.get('/question/:questionId', feedController.getQuestion);
 
-router.post('/contest', isAuthAdmin, feedController.postContest);
+router.post('/newcontest', isAuthAdmin, feedController.postNewContest);
 
-router.get('/contest', isAuthAdmin, feedController.getContest);
+router.get('/newcontest', isAuthAdmin, feedController.getNewContest);
 
-router.post('/contest-delete-question', isAuthAdmin, feedController.postContestDeleteQuestion);
+router.post('/newcontest-delete-question', isAuthAdmin, feedController.postNewContestDeleteQuestion);
 
 router.get('/finalcontest', feedController.getFinalContest);
 
@@ -25,10 +25,10 @@ router.post('/finalcontest', isAuthAdmin, feedController.postFinalContest);
 
 router.get('/finalcontest/questions/:contestId', isAuthAdmin, feedController.getFinalContestQuestions);
 
-router.get('/allcontest', isAuthAdmin, feedController.getAllContest);
+router.get('/allcontests', isAuthAdmin, feedController.getAllContests);
 
-router.post('/allcontest', isAuthAdmin, feedController.postAllContest);
+router.post('/allcontests', isAuthAdmin, feedController.postAllContests);
 
-router.get('/allcontest/questions/:contestId', isAuthAdmin, feedController.getAllContestquestions);
+router.get('/allcontests/questions/:contestId', isAuthAdmin, feedController.getAllContestsQuestions);
 
 module.exports = router;
