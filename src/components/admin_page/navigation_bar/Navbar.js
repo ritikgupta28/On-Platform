@@ -5,6 +5,8 @@ import './Navbar.css'
 import logo from '../../images/logo1.jpg'
 import Contest from '../Contest'
 import FinalContest from '../FinalContest'
+import FContest from '../FContest'
+import FContestQuestion from '../FContestQuestion'
 import PreviousContest from '../PreviousContest'
 import AddQuestion from '../AddQuestion'
 import AllQuestions from '../AllQuestions'
@@ -19,22 +21,25 @@ export default class Navbar extends React.Component {
 			    <ul className='one'>
 				    <Link to='/admin/questions'>
 					    <li value='ques'>Questions</li>
-			  	    </Link>
+			  	  </Link>
 			    	<Link to='/admin/addquestion'>
-						<li value='Addques'>Add Question</li>
-					</Link>
-					<Link to='/admin/contest'>
+							<li value='Addques'>Add Question</li>
+						</Link>
+						<Link to='/admin/contest'>
 				    	<li value='contest'>Contest</li>
 				    </Link>
-					<Link to='/admin/previouscontest'>
-				    	<li value='PCON'>Previous Contests</li>
+						<Link to='/admin/fcontest'>
+				    	<li value='PCON'>F Contest</li>
 				    </Link>
-					<Link to='/admin/about'>
-						<li value='about'><img className = 'log' alt='logo' src= {logo}></img></li>
+						<Link to='/admin/previouscontest'>
+				    	<li value='PCON'>All Contests</li>
+				    </Link>
+						<Link to='/admin/about'>
+							<li value='about'><img className = 'log' alt='logo' src= {logo}></img></li>
 				    </Link>
 				    <Link to='/'>
-    	            <button className='but' type="submit" value='Signout' onClick={this.props.logout}>Sign Out</button>
-    	            </Link>
+    	        <button className='but' type="submit" value='Signout' onClick={this.props.logout}>Sign Out</button>
+    	      </Link>
 		    	</ul>
 			    <div className='coc'>
 			    	<Switch>
@@ -65,6 +70,16 @@ export default class Navbar extends React.Component {
 			    	   	)}
 			    	  />
 					    <Route
+					    	path="/admin/fcontest"
+					    	exact
+					    	render = {props => (
+					    		<FContest
+					    			{...props}
+										token = {this.props.token}
+					    		/>
+					    	)}
+					    />
+					    <Route
 					    	path="/admin/previouscontest"
 					    	exact
 					    	render = {props => (
@@ -82,6 +97,14 @@ export default class Navbar extends React.Component {
 					    		/>
 					    	)}
 					    />
+					    <Route path="/finalcontest/:id"
+			    	   	render = {props => (
+			    	   		<FContestQuestion
+			    	   		  {...props}
+			    	   			token = {this.props.token}
+			    	   		/>
+			    	   	)}
+			    	  />
 					    <Route path="/contest/:id"
 			    	   	render = {props => (
 			    	   		<FinalContest

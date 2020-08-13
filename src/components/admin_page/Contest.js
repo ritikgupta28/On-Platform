@@ -24,7 +24,7 @@ class Contest extends Component {
   }
 
   handler = (e) => {
-		fetch('http://localhost:8000/feed/allcontest', {
+		fetch('http://localhost:8000/feed/finalcontest', {
       method: 'POST',
       headers: {
         Authorization: 'Bearer ' + this.props.token,
@@ -33,7 +33,7 @@ class Contest extends Component {
     })
     .then(response => response.json())
     .catch(err => console.log(err));
-	} 
+	}
 
 	componentDidMount() {
 		fetch('http://localhost:8000/feed/contest', {
@@ -55,8 +55,8 @@ class Contest extends Component {
 	render() {
 		return (
       <div>
-	   	  <Link to='/admin/previouscontest'>
-          <button className='but' value='s' style={{ marginBottom: '10px' }} onClick={this.handler}>Add to All Contest</button>
+	   	  <Link to='/admin/fcontest'>
+          <button className='but' value='s' style={{ marginBottom: '10px' }} onClick={this.handler}>Host</button>
         </Link>
         <div>
 			    {this.state.questions.map(q => (

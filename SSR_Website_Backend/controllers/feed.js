@@ -1,5 +1,6 @@
 const Question = require('../models/question');
 const Admin = require('../models/admin');
+const FinalContest = require('../models/finalcontest');
 const AllContest = require('../models/allcontest');
 const ObjectId = require('mongodb').ObjectID;
 
@@ -115,7 +116,7 @@ exports.postContestDeleteQuestion = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
-exports.postAllContest = (req, res, next) => {
+exports.postFinalContest = (req, res, next) => {
   Admin.findById(req.adminId)
   .then(admn => {
     admn.populate('contest.items.questionId')
@@ -124,17 +125,70 @@ exports.postAllContest = (req, res, next) => {
       const questions = admin.contest.items.map(i => {
         return { questionId: { ...i.questionId } };
       });
-      const allcontest = new AllContest({
+      const finalcontest = new FinalContest({
         admin: {
           name: admn.name,
           adminId: req.adminId
         },
         questions: questions
       });
-      return allcontest.save();
+      return finalcontest.save();
     })
     .then(result => {
       return admn.clearContest();
+    })
+    .catch(err => console.log(err));
+  })
+  .catch(err => console.log(err));
+}
+
+exports.getFinalContest = (req, res, next) => {
+  FinalContest.find()
+  .then(contest => {
+    res.status(200).json({
+        message: 'Fetched question successfully!',
+        finalcontest: contest
+    });
+  })
+  .catch(err => console.log(err));
+}
+
+exports.getFinalContestQuestions = (req, res, next) => {
+  const contestId = req.params.contestId;
+  FinalContest.findById(contestId)
+  .then(contest => {
+    contest.populate('questions.questionId')
+    .execPopulate()
+    .then(contest => {
+      const questions = contest.questions;
+      res.status(200).json({
+        message: 'Fetched Contest Questions Successfully',
+        questions: questions
+      });
+    })
+    .catch(err => console.log(err)); 
+  })
+  .catch(err => console.log(err));
+}
+
+exports.postAllContest = (req, res, next) => {
+  const contestId = req.body.contestId;
+  FinalContest.findById(contestId)
+  .then(contst => {
+    contst.populate('questions.questionId')
+    .execPopulate()
+    .then(contest => {
+      const questions = contest.questions.map(i => {
+        return { questionId: { ...i.questionId } };
+      });
+      const allcontest = new AllContest({
+        admin: {
+          name: contest.admin.name,
+          adminId: contest.admin.adminId
+        },
+        questions: questions
+      });
+      return allcontest.save();
     })
     .catch(err => console.log(err));
   })

@@ -17,7 +17,13 @@ router.post('/contest', isAuthAdmin, feedController.postContest);
 
 router.get('/contest', isAuthAdmin, feedController.getContest);
 
-router.post('/contest-delete-question', isAuthAdmin, feedController.postContestDeleteQuestion)
+router.post('/contest-delete-question', isAuthAdmin, feedController.postContestDeleteQuestion);
+
+router.get('/finalcontest', feedController.getFinalContest);
+
+router.post('/finalcontest', isAuthAdmin, feedController.postFinalContest);
+
+router.get('/finalcontest/questions/:contestId', isAuthAdmin, feedController.getFinalContestQuestions);
 
 router.get('/allcontest', isAuthAdmin, feedController.getAllContest);
 
