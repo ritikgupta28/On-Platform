@@ -9,6 +9,8 @@ class Addques extends React.Component {
       content : "",
       sinput: "",
       soutput: "",
+      inputfile: "",
+      outputfile: ""
     };
     this.handler = this.handler.bind(this);
   }
@@ -24,17 +26,18 @@ class Addques extends React.Component {
         title: this.state.title,
         content: this.state.content,
         sinput: this.state.sinput,
-        soutput: this.state.soutput
+        soutput: this.state.soutput,
+        inputfile: this.state.inputfile,
+        outputfile: this.state.outputfile
       })
     })
     .then(response => response.json())
-    .then(data => {
-    	console.log(data);
-    })
+    .then(data => console.log(data))
     .catch(err => console.log(err));
   }
 
   handler(event) {
+  	console.log(event.target.value);
   	const target = event.target ;
     const value = target.value ;
     const name = target.name ;
@@ -46,56 +49,69 @@ class Addques extends React.Component {
 		return (
 			<div className='ques'>
 			  <form className='fo'>
-				  <label>
 				    Title:
-				    <br />
 				    <textarea 
+				      rows="2"
+              cols="40"
 			  	    placeholder='Enter title here...'
-			    	  className='title'
-			      	type="text"
 				      name="title"
 				      value = {this.state.title}
     	        onChange = {this.handler}
       	    />
-			  	</label>
-			  	<br />
-				  <label>
+      	    <br/>
 				    Content:
-				    <br />
 		  			<textarea 
+		  			  rows="7"
+              cols="80"
 			  		  placeholder='Enter Question here...'
-				  	  className='content' 
-				    	type="text"
 					    name="content" 
 					    value = {this.state.content}
     	        onChange = {this.handler}
       	  	/>
-					</label>
-					<br />
-					<label>
-					  Input:
+					  <br/>
+					<div style={{ display: 'flex'}}>
+					   Sample Input:
 					  <textarea 
+					    rows="3"
+              cols="30"
 					    placeholder='Sample Input...'
-				  	  className='sio'
-				    	type="text"
 					    name="sinput" 
 					    value = {this.state.sinput}
     	        onChange = {this.handler}
 						/> 
-					  Output:
+					  Sample Output:
 				  	<textarea
+				  	  rows="3"
+              cols="30"
 					    placeholder='Sample Output...'
-					    className='sio'
-					    type="text" 
 					    name="soutput" 
-					    value = {this.state.soutput}
-          	  onChange = {this.handler}
+					    value={this.state.soutput}
+          	  onChange={this.handler}
           	/>
-					</label>
-					<div style={{ padding: '5px', margin: '20px'}}>
-					  <label>Input File: <input type='file' name='Input File' /></label>
-				    <label>Output File: <input type='file' name='Output File' /></label>
-			  	</div>
+					</div>
+					<br/>
+					<div style={{ display: 'flex', margin: '10px'}}>
+					  Input File:
+					  <br /> 
+					  <textarea
+              rows="5"
+              cols="40"
+              name="inputfile"
+              value={this.state.inputfile}
+              onChange={this.handler} 
+              placeholder="Enter input here.."
+            />
+				     Output File:
+				    <textarea
+              rows="5"
+              cols="40"
+              name="outputfile"
+              value={this.state.outputfile}
+              onChange={this.handler} 
+              placeholder="Enter output here.."
+            />
+            </div>
+            <br />
 				  <Link to='/admin/questions'> 
 				  	<button className='but' value='pcon' type='submit' onClick={this.handle}>ADD Question</button>
 				  </Link>

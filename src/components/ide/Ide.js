@@ -34,7 +34,7 @@ class App extends React.Component {
       language: lang
     });
   }
-  async handleSubmit(e) {
+  async handleCompile(e) {
     e.preventDefault();
     let script = this.state.code;
     let language = null;
@@ -51,6 +51,11 @@ class App extends React.Component {
       output: true
     });
   }
+  
+  handleSubmit = (e) => {
+    e.preventDefault();
+    
+  } 
 
   render() {
     let options = {
@@ -63,7 +68,7 @@ class App extends React.Component {
         <div className="con">
           <Dropdown sendData={this.getData.bind(this)} />
           <hr />
-          <form onSubmit={this.handleSubmit}>
+          <form>
             <CodeMirror
               value={this.state.code}
               onChange={this.updateCode.bind(this)}
@@ -79,8 +84,8 @@ class App extends React.Component {
               name="input"
               placeholder="Enter input here.."
             />{' '}
-            <button className="bu">Compile</button>
-            <button className="bu">Submit</button>
+            <button className="bu" onClick={this.handleCompile}>Compile</button>
+            <button className="bu" onClick={this.handleSubmit}>Submit</button>
           </form>
           <br />
           {

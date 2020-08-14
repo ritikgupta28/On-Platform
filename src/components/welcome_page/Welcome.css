@@ -3,60 +3,50 @@
     margin: 0px;
 }
 .logo {
-    float: left;
-    margin-left: 80px;
-    margin-top: 2px;
-    width : 90px;
-    height : 90px;
+    width : 80px;
+    height : 80px;
 }
 .header {
-    text-align: center;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     background-color: rgb(7, 2, 15);
     width: 100%;
     color: white;
 }
 .heading {
+    padding-left: 250px; 
     font-size: 3em;
 }
 .main {
-    padding: 0px;
-    margin: 0px;
-    width: 100%;
     color: rgb(7, 2, 15);
-    font-family:Courier New;
     font-size: 2em;
 }
 input {
-    width: 30%;
-    margin-top:10px;
+    width: 25%;
+    margin: 10px 15px;
     padding: 10px 15px;
     box-sizing: border-box;
-    border: 5px solid rgb(7, 2, 15);
-    border-radius: 14px;
+    border: 2px solid rgb(7, 2, 15);
+    border-radius: 10px;
+}
 
-  }
 ::placeholder{
     color: rgb(7, 2, 15);
     font-size: 1em;
 }
 
 .button {
+    font-size: 20px;
     color: rgb(255, 255, 255);
-    width: 12%;
-    padding: 8px 25px;
-    margin: 5px;
-    box-sizing: border-box;
+    padding: 5px 25px;
+    margin: 4px;
     border: 5px solid rgb(7, 2, 15);
     border-radius: 14px;
     background-color: rgb(7, 2, 15);
 }
 .footer {
-	margin: 0px;
     padding: 1px;
-    width: 100%;
     color: aliceblue;
     font-size: 2vmin;
     background-color: rgb(7, 2, 15);
@@ -65,10 +55,11 @@ input {
 input:hover {
     background-color: rgb(185, 204, 121);
 }
+
 .form {
     text-align: center;
-    padding: 20px 50px;
-    margin: 25px 250px;
+    padding: 10px 40px;
+    margin: 30px 300px;
     border: 2px solid;
     border-radius: 10px;
 }
@@ -80,8 +71,5 @@ input:hover {
 }
 
 .but {
-    margin-top: 10px;
-    margin-left: 50px;
-    margin-right: 50px;
-    padding: 10px;
+    padding: 15px 200px;
 }

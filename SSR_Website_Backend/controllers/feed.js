@@ -21,15 +21,14 @@ exports.getQuestions = (req, res, next) => {
 };
 
 exports.createQuestion = (req, res, next) => {
-  const title = req.body.title;
-  const content = req.body.content;
-  const sinput = req.body.sinput;
-  const soutput = req.body.soutput;
+  const { title, content, sinput, soutput, inputfile, outputfile } = req.body;
   const question = new Question({
     title: title,
     content: content,
     sinput: sinput,
     soutput: soutput,
+    inputfile: inputfile,
+    outputfile: outputfile,
     adminId: req.adminId
   });
   question
@@ -61,9 +60,7 @@ exports.getQuestion = (req, res, next) => {
         question: result
       });
     })
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(err => console.log(err));
 };
 
 exports.postNewContest = (req, res, next) => {
@@ -80,9 +77,7 @@ exports.postNewContest = (req, res, next) => {
         message: 'Add question successfully!'
       });
     })
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(err => console.log(err));
 };
 
 exports.getNewContest = (req, res, next) => {

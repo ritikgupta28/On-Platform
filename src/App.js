@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 
 import Welcome from './components/welcome_page/Welcome';
+import Ide from './components/ide/Ide'
 import Admin from './components/admin_page/Admin';
 import User from './components/user_page/User';
 import Developers from './components/developers/Developers';
@@ -242,6 +243,13 @@ class App extends Component {
           exact
           render = {props => (
             <Developers />
+          )}
+        />
+        <Route
+          path="/ide"
+          exact
+          render = {props => (
+            <Ide />
           )}
         />
         <Redirect to="/" />

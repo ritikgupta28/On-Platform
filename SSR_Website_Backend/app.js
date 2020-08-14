@@ -7,7 +7,6 @@ const feedRoutes = require('./routes/feed');
 const outputRoutes = require('./routes/output');
 const authUserRoutes = require('./routes/authUser');
 const authAdminRoutes = require('./routes/authAdmin');
-const Admin = require('./models/admin');
 
 const app = express();
  
@@ -26,7 +25,6 @@ app.use('/feed', feedRoutes);
 app.use('/authUser', authUserRoutes);
 app.use('/authAdmin', authAdminRoutes);
 app.use(outputRoutes);
-// app.use(authAdmin);
 
 mongoose
   .connect(
