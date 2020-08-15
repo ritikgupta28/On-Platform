@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const feedRoutes = require('./routes/feed');
-const outputRoutes = require('./routes/output');
+const ideRoutes = require('./routes/ide');
 const authUserRoutes = require('./routes/authUser');
 const authAdminRoutes = require('./routes/authAdmin');
 
@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 app.use('/feed', feedRoutes);
 app.use('/authUser', authUserRoutes);
 app.use('/authAdmin', authAdminRoutes);
-app.use(outputRoutes);
+app.use(ideRoutes);
 
 mongoose
   .connect(
