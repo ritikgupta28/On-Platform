@@ -32,12 +32,10 @@ class Addques extends React.Component {
       })
     })
     .then(response => response.json())
-    .then(data => console.log(data))
     .catch(err => console.log(err));
   }
 
   handler(event) {
-  	console.log(event.target.value);
   	const target = event.target ;
     const value = target.value ;
     const name = target.name ;
