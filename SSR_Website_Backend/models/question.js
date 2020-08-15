@@ -12,20 +12,20 @@ const questionSchema = new Schema(
       required: true
     },
     sinput: {
-      type: Object,
-      required: String
+      type: String,
+      required: true
     },
     soutput: {
-      type: Object,
-      required: String
+      type: String,
+      required: true
     },
     inputfile: {
-      type: Object,
-      required: String
+      type: String,
+      required: true
     },
     outputfile: {
-      type: Object,
-      required: String
+      type: String,
+      required: true
     },
     adminId: {
       type: Schema.Types.ObjectId,

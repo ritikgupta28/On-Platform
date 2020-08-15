@@ -42,11 +42,7 @@ adminSchema.methods.addToContest = function(question) {
   });
   let newQuantity = 1;
   const updatedContestItems = [...this.contest.items];
-
-  // if(contestQuestionIndex >= 0) {
-  //   newQuantity = this.contest.items[contestQuestionIndex].quantity + 1;
-  //   updatedContestItems[contestQuestionIndex].quantity = newQuantity;
-  // }
+  
   if(contestQuestionIndex < 0) {
     updatedContestItems.push({
       questionId: question._id,

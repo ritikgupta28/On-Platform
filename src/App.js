@@ -263,6 +263,7 @@ class App extends Component {
             exact
             render = {props => (
               <Admin
+                {...props}
                 logout={this.logoutHandler}
                 token = {this.state.token}
               />
@@ -277,10 +278,21 @@ class App extends Component {
             )}
           />
           <Route
-            path="/admin/contest"
+            path="/admin/newcontest"
             exact
             render = {props => (
               <Admin
+                {...props}
+                token = {this.state.token}
+              />
+            )}
+          />
+          <Route
+            path="/admin/finalcontest"
+            exact
+            render = {props => (
+              <Admin
+                {...props}
                 token = {this.state.token}
               />
             )}
@@ -290,6 +302,7 @@ class App extends Component {
             exact
             render = {props => (
               <Admin
+                {...props}
                 token = {this.state.token}
               />
             )}
@@ -299,6 +312,7 @@ class App extends Component {
             exact
             render = {props => (
               <Admin
+                {...props}
                 token = {this.state.token}
               />
             )}

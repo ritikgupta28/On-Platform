@@ -76,6 +76,7 @@ export default class Navbar extends React.Component {
 					    	render = {props => (
 					    		<FinalContest
 					    			{...props}
+					    			adminId = {this.props.adminId}
 										token = {this.props.token}
 					    		/>
 					    	)}

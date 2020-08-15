@@ -20,15 +20,21 @@ class App extends React.Component {
       language: '',
       output: false
     };
+    this.handleCompile = this.handleCompile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   updateCode(newCode) {
     this.setState({
-      code: newCode
+      code: newCode,
     });
   }
 
+  onInputDataChange = (e) => {
+    this.setState({
+      inputdata: e.target.value
+    })
+  }
   getData(lang) {
     this.setState({
       language: lang
@@ -40,8 +46,7 @@ class App extends React.Component {
     let language = null;
     if (this.state.language === 'python') language = 'python3';
     else language = 'cpp';
-    let stdin = e.target.elements.input.value;
-
+    let stdin = this.state.inputdata;
     this.state.result = await axios.post('http://localhost:8000/ide', {
       script,
       language,
@@ -51,10 +56,21 @@ class App extends React.Component {
       output: true
     });
   }
-  
-  handleSubmit = (e) => {
-    e.preventDefault();
-    
+
+  async handleSubmit(e) {
+    let script = this.state.code;
+    let language = null;
+    if (this.state.language === 'python') language = 'python3';
+    else language = 'cpp';
+    let questionId = this.props.questionId;
+    this.state.result = await axios.post('http://localhost:8000/ide/input', {
+      script,
+      language,
+      questionId
+    });
+    this.setState({
+      output: true
+    });
   } 
 
   render() {
@@ -68,7 +84,7 @@ class App extends React.Component {
         <div className="con">
           <Dropdown sendData={this.getData.bind(this)} />
           <hr />
-          <form>
+          <form >
             <CodeMirror
               value={this.state.code}
               onChange={this.updateCode.bind(this)}
@@ -82,6 +98,8 @@ class App extends React.Component {
               rows="5"
               cols="60"
               name="input"
+              value={this.state.inputdata}
+              onChange={this.onInputDataChange}
               placeholder="Enter input here.."
             />{' '}
             <button className="bu" onClick={this.handleCompile}>Compile</button>

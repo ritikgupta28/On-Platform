@@ -10,11 +10,12 @@ export default class FinalContest extends React.Component {
 	};
 
 	componentDidMount() {
-		fetch('http://localhost:8000/feed/finalcontest', {
+		fetch('http://localhost:8000/feed/userfinalcontest', {
 			headers: {
+				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
-      }
-    })
+			}
+		})
 			.then(res => res.json())
 			.then(resData=> {
 				this.setState({

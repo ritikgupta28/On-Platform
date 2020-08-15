@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 
 const allContestSchema = new Schema({
 	questions: [
-    {
-      questionId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Question',
-        required: true
-      }
-    }
-  ],
+		{
+			questionId: {
+				type: Schema.Types.ObjectId,
+				ref: 'Question',
+				required: true
+			}
+		}
+	],
 	admin: {
 		name: {
 			type: String,
@@ -22,6 +22,17 @@ const allContestSchema = new Schema({
 			required: true,
 			ref: 'Admin'
 		}
+	},
+	participant: {
+		users: [
+			{
+				userId: {
+					type: Schema.Types.ObjectId,
+					ref: 'User',
+					required: true
+				}
+			}
+		]
 	}
 });
 

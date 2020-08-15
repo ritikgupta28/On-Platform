@@ -138,6 +138,17 @@ exports.postFinalContest = (req, res, next) => {
 }
 
 exports.getFinalContest = (req, res, next) => {
+  FinalContest.find({ 'admin.adminId' : req.adminId })
+  .then(contest => {
+    res.status(200).json({
+        message: 'Fetched question successfully!',
+        finalcontest: contest
+    });
+  })
+  .catch(err => console.log(err));
+}
+
+exports.getUserFinalContest = (req, res, next) => {
   FinalContest.find()
   .then(contest => {
     res.status(200).json({
@@ -166,28 +177,45 @@ exports.getFinalContestQuestions = (req, res, next) => {
   .catch(err => console.log(err));
 }
 
+exports.getUserFinalContestQuestions = (req, res, next) => {
+  const contestId = req.params.contestId;
+  FinalContest.findById(contestId)
+  .then(contest => {
+  	contest.addToParticipant(req.userId);
+    contest.populate('questions.questionId')
+    .execPopulate()
+    .then(contest => {
+      const questions = contest.questions;
+      res.status(200).json({
+        message: 'Fetched Contest Questions Successfully',
+        questions: questions
+      });
+    })
+    .catch(err => console.log(err)); 
+  })
+  .catch(err => console.log(err));
+}
+
 exports.postAllContests = (req, res, next) => {
   const contestId = req.body.contestId;
   FinalContest.findById(contestId)
-  .then(contst => {
-    contst.populate('questions.questionId')
-    .execPopulate()
     .then(contest => {
-      const questions = contest.questions.map(i => {
-        return { questionId: { ...i.questionId } };
-      });
       const allcontest = new AllContest({
-        admin: {
-          name: contest.admin.name,
-          adminId: contest.admin.adminId
-        },
-        questions: questions
+        admin: contest.admin,
+        questions: contest.questions,
+        participant: contest.participant
       });
       return allcontest.save();
     })
+    .then(result => {
+      return FinalContest.deleteOne(
+        { _id: contestId },
+        function (err) {
+          if(err) console.log(err);
+          console.log("Successful deletion");
+      });
+    })
     .catch(err => console.log(err));
-  })
-  .catch(err => console.log(err));
 }
 
 exports.getAllContests = (req, res, next) => {

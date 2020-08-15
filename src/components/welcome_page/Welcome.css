@@ -48,7 +48,7 @@ input {
 .footer {
     padding: 1px;
     color: aliceblue;
-    font-size: 2vmin;
+    font-size: 3vmin;
     background-color: rgb(7, 2, 15);
     text-align: center;
 }
@@ -58,7 +58,7 @@ input:hover {
 
 .form {
     text-align: center;
-    padding: 10px 40px;
+    padding: 8px 30px;
     margin: 30px 300px;
     border: 2px solid;
     border-radius: 10px;
