@@ -16,7 +16,6 @@ class FinalContestQuestions extends Component {
       })
       .then(res => res.json())
       .then(resData => {
-      	console.log(resData.questions);
         this.setState({
           questions: resData.questions
         });

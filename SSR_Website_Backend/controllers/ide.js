@@ -31,8 +31,13 @@ exports.inputFile = (req, res, next) => {
   const questionId = req.body.questionId;
   Question.findById(questionId)
   .then(question => {
+<<<<<<< HEAD
   	let stdin = question.inputfile;
   	let stdout = question.outputfile;
+=======
+    let stdin = question.inputfile;
+    let stdout = question.outputfile;
+>>>>>>> fa6582086e3055469991fa788f26f98263acc25e
     let { script, language } = req.body;
     let program = {
       script,
@@ -50,6 +55,7 @@ exports.inputFile = (req, res, next) => {
     },
     function(error, response, body) {
       if(!error) {
+<<<<<<< HEAD
       	const res = body.output;
       	if (res === stdout) {
       		console.log("100 Marks");
@@ -61,6 +67,19 @@ exports.inputFile = (req, res, next) => {
       }
       else {
       	console.log(error);
+=======
+        const res = body.output;
+        if (res === stdout) {
+          console.log("100 Marks");
+        }
+        else {
+          console.log("Sorry, Try again");
+        }
+        //res.send(response).status(200);
+      }
+      else {
+        console.log(error);
+>>>>>>> fa6582086e3055469991fa788f26f98263acc25e
       }
     }
   );

@@ -8,7 +8,7 @@ class FinalContestQuestions extends Component {
 
   componentDidMount() {
     const contestId = this.props.match.params.id;
-    fetch('http://localhost:8000/feed/finalcontest/questions/' + contestId, {
+    fetch('http://localhost:8000/feed/userfinalcontest/questions/' + contestId, {
       headers: {
         Authorization: 'Bearer ' + this.props.token,
         'Content-Type': 'application/json'

@@ -2,6 +2,7 @@ const express = require('express');
 
 const feedController = require('../controllers/feed');
 const isAuthAdmin = require('../middleware/is-authAdmin');
+const isAuthUser = require('../middleware/is-authUser');
 
 const router = express.Router();
 
@@ -19,11 +20,15 @@ router.get('/newcontest', isAuthAdmin, feedController.getNewContest);
 
 router.post('/newcontest-delete-question', isAuthAdmin, feedController.postNewContestDeleteQuestion);
 
-router.get('/finalcontest', feedController.getFinalContest);
+router.get('/finalcontest', isAuthAdmin, feedController.getFinalContest);
+
+router.get('/userfinalcontest', isAuthUser, feedController.getUserFinalContest);
 
 router.post('/finalcontest', isAuthAdmin, feedController.postFinalContest);
 
 router.get('/finalcontest/questions/:contestId', isAuthAdmin, feedController.getFinalContestQuestions);
+
+router.get('/userfinalcontest/questions/:contestId', isAuthUser, feedController.getUserFinalContestQuestions);
 
 router.get('/allcontests', isAuthAdmin, feedController.getAllContests);
 

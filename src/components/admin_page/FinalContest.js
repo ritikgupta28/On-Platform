@@ -27,12 +27,12 @@ export default class FinalContest extends React.Component {
 	componentDidMount() {
 		fetch('http://localhost:8000/feed/finalcontest', {
 			headers: {
+        Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
       }
     })
 			.then(res => res.json())
 			.then(resData=> {
-				console.log(resData);
 				this.setState({
 					finalcontest: resData.finalcontest
 				});
