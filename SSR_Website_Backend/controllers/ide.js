@@ -3,6 +3,7 @@ const Question = require('../models/question');
 
 exports.ideResult = async (req, res) => {
   let { script, language, stdin } = req.body;
+  console.log(req.userId);
   let program = {
     script,
     language,
@@ -30,6 +31,7 @@ exports.ideResult = async (req, res) => {
 
 exports.inputFile = (req, res, next) => {
   const questionId = req.body.questionId;
+  console.log(req.userId);
   Question.findById(questionId)
   .then(question => {
     let stdin = question.inputfile;

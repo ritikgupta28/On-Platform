@@ -47,7 +47,12 @@ class App extends React.Component {
     if (this.state.language === 'python') language = 'python3';
     else language = 'cpp';
     let stdin = this.state.inputdata;
+    console.log(this.props.token);
     this.state.result = await axios.post('http://localhost:8000/ide', {
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+        'Content-Type': 'application/json'
+      },
       script,
       language,
       stdin
@@ -64,6 +69,10 @@ class App extends React.Component {
     else language = 'cpp';
     let questionId = this.props.questionId;
     this.state.result = await axios.post('http://localhost:8000/ide/input', {
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+        'Content-Type': 'application/json'
+      },
       script,
       language,
       questionId

@@ -40,7 +40,7 @@ class Question extends React.Component {
 					  <p>{this.state.soutput}</p>
 					</pre>
 				</div>
-				<Ide questionId={this.props.match.params.id}/>
+				<Ide token={this.props.token} questionId={this.props.match.params.id}/>
 			</div>
 		)
 	}
