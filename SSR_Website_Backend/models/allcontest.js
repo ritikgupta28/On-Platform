@@ -30,6 +30,23 @@ const allContestSchema = new Schema({
 					type: Schema.Types.ObjectId,
 					ref: 'User',
 					required: true
+				},
+				questions: [
+					{
+						questionId: {
+							type: Schema.Types.ObjectId,
+							ref: 'Question',
+							required: true
+						},
+						score: {
+							type: Number,
+							required: true
+						}
+					}
+				],
+				totalScore: {
+					type: Number,
+					required: true
 				}
 			}
 		]
