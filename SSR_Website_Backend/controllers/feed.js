@@ -167,6 +167,7 @@ exports.getFinalContestQuestions = (req, res, next) => {
     .execPopulate()
     .then(contest => {
       const questions = contest.questions;
+      console.log(questions);
       res.status(200).json({
         message: 'Fetched Contest Questions Successfully',
         questions: questions

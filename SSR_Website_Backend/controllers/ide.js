@@ -18,9 +18,10 @@ exports.ideResult = async (req, res) => {
       json: program
     },
     function(error, response, body) {
-      if (!error) {
+      if(!error) {
         res.send(response).status(200);
-      } else {
+      }
+      else {
         res.send(error).status(404);
       }
     }
@@ -50,17 +51,19 @@ exports.inputFile = (req, res, next) => {
     },
     function(error, response, body) {
       if(!error) {
-        const res = body.output;
-        if (res === stdout) {
+        const result = body.output;
+        const n = result.localeCompare(stdout);
+        if (n === 0) {
           console.log("100 Marks");
+          res.send(response).status(200);
         }
         else {
           console.log("Sorry, Try again");
-        }
-        //res.send(response).status(200);
-      }
+          res.send(error).status(200)
+        }      }
       else {
         console.log(error);
+        res.send(error).status(200);
       }
     }
   );

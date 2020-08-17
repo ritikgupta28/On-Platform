@@ -7,6 +7,6 @@ const router = express.Router();
 //POST /ide
 router.post('/ide', ideController.ideResult);
 
-router.post('/ide/input' , ideController.inputFile);
+router.post('/ide/input', ideController.inputFile);
 
 module.exports = router;
