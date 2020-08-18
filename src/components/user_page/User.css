@@ -28,6 +28,7 @@
     background-color: rgb(7, 2, 15);
 }
 .log {
+    cursor: pointer;
     float: left;
     margin-left: 80px;
     margin-top: 2px;
@@ -51,11 +52,13 @@
     align-items: center;
 }
 .butt {
+    cursor: pointer;
     float: left;
     margin: 100px;
     padding: 10px;
 }
 .but {
+    cursor: pointer;
     margin-top: 10px;
     margin-left: 50px;
     margin-right: 50px;

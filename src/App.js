@@ -335,15 +335,6 @@ class App extends Component {
             )}
           />
           <Route
-            path="/user/allcontests"
-            exact
-            render = {props => (
-              <User
-                token = {this.state.token}
-              />
-            )}
-          />
-          <Route
             path="/user/about"
             exact
             render = {props => (

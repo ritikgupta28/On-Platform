@@ -41,6 +41,7 @@ class App extends React.Component {
     });
   }
   async handleCompile(e) {
+    console.log(this.props.token);
     e.preventDefault();
     let script = this.state.code;
     let language = null;
@@ -49,14 +50,17 @@ class App extends React.Component {
     let stdin = this.state.inputdata;
     console.log(this.props.token);
     this.state.result = await axios.post('http://localhost:8000/ide', {
-      headers: {
-        Authorization: 'Bearer ' + this.props.token,
-        'Content-Type': 'application/json'
-      },
       script,
       language,
       stdin
-    });
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.props.token,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
     this.setState({
       output: true
     });
@@ -68,15 +72,18 @@ class App extends React.Component {
     if (this.state.language === 'python') language = 'python3';
     else language = 'cpp';
     let questionId = this.props.questionId;
-    this.state.result = await axios.post('http://localhost:8000/ide/input', {
-      headers: {
-        Authorization: 'Bearer ' + this.props.token,
-        'Content-Type': 'application/json'
-      },
+    this.state.result = await axios.post('http://localhost:8000/ide/input',{
       script,
       language,
       questionId
-    });
+      },
+      {
+        headers: {
+          Authorization: 'Bearer ' + this.props.token,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
     this.setState({
       output: true
     });
@@ -116,15 +123,14 @@ class App extends React.Component {
           </form>
           <br />
           {
-            this.state.output 
-            ? 
-            (
+            this.state.output
+            ?
             <div>
               <hr/>
               <Output result={this.state.result} />
             </div>
-            ) 
-            : null
+            :
+            null
           }
         </div>
       </div>

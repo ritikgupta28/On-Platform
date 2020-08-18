@@ -1,5 +1,7 @@
 const request = require('request');
+
 const Question = require('../models/question');
+const FinalContest = require('../models/finalcontest');
 
 exports.ideResult = async (req, res) => {
   let { script, language, stdin } = req.body;
@@ -29,7 +31,7 @@ exports.ideResult = async (req, res) => {
   );
 }
 
-exports.inputFile = (req, res, next) => {
+exports.inputFile = async (req, res) => {
   const questionId = req.body.questionId;
   console.log(req.userId);
   Question.findById(questionId)
@@ -56,19 +58,20 @@ exports.inputFile = (req, res, next) => {
         const result = body.output;
         const n = result.localeCompare(stdout);
         if (n === 0) {
+          FinalContest.findById('5f3b711257ac832dbc1b337e')
+            .then(contest => contest.addScore(req.userId, questionId))
+            .catch(err => console.log(err));
           console.log("100 Marks");
           res.send(response).status(200);
         }
         else {
           console.log("Sorry, Try again");
-          res.send(error).status(200)
-        }      }
+        }
+      }
       else {
         console.log(error);
-        res.send(error).status(200);
       }
-    }
-  );
+  })
   })
   .catch(err => console.log(err));
 }

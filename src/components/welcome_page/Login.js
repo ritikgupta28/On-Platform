@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default class Login extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       email : '',
@@ -11,7 +11,7 @@ export default class Login extends React.Component {
   }
 
   onRChange = (e) => {
-  	this.props.onRouteChange(e.target.value)
+    this.props.onRouteChange(e.target.value)
   }
 
   onEmailChange = (e) => {
@@ -27,9 +27,9 @@ export default class Login extends React.Component {
   }
 
   onUserAdminChange = (e) => {
-  	this.setState({
-  		userAdmin: e.target.value
-  	})
+    this.setState({
+      userAdmin: e.target.value
+    })
     this.props.onChangeUserAdmin(e.target.value);
   }
 
@@ -37,10 +37,11 @@ export default class Login extends React.Component {
     return (
       <div className='main'>
         <form className='form'>
-          <h2>Login</h2>
+          <h3>Login</h3>
           <hr />
           <label>
-            Email: 
+            Email:
+            <br />
             <input 
               placeholder="user@sr.com" 
               name = "email"
@@ -52,6 +53,7 @@ export default class Login extends React.Component {
           <br />
           <label>
             Password: 
+            <br/>
             <input 
               placeholder="password"
               name = "password"

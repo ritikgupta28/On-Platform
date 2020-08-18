@@ -28,6 +28,7 @@
     background-color: rgb(7, 2, 15);
 }
 .log {
+    cursor: pointer;
     float: left;
     margin-left: 80px;
     margin-top: 2px;

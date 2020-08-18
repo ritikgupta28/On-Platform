@@ -76,4 +76,25 @@ finalContestSchema.methods.addToParticipant = function(id) {
   return this.save();
 };
 
+finalContestSchema.methods.addScore = function(uid, qid) {
+  const userIndex = this.participant.users.findIndex(pu => {
+    return pu.userId.toString() === uid.toString();
+  });
+  const userQuestionIndex = this.participant.users[userIndex].questions.findIndex(puq => {
+    return puq.questionId.toString() === qid.toString();
+  });
+  const updatedParticipantUsers = [...this.participant.users];
+
+  updatedParticipantUsers[userIndex].questions[userQuestionIndex].score = 100;
+  updatedParticipantUsers[userIndex].totalScore = 0;
+  updatedParticipantUsers[userIndex].questions.map(i => {
+  	updatedParticipantUsers[userIndex].totalScore += i.score;
+  });
+  const updatedParticipant = {
+    users: updatedParticipantUsers
+  };
+  this.participant = updatedParticipant;
+  return this.save();
+};
+
 module.exports = mongoose.model('FinalContest', finalContestSchema);

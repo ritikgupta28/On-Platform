@@ -1,12 +1,13 @@
-import React from 'react';
+import React from 'react'
 
 export default function Output(props) {
-  let result = props.result.data.body.output;
-  return (
-    <div className='out'>
-      <h2>Output: </h2>
-      <hr/>
-      {result}
+	let result=props.result.data.body.output;
+	return (
+    <div>
+     <p>Output:</p>
+		  <div className='out'>
+         <p>{result}</p>
+      </div>
     </div>
-  );
+	)
 }
