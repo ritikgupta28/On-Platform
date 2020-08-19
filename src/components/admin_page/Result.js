@@ -32,7 +32,7 @@ export default class Result extends React.Component {
 					this.state.participants.map(user => (
 					<div style={{ display: 'flex'}}>
 						<p>{user.userId}</p>
-						<p>{user.totalScore}</p>
+						<p style={{paddingLeft: '20px'}}>{user.totalScore}</p>
 					</div>
 				    ))
 				}

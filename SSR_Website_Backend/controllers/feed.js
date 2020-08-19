@@ -5,14 +5,25 @@ const AllContest = require('../models/allcontest');
 const ObjectId = require('mongodb').ObjectID;
 
 exports.getQuestions = (req, res, next) => {
+  const currentPage = req.query.page || 1;
+  const perPage = 2;
+  let totalQuestions;
 	Admin.findById(req.adminId)
 		.then(admin => {
 			admin.populate('questions')
 			.execPopulate()
 			.then(admin => {
 				const questions = admin.questions;
+				const totalQuestions = admin.totalQuestions;
+				return questions
+                .skip((currentPage - 1) * perPage)
+                .limit(perPage);
+			})
+			.then(questions => {
 				res.status(200).json({
-					questions: questions
+					message: 'Fetched questions successfully.',
+					questions: questions,
+					totalQuestions: totalQuestions
 				});
 			})
 			.catch(err => console.log(err));
@@ -36,6 +47,7 @@ exports.createQuestion = (req, res, next) => {
 		.then(result => {
 			return Admin.findById(req.adminId)
 			.then(admin => {
+				admin.totalQuestions++;
 				admin.questions.push(question);
 				return admin.save();
 			})

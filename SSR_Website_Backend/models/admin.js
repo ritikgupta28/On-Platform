@@ -15,6 +15,10 @@ const adminSchema = new Schema({
     type: String,
     required: true
   },
+  totalQuestions: { 
+    type: Number, 
+    required: true 
+  },
   questions: [
     {
       type: Schema.Types.ObjectId,

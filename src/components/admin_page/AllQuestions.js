@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import Card from './Card';
+import Paginator from '../Paginator/Paginator'
 
 class AllQuestions extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-			questions: []
+			questions: [],
+      questionsLoading: false,
+      totalQuestions: 0,
+      questionPage: 1,
+      status: ''
 		}
   };
 
@@ -31,18 +36,66 @@ class AllQuestions extends Component {
         'Content-Type': 'application/json'
       }
     })
-			.then(res => res.json())
-			.then(resData=> {
-				this.setState({
-					questions: resData.questions
-				});
-			})
-			.catch(err => console.log(err));
+      .then(res => {
+        if (res.status !== 200) {
+          console.log('Failed to fetch user status.');
+        }
+        return res.json();
+      })
+      .then(resData => {
+        this.setState({ status: resData.status });
+      })
+      .catch(err => console.log(err));
+
+      this.loadQuestions();
 	};
+
+  loadQuestions = direction => {
+    if (direction) {
+      this.setState({ questionsLoading: true });
+    }
+    let page = this.state.postPage;
+    if (direction === 'next') {
+      page++;
+      this.setState({ questionPage: page });
+    }
+    if (direction === 'previous') {
+      page--;
+      this.setState({ questionPage: page });
+    }
+
+    fetch('http://localhost:8000/feed/questions', {
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(resData => {
+    	console.log('1', resData.questions);
+        this.setState({
+          questions: resData.questions,
+          totalQuestions: resData.totalItems,
+          questionsLoading: false
+        });
+     })
+     .catch(err => console.log(err));
+  };
 
 	render() {
 		return (
 	   <div>
+	   {this.state.questionsLoading && (
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <p>Loading</p>
+          </div>
+      )}
+	   {!this.state.questionsLoading && (
+     <Paginator
+      onPrevious={this.loadQuestions.bind(this, 'previous')}
+      onNext={this.loadQuestions.bind(this, 'next')}
+      lastPage={Math.ceil(this.state.totalQuestions / 2)}
+      currentPage={this.state.questionPage}
+     >
 		 {
       this.state.questions.map(q => (
             <Card
@@ -54,6 +107,8 @@ class AllQuestions extends Component {
             />
       ))
      }
+     </Paginator>
+     )}
      </div>
 		)
 	}
