@@ -3,9 +3,22 @@ const request = require('request');
 const Question = require('../models/question');
 const FinalContest = require('../models/finalcontest');
 
+// #include<bits/stdc++.h>
+// using namespace std;
+//   int main() {
+//   int t,a,b;
+//   cin>>t;
+//   while(t>1) {
+//     cin>>a>>b;
+//     cout<<a+b<<"\n";
+//     --t;
+//   }
+//   cin>>a>>b;
+//   cout<<a+b;
+// }
+
 exports.ideResult = async (req, res) => {
   let { script, language, stdin } = req.body;
-  console.log(req.userId);
   let program = {
     script,
     language,
@@ -33,7 +46,6 @@ exports.ideResult = async (req, res) => {
 
 exports.inputFile = async (req, res) => {
   const questionId = req.body.questionId;
-  console.log(req.userId);
   Question.findById(questionId)
   .then(question => {
     let stdin = question.inputfile;
@@ -56,13 +68,19 @@ exports.inputFile = async (req, res) => {
     function(error, response, body) {
       if(!error) {
         const result = body.output;
-        const n = result.localeCompare(stdout);
+        const n = stdout.localeCompare(result);
         if (n === 0) {
-          FinalContest.findById('5f3b711257ac832dbc1b337e')
-            .then(contest => contest.addScore(req.userId, questionId))
+          FinalContest.find()
+            .then(fContest => {
+              fContest.map(contest => {
+                return contest.addScore(req.userId, questionId)
+              })
+            })
+            .then(r => {
+              console.log("100 Marks");
+              res.send(response).status(200);
+            })
             .catch(err => console.log(err));
-          console.log("100 Marks");
-          res.send(response).status(200);
         }
         else {
           console.log("Sorry, Try again");

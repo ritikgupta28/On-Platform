@@ -180,6 +180,7 @@ exports.getFinalContestQuestions = (req, res, next) => {
 
 exports.getUserFinalContestQuestions = (req, res, next) => {
   const contestId = req.params.contestId;
+  req.contestId = contestId;
   FinalContest.findById(contestId)
   .then(contest => {
   	contest.addToParticipant(req.userId);
@@ -246,4 +247,8 @@ exports.getAllContestsQuestions = (req, res, next) => {
     .catch(err => console.log(err)); 
   })
   .catch(err => console.log(err));
+}
+
+exports.resultFinalContest = (req, res, next) => {
+  const contestId = req.params.contestId;
 }

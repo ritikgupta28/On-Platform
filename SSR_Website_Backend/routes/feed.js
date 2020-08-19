@@ -26,6 +26,8 @@ router.get('/userfinalcontest', isAuthUser, feedController.getUserFinalContest);
 
 router.post('/finalcontest', isAuthAdmin, feedController.postFinalContest);
 
+router.get('/finalcontest/result', isAuthAdmin, feedController.resultFinalContest);
+
 router.get('/finalcontest/questions/:contestId', isAuthAdmin, feedController.getFinalContestQuestions);
 
 router.get('/userfinalcontest/questions/:contestId', isAuthUser, feedController.getUserFinalContestQuestions);
