@@ -73,4 +73,9 @@ adminSchema.methods.clearContest = function() {
   return this.save();
 }
 
+adminSchema.methods.sliceQuestions = function(skip, perPage) {
+   var questions = this.questions.slice(skip, skip+perPage);
+   return questions;
+}
+
 module.exports = mongoose.model('Admin', adminSchema);

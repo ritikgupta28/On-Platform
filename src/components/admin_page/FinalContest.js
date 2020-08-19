@@ -18,7 +18,7 @@ export default class FinalContest extends React.Component {
       },
       body: JSON.stringify({
         contestId: e.target.value
-    	})
+      })
     })
     .then(response => response.json())
     .catch(err => console.log(err));

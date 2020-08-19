@@ -13,7 +13,7 @@ exports.getQuestions = (req, res, next) => {
 			admin.populate('questions')
 			.execPopulate()
 			.then(admin => {
-				const questions = admin.questions;
+				const questions = admin.sliceQuestions((currentPage-1)*perPage, perPage);
 				const totalQuestions = admin.totalQuestions;
 				res.status(200).json({
 					message: 'Fetched questions successfully.',

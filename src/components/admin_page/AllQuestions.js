@@ -7,7 +7,7 @@ class AllQuestions extends Component {
     super(props);
     this.state = {
 			questions: [],
-      questionsLoading: false,
+      questionsLoading: true,
       totalQuestions: 0,
       questionPage: 1,
       status: ''
@@ -43,18 +43,18 @@ class AllQuestions extends Component {
         return res.json();
       })
       .then(resData => {
-        this.setState({ status: resData.status, questions: resData.questions });
+        this.setState({ status: resData.status });
       })
       .catch(err => console.log(err));
 
-      //this.loadQuestions();
+      this.loadQuestions();
 	};
 
   loadQuestions = direction => {
     if (direction) {
       this.setState({ questionsLoading: true, questions: [] });
     }
-    let page = this.state.postPage;
+    let page = this.state.questionPage;
     if (direction === 'next') {
       page++;
       this.setState({ questionPage: page });
@@ -64,7 +64,7 @@ class AllQuestions extends Component {
       this.setState({ questionPage: page });
     }
 
-    fetch('http://localhost:8000/feed/questions', {
+    fetch('http://localhost:8000/feed/questions?page=' + page , {
       headers: {
         Authorization: 'Bearer ' + this.props.token,
         'Content-Type': 'application/json'
@@ -72,14 +72,14 @@ class AllQuestions extends Component {
     })
     .then(res => {
         if (res.status !== 200) {
-          throw new Error('Failed to fetch posts.');
+          console.log('Failed to fetch user status.');
         }
         return res.json();
     })
     .then(resData => {
         this.setState({
           questions: resData.questions,
-          totalQuestions: resData.totalItems,
+          totalQuestions: resData.totalQuestions,
           questionsLoading: false
         });
      })
@@ -112,6 +112,7 @@ class AllQuestions extends Component {
             />
       ))
      }
+     <br/>
      </Paginator>
      )}
      </div>
