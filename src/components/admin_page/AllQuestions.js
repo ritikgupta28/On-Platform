@@ -43,7 +43,8 @@ class AllQuestions extends Component {
 	render() {
 		return (
 	   <div>
-		{this.state.questions.map(q => (
+		 {
+      this.state.questions.map(q => (
             <Card
               sign={'+'}
               handle={this.handle}
@@ -51,8 +52,9 @@ class AllQuestions extends Component {
               id={q._id}
               title={q.title}
             />
-        ))}
-      </div>
+      ))
+     }
+     </div>
 		)
 	}
 }

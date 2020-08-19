@@ -28,12 +28,14 @@ export default class Result extends React.Component {
 	render() {
 		return (
 			<div>
-				{this.state.participants.map(user => (
-					<div>
+				{
+					this.state.participants.map(user => (
+					<div style={{ display: 'flex'}}>
 						<p>{user.userId}</p>
 						<p>{user.totalScore}</p>
 					</div>
-				))}
+				    ))
+				}
 			</div>
 		)
 	}

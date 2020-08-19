@@ -58,7 +58,8 @@ class Contest extends Component {
           <button className='but' value='s' style={{ marginBottom: '10px' }} onClick={this.handler}>Host</button>
         </Link>
         <div>
-			    {this.state.questions.map(q => (
+			    {
+            this.state.questions.map(q => (
 			      <Card
 			        sign={'-'}
               handle={this.handle}
@@ -66,7 +67,8 @@ class Contest extends Component {
               id={q.questionId._id}
               title={q.questionId.title}
             />
-          ))}
+            ))
+          }
         </div>
       </div>
 		)

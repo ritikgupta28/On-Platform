@@ -73,7 +73,6 @@ class App extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
         this.setState({ isAdminAuth: false });
         this.props.history.replace('/');
       })
@@ -87,7 +86,6 @@ class App extends Component {
   };
 
   loginAdminHandler = (event, authData) => {
-    console.log(authData);
     event.preventDefault();
     fetch('http://localhost:8000/authAdmin/login', {
       method: 'POST',
@@ -111,7 +109,6 @@ class App extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
         this.setState({
           isAdminAuth: true,
           token: resData.token,
@@ -162,7 +159,6 @@ class App extends Component {
       })
     })
       .then(resData => {
-        console.log(resData);
         this.setState({ isUserAuth: false });
         this.props.history.replace('/');
       })
@@ -197,7 +193,6 @@ class App extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
         this.setState({
           isUserAuth: true,
           token: resData.token,

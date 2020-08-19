@@ -28,7 +28,8 @@ export default class AllContests extends React.Component {
 	render() {
 		return (
 			<div className='pcon'>
-				{this.state.allcontest.map(contest => (
+				{
+					this.state.allcontest.map(contest => (
 					<AllContestsCard
 						sign={'Result'}
 						key={contest._id}
@@ -36,7 +37,8 @@ export default class AllContests extends React.Component {
 						id={contest._id}
 						questions={contest.questions}
 					/>
-				))}
+				    ))
+				}
 			</div>
 		)
 	}

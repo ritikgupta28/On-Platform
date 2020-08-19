@@ -25,8 +25,8 @@ export default class Navbar extends React.Component {
 			  	  </Link>
 			    	<Link to='/admin/addquestion'>
 							<li value='Addques'>Add Question</li>
-						</Link>
-						<Link to='/admin/newcontest'>
+					  </Link>
+					  <Link to='/admin/newcontest'>
 				    	<li value='contest'>New Contest</li>
 				    </Link>
 						<Link to='/admin/finalcontest'>
@@ -50,7 +50,7 @@ export default class Navbar extends React.Component {
 					    	render = {props => (
 					    		<AllQuestions
 					    			{...props}
-										token = {this.props.token}
+										token={this.props.token}
 					    		/>
 					    	)}
 					    />
@@ -59,7 +59,7 @@ export default class Navbar extends React.Component {
 					    	exact
 					    	render = {props => (
 					    		<AddQuestion
-					    			token = {this.props.token}
+					    			token={this.props.token}
 					    		/>
 					    	)}
 					    />
@@ -67,7 +67,7 @@ export default class Navbar extends React.Component {
 			    	   	exact
 			    	   	render = {props => (
 			    	   		<NewContest
-			    	   			token = {this.props.token}
+			    	   			token={this.props.token}
 			    	  		/>
 			    	   	)}
 			    	  />
@@ -77,8 +77,8 @@ export default class Navbar extends React.Component {
 					    	render = {props => (
 					    		<FinalContest
 					    			{...props}
-					    			adminId = {this.props.adminId}
-										token = {this.props.token}
+					    			adminId={this.props.adminId}
+										token={this.props.token}
 					    		/>
 					    	)}
 					    />
@@ -87,7 +87,7 @@ export default class Navbar extends React.Component {
 			    	   	render = {props => (
 			    	   		<FinalContestQuestions
 			    	   		  {...props}
-			    	   			token = {this.props.token}
+			    	   			token={this.props.token}
 			    	   		/>
 			    	   	)}
 			    	  />
@@ -97,7 +97,7 @@ export default class Navbar extends React.Component {
 					    	render = {props => (
 					    		<AllContests
 					    			{...props}
-										token = {this.props.token}
+										token={this.props.token}
 					    		/>
 					    	)}
 					    />
@@ -106,7 +106,7 @@ export default class Navbar extends React.Component {
 			    	   	render = {props => (
 			    	   		<AllContestsQuestions
 			    	   		  {...props}
-			    	   			token = {this.props.token}
+			    	   			token={this.props.token}
 			    	   		/>
 			    	   	)}
 			    	  />
@@ -115,7 +115,7 @@ export default class Navbar extends React.Component {
 			    	   	exact
 			    	   	render = {props => (
 			    	   		<Ide
-			    	   			token = {this.props.token}
+			    	   			token={this.props.token}
 			    	   		/>
 			    	   	)}
 			    	  />
@@ -124,7 +124,7 @@ export default class Navbar extends React.Component {
 					    	render = {props => (
 					    		<Question
 					    		 {...props}
-					    		token = {this.props.token}
+					    		token={this.props.token}
 					    		/>
 					    	)}
 					    />
@@ -133,7 +133,7 @@ export default class Navbar extends React.Component {
 			    	   	exact
 			    	   	render = {props => (
 			    	   		<Ide
-			    	   			token = {this.props.token}
+			    	   			token={this.props.token}
 			    	   		/>
 			    	   	)}
 			    	  />
@@ -142,7 +142,7 @@ export default class Navbar extends React.Component {
 			    	   	render = {props => (
 			    	   		<Result
 			    	   			{...props}
-			    	   			token = {this.props.token}
+			    	   			token={this.props.token}
 			    	   		/>
 			    	   	)}
 			    	  />

@@ -8,7 +8,10 @@ export default class User extends React.Component {
 	render() {
 		return (
 			<div className='Usr'>
-				<Navbar token = {this.props.token} logout={this.props.logout} />
+				<Navbar 
+				 token={this.props.token} 
+				 logout={this.props.logout} 
+				/>
 				<Footer />
 			</div>
 		)

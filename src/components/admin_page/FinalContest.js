@@ -43,7 +43,8 @@ export default class FinalContest extends React.Component {
 	render() {
 		return (
 			<div className='pcon'>
-				{this.state.finalcontest.map(contest => (
+				{
+					this.state.finalcontest.map(contest => (
 					<FinalContestCard
 						sign={'.'}
 						handle={this.handler}
@@ -53,7 +54,8 @@ export default class FinalContest extends React.Component {
 						questions={contest.questions}
 						admin={contest.admin.name}
 					/>
-				))}
+				    ))
+				}
 			</div>
 		)
 	}

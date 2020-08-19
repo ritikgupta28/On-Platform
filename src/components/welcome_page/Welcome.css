@@ -12,24 +12,21 @@
     justify-content: space-around;
     align-items: center;
     background-color: rgb(7, 2, 15);
-    width: 100%;
     color: white;
 }
 .heading {
     padding-left: 250px; 
-    font-size: 3em;
+    font-size: 2.5em;
 }
 .main {
     color: rgb(7, 2, 15);
     font-size: 2em;
 }
 input {
-    width: 100%;
     margin: 5px 0px;
     padding: 8px 10px;
-    box-sizing: border-box;
     border: 2px solid rgb(7, 2, 15);
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 ::placeholder{
@@ -38,7 +35,6 @@ input {
 }
 
 .button {
-    width: 60%;
     cursor: pointer;
     font-size: 20px;
     color: rgb(255, 255, 255);

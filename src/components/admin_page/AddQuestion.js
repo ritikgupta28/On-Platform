@@ -16,6 +16,7 @@ class Addques extends React.Component {
   }
 
 	handle = (e) => {
+    const { title, content, sinput, soutput, inputfile, outputfile } = this.state;
     fetch('http://localhost:8000/feed/question', {
       method: 'POST',
       headers: {
@@ -23,12 +24,12 @@ class Addques extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        title: this.state.title,
-        content: this.state.content,
-        sinput: this.state.sinput,
-        soutput: this.state.soutput,
-        inputfile: this.state.inputfile,
-        outputfile: this.state.outputfile
+        title: title,
+        content: content,
+        sinput: sinput,
+        soutput: soutput,
+        inputfile: inputfile,
+        outputfile: outputfile
       })
     })
     .then(response => response.json())
@@ -53,8 +54,8 @@ class Addques extends React.Component {
               cols="40"
 			  	    placeholder='Enter title here...'
 				      name="title"
-				      value = {this.state.title}
-    	        onChange = {this.handler}
+				      value={this.state.title}
+    	        onChange={this.handler}
       	    />
       	    <br/>
 				    Content:
@@ -63,8 +64,8 @@ class Addques extends React.Component {
               cols="80"
 			  		  placeholder='Enter Question here...'
 					    name="content" 
-					    value = {this.state.content}
-    	        onChange = {this.handler}
+					    value={this.state.content}
+    	        onChange={this.handler}
       	  	/>
 					  <br/>
 					<div style={{ display: 'flex'}}>
@@ -74,8 +75,8 @@ class Addques extends React.Component {
               cols="30"
 					    placeholder='Sample Input...'
 					    name="sinput" 
-					    value = {this.state.sinput}
-    	        onChange = {this.handler}
+					    value={this.state.sinput}
+    	        onChange={this.handler}
 						/> 
 					  Sample Output:
 				  	<textarea
