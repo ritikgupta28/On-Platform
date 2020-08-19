@@ -15,11 +15,6 @@ exports.getQuestions = (req, res, next) => {
 			.then(admin => {
 				const questions = admin.questions;
 				const totalQuestions = admin.totalQuestions;
-				return questions
-                .skip((currentPage - 1) * perPage)
-                .limit(perPage);
-			})
-			.then(questions => {
 				res.status(200).json({
 					message: 'Fetched questions successfully.',
 					questions: questions,
@@ -81,8 +76,9 @@ exports.postNewContest = (req, res, next) => {
 		.then(result => {
 			return Admin.findById(req.adminId)
 				.then(admin => {
-				admin.addToContest(result);
-			});
+				  admin.addToContest(result);
+			   })
+			   .catch(err => console.log(err));
 		})
 		.then(resData => {
 			res.status(201).json({
@@ -213,6 +209,7 @@ exports.postAllContests = (req, res, next) => {
 	const contestId = req.body.contestId;
 	FinalContest.findById(contestId)
 		.then(contest => {
+			contest.sortUsers();
 			const allcontest = new AllContest({
 				admin: contest.admin,
 				questions: contest.questions,

@@ -97,4 +97,14 @@ finalContestSchema.methods.addScore = function(uid, qid) {
   return this.save();
 };
 
+finalContestSchema.methods.sortUsers = function() {
+	const users = this.participant.users;
+	users.sort( function(a, b) { 
+		return a.totalScore > b.totalScore 
+	});
+	console.log(users);
+	return this.save();
+}
+
+
 module.exports = mongoose.model('FinalContest', finalContestSchema);

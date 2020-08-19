@@ -43,11 +43,11 @@ class AllQuestions extends Component {
         return res.json();
       })
       .then(resData => {
-        this.setState({ status: resData.status });
+        this.setState({ status: resData.status, questions: resData.questions });
       })
       .catch(err => console.log(err));
 
-      this.loadQuestions();
+      //this.loadQuestions();
 	};
 
   loadQuestions = direction => {
