@@ -3,8 +3,8 @@ import AllContestsCard from './AllContestsCard'
 
 export default class AllContests extends React.Component {
 	constructor(props) {
-    super(props);
-    this.state = {
+		super(props);
+		this.state = {
 			allcontest: []
 		}
 	};
@@ -14,23 +14,23 @@ export default class AllContests extends React.Component {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
-      }
-    })
-			.then(res => res.json())
-			.then(resData=> {
-				this.setState({
-					allcontest: resData.allcontest
-				});
-			})
-			.catch(err => console.log(err));
+			}
+		})
+		.then(res => res.json())
+		.then(resData => {
+			this.setState({
+				allcontest: resData.allcontest
+			});
+		})
+		.catch(err => console.log(err));
 	};
 
 	render() {
 		return (
 			<div className='pcon'>
-				{this.state.allcontest.map(contest => ( 
+				{this.state.allcontest.map(contest => (
 					<AllContestsCard
-						sign={'Host'}
+						sign={'Result'}
 						key={contest._id}
 						title={contest._id}
 						id={contest._id}

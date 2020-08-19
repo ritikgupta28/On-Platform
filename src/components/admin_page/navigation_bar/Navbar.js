@@ -12,6 +12,7 @@ import AllContests from '../AllContests'
 import AllContestsQuestions from '../AllContestsQuestions'
 import Question from '../../single_question/Question'
 import Ide from '../../ide/Ide'
+import Result from '../Result'
 
 export default class Navbar extends React.Component {
 	render() {
@@ -81,7 +82,8 @@ export default class Navbar extends React.Component {
 					    		/>
 					    	)}
 					    />
-					    <Route path="/finalcontest/questions/:id"
+					    <Route
+					    	path="/finalcontest/questions/:id"
 			    	   	render = {props => (
 			    	   		<FinalContestQuestions
 			    	   		  {...props}
@@ -99,7 +101,8 @@ export default class Navbar extends React.Component {
 					    		/>
 					    	)}
 					    />
-					    <Route path="/allcontests/questions/:id"
+					    <Route
+					    	path="/allcontests/questions/:id"
 			    	   	render = {props => (
 			    	   		<AllContestsQuestions
 			    	   		  {...props}
@@ -107,7 +110,9 @@ export default class Navbar extends React.Component {
 			    	   		/>
 			    	   	)}
 			    	  />
-			    	  <Route path="/admin/about"
+			    	  <Route
+			    	  	path="/admin/about"
+			    	   	exact
 			    	   	render = {props => (
 			    	   		<Ide
 			    	   			token = {this.props.token}
@@ -123,9 +128,20 @@ export default class Navbar extends React.Component {
 					    		/>
 					    	)}
 					    />
-			    	  <Route path="/ide"
+			    	  <Route
+			    	  	path="/ide"
+			    	   	exact
 			    	   	render = {props => (
 			    	   		<Ide
+			    	   			token = {this.props.token}
+			    	   		/>
+			    	   	)}
+			    	  />
+			    	  <Route
+			    	  	path="/result/:id"
+			    	   	render = {props => (
+			    	   		<Result
+			    	   			{...props}
 			    	   			token = {this.props.token}
 			    	   		/>
 			    	   	)}

@@ -26,8 +26,6 @@ router.get('/userfinalcontest', isAuthUser, feedController.getUserFinalContest);
 
 router.post('/finalcontest', isAuthAdmin, feedController.postFinalContest);
 
-router.get('/finalcontest/result', isAuthAdmin, feedController.resultFinalContest);
-
 router.get('/finalcontest/questions/:contestId', isAuthAdmin, feedController.getFinalContestQuestions);
 
 router.get('/userfinalcontest/questions/:contestId', isAuthUser, feedController.getUserFinalContestQuestions);
@@ -37,5 +35,7 @@ router.get('/allcontests', isAuthAdmin, feedController.getAllContests);
 router.post('/allcontests', isAuthAdmin, feedController.postAllContests);
 
 router.get('/allcontests/questions/:contestId', isAuthAdmin, feedController.getAllContestsQuestions);
+
+router.get('/result/:contestId', isAuthAdmin, feedController.getResult);
 
 module.exports = router;

@@ -8,6 +8,9 @@ export default class AllContestsCard extends React.Component {
 				<Link to={`/allcontests/questions/${this.props.id}`}>
 					<p>{this.props.id}</p>
 				</Link>
+				<Link to={`/result/${this.props.id}`}>
+					<button className='but' value={this.props.id}> {this.props.sign} </button> 
+				</Link>
 			</div>
 		)
 	}
