@@ -52,7 +52,7 @@ class AllQuestions extends Component {
 
   loadQuestions = direction => {
     if (direction) {
-      this.setState({ questionsLoading: true });
+      this.setState({ questionsLoading: true, questions: [] });
     }
     let page = this.state.postPage;
     if (direction === 'next') {
@@ -70,8 +70,13 @@ class AllQuestions extends Component {
         'Content-Type': 'application/json'
       }
     })
+    .then(res => {
+        if (res.status !== 200) {
+          throw new Error('Failed to fetch posts.');
+        }
+        return res.json();
+    })
     .then(resData => {
-    	console.log('1', resData.questions);
         this.setState({
           questions: resData.questions,
           totalQuestions: resData.totalItems,
