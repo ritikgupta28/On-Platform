@@ -69,12 +69,10 @@ class App extends Component {
     })
       .then(res => {
         if(res.status === 422) {
-          console.log("Validation failed! Make sure the email address isn't used yet!");
-          throw new Error("vfmsteaiuy!");
+          throw new Error("Validation failed! Make sure the email address isn't used yet!");
         }
         if(res.status !== 200 && res.status !== 201) {
-          console.log('Creating a admin failed');
-          throw new Error("caaf!");
+          throw new Error('Creating a admin failed');
         }
         return res.json();
       })
@@ -83,7 +81,6 @@ class App extends Component {
         this.props.history.replace('/');
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           isAdminAuth: false,
           error: err
@@ -105,12 +102,10 @@ class App extends Component {
     })
       .then(res => {
         if(res.status === 422) {
-          console.log('Validation failed!');
-          throw new Error('vf!');
+          throw new Error('Validation failed!');
         }
         if(res.status !== 200 && res.status !== 201) {
-          console.log('Could not authenticate you!');
-          throw new Error('cnau!');
+          throw new Error('Could not authenticate you!');
         }
         return res.json();
       })
@@ -164,12 +159,20 @@ class App extends Component {
         password: authData.password
       })
     })
+    .then(res => {
+        if(res.status === 422) {
+          throw new Error("Validation failed! Make sure the email address isn't used yet!");
+        }
+        if(res.status !== 200 && res.status !== 201) {
+          throw new Error('Creating a admin failed');
+        }
+        return res.json();
+      })
       .then(resData => {
         this.setState({ isUserAuth: false });
         this.props.history.replace('/');
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           isUserAuth: false,
           error: err
@@ -213,7 +216,6 @@ class App extends Component {
         localStorage.setItem('expiryDate', expiryDate.toISOString());
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           isUserAuth: false,
           error: err

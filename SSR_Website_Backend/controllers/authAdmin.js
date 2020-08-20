@@ -7,7 +7,10 @@ const Admin = require('../models/admin');
 exports.signup = (req, res, next) => {
 	const errors = validationResult(req);
 	if(!errors.isEmpty()) {
-	 	console.log(errors);
+	 	const error = new Error('Validation faild.');
+	 	error.statusCode = 422;
+	 	error.data = error.array();
+	 	throw error;
 	}
 	const email = req.body.email;
 	const name = req.body.name;
