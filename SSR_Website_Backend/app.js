@@ -26,6 +26,10 @@ app.use('/authUser', authUserRoutes);
 app.use('/authAdmin', authAdminRoutes);
 app.use(ideRoutes);
 
+app.use((error, req, res, next) => {
+  res.status(500).json({ error: error });
+})
+
 mongoose
   .connect(
     'mongodb+srv://ritikgupta:ZU5DvtmxnizGbPsu@cluster0-mzunh.mongodb.net/coding_round?retryWrites=true&w=majority'

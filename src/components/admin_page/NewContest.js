@@ -1,12 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
+//import ErrorHandler from '../ErrorHandler/ErrorHandler'
 import Card from './QuestionCard';
 
 class Contest extends Component {
 	state = {
-		questions: []
+		questions: [],
+    error: null
 	}
+
+  componentDidMount() {
+    fetch('http://localhost:8000/feed/newcontest', {
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(resData=> {
+        this.setState({
+          questions: resData.questions,
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
+  catchError = (error) => {
+    this.setState({ error: error })
+  }
 
 	handle = (e) => {
     fetch('http://localhost:8000/feed/newcontest-delete-question', {
@@ -20,7 +44,7 @@ class Contest extends Component {
     	})
     })
     .then(response => response.json())
-    .catch(err => console.log(err));
+    .catch(this.catchError);
   }
 
   handler = (e) => {
@@ -32,36 +56,19 @@ class Contest extends Component {
       }
     })
     .then(response => response.json())
-    .catch(err => console.log(err));
+    .catch(this.catchError);
 	}
-
-	componentDidMount() {
-		fetch('http://localhost:8000/feed/newcontest', {
-			headers: {
-        Authorization: 'Bearer ' + this.props.token,
-        'Content-Type': 'application/json'
-      }
-		})
-			.then(res => res.json())
-			.then(resData=> {
-				this.setState({
-					questions: resData.questions
-				});
-			})
-			.catch(err => console.log(err));
-	};
 
 	render() {
 		return (
-      <div>
+      <Fragment>
 	   	  <Link to='/admin/finalcontest'>
           <button className='but' value='s' style={{ marginBottom: '10px' }} onClick={this.handler}>Host</button>
         </Link>
-        <div>
-			    {
+         {
             this.state.questions.map(q => (
-			      <Card
-			        sign={'-'}
+            <Card
+              sign={'-'}
               handle={this.handle}
               key={q.questionId._id}
               id={q.questionId._id}
@@ -69,8 +76,7 @@ class Contest extends Component {
             />
             ))
           }
-        </div>
-      </div>
+      </Fragment>
 		)
 	}
 }
