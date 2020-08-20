@@ -1,17 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Card from './QuestionCard';
 import Pagination from '../pagination/Pagination'
+import ErrorHandler from '../ErrorHandler/ErrorHandler'
 
 class AllQuestions extends Component {
-	constructor(props) {
-    super(props);
-    this.state = {
+    state = {
 			questions: [],
       questionsLoading: true,
       totalQuestions: 0,
       questionPage: 1,
-      status: ''
+      status: '',
+      error: null
 		}
+
+  catchError = error => {
+    this.setState({ error: error, questionsLoading: false })
+  } 
+
+  errorHandler = () => {
+    this.setState({ error: null });
   };
 
 	handle = (e) => {
@@ -38,14 +45,14 @@ class AllQuestions extends Component {
     })
       .then(res => {
         if (res.status !== 200) {
-          console.log('Failed to fetch user status.');
+          throw new Error('Failed to fetch user status.');
         }
         return res.json();
       })
       .then(resData => {
         this.setState({ status: resData.status });
       })
-      .catch(err => console.log(err));
+      .catch(this.catchError);
 
       this.loadQuestions();
 	};
@@ -72,7 +79,7 @@ class AllQuestions extends Component {
     })
     .then(res => {
         if (res.status !== 200) {
-          console.log('Failed to fetch user status.');
+          throw new Error('Failed to fetch user status.');
         }
         return res.json();
     })
@@ -83,12 +90,13 @@ class AllQuestions extends Component {
           questionsLoading: false
         });
      })
-     .catch(err => console.log(err));
+     .catch(this.catchError);
   };
 
 	render() {
 		return (
-	   <div>
+	   <Fragment>
+     <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 	   {this.state.questionsLoading && (
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
             <p>Loading</p>
@@ -115,7 +123,7 @@ class AllQuestions extends Component {
      <br/>
      </Pagination>
      )}
-     </div>
+     </Fragment>
 		)
 	}
 }

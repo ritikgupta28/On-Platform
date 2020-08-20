@@ -27,7 +27,10 @@ app.use('/authAdmin', authAdminRoutes);
 app.use(ideRoutes);
 
 app.use((error, req, res, next) => {
-  res.status(500).json({ error: error });
+  const status = error.statusCode || 500;
+  const message = error.message;
+  const data = error.data;
+  res.status(status).json({ message: message, data: data });
 })
 
 mongoose

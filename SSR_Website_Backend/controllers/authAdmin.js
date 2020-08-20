@@ -30,8 +30,11 @@ exports.signup = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-			console.log(err);
-		})
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 }
 
 exports.login = (req, res, next) => {
@@ -65,6 +68,9 @@ exports.login = (req, res, next) => {
 		res.status(200).json({ token: token, adminId: loadedAdmin._id.toString() });
 	}) 
 	.catch(err => {
-		console.log(err);
-	})
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 };

@@ -13,7 +13,7 @@ exports.getQuestions = (req, res, next) => {
 			admin.populate('questions')
 			.execPopulate()
 			.then(admin => {
-				const questions = admin.sliceQuestions((currentPage-1)*perPage, perPage);
+				const questions = admin.sliceQuestions(currentPage, perPage);
 				const totalQuestions = admin.totalQuestions;
 				res.status(200).json({
 					message: 'Fetched questions successfully.',
@@ -21,13 +21,19 @@ exports.getQuestions = (req, res, next) => {
 					totalQuestions: totalQuestions
 				});
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 		})
 		.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-			return next(error);
-		});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 };
 
 exports.createQuestion = (req, res, next) => {
@@ -58,10 +64,11 @@ exports.createQuestion = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-			return next(error);
-		});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 };
 
 exports.getQuestion = (req, res, next) => {
@@ -74,10 +81,11 @@ exports.getQuestion = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-			return next(error);
-		});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 };
 
 exports.postNewContest = (req, res, next) => {
@@ -96,10 +104,11 @@ exports.postNewContest = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-			return next(error);
-		});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 };
 
 exports.getNewContest = (req, res, next) => {
@@ -116,10 +125,11 @@ exports.getNewContest = (req, res, next) => {
 			.catch(err => console.log(err));
 		})
 		.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-			return next(error);
-		});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 };
 
 exports.postNewContestDeleteQuestion = (req, res, next) => {
@@ -135,10 +145,11 @@ exports.postNewContestDeleteQuestion = (req, res, next) => {
 			.catch(err => console.log(err));
 		})
 		.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-			return next(error);
-		});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 };
 
 exports.postFinalContest = (req, res, next) => {
@@ -165,10 +176,11 @@ exports.postFinalContest = (req, res, next) => {
 		.catch(err => console.log(err));
 	})
 	.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-			return next(error);
-	});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 }
 
 exports.getFinalContest = (req, res, next) => {
@@ -180,10 +192,11 @@ exports.getFinalContest = (req, res, next) => {
 		});
 	})
 	.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-			return next(error);
-	});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 }
 
 exports.getUserFinalContest = (req, res, next) => {
@@ -195,10 +208,11 @@ exports.getUserFinalContest = (req, res, next) => {
 		});
 	})
 	.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-			return next(error);
-	});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 }
 
 exports.getFinalContestQuestions = (req, res, next) => {
@@ -217,10 +231,11 @@ exports.getFinalContestQuestions = (req, res, next) => {
 		.catch(err => console.log(err)); 
 	})
 	.catch(err => {
-		const error = new Error(err);
-		error.httpStatusCode = 500;
-		return next(error);
-	});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 }
 
 exports.getUserFinalContestQuestions = (req, res, next) => {
@@ -241,10 +256,11 @@ exports.getUserFinalContestQuestions = (req, res, next) => {
 		.catch(err => console.log(err)); 
 	})
 	.catch(err => {
-		const error = new Error(err);
-		error.httpStatusCode = 500;
-		return next(error);
-	});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 }
 
 exports.postAllContests = (req, res, next) => {
@@ -268,10 +284,11 @@ exports.postAllContests = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-		  return next(error);
-	  });
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 }
 
 exports.getAllContests = (req, res, next) => {
@@ -283,10 +300,11 @@ exports.getAllContests = (req, res, next) => {
 		});
 	})
 	.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-		  return next(error);
-	});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 }
 
 exports.getAllContestsQuestions = (req, res, next) => {
@@ -305,10 +323,11 @@ exports.getAllContestsQuestions = (req, res, next) => {
 		.catch(err => console.log(err)); 
 	})
 	.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-		  return next(error);
-	});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 }
 
 exports.getResult = (req, res, next) => {
@@ -322,8 +341,9 @@ exports.getResult = (req, res, next) => {
 		});
 	})
 	.catch(err => {
-			const error = new Error(err);
-			error.httpStatusCode = 500;
-		  return next(error);
-	});
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 }

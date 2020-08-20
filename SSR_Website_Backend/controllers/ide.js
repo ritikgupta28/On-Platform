@@ -17,7 +17,7 @@ const FinalContest = require('../models/finalcontest');
 //   cout<<a+b;
 // }
 
-exports.ideResult = async (req, res) => {
+exports.ideResult = async (req, res, next) => {
   let { script, language, stdin } = req.body;
   let program = {
     script,
@@ -91,5 +91,10 @@ exports.inputFile = async (req, res) => {
       }
   })
   })
-  .catch(err => console.log(err));
+  .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 }

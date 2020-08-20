@@ -73,7 +73,8 @@ adminSchema.methods.clearContest = function() {
   return this.save();
 }
 
-adminSchema.methods.sliceQuestions = function(skip, perPage) {
+adminSchema.methods.sliceQuestions = function(currentPage, perPage) {
+  const skip = ( currentPage - 1 ) * perPage; 
    var questions = this.questions.slice(skip, skip+perPage);
    return questions;
 }

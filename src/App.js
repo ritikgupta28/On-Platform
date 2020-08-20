@@ -6,6 +6,7 @@ import Ide from './components/ide/Ide'
 import Admin from './components/admin_page/admin/Admin';
 import User from './components/user_page/user/User';
 import Developers from './components/developers/Developers';
+import ErrorHandler from './components/ErrorHandler/ErrorHandler'
 
 class App extends Component {
   state = {
@@ -17,6 +18,11 @@ class App extends Component {
     adminId: null,
     token: null
   };
+
+   errorHandler = () => {
+    this.setState({ error: null });
+  };
+
 
   componentDidMount() {
     const token = localStorage.getItem('token');
@@ -345,6 +351,7 @@ class App extends Component {
 
     return (
       <Fragment>
+       <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
         {routes}
       </Fragment>
     );
