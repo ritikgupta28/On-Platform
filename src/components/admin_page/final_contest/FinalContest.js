@@ -1,13 +1,19 @@
 import React from 'react'
 import FinalContestCard from './FinalContestCard'
+import ErrorHandler from '../../ErrorHandler/ErrorHandler'
 
 export default class FinalContest extends React.Component {
 	constructor(props) {
     super(props);
     this.state = {
-			finalcontest: []
+			finalcontest: [],
+			error: null
 		}
 	};
+
+  catchError = error => {
+    this.setState({ error: error })
+  }
 
 	handler = (e) => {
 		fetch('http://localhost:8000/feed/allcontests', {
@@ -20,8 +26,13 @@ export default class FinalContest extends React.Component {
         contestId: e.target.value
       })
     })
-    .then(response => response.json())
-    .catch(err => console.log(err));
+    .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error');
+        }
+        return res.json();
+      })
+    .catch(this.catchError);
 	}
 
 	componentDidMount() {
@@ -31,18 +42,24 @@ export default class FinalContest extends React.Component {
 				'Content-Type': 'application/json'
       }
     })
-			.then(res => res.json())
+			.then(res => {
+        if (res.status !== 200) {
+          throw new Error('error');
+        }
+        return res.json();
+      })
 			.then(resData=> {
 				this.setState({
 					finalcontest: resData.finalcontest
 				});
 			})
-			.catch(err => console.log(err));
+			.catch(this.catchError);
 	};
 
 	render() {
 		return (
 			<div className='pcon'>
+			   <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{
 					this.state.finalcontest.map(contest => (
 					<FinalContestCard

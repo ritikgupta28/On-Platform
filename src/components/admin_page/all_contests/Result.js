@@ -1,12 +1,18 @@
 import React from 'react'
+import ErrorHandler from '../../ErrorHandler/ErrorHandler'
 
 export default class Result extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			participants: []
+			participants: [],
+			error: null
 		}
 	};
+
+	catchError = error => {
+    this.setState({ error: error })
+  }
 
 	componentDidMount() {
     const contestId = this.props.match.params.id;
@@ -16,18 +22,24 @@ export default class Result extends React.Component {
 				'Content-Type': 'application/json'
 			}
 		})
-		.then(res => res.json())
+		.then(res => {
+        if (res.status !== 200) {
+          throw new Error('error');
+        }
+        return res.json();
+      })
 		.then(resData=> {
 			this.setState({
 				participants: resData.participants
 			});
 		})
-		.catch(err => console.log(err));
+		.catch(this.catchError);
 	}
 
 	render() {
 		return (
 			<div>
+			    <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{
 					this.state.participants.map(user => (
 					<div key={user.userId} style={{ display: 'flex'}}>

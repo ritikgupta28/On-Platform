@@ -1,13 +1,19 @@
 import React from 'react'
 import AllContestsCard from './AllContestsCard'
+import ErrorHandler from '../../ErrorHandler/ErrorHandler'
 
 export default class AllContests extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			allcontest: []
+			allcontest: [],
+			error: null
 		}
 	};
+
+	catchError = error => {
+    this.setState({ error: error })
+  }
 
 	componentDidMount() {
 		fetch('http://localhost:8000/feed/allcontests', {
@@ -16,18 +22,24 @@ export default class AllContests extends React.Component {
 				'Content-Type': 'application/json'
 			}
 		})
-		.then(res => res.json())
+		.then(res => {
+        if (res.status !== 200) {
+          throw new Error('error');
+        }
+        return res.json();
+      })
 		.then(resData => {
 			this.setState({
 				allcontest: resData.allcontest
 			});
 		})
-		.catch(err => console.log(err));
+		.catch(this.catchError);
 	};
 
 	render() {
 		return (
 			<div className='pcon'>
+			<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{
 					this.state.allcontest.map(contest => (
 					<AllContestsCard

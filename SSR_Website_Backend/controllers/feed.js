@@ -58,7 +58,7 @@ exports.createQuestion = (req, res, next) => {
 			})
 		})
 		.then(result => {
-			res.status(201).json({
+			res.status(200).json({
 				message: 'Question created successfully!',
 				question: question
 			});
@@ -99,7 +99,7 @@ exports.postNewContest = (req, res, next) => {
 			   .catch(err => console.log(err));
 		})
 		.then(resData => {
-			res.status(201).json({
+			res.status(200).json({
 				message: 'Add question successfully!'
 			});
 		})
@@ -122,7 +122,12 @@ exports.getNewContest = (req, res, next) => {
 					questions: questions
 				});
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 		})
 		.catch(err => {
       if (!err.statusCode) {
@@ -138,11 +143,16 @@ exports.postNewContestDeleteQuestion = (req, res, next) => {
 		.then(admin => {
 			admin.removeFromContest(quesId)
 			.then(result => {
-				res.status(201).json({
+				res.status(200).json({
 					message: 'Remove question successfully!'
 				});
 			})
-			.catch(err => console.log(err));
+			.catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 		})
 		.catch(err => {
       if (!err.statusCode) {
@@ -173,7 +183,12 @@ exports.postFinalContest = (req, res, next) => {
 		.then(result => {
 			return admn.clearContest();
 		})
-		.catch(err => console.log(err));
+		.catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 	})
 	.catch(err => {
       if (!err.statusCode) {
@@ -228,7 +243,12 @@ exports.getFinalContestQuestions = (req, res, next) => {
 				questions: questions
 			});
 		})
-		.catch(err => console.log(err)); 
+		.catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 	})
 	.catch(err => {
       if (!err.statusCode) {
@@ -253,7 +273,12 @@ exports.getUserFinalContestQuestions = (req, res, next) => {
 				questions: questions
 			});
 		})
-		.catch(err => console.log(err)); 
+		.catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 	})
 	.catch(err => {
       if (!err.statusCode) {
@@ -280,7 +305,6 @@ exports.postAllContests = (req, res, next) => {
 				{ _id: contestId },
 				function (err) {
 					if(err) console.log(err);
-					console.log("Successful deletion");
 			});
 		})
 		.catch(err => {
@@ -320,7 +344,12 @@ exports.getAllContestsQuestions = (req, res, next) => {
 				questions: questions
 			});
 		})
-		.catch(err => console.log(err)); 
+		.catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
 	})
 	.catch(err => {
       if (!err.statusCode) {

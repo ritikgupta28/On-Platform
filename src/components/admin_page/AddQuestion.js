@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import ErrorHandler from '../ErrorHandler/ErrorHandler'
 
 class Addques extends React.Component {
 	constructor(props) {
@@ -10,9 +11,14 @@ class Addques extends React.Component {
       sinput: "",
       soutput: "",
       inputfile: "",
-      outputfile: ""
+      outputfile: "",
+      error: null
     };
     this.handler = this.handler.bind(this);
+  }
+  
+  catchError = error => {
+    this.setState({ error: error })
   }
 
 	handle = (e) => {
@@ -32,8 +38,13 @@ class Addques extends React.Component {
         outputfile: outputfile
       })
     })
-    .then(response => response.json())
-    .catch(err => console.log(err));
+    .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error');
+        }
+        return res.json();
+      })
+    .catch(this.catchError);
   }
 
   handler(event) {
@@ -47,6 +58,7 @@ class Addques extends React.Component {
 	render() {
 		return (
 			<div className='ques'>
+        <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 			  <form className='fo'>
 				    Title:
 				    <textarea 

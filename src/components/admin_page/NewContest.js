@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-
-//import ErrorHandler from '../ErrorHandler/ErrorHandler'
+import ErrorHandler from '../ErrorHandler/ErrorHandler'
 import Card from './QuestionCard';
 
 class Contest extends Component {
@@ -9,6 +8,10 @@ class Contest extends Component {
 		questions: [],
     error: null
 	}
+
+  catchError = error => {
+    this.setState({ error: error })
+  }
 
   componentDidMount() {
     fetch('http://localhost:8000/feed/newcontest', {
@@ -18,6 +21,9 @@ class Contest extends Component {
       }
     })
       .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error');
+        }
         return res.json();
       })
       .then(resData=> {
@@ -25,7 +31,7 @@ class Contest extends Component {
           questions: resData.questions,
         });
       })
-      .catch(err => console.log(err));
+      .catch(this.catchError);
   };
 
   catchError = (error) => {
@@ -43,7 +49,12 @@ class Contest extends Component {
         questionId: e.target.value
     	})
     })
-    .then(response => response.json())
+    .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error');
+        }
+        return res.json();
+      })
     .catch(this.catchError);
   }
 
@@ -55,13 +66,19 @@ class Contest extends Component {
         'Content-Type': 'application/json'
       }
     })
-    .then(response => response.json())
+    .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error');
+        }
+        return res.json();
+      })
     .catch(this.catchError);
 	}
 
 	render() {
 		return (
       <Fragment>
+        <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 	   	  <Link to='/admin/finalcontest'>
           <button className='but' value='s' style={{ marginBottom: '10px' }} onClick={this.handler}>Host</button>
         </Link>
