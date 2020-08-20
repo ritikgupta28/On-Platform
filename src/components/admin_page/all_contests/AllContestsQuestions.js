@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Card from './Card';
+import Card from '../QuestionContestCard';
 
-class FinalContestQuestions extends Component {
+class AllContestsQuestions extends Component {
   state = {
     questions: []
   };
 
   componentDidMount() {
     const contestId = this.props.match.params.id;
-    fetch('http://localhost:8000/feed/finalcontest/questions/' + contestId, {
+    fetch('http://localhost:8000/feed/allcontests/questions/' + contestId, {
       headers: {
         Authorization: 'Bearer ' + this.props.token,
         'Content-Type': 'application/json'
@@ -23,18 +23,12 @@ class FinalContestQuestions extends Component {
       .catch(err => { console.log(err); });
   }
 
-  handle = (e) => {
-    console.log(e.target.value);
-  }
-
   render() {
     return (
       <div>
         {
           this.state.questions.map(q=> (
             <Card
-            sign={'view'}
-            handle={this.handle}
             key={q.questionId._id}
             id={q.questionId._id}
             title={q.questionId.title}
@@ -46,4 +40,4 @@ class FinalContestQuestions extends Component {
   }
 }
 
-export default FinalContestQuestions;
+export default AllContestsQuestions;

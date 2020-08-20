@@ -2,11 +2,11 @@ import React from 'react'
 import { Route, Link, Redirect, Switch, BrowserRouter as Router } from 'react-router-dom'
 
 import './Navbar.css'
-import logo from '../../images/logo1.jpg'
-import FinalContest from '../FinalContest'
-import FinalContestQuestions from '../FinalContestQuestions'
-import Question from '../../single_question/Question'
-import Ide from '../../ide/Ide'
+import logo from '../../../images/logo1.jpg'
+import FinalContest from '../../final_contest/FinalContest'
+import FinalContestQuestions from '../../final_contest/FinalContestQuestions'
+import Question from '../../../single_question/Question'
+import Ide from '../../../ide/Ide'
 
 export default class Navbar extends React.Component {
 	render() {

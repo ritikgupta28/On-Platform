@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import Card from './Card';
+import Card from './QuestionCard';
 
 class Contest extends Component {
 	state = {

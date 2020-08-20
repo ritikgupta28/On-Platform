@@ -99,8 +99,8 @@ finalContestSchema.methods.addScore = function(uid, qid) {
 
 finalContestSchema.methods.sortUsers = function() {
 	const users = this.participant.users;
-	users.sort( function(a, b) { 
-		return a.totalScore > b.totalScore 
+	users.sort( function(a, b) {
+		return a.totalScore < b.totalScore 
 	});
 	console.log(users);
 	return this.save();

@@ -46,7 +46,7 @@ export default class FinalContest extends React.Component {
 				{
 					this.state.finalcontest.map(contest => (
 					<FinalContestCard
-						sign={'.'}
+						sign={'End Contest'}
 						handle={this.handler}
 						key={contest._id}
 						title={contest._id}

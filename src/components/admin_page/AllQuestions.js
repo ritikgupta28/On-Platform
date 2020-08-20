@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Card from './Card';
-import Paginator from '../Paginator/Paginator'
+import Card from './QuestionCard';
+import Pagination from '../pagination/Pagination'
 
 class AllQuestions extends Component {
 	constructor(props) {
@@ -95,7 +95,7 @@ class AllQuestions extends Component {
           </div>
       )}
 	   {!this.state.questionsLoading && (
-     <Paginator
+     <Pagination
       onPrevious={this.loadQuestions.bind(this, 'previous')}
       onNext={this.loadQuestions.bind(this, 'next')}
       lastPage={Math.ceil(this.state.totalQuestions / 2)}
@@ -113,7 +113,7 @@ class AllQuestions extends Component {
       ))
      }
      <br/>
-     </Paginator>
+     </Pagination>
      )}
      </div>
 		)
