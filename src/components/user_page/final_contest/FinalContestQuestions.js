@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import Card from './QuestionContestCard';
+import ErrorHandler from '../../ErrorHandler/ErrorHandler'
 
 class FinalContestQuestions extends Component {
   state = {
-    questions: []
+    questions: [],
+    error: null
   };
+
+  catchError = error => {
+    this.setState({ error: error })
+  }
 
   componentDidMount() {
     const contestId = this.props.match.params.id;
@@ -14,18 +20,24 @@ class FinalContestQuestions extends Component {
         'Content-Type': 'application/json'
       }
       })
-      .then(res => res.json())
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error');
+        }
+        return res.json();
+      })
       .then(resData => {
         this.setState({
           questions: resData.questions
         });
       })
-      .catch(err => { console.log(err); });
+      .catch(this.catchError);
   }
 
   render() {
     return (
       <div>
+        <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
         {
           this.state.questions.map(q=> (
             <Card
