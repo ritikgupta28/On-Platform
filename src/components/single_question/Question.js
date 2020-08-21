@@ -1,5 +1,6 @@
 import React from 'react'
 import './Question.css'
+import ErrorHandler from '../ErrorHandler/ErrorHandler'
 import Ide from '../ide/Ide'
 
 class Question extends React.Component {
@@ -7,13 +8,23 @@ class Question extends React.Component {
 		title: '',
 		content: '',
 		sinput: '',
-		soutput: ''
+		soutput: '',
+		error: null
 	};
+
+	catchError = error => {
+    this.setState({ error: error })
+  }
 
 	componentDidMount() {
 	const questionId = this.props.match.params.id;
     fetch('http://localhost:8000/feed/question/' + questionId)
-      .then(res => res.json())
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error');
+        }
+        return res.json();
+      })
       .then(resData => {
         this.setState({
           title: resData.question.title,
@@ -22,12 +33,13 @@ class Question extends React.Component {
           soutput: resData.question.soutput
         });
       })
-      .catch(err => console.log(err));
+      .catch(this.catchError);
   }
 
 	render() {
 		return (
 			<div className='dsc'>
+			 <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				<div className='tit'>
 			    <h2>{this.state.title}</h2>
 				</div>

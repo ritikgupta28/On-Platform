@@ -7,7 +7,10 @@ const User = require('../models/user');
 exports.signup = (req, res, next) => {
 	const errors = validationResult(req);
 	if(!errors.isEmpty()) {
-	 	console.log(errors);
+	 	const error = new Error('Validation faild.');
+	 	error.statusCode = 422;
+	 	error.data = error.array();
+	 	throw error;
 	}
 	const email = req.body.email;
 	const name = req.body.name;
@@ -62,7 +65,10 @@ exports.login = (req, res, next) => {
 		'somesupersecretsecret', 
 		{ expiresIn: '1h' }
 		);
-		res.status(200).json({ token: token, userId: loadedUser._id.toString() });
+		res.status(200).json({ 
+			token: token, 
+			userId: loadedUser._id.toString() 
+		});
 	}) 
 	.catch(err => {
       if (!err.statusCode) {

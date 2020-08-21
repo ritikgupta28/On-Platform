@@ -47,8 +47,7 @@ exports.login = (req, res, next) => {
 	Admin.findOne({ email: email })
 	.then(admin => {
 		if (!admin) {
-			console.log(admin);
-			const error = new Error('User not found');
+			const error = new Error('Admin not found');
 			error.statusCode = 401;
 			throw error;
 		}
@@ -56,7 +55,7 @@ exports.login = (req, res, next) => {
 		return bcrypt.compare(password, admin.password);
 	})
 	.then(isEqual => {
-		if(!isEqual) {
+		if (!isEqual) {
 			const error = new Error('Wrong password');
 			error.statusCode = 401;
 			throw error;
@@ -68,7 +67,10 @@ exports.login = (req, res, next) => {
 		'somesupersecretsecret', 
 		{ expiresIn: '1h' }
 		);
-		res.status(200).json({ token: token, adminId: loadedAdmin._id.toString() });
+		res.status(200).json({ 
+			token: token,
+			adminId: loadedAdmin._id.toString()
+		});
 	}) 
 	.catch(err => {
       if (!err.statusCode) {
