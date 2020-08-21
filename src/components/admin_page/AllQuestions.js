@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import Card from './QuestionCard';
+import { ClipLoader } from 'react-spinners'
 import Pagination from '../pagination/Pagination'
 import ErrorHandler from '../ErrorHandler/ErrorHandler'
+
 
 class AllQuestions extends Component {
     state = {
@@ -97,11 +99,13 @@ class AllQuestions extends Component {
 		return (
 	   <Fragment>
      <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-	   {this.state.questionsLoading && (
-          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <p>Loading</p>
-          </div>
-      )}
+     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+	   <ClipLoader 
+      size={100}
+      color={"#123abc"}
+      loading={this.state.questionsLoading} 
+      />
+      </div>
 	   {!this.state.questionsLoading && (
      <Pagination
       onPrevious={this.loadQuestions.bind(this, 'previous')}
