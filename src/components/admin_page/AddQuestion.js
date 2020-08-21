@@ -122,10 +122,10 @@ class Addques extends React.Component {
               placeholder="Enter output here.."
             />
             </div>
-            <br />
-				  <Link to='/admin/questions'> 
+            <br /> 
+            <Link to='/admin/questions'>
 				  	<button className='but' value='pcon' type='submit' onClick={this.handle}>ADD Question</button>
-				  </Link>
+            </Link>
 			  </form>
 			</div>
 		)
