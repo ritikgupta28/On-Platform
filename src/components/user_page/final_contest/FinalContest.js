@@ -14,7 +14,10 @@ export default class FinalContest extends React.Component {
 	catchError = error => {
     this.setState({ error: error })
   }
-
+   errorHandler = () => {
+    this.setState({ error: null });
+  };
+  
 	componentDidMount() {
 		fetch('http://localhost:8000/feed/userfinalcontest', {
 			headers: {

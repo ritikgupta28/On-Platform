@@ -15,6 +15,9 @@ class Question extends React.Component {
 	catchError = error => {
     this.setState({ error: error })
   }
+  errorHandler = () => {
+    this.setState({ error: null });
+  };
 
 	componentDidMount() {
 	const questionId = this.props.match.params.id;

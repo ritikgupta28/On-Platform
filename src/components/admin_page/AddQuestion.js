@@ -20,7 +20,11 @@ class Addques extends React.Component {
   catchError = error => {
     this.setState({ error: error })
   }
-
+  
+  errorHandler = () => {
+    this.setState({ error: null });
+  };
+  
 	handle = (e) => {
     const { title, content, sinput, soutput, inputfile, outputfile } = this.state;
     fetch('http://localhost:8000/feed/question', {

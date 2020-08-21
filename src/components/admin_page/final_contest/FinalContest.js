@@ -15,6 +15,10 @@ export default class FinalContest extends React.Component {
     this.setState({ error: error })
   }
 
+   errorHandler = () => {
+    this.setState({ error: null });
+  };
+
 	handler = (e) => {
 		fetch('http://localhost:8000/feed/allcontests', {
       method: 'POST',

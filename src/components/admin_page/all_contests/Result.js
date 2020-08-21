@@ -14,6 +14,10 @@ export default class Result extends React.Component {
     this.setState({ error: error })
   }
 
+   errorHandler = () => {
+    this.setState({ error: null });
+  };
+
 	componentDidMount() {
     const contestId = this.props.match.params.id;
 		fetch('http://localhost:8000/feed/result/' + contestId, {

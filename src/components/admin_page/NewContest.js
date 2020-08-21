@@ -13,6 +13,10 @@ class Contest extends Component {
     this.setState({ error: error })
   }
 
+  errorHandler = () => {
+    this.setState({ error: null });
+  };
+
   componentDidMount() {
     fetch('http://localhost:8000/feed/newcontest', {
       headers: {
