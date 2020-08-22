@@ -3,18 +3,18 @@
     width: 150px;
 }
 .h {
+    padding: 0px;
     background-color: rgb(7, 2, 15);
     color: white;
 }
 h1 {
     padding-top: 30px; 
-    font-size: 50px;
+    font-size: 40px;
 }
 .but {
     padding: 0px 5px;
     margin: 3px;
 }
 .b {
-    margin-top: 50px;
-    margin-right: 0px;
+    margin: 10px;
 }

@@ -11,15 +11,13 @@ class Header extends React.Component {
          <Col xs='2'>
           <Image className='logo' src={logo} rounded />
          </Col>
-         <Col xs='7'>
+         <Col xs='8'>
          <h1>Welcome to Project Up</h1>
          </Col>
-        <Col >
+        <Col style={{ paddingTop: '30px'}}>
          <Link to='ide'> 
-          <Button className='b'>IDE</Button>
+          <Button className='b'>Online IDE</Button>
          </Link>
-         </Col>
-         <Col >
          <Link to='developers'>
           <Button className='b'>Developers</Button>
          </Link>
