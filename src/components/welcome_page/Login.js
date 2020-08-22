@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, Container } from 'react-bootstrap'
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -35,19 +36,18 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <div className='main'>
-        <form className='form'>
-          <h3>Login</h3>
+      <Container style={{ fontSize: '20px', marginTop: '40px', textAlign: 'center', marginBottom: '40px'}}>
+          <h1>Login</h1>
           <hr />
           <label>
             Email:
             <br />
             <input 
               placeholder="user@sr.com" 
-              name = "email"
-              type = "text"
-              value = {this.state.email}
-              onChange = {this.onEmailChange.bind(this)}
+              name="email"
+              type="text"
+              value={this.state.email}
+              onChange={this.onEmailChange.bind(this)}
              />
           </label>
           <br />
@@ -56,16 +56,16 @@ export default class Login extends React.Component {
             <br/>
             <input 
               placeholder="password"
-              name = "password"
-              type = "text"
-              value = {this.state.password}
-              onChange = {this.onPasswordChange.bind(this)}
+              name="password"
+              type="text"
+              value={this.state.password}
+              onChange={this.onPasswordChange.bind(this)}
              />
           </label>
           <br/>
           <label>
-            As a:
-            <select className='userAdmin' value={this.state.userAdmin} onChange={this.onUserAdminChange.bind(this)}>
+            Login as:
+            <select value={this.state.userAdmin} onChange={this.onUserAdminChange.bind(this)}>
               <option value="admin">Admin</option>
               <option value="user">User</option>
             </select>
@@ -74,14 +74,15 @@ export default class Login extends React.Component {
           {
           this.state.userAdmin === 'admin'
           ?
-          <button className='button' value="login" onClick={e => this.props.onAdminlogin(e, this.state)} >Login</button>
+          <Button variant="outline-primary" className='but' value="login" onClick={e => this.props.onAdminlogin(e, this.state)}>Login</Button>
           :
-          <button className = "button" value="login" onClick={e => this.props.onUserlogin(e, this.state)} >Login</button>
+          <Button variant="outline-primary" className='but' value="login" onClick={e => this.props.onUserlogin(e, this.state)}>Login</Button>
           }
           <br />
-          <button className='button' value='register' onClick={this.onRChange} >Register</button>
-        </form>
-      </div>
+          <Button variant="outline-primary" className='but' value='register' onClick={this.onRChange}>
+          Register
+          </Button>
+      </Container>
     )
   }
 }

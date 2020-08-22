@@ -1,4 +1,5 @@
 import React from 'react'
+import { Container, Button } from 'react-bootstrap'
 
 export default class Register extends React.Component {
 	constructor(props) {
@@ -42,46 +43,48 @@ export default class Register extends React.Component {
 
   render() {
     return (
-      <div className='main'>
-        <form className='form'>
-          <h2>Register</h2>
+      <Container style={{ fontSize: '20px', marginTop: '40px', textAlign: 'center', marginBottom: '40px' }}>
+          <h1>Register</h1>
           <hr />
           <label>
             Name: 
+            <br/>
             <input 
               placeholder="user" 
-              name = "name"
-              type = "text"
-              value = {this.state.name}
-              onChange = {this.onNameChange.bind(this)}
+              name="name"
+              type="text"
+              value={this.state.name}
+              onChange={this.onNameChange.bind(this)}
              />
           </label>
           <br />
           <label>
-            Email: 
+            Email:
+            <br/> 
             <input 
               placeholder="user@sr.com" 
-              name = "email"
-              type = "email"
-              value = {this.state.email}
-              onChange = {this.onEmailChange.bind(this)}
+              name="email"
+              type="email"
+              value={this.state.email}
+              onChange={this.onEmailChange.bind(this)}
              />
           </label>
           <br />
           <label>
             Password: 
+            <br/>
             <input 
               placeholder="password"
-              name = "password"
-              type = "password"
-              value = {this.state.password}
-              onChange = {this.onPasswordChange.bind(this)}
+              name="password"
+              type="password"
+              value={this.state.password}
+              onChange={this.onPasswordChange.bind(this)}
              />
           </label>
           <br/>
           <label>
-            As a:
-            <select className='userAdmin' value={this.state.userAdmin} onChange={this.onUserAdminChange.bind(this)}>
+            Register as:
+            <select value={this.state.userAdmin} onChange={this.onUserAdminChange.bind(this)}>
               <option value="admin">Admin</option>
               <option value="user">User</option>
             </select>
@@ -90,14 +93,15 @@ export default class Register extends React.Component {
           {
           this.state.userAdmin === 'admin'
           ?
-          <button className='button' value='register' onClick={e => this.props.onAdminsignup(e, this.state)} >Register</button>
+          <Button variant="outline-primary" className='but' value='register' onClick={e => this.props.onAdminsignup(e, this.state)} >Register</Button>
           :
-          <button className = "button" value='register' onClick={e => this.props.onUsersignup(e, this.state)} >Register</button>
+          <Button variant="outline-primary" className='but' value='register' onClick={e => this.props.onUsersignup(e, this.state)} >Register</Button>
           }
           <br />
-          <button className='button' value='login' onClick={this.onRChange} >Login</button>
-        </form>
-      </div>
+          <Button variant="outline-primary" className='but' value='login' onClick={this.onRChange}>
+          Login
+          </Button>
+      </Container>
     )
   }
 }

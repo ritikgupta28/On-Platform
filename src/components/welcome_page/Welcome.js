@@ -18,7 +18,7 @@ export default class Welcome extends React.Component {
     }
    render() {
 		return (
-			<div className='home'>
+			<div>
             <Header />
             {
             this.state.route === 'login'

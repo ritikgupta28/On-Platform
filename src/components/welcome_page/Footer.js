@@ -1,12 +1,12 @@
 import React from 'react';
+import { Container } from 'react-bootstrap'
 
 class Footer extends React.Component {
-
     render() {
         return(
-            <div className='footer'>
+            <Container fluid className='h' style={{ textAlign: 'center' }}>
                 <h1>Contact Us.</h1>
-            </div>
+            </Container>
         );
     }
 }
