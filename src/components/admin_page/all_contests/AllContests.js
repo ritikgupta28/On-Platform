@@ -1,8 +1,9 @@
-import React from 'react'
-import AllContestsCard from './AllContestsCard'
-import ErrorHandler from '../../ErrorHandler/ErrorHandler'
+import React, { Component, Fragment } from 'react'
 
-export default class AllContests extends React.Component {
+import AllContestsCard from './AllContestsCard'
+import ErrorHandler from '../../error_handler/ErrorHandler'
+
+class AllContests extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -41,9 +42,9 @@ export default class AllContests extends React.Component {
 
 	render() {
 		return (
-			<div className='pcon'>
+			<Fragment>
 			<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-				{
+			{
 					this.state.allcontest.map(contest => (
 					<AllContestsCard
 						sign={'Result'}
@@ -54,7 +55,9 @@ export default class AllContests extends React.Component {
 					/>
 				    ))
 				}
-			</div>
+			</Fragment>
 		)
 	}
 }
+
+export default AllContests;
