@@ -19,6 +19,7 @@
     color: rgb(7, 2, 15);
 }
 .foot {
+    padding: 10px;
     width: 100%;
     display: grid;
     justify-content: center;
@@ -27,51 +28,9 @@
     font-size: 3vmin;
     background-color: rgb(7, 2, 15);
 }
-.log {
-    cursor: pointer;
-    float: left;
-    margin-left: 80px;
-    margin-top: 2px;
-    width : 90px;
-    height : 90px;
-}
-
-.pcon {
-    background-color: aliceblue;
-    margin: 40px 180px;
-    padding: 10px 10px;
-    font-size: 20px;
-    color: black;
-    border: 2px solid;
-}
-.ques { 
-    margin: 15px;
-    padding: 15px;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-}
-.butt {
-    float: left;
-    margin: 100px;
-    padding: 10px;
-}
-.but {
-    margin-top: 10px;
-    margin-left: 50px;
-    margin-right: 50px;
-    padding: 10px;
-}
-.fo {
-    background-color: aliceblue;
-    font-size: 15px;
-    padding: 20px;
-    margin: 5px;
-    border: 2px solid black;  
-}
 
 .questioncard {
     display: flex;
     justify-content: space-between;
-    padding: 5px 30px 5px 30px;
+    padding: 5px 30px;
 }

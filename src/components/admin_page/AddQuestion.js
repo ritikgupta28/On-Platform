@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Container } from 'react-bootstrap'
+import { Container, Form, Row, Col, Button } from 'react-bootstrap'
 
 import ErrorHandler from '../error_handler/ErrorHandler'
 
@@ -63,80 +63,91 @@ class Addques extends React.Component {
 	}
 	render() {
 		return (
-			<Container style={{ fontSize: '20px', marginTop: '40px', textAlign: 'center', marginBottom: '40px'}}>
-				<div className='ques'>
+			<Container style={{ padding: '10px 50px'}}>
 					<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-					<form className='fo'>
-						Title:
-						<textarea 
-							rows="2"
-							cols="40"
-							placeholder='Enter title here...'
-							name="title"
-							value={this.state.title}
+					<Form>
+					 <Form.Group controlId="exampleForm.ControlTextarea1">
+           <Form.Label>Title</Form.Label>
+           <Form.Control 
+            placeholder="Title"
+            name="title"
+            as="textarea" 
+            rows="1" 
+            value={this.state.title}
+					  onChange={this.handler}
+            />
+           </Form.Group>
+           <Form.Group controlId="exampleForm.ControlTextarea1">
+           <Form.Label>Content</Form.Label>
+           <Form.Control 
+            placeholder="Content"
+            name="content"
+            as="textarea" 
+            rows="5" 
+            value={this.state.content}
+						onChange={this.handler}
+            />
+           </Form.Group>
+           <Row>
+            <Col>
+             <Form.Group controlId="exampleForm.ControlTextarea1">
+             <Form.Label>Sample Input</Form.Label>
+             <Form.Control 
+              placeholder="Sample Input"
+              name="sinput"
+              as="textarea" 
+              rows="2" 
+              value={this.state.sinput}
+						  onChange={this.handler}
+             />
+             </Form.Group>
+            </Col>
+            <Col>
+             <Form.Group controlId="exampleForm.ControlTextarea1">
+             <Form.Label>Sample Output</Form.Label>
+             <Form.Control
+              placeholder="Sample Output"
+              name="soutput" 
+              as="textarea" 
+              rows="2" 
+              value={this.state.soutput}
 							onChange={this.handler}
-						/>
-						<br/>
-						<br/>
-						Content:
-						<textarea 
-							rows="6"
-							cols="64"
-							placeholder='Enter Question here...'
-							name="content" 
-							value={this.state.content}
-							onChange={this.handler}
-						/>
-						<br/>
-						<br/>
-					<div style={{ display: 'flex', margin: '10px' }}>
-						Sample Input:
-						<textarea 
-							rows="4"
-							cols="32"
-							placeholder='Sample Input...'
-							name="sinput" 
-							value={this.state.sinput}
-							onChange={this.handler}
-						/> 
-						Sample Output:
-						<textarea
-							rows="4"
-							cols="32"
-							placeholder='Sample Output...'
-							name="soutput" 
-							value={this.state.soutput}
-							onChange={this.handler}
-						/>
-					</div>
-					<br/>
-					<div style={{ display: 'flex', margin: '10px' }}>
-						Input File:
-						<br /> 
-						<textarea
-							rows="4"
-							cols="32"
-							name="inputfile"
-							value={this.state.inputfile}
+              />
+             </Form.Group>
+            </Col>
+           </Row>
+           <Row>
+            <Col>
+             <Form.Group controlId="exampleForm.ControlTextarea1">
+             <Form.Label>Input File</Form.Label>
+             <Form.Control 
+              placeholder="Input File"
+              name="inputfile"
+              as="textarea" 
+              rows="3" 
+              value={this.state.inputfile}
 							onChange={this.handler} 
-							placeholder="Enter input here.."
-						/>
-						 Output File:
-						<textarea
-							rows="4"
-							cols="32"
-							name="outputfile"
-							value={this.state.outputfile}
-							onChange={this.handler} 
-							placeholder="Enter output here.."
-						/>
-						</div>
-						<br /> 
-						<Link to='/admin/questions'>
-						<button className='but' value='pcon' type='submit' onClick={this.handle}>ADD Question</button>
-						</Link>
-				</form>
-			</div>
+              />
+             </Form.Group>
+            </Col>
+            <Col>
+             <Form.Group controlId="exampleForm.ControlTextarea1">
+             <Form.Label>Output File</Form.Label>
+             <Form.Control 
+              placeholder="Output File"
+              name="outputfile"
+              as="textarea" 
+              rows="3" 
+              value={this.state.outputfile}
+							onChange={this.handler}  
+							/>
+             </Form.Group>
+            </Col>
+           </Row>
+           <Link to='/admin/questions'>
+						<Button value='pcon' type='submit' onClick={this.handle}>ADD Question</Button>
+					 </Link>
+					</Form>
 			</Container>
 		)
 	}
