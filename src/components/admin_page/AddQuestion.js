@@ -8,8 +8,8 @@ class Addques extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			title : "",
-			content : "",
+			title: "",
+			content: "",
 			sinput: "",
 			soutput: "",
 			inputfile: "",

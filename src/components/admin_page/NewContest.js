@@ -90,6 +90,7 @@ class Contest extends Component {
       {
             this.state.questions.map(q => (
             <Card
+              value="Remove"
               sign={'-'}
               handle={this.handle}
               key={q.questionId._id}

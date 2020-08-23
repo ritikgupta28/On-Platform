@@ -119,6 +119,7 @@ class AllQuestions extends Component {
       {
       this.state.questions.map(q => (
       <Card
+              value="Add to Contest"
               sign={'+'}
               hoverText={'Add to Contest'}
               handle={this.handle}
