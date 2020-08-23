@@ -70,13 +70,8 @@
     border: 2px solid black;  
 }
 
-.quescard {
+.questioncard {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-right: 150px;
-    margin-left: 150px;
-    padding-right: 30px;
-    padding-left: 30px;
-    border: 1px solid black;
+    padding: 5px 30px 5px 30px;
 }
