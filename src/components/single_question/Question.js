@@ -1,6 +1,6 @@
 import React from 'react'
 import './Question.css'
-import ErrorHandler from '../ErrorHandler/ErrorHandler'
+import ErrorHandler from '../error_handler/ErrorHandler'
 import Ide from '../ide/Ide'
 
 class Question extends React.Component {
