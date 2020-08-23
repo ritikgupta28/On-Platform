@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+
 import Card from '../QuestionContestCard';
-import ErrorHandler from '../../ErrorHandler/ErrorHandler'
+import ErrorHandler from '../../error_handler/ErrorHandler'
 
 class AllContestsQuestions extends Component {
   state = {
@@ -42,7 +43,7 @@ class AllContestsQuestions extends Component {
     return (
       <div>
         <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-        {
+      {
           this.state.questions.map(q=> (
             <Card
             key={q.questionId._id}
