@@ -32,7 +32,7 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <Container style={{ padding: '30px 100px' }}>
+      <Container style={{ padding: '30px 150px' }}>
           <h1>Login</h1>
           <hr />
           <Form>

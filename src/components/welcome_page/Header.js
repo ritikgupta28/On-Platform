@@ -11,16 +11,20 @@ class Header extends React.Component {
     return (
       <Container fluid className='h'>
        <Row>
-         <Col>
+         <Col xs='6'>
           <h1>Platform-Up</h1>
          </Col>
-        <Col style={{ paddingTop: '30px'}}>
+        <Col xs='1'>
          <Link to='ide'> 
-          <Button variant="secondary" className='b'>Online IDE</Button>
+          <Button variant="secondary" className='b'>IDE</Button>
          </Link>
+         </Col>
+         <Col xs='2' >
          <Link to='developers'>
           <Button variant="secondary" className='b'>Developers</Button>
          </Link>
+         </Col>
+         <Col xs='1'>
          {
           this.props.route === 'login'
           ?
