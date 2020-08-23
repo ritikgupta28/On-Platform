@@ -298,6 +298,7 @@ exports.postAllContests = (req, res, next) => {
 			const allcontest = new AllContest({
 				admin: contest.admin,
 				questions: contest.questions,
+				contestName: contest.contestName,
 				participant: contest.participant
 			});
 			return allcontest.save();

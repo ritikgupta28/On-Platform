@@ -49,7 +49,7 @@ class AllContests extends Component {
 					<AllContestsCard
 						sign={'Result'}
 						key={contest._id}
-						title={contest._id}
+						title={contest.contestName}
 						id={contest._id}
 						questions={contest.questions}
 					/>

@@ -8,7 +8,7 @@ export default class AllContestsCard extends React.Component {
 			<Container style={{ fontSize: '20px', textAlign: 'center', border: '1px solid black'}}>
 			<div className='questioncard'>
 				<Link to={`/allcontests/questions/${this.props.id}`}>
-					<p>{this.props.id}</p>
+					<p>{this.props.title}</p>
 				</Link>
 				<Link to={`/result/${this.props.id}`}>
 					<Button value={this.props.id}>{this.props.sign}</Button> 
