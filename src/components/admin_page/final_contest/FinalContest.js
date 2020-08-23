@@ -54,6 +54,7 @@ class FinalContest extends Component {
         return res.json();
       })
 			.then(resData=> {
+				console.log(resData);
 				this.setState({
 					finalcontest: resData.finalcontest
 				});
@@ -71,7 +72,7 @@ class FinalContest extends Component {
 						sign={'End'}
 						handle={this.handler}
 						key={contest._id}
-						title={contest._id}
+						title={contest.contestName}
 						id={contest._id}
 						questions={contest.questions}
 						admin={contest.admin.name}

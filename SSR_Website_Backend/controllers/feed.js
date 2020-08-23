@@ -163,6 +163,7 @@ exports.postNewContestDeleteQuestion = (req, res, next) => {
 };
 
 exports.postFinalContest = (req, res, next) => {
+	const cName = req.body.cName;
 	Admin.findById(req.adminId)
 	.then(admn => {
 		admn.populate('contest.items.questionId')
@@ -176,6 +177,7 @@ exports.postFinalContest = (req, res, next) => {
 					name: admn.name,
 					adminId: req.adminId
 				},
+				contestName: cName,
 				questions: questions
 			});
 			return finalcontest.save();

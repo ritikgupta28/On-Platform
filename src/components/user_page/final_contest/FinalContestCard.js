@@ -8,7 +8,7 @@ export default class FinalContestCard extends React.Component {
 			<Container style={{ fontSize: '20px', textAlign: 'center', border: '1px solid black'}}>
 			<div className='questioncard'>
 				<Link to={`/finalcontest/questions/${this.props.id}`}>
-					<p>{this.props.id}</p>
+					<p>{this.props.title}</p>
 				</Link>
 			</div>
 			</Container>

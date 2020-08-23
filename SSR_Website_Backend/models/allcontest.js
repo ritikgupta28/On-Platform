@@ -23,6 +23,10 @@ const allContestSchema = new Schema({
 			ref: 'Admin'
 		}
 	},
+	contestName: {
+		type: String,
+		required: true
+	},
 	participant: {
 		users: [
 			{

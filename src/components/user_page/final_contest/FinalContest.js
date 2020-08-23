@@ -48,7 +48,7 @@ class FinalContest extends Component {
 					this.state.finalcontest.map(contest => (
 					<FinalContestCard
 						key={contest._id}
-						title={contest._id}
+						title={contest.contestName}
 						id={contest._id}
 						questions={contest.questions}
 						admin={contest.admin.name}
