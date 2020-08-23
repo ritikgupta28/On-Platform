@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import '../admin/Admin.css';
@@ -13,7 +13,7 @@ export default class CardContest extends React.Component {
 					<p>{this.props.id}</p>
 				</Link>
 				<Link to="/admin/allcontests">
-					<button value={this.props.id} onClick={this.props.handle}>{this.props.sign}</button> 
+					<Button value={this.props.id} onClick={this.props.handle}>{this.props.sign}</Button> 
 				</Link>
 			</div>
 			</Container>

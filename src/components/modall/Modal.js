@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Button } from 'react-bootstrap'
 
 import './Modal.css';
 
@@ -11,8 +12,8 @@ const modal = props =>
       </header>
       <div className="modal__content">{props.children}</div>
       <div className="modal__actions">
-        <button onClick={props.onCancelModal}>Cancel</button>
-        <button onClick={props.onAcceptModal}>Accept</button>
+        <Button onClick={props.onCancelModal}>Cancel</Button>
+        <Button onClick={props.onAcceptModal}>Accept</Button>
       </div>
     </div>,
     document.getElementById('modal-root')

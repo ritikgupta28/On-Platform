@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 
 export default class AllContestsCard extends React.Component {
 	render() {
@@ -11,7 +11,7 @@ export default class AllContestsCard extends React.Component {
 					<p>{this.props.id}</p>
 				</Link>
 				<Link to={`/result/${this.props.id}`}>
-					<button value={this.props.id}>{this.props.sign}</button> 
+					<Button value={this.props.id}>{this.props.sign}</Button> 
 				</Link>
 			</div>
 			</Container>

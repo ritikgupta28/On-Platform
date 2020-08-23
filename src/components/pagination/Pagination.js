@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Button } from 'react-bootstrap'
 import './Pagination.css';
 
 const paginator = props => (
@@ -8,12 +8,12 @@ const paginator = props => (
     <div className="paginator__controls">
       {
         props.currentPage > 1 && (
-        <button className="paginator__control" onClick={props.onPrevious}>Previous</button>
+        <Button className="paginator__control" onClick={props.onPrevious}>Previous</Button>
         )
       }
       {
         props.currentPage < props.lastPage && (
-        <button className="paginator__control" onClick={props.onNext}>Next</button>
+        <Button className="paginator__control" onClick={props.onNext}>Next</Button>
         )
       }
     </div>
