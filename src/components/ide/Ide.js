@@ -5,9 +5,7 @@ import 'codemirror/theme/monokai.css';
 import 'codemirror/mode/python/python';
 import 'codemirror/mode/clike/clike';
 import axios from 'axios';
-
-import Dropdown from './Dropdown';
-import Output from './Output';
+import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 import './Ide.css';
 
 class App extends React.Component {
@@ -17,11 +15,17 @@ class App extends React.Component {
       name: 'CodeMirror',
       result: '',
       code: "",
-      language: '',
+      language: 'text/x-c++src',
       output: false
     };
     this.handleCompile = this.handleCompile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  onLangChange = (e) => {
+    this.setState({ 
+      language: e.target.value
+    })
   }
 
   updateCode(newCode) {
@@ -35,20 +39,14 @@ class App extends React.Component {
       inputdata: e.target.value
     })
   }
-  getData(lang) {
-    this.setState({
-      language: lang
-    });
-  }
+
   async handleCompile(e) {
-    console.log(this.props.token);
     e.preventDefault();
     let script = this.state.code;
     let language = null;
     if (this.state.language === 'python') language = 'python3';
     else language = 'cpp';
     let stdin = this.state.inputdata;
-    console.log(this.props.token);
     this.state.result = await axios.post('http://localhost:8000/ide', {
       script,
       language,
@@ -96,44 +94,64 @@ class App extends React.Component {
       theme: 'monokai'
     };
     return (
-      <div style={{ textAlign: 'center', paddingLeft: '150px', paddingRight: '150px'}}>
-        <div className="con">
-          <Dropdown sendData={this.getData.bind(this)} />
-          <hr />
-          <form >
+      <Container style={{ marginTop: '50px'}}>
+          <Form>
+          <Row>
+          <Col xs='6'>
+           <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Select Language.</Form.Label>
+            <Form.Control as="select" value={this.state.language} onChange={this.onLangChange.bind(this)}>
+             <option value="text/x-c++src">C++</option>
+             <option value="python">Python</option>
+            </Form.Control>
+           </Form.Group>
+           </Col>
+           </Row>
+          <Form.Group controlId="exampleForm.ControlSelect1">
             <CodeMirror
               value={this.state.code}
               onChange={this.updateCode.bind(this)}
               options={options}
               className="code"
             />
-            {' '}
-            <br />
-            <textarea
-              style={{ float: 'left' }}
-              rows="5"
-              cols="60"
-              name="input"
-              value={this.state.inputdata}
-              onChange={this.onInputDataChange}
-              placeholder="Enter input here.."
-            />{' '}
-            <button className="bu" onClick={this.handleCompile}>Compile</button>
-            <button className="bu" onClick={this.handleSubmit}>Submit</button>
-          </form>
+           </Form.Group>
+           <Row>
+           <Col xs='8'>
+           <Form.Group controlId="exampleForm.ControlTextarea1">
+           <Form.Control 
+            placeholder="Input"
+            as="textarea" 
+            rows="3" 
+            name="input"
+            value={this.state.inputdata}
+            onChange={this.onInputDataChange}
+            />
+           </Form.Group>
+           </Col>
+           <Col xs='2'>
+          <Button onClick={this.handleCompile}>Compile</Button>
+          </Col>
+          <Col xs='2'>
+          <Button onClick={this.handleSubmit}>Submit</Button>
+          </Col>
+          </Row>
           <br />
           {
             this.state.output
             ?
-            <div>
-              <hr/>
-              <Output result={this.state.result} />
-            </div>
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+             <Form.Control 
+              as="textarea" 
+              rows="4" 
+              name="output"
+              value={this.state.result.data.body.output}
+              />
+           </Form.Group>
             :
             null
           }
-        </div>
-      </div>
+          </Form>
+      </Container>
     );
   }
 }

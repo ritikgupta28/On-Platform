@@ -2,6 +2,7 @@ import React from 'react'
 import './Question.css'
 import ErrorHandler from '../error_handler/ErrorHandler'
 import Ide from '../ide/Ide'
+import { Container } from 'react-bootstrap'
 
 class Question extends React.Component {
 	state = {
@@ -41,7 +42,7 @@ class Question extends React.Component {
 
 	render() {
 		return (
-			<div className='dsc'>
+			<Container>
 			 <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				<div className='tit'>
 			    <h2>{this.state.title}</h2>
@@ -55,8 +56,11 @@ class Question extends React.Component {
 					  <p>{this.state.soutput}</p>
 					</pre>
 				</div>
-				<Ide token={this.props.token} questionId={this.props.match.params.id} />
-			</div>
+				<Ide 
+				 token={this.props.token}
+				 questionId={this.props.match.params.id} 
+				/>
+			</Container>
 		)
 	}
 }

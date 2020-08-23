@@ -10,7 +10,7 @@ class Header extends React.Component {
     return (
       <Container fluid className='h'>
        <Row>
-         <Col xs='7'>
+         <Col xs='6'>
           <h1>Platform-Up</h1>
          </Col>
         <Col xs='1'>

@@ -1,31 +1,5 @@
-.wel {
-	margin-top: 10px;
-	font-size: 25px;
-}
 .CodeMirror { 
+	font-size: 20px;
 	height: 400px;
 	text-align: left;
  }
-
-.con {
-	margin-right: 70px;
-	margin-left: 70px;
-}
-.bu {
-	cursor: pointer;
-	font-size: 20px;
-	margin : 8px 25px;
-	padding: 5px 10px; 
-}
-.bu:hover {
-	background-color: aliceblue;
-}
-.code {
-	font-size: 20px;
-}
-.out {
-	padding: 50px;
-	border: 2px solid black;
-	border-radius: 5px;
-	text-align: left;
-}
