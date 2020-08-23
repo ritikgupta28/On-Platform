@@ -1,7 +1,9 @@
-import React from 'react'
-import ErrorHandler from '../../ErrorHandler/ErrorHandler'
+import React, { Component, Fragment } from 'react'
+import { Container } from 'react-bootstrap'
 
-export default class Result extends React.Component {
+import ErrorHandler from '../../error_handler/ErrorHandler'
+
+class Result extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -42,17 +44,21 @@ export default class Result extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<Fragment>
 			    <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{
 					this.state.participants.map(user => (
-					<div key={user.userId} style={{ display: 'flex'}}>
+					<Container style={{ fontSize: '20px', textAlign: 'center', border: '1px solid black'}}>
+					<div className='questioncard'>
 						<p>{user.userId}</p>
 						<p style={{paddingLeft: '20px'}}>{user.totalScore}</p>
 					</div>
+					</Container>
 				    ))
 				}
-			</div>
+			</Fragment>
 		)
 	}
 }
+
+export default Result;
