@@ -1,5 +1,6 @@
 import React from 'react'
-import { Route, Redirect, Link, Switch, BrowserRouter as Router } from 'react-router-dom'
+import { Route, Link, Switch, BrowserRouter as Router } from 'react-router-dom'
+import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap'
 
 import './Navbar.css'
 import logo from '../../../images/logo1.jpg'
@@ -11,37 +12,34 @@ import FinalContestQuestions from '../../final_contest/FinalContestQuestions'
 import AllContests from '../../all_contests/AllContests'
 import AllContestsQuestions from '../../all_contests/AllContestsQuestions'
 import Question from '../../../single_question/Question'
-import Ide from '../../../ide/Ide'
 import Result from '../../all_contests/Result'
+import About from '../About'
 
-export default class Navbar extends React.Component {
+export default class navbar extends React.Component {
 	render() {
 		return (
 			<Router >
 				<div className='na'>
-			    <ul className='one'>
-				    <Link to='/admin/questions'>
-					    <li value='ques'>Questions</li>
-			  	  </Link>
-			    	<Link to='/admin/addquestion'>
-							<li value='Addques'>Add Question</li>
-					  </Link>
-					  <Link to='/admin/newcontest'>
-				    	<li value='contest'>New Contest</li>
-				    </Link>
-						<Link to='/admin/finalcontest'>
-				    	<li value='PCON'>Final Contest</li>
-				    </Link>
-						<Link to='/admin/allcontests'>
-				    	<li value='PCON'>All Contests</li>
-				    </Link>
-						<Link to='/admin/about'>
-							<li value='about'><img className = 'log' alt='logo' src= {logo}></img></li>
-				    </Link>
-				    <Link to='/'>
-    	        <button className='but' type="submit" value='Signout' onClick={this.props.logout}>Sign Out</button>
-    	      </Link>
-		    	</ul>
+		    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+           <Navbar.Brand href="#home">Platform-Up</Navbar.Brand>
+           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <Link to='/admin/questions'><Nav.Link href='/admin/questions'>Question</Nav.Link></Link>
+            <Link to='/admin/addquestion'><Nav.Link href='/admin/addquestion'>Add Question</Nav.Link></Link>
+          <NavDropdown title="Contest" id="collasible-nav-dropdown">
+            <Link to='/admin/newcontest'><NavDropdown.Item href='/admin/newcontest'>New Contest</NavDropdown.Item></Link>
+            <Link to='/admin/finalcontest'><NavDropdown.Item href='/admin/finalcontest'>Final Contest</NavDropdown.Item></Link>
+            <NavDropdown.Divider />
+            <Link to='/admin/allcontests'><NavDropdown.Item href='/admin/allcontests'>All Contests</NavDropdown.Item></Link>
+          </NavDropdown>
+          </Nav>
+          <Nav>
+           <Link to='/admin/about'><Nav.Link href='/admin/about'>About</Nav.Link></Link>
+           <Link to='/'><Button eventKey={2} onClick={this.props.logout} href='/'>Sign Out</Button></Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
 			    <div className='coc'>
 			    	<Switch>
 					    <Route
@@ -114,7 +112,7 @@ export default class Navbar extends React.Component {
 			    	  	path="/admin/about"
 			    	   	exact
 			    	   	render = {props => (
-			    	   		<Ide
+			    	   		<About
 			    	   			token={this.props.token}
 			    	   		/>
 			    	   	)}
@@ -129,15 +127,6 @@ export default class Navbar extends React.Component {
 					    	)}
 					    />
 			    	  <Route
-			    	  	path="/ide"
-			    	   	exact
-			    	   	render = {props => (
-			    	   		<Ide
-			    	   			token={this.props.token}
-			    	   		/>
-			    	   	)}
-			    	  />
-			    	  <Route
 			    	  	path="/result/:id"
 			    	   	render = {props => (
 			    	   		<Result
@@ -146,7 +135,6 @@ export default class Navbar extends React.Component {
 			    	   		/>
 			    	   	)}
 			    	  />
-			    	  <Redirect to="/admin/questions" />
 				    </Switch>
 		    	</div>
 				</div>

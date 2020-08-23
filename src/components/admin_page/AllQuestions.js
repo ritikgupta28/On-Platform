@@ -101,9 +101,12 @@ class AllQuestions extends Component {
      <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
      {this.state.questionsLoading && (
      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-	   <Spinner animation="border" role="status">
-      <span className="sr-only">Loading...</span>
-     </Spinner>
+	   <Spinner 
+      size='lg'
+      variant="primary"
+      animation="border" 
+      role="status"
+      />
      </div>
      )}
 	   {!this.state.questionsLoading && (
