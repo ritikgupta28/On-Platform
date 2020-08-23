@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component, Fragment } from 'react';
 import FinalContestCard from './FinalContestCard'
-import ErrorHandler from '../../ErrorHandler/ErrorHandler'
+import ErrorHandler from '../../error_handler/ErrorHandler'
 
-export default class FinalContest extends React.Component {
+class FinalContest extends Component {
 	constructor(props) {
     super(props);
     this.state = {
@@ -12,12 +12,13 @@ export default class FinalContest extends React.Component {
 	};
 
 	catchError = error => {
-    this.setState({ error: error })
-  }
-   errorHandler = () => {
-    this.setState({ error: null });
-  };
-  
+		this.setState({ error: error })
+	}
+
+	errorHandler = () => {
+		this.setState({ error: null });
+	};
+
 	componentDidMount() {
 		fetch('http://localhost:8000/feed/userfinalcontest', {
 			headers: {
@@ -25,23 +26,23 @@ export default class FinalContest extends React.Component {
 				'Content-Type': 'application/json'
 			}
 		})
-			.then(res => {
-				if (res.status !== 200) {
-          throw new Error('error');
-        }
-        return res.json();
-      })
-			.then(resData=> {
-				this.setState({
-					finalcontest: resData.finalcontest
-				});
-			})
-			.catch(this.catchError);
+		.then(res => {
+			if (res.status !== 200) {
+				throw new Error('error');
+			}
+			return res.json();
+		})
+		.then(resData=> {
+			this.setState({
+				finalcontest: resData.finalcontest
+			});
+		})
+		.catch(this.catchError);
 	};
 
 	render() {
 		return (
-			<div className='pcon'>
+			<Fragment>
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{
 					this.state.finalcontest.map(contest => (
@@ -54,7 +55,9 @@ export default class FinalContest extends React.Component {
 					/>
 				    ))
 				}
-			</div>
+			</Fragment>
 		)
 	}
 }
+
+export default FinalContest;
