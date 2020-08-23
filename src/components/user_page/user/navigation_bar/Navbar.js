@@ -3,7 +3,6 @@ import { Route, Link, Redirect, Switch, BrowserRouter as Router } from 'react-ro
 import { Navbar, Nav, Button } from 'react-bootstrap'
 
 import './Navbar.css'
-import logo from '../../../images/logo1.jpg'
 import FinalContest from '../../final_contest/FinalContest'
 import FinalContestQuestions from '../../final_contest/FinalContestQuestions'
 import Question from '../../../single_question/Question'

@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import { Container, Row, Col, Button } from 'react-bootstrap'
-import logo from '../images/logo1.jpg'
+import { Link } from 'react-router-dom';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 class Header extends React.Component {
   onRChange = (e) => {
@@ -11,7 +10,7 @@ class Header extends React.Component {
     return (
       <Container fluid className='h'>
        <Row>
-         <Col xs='6'>
+         <Col xs='7'>
           <h1>Platform-Up</h1>
          </Col>
         <Col xs='1'>
