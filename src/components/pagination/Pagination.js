@@ -12,6 +12,11 @@ const paginator = props => (
         )
       }
       {
+        props.currentPage > 1 && props.currentPage < props.lastPage && (
+          <Button className="paginator__control">{props.currentPage}</Button>
+        )
+      }
+      {
         props.currentPage < props.lastPage && (
         <Button className="paginator__control" onClick={props.onNext}>Next</Button>
         )
