@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import ErrorHandler from '../ErrorHandler/ErrorHandler'
+
+import ErrorHandler from '../error_handler/ErrorHandler'
 import Card from './QuestionCard';
 
 class Contest extends Component {
@@ -86,7 +87,7 @@ class Contest extends Component {
 	   	  <Link to='/admin/finalcontest'>
           <button className='but' value='s' style={{ marginBottom: '10px' }} onClick={this.handler}>Host</button>
         </Link>
-         {
+      {
             this.state.questions.map(q => (
             <Card
               sign={'-'}
