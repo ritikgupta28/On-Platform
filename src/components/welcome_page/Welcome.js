@@ -19,19 +19,20 @@ export default class Welcome extends React.Component {
    render() {
 		return (
 			<div>
-            <Header />
+            <Header 
+             route={this.state.route}
+             onRouteChange={this.onRouteChange}
+            />
             {
             this.state.route === 'login'
             ?
             <Login 
-             onRouteChange={this.onRouteChange}
              onChangeUserAdmin={this.props.onChangeUserAdmin}
              onUserlogin={this.props.onUserlogin} 
              onAdminlogin={this.props.onAdminlogin} 
             />
             :
             <Register 
-             onRouteChange={this.onRouteChange}
              onChangeUserAdmin={this.props.onChangeUserAdmin}
              onUsersignup={this.props.onUsersignup}
              onAdminsignup={this.props.onAdminsignup} 

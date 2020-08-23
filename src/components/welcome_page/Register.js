@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Button } from 'react-bootstrap'
+import { Container, Button, Form } from 'react-bootstrap'
 
 export default class Register extends React.Component {
 	constructor(props) {
@@ -43,64 +43,67 @@ export default class Register extends React.Component {
 
   render() {
     return (
-      <Container style={{ fontSize: '20px', marginTop: '40px', textAlign: 'center', marginBottom: '40px' }}>
+      <Container style={{ padding: '30px 100px' }}>
           <h1>Register</h1>
           <hr />
-          <label>
-            Name: 
-            <br/>
-            <input 
-              placeholder="user" 
-              name="name"
-              type="text"
-              value={this.state.name}
-              onChange={this.onNameChange.bind(this)}
+          <Form>
+           <Form.Group controlId="formNamePassword">
+            <Form.Label>Name</Form.Label>
+            <Form.Control 
+             type="text"
+             placeholder="Name"
+             value={this.state.name}
+             onChange={this.onNameChange.bind(this)}
              />
-          </label>
-          <br />
-          <label>
-            Email:
-            <br/> 
-            <input 
-              placeholder="user@sr.com" 
-              name="email"
-              type="email"
-              value={this.state.email}
-              onChange={this.onEmailChange.bind(this)}
+           </Form.Group>
+           <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control 
+             type="email"
+             placeholder="Enter email" 
+             value={this.state.email}
+             onChange={this.onEmailChange.bind(this)}
              />
-          </label>
-          <br />
-          <label>
-            Password: 
-            <br/>
-            <input 
-              placeholder="password"
-              name="password"
-              type="password"
-              value={this.state.password}
-              onChange={this.onPasswordChange.bind(this)}
+            <Form.Text className="text-muted">
+             We'll never share your email with anyone else.
+            </Form.Text>
+           </Form.Group>
+           <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control 
+             type="password"
+             placeholder="Password"
+             value={this.state.password}
+             onChange={this.onPasswordChange.bind(this)}
              />
-          </label>
-          <br/>
-          <label>
-            Register as:
-            <select value={this.state.userAdmin} onChange={this.onUserAdminChange.bind(this)}>
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
-            </select>
-          </label>
-          <br />
-          {
-          this.state.userAdmin === 'admin'
-          ?
-          <Button variant="outline-primary" className='but' value='register' onClick={e => this.props.onAdminsignup(e, this.state)} >Register</Button>
-          :
-          <Button variant="outline-primary" className='but' value='register' onClick={e => this.props.onUsersignup(e, this.state)} >Register</Button>
+           </Form.Group>
+           <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Register As.</Form.Label>
+            <Form.Control as="select" value={this.state.userAdmin} onChange={this.onUserAdminChange.bind(this)}>
+             <option value="admin">Admin</option>
+             <option value="user">User</option>
+            </Form.Control>
+           </Form.Group>
+           {
+            this.state.userAdmin === 'admin'
+            ?
+           <Button 
+            variant="primary" 
+            type="submit"
+            onClick={e => this.props.onAdminsignup(e, this.state)}
+            >
+            Register
+           </Button>
+           :
+           <Button 
+            variant="primary" 
+            type="submit"
+            onClick={e => this.props.onUsersignup(e, this.state)}
+            >
+            Register
+           </Button>
           }
-          <br />
-          <Button variant="outline-primary" className='but' value='login' onClick={this.onRChange}>
-          Login
-          </Button>
+          </Form>
       </Container>
     )
   }
