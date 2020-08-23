@@ -1,8 +1,9 @@
-import React from 'react'
-import FinalContestCard from './FinalContestCard'
-import ErrorHandler from '../../ErrorHandler/ErrorHandler'
+import React, { Component, Fragment } from 'react'
 
-export default class FinalContest extends React.Component {
+import FinalContestCard from './FinalContestCard'
+import ErrorHandler from '../../error_handler/ErrorHandler'
+
+class FinalContest extends Component {
 	constructor(props) {
     super(props);
     this.state = {
@@ -62,12 +63,12 @@ export default class FinalContest extends React.Component {
 
 	render() {
 		return (
-			<div className='pcon'>
+			<Fragment>
 			   <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{
 					this.state.finalcontest.map(contest => (
 					<FinalContestCard
-						sign={'End Contest'}
+						sign={'End'}
 						handle={this.handler}
 						key={contest._id}
 						title={contest._id}
@@ -77,7 +78,9 @@ export default class FinalContest extends React.Component {
 					/>
 				    ))
 				}
-			</div>
+			</Fragment>
 		)
 	}
 }
+
+export default FinalContest;
