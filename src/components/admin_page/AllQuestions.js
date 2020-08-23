@@ -2,8 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Card from './QuestionCard';
 import { Spinner } from 'react-bootstrap'
 import Pagination from '../pagination/Pagination'
-import ErrorHandler from '../ErrorHandler/ErrorHandler'
-
+import ErrorHandler from '../error_handler/ErrorHandler'
 
 class AllQuestions extends Component {
     state = {
@@ -116,10 +115,12 @@ class AllQuestions extends Component {
       lastPage={Math.ceil(this.state.totalQuestions / 2)}
       currentPage={this.state.questionPage}
      >
-		 {
+		 
+      {
       this.state.questions.map(q => (
-            <Card
+      <Card
               sign={'+'}
+              hoverText={'Add to Contest'}
               handle={this.handle}
               key={q._id}
               id={q._id}
