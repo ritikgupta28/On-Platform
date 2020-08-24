@@ -44,10 +44,10 @@ export default class Register extends React.Component {
   render() {
     return (
       <Container style={{ padding: '30px 150px' }}>
-          <h1>Register</h1>
+          <h1 style={{ textAlign: 'center' }}>Register</h1>
           <hr />
           <Form>
-           <Form.Group controlId="formNamePassword">
+           <Form.Group controlId="formBasicName">
             <Form.Label>Name</Form.Label>
             <Form.Control 
              type="text"
@@ -84,6 +84,7 @@ export default class Register extends React.Component {
              <option value="user">User</option>
             </Form.Control>
            </Form.Group>
+           <Form.Group style={{ textAlign: 'center' }}>
            {
             this.state.userAdmin === 'admin'
             ?
@@ -103,6 +104,7 @@ export default class Register extends React.Component {
             Register
            </Button>
           }
+          </Form.Group>
           </Form>
       </Container>
     )

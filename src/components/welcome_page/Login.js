@@ -33,7 +33,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <Container style={{ padding: '30px 150px' }}>
-          <h1>Login</h1>
+          <h1 style={{ textAlign: 'center' }}>Login</h1>
           <hr />
           <Form>
            <Form.Group controlId="formBasicEmail">
@@ -64,6 +64,7 @@ export default class Login extends React.Component {
              <option value="user">User</option>
             </Form.Control>
            </Form.Group>
+           <Form.Group style={{ textAlign: 'center' }}>
            {
             this.state.userAdmin === 'admin'
             ?
@@ -83,6 +84,7 @@ export default class Login extends React.Component {
             Login
            </Button>
           }
+          </Form.Group>
           </Form>
       </Container>
     )

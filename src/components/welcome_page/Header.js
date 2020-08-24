@@ -2,16 +2,19 @@ import React from 'react';
 import { Container, Row, Col, Button, Nav } from 'react-bootstrap';
 
 class Header extends React.Component {
+  state = {
+    route: 'Register'
+  }
   onRChange = (e) => {
-    this.props.onRouteChange(e.target.value)
+    if(this.state.route === 'Login') {
+      this.setState({ route: 'Register' })
+      this.props.onRouteChange('login')
+    } else {
+      this.setState({ route: 'Login' })
+      this.props.onRouteChange('register')
+    }
   }
   render() {
-    let route;
-      if(this.props.route === 'login') { 
-        route = 'Register'
-      } else {
-      route = 'Login'
-      }
     return (
       <Container fluid className='h'>
        <Row>
@@ -26,7 +29,7 @@ class Header extends React.Component {
           <Nav.Link href="/developers">Developers</Nav.Link>
          </Nav.Item>
          <Nav.Item>
-          <Button value='register' onClick={this.onRChange}>{route}</Button>
+          <Button onClick={this.onRChange}>{this.state.route}</Button>
          </Nav.Item>
          </Nav>
         </Row>

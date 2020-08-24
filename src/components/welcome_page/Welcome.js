@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Contact from './Contact'
 import './Welcome.css';
 import Header from './Header';
 import Footer from './Footer'
@@ -38,6 +38,8 @@ export default class Welcome extends React.Component {
              onAdminsignup={this.props.onAdminsignup} 
             />
             }
+            <hr />
+            <Contact />
             <Footer />
             </div>
    		)
