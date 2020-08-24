@@ -78,16 +78,20 @@ exports.inputFile = async (req, res) => {
             })
             .then(r => {
               console.log("100 Marks");
+              body.output = 'Correct Answer';
               res.send(response).status(200);
             })
             .catch(err => console.log(err));
         }
         else {
           console.log("Sorry, Try again");
+          body.output = 'Wrong Answer';
+          res.send(response).status(200);
         }
       }
       else {
         console.log(error);
+        res.send(error).status(200);
       }
   })
   })
