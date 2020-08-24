@@ -1,14 +1,19 @@
 import React from 'react';
-
-import logo from '../images/logo1.jpg'
+import { Container, Row, Col } from 'react-bootstrap'
 
 class Header extends React.Component {
     render() {
         return(
-            <div className="h">
-             <img className="l" alt='logo' src= {logo}></img>
-             <h1 className="he">Developers</h1>
-            </div>
+            <Container fluid style={{ backgroundColor: 'rgb(7, 2, 15)'}}>
+            <Row>
+            <Col xs='5'>
+             <h1 style={{ color: 'white'}}>Platform-Up</h1>
+             </Col>
+             <Col>
+             <h1 style={{ color: 'white'}}>Developers</h1>
+             </Col>
+             </Row>
+            </Container>
         );
     }
 }

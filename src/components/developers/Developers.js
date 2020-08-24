@@ -1,13 +1,12 @@
 import React from 'react'
-
 import Cardlist from  './Cardlist'
 import Header from './Header'
 
 export default class Developers extends React.Component {
 	render() {
 		return (
-			<div className='cc'>
-				<Header />
+			<div>
+			    <Header />
 				<Cardlist />
 			</div>
 		)

@@ -97,7 +97,7 @@ class App extends React.Component {
       <Container style={{ marginTop: '50px'}}>
           <Form>
           <Row>
-          <Col xs='6'>
+          <Col xs='4'>
            <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>Select Language.</Form.Label>
             <Form.Control as="select" value={this.state.language} onChange={this.onLangChange.bind(this)}>
