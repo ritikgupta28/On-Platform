@@ -42,6 +42,10 @@ const allContestSchema = new Schema({
 							ref: 'Question',
 							required: true
 						},
+						code: {
+							type: String,
+							required: true
+						},
 						score: {
 							type: Number,
 							required: true

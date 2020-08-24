@@ -366,11 +366,21 @@ exports.getResult = (req, res, next) => {
 	const contestId = req.params.contestId;
 	AllContest.findById(contestId)
 	.then(contest => {
-		const participants = contest.participant.users;
-		res.status(200).json({
-			message: 'Fetched Participant Successfully',
-			participants: participants
-		});
+		contest.populate('participant.users.userId')
+		.execPopulate()
+		.then(contest => {
+			const participants = contest.participant.users;
+			res.status(200).json({
+				message: 'Fetched Participant Successfully',
+				participants: participants
+			});
+		})
+		.catch(err => {
+			if(!err.statusCode) {
+				err.statusCode = 500;
+			}
+			next(err);
+		})
 	})
 	.catch(err => {
       if (!err.statusCode) {

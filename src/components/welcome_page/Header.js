@@ -21,7 +21,7 @@ class Header extends React.Component {
        <Col xs='9'>
         <h1>Platform-Up</h1>
         </Col>
-        <Nav variant="tabs">
+        <Nav fill variant="tabs">
          <Nav.Item>
           <Nav.Link href="/ide">IDE</Nav.Link>
          </Nav.Item>

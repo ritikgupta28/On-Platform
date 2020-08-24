@@ -42,6 +42,10 @@ const finalContestSchema = new Schema({
 							ref: 'Question',
 							required: true
 						},
+						code: {
+							type: String,
+							required: true
+						},
 						score: {
 							type: Number,
 							required: true
@@ -63,7 +67,7 @@ finalContestSchema.methods.addToParticipant = function(id) {
   });
   const updatedParticipantUsers = [...this.participant.users];
   const ques = this.questions.map(i => {
-  	return { questionId: i.questionId, score: 0 };
+  	return { questionId: i.questionId, code: "// Code Here", score: 0 };
   });
 
   if(participantUserIndex < 0) {
@@ -94,6 +98,23 @@ finalContestSchema.methods.addScore = function(uid, qid) {
   updatedParticipantUsers[userIndex].questions.map(i => {
   	updatedParticipantUsers[userIndex].totalScore += i.score;
   });
+  const updatedParticipant = {
+    users: updatedParticipantUsers
+  };
+  this.participant = updatedParticipant;
+  return this.save();
+};
+
+finalContestSchema.methods.addCode = function(uid, qid, script) {
+  const userIndex = this.participant.users.findIndex(pu => {
+    return pu.userId.toString() === uid.toString();
+  });
+  const userQuestionIndex = this.participant.users[userIndex].questions.findIndex(puq => {
+    return puq.questionId.toString() === qid.toString();
+  });
+  const updatedParticipantUsers = [...this.participant.users];
+
+  updatedParticipantUsers[userIndex].questions[userQuestionIndex].code = script;
   const updatedParticipant = {
     users: updatedParticipantUsers
   };

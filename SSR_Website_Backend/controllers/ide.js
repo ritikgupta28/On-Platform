@@ -5,19 +5,29 @@ const FinalContest = require('../models/finalcontest');
 
 // #include<bits/stdc++.h>
 // using namespace std;
-//   int main() {
-//   int t,a,b;
+
+// int main() {
+//   int t;
 //   cin>>t;
-//   while(t>1) {
-//     cin>>a>>b;
-//     cout<<a+b<<"\n";
-//     --t;
-//   }
+//   int a,b;
 //   cin>>a>>b;
 //   cout<<a+b;
+//   t--;
+//   while(t--) {
+//     cin>>a>>b;
+//     cout<<"\n"<<a+b;
+//   }
 // }
 
 exports.ideResult = async (req, res, next) => {
+  const questionId = req.body.questionId;
+  FinalContest.find()
+    .then(fContest => {
+      fContest.map(contest => {
+        contest.addCode(req.userId, questionId, req.body.script)
+      })
+    })
+    .catch(err => console.log(err));
   let { script, language, stdin } = req.body;
   let program = {
     script,
@@ -46,6 +56,13 @@ exports.ideResult = async (req, res, next) => {
 
 exports.inputFile = async (req, res) => {
   const questionId = req.body.questionId;
+  FinalContest.find()
+    .then(fContest => {
+      fContest.map(contest => {
+        contest.addCode(req.userId, questionId, req.body.script)
+      })
+    })
+    .catch(err => console.log(err));
   Question.findById(questionId)
   .then(question => {
     let stdin = question.inputfile;

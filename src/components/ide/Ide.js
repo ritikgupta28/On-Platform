@@ -46,10 +46,12 @@ class App extends React.Component {
     let language = null;
     if (this.state.language === 'python') language = 'python3';
     else language = 'cpp';
+    let questionId = this.props.questionId;
     let stdin = this.state.inputdata;
     this.state.result = await axios.post('http://localhost:8000/ide', {
       script,
       language,
+      questionId,
       stdin
       },
       {
