@@ -1,18 +1,19 @@
 const { validationResult } = require('express-validator/check');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-// const nodemailer = require('nodemailer');
-// const sendgridTransport = require('nodemailer-sendgrid-transport');
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
 
 const Admin = require('../models/admin');
-// const transporter = nodemailer.createTransport(
-//   sendgridTransport({
-//     auth: {
-//       api_key:
-//         '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'
-//     }
-//   })
-// );
+
+const transporter = nodemailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key:
+        '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'
+    }
+  })
+);
 
 exports.signup = (req, res, next) => {
 	const errors = validationResult(req);
@@ -34,25 +35,25 @@ exports.signup = (req, res, next) => {
 			});
 			return admin.save();
 		})
+
 		.then(result => {
 			res.status(201).json({
 				message: 'Admin created!',
 				adminId: result._id
 			});
-			// transporter.sendMail({
-			// 	to: email,
-			// 	from: 'platform@platform.com',
-			// 	subject: 'Signup Succeeded!',
-			// 	html: '<h1>You successfully signed up!</h1>'
-			// });
-			// console.log(result);
+			return transporter.sendMail({
+				to: email,
+				from: 'rgritik001@gmail.com',
+				subject: 'Signup Succeeded!',
+				html: '<h4>Hey! You have successfully signed up as an admin on Platform Up.</h4>'
+			});
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+			if(!err.statusCode) {
+				err.statusCode = 500;
+			}
+			next(err);
+		});
 }
 
 exports.login = (req, res, next) => {

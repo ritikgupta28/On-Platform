@@ -1,8 +1,19 @@
 const { validationResult } = require('express-validator/check');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
 
 const User = require('../models/user');
+
+const transporter = nodemailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key:
+        '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'
+    }
+  })
+);
 
 exports.signup = (req, res, next) => {
 	const errors = validationResult(req);
@@ -29,13 +40,19 @@ exports.signup = (req, res, next) => {
 				message: 'User created!',
 				userId: result._id
 			});
+			return transporter.sendMail({
+				to: email,
+				from: 'rgritik001@gmail.com',
+				subject: 'Signup Succeeded!',
+				html: '<h4>Hey! You have successfully signed up as an user on Platform Up.</h4>'
+			});
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+			if(!err.statusCode) {
+				err.statusCode = 500;
+			}
+			next(err);
+		});
 };
 
 exports.login = (req, res, next) => {
