@@ -14,7 +14,7 @@ class App extends React.Component {
     this.state = {
       name: 'CodeMirror',
       result: '',
-      code: "",
+      code: this.props.code,
       language: 'text/x-c++src',
       output: false
     };
