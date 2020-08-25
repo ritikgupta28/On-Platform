@@ -19,11 +19,6 @@ class App extends Component {
     token: null
   };
 
-   errorHandler = () => {
-    this.setState({ error: null });
-  };
-
-
   componentDidMount() {
     const token = localStorage.getItem('token');
     const expiryDate = localStorage.getItem('expiryDate');
@@ -88,6 +83,40 @@ class App extends Component {
       });
   };
 
+  signupUserHandler = (event, authData) => {
+    event.preventDefault();
+    fetch('http://localhost:8000/authUser/signup', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: authData.name,
+        email: authData.email,
+        password: authData.password
+      })
+    })
+    .then(res => {
+        if(res.status === 422) {
+          throw new Error("Validation failed! Make sure the email address isn't used yet!");
+        }
+        if(res.status !== 200 && res.status !== 201) {
+          throw new Error('Creating a user failed');
+        }
+        return res.json();
+      })
+      .then(resData => {
+        this.setState({ isUserAuth: false });
+        this.props.history.replace('/');
+      })
+      .catch(err => {
+        this.setState({
+          isUserAuth: false,
+          error: err
+        });
+      });
+  };
+
   loginAdminHandler = (event, authData) => {
     event.preventDefault();
     fetch('http://localhost:8000/authAdmin/login', {
@@ -127,54 +156,6 @@ class App extends Component {
         console.log(err);
         this.setState({
           isAdminAuth: false,
-          error: err
-        });
-      });
-  };
-
-   setAutoLogout = milliseconds => {
-    setTimeout(() => {
-      this.logoutHandler();
-    }, milliseconds);
-  };
-
-  logoutHandler = () => {
-    this.setState({ isAdminAuth: false, isUserAuth: false, token: null });
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiryDate');
-    localStorage.removeItem('adminId');
-    localStorage.removeItem('userId');
-  };
-
-  signupUserHandler = (event, authData) => {
-    event.preventDefault();
-    fetch('http://localhost:8000/authUser/signup', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: authData.name,
-        email: authData.email,
-        password: authData.password
-      })
-    })
-    .then(res => {
-        if(res.status === 422) {
-          throw new Error("Validation failed! Make sure the email address isn't used yet!");
-        }
-        if(res.status !== 200 && res.status !== 201) {
-          throw new Error('Creating a admin failed');
-        }
-        return res.json();
-      })
-      .then(resData => {
-        this.setState({ isUserAuth: false });
-        this.props.history.replace('/');
-      })
-      .catch(err => {
-        this.setState({
-          isUserAuth: false,
           error: err
         });
       });
@@ -221,6 +202,24 @@ class App extends Component {
           error: err
         });
       });
+  };
+
+  setAutoLogout = milliseconds => {
+    setTimeout(() => {
+      this.logoutHandler();
+    }, milliseconds);
+  };
+
+  logoutHandler = () => {
+    this.setState({ isAdminAuth: false, isUserAuth: false, token: null });
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiryDate');
+    localStorage.removeItem('adminId');
+    localStorage.removeItem('userId');
+  };
+
+  errorHandler = () => {
+    this.setState({ error: null });
   };
 
   render() {

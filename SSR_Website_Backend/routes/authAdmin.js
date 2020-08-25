@@ -10,10 +10,8 @@ router.put('/signup', [
 		.isEmail()
 		.withMessage('Please enter a valid email.')
 		.custom((value, { req }) => {
-			return 
-			Admin.findOne({ email: value })
-			.then(adminDoc => {
-				if(userDoc) {
+			return Admin.findOne({ email: value }).then(adminDoc => {
+				if(adminDoc) {
 					return Promise.reject('E-mail address already exists!');
 				}
 			})

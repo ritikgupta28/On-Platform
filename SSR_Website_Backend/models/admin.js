@@ -17,6 +17,7 @@ const adminSchema = new Schema({
   },
   totalQuestions: { 
     type: Number, 
+    default: 0,
     required: true 
   },
   questions: [

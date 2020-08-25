@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 // const sendgridTransport = require('nodemailer-sendgrid-transport');
 
 const Admin = require('../models/admin');
-
 // const transporter = nodemailer.createTransport(
 //   sendgridTransport({
 //     auth: {
@@ -17,7 +16,6 @@ const Admin = require('../models/admin');
 
 exports.signup = (req, res, next) => {
 	const errors = validationResult(req);
-	console.log(errors);
 	if(!errors.isEmpty()) {
 	 	const error = new Error('Validation faild.');
 	 	error.statusCode = 422;
@@ -27,19 +25,16 @@ exports.signup = (req, res, next) => {
 	const email = req.body.email;
 	const name = req.body.name;
 	const password = req.body.password;
-	const totalQuestions = 0;
 	bcrypt.hash(password, 12)
 		.then(hashedPw => {
 			const admin = new Admin({
 				email: email,
 				name: name,
-				password: hashedPw,
-				totalQuestions: totalQuestions
+				password: hashedPw
 			});
 			return admin.save();
 		})
 		.then(result => {
-			console.log(result);
 			res.status(201).json({
 				message: 'Admin created!',
 				adminId: result._id

@@ -5,7 +5,7 @@ const errorHandler = props => (
   <div>
     {props.error && (
       <Modal
-        show="true"
+        show={true}
         onHide={props.onHandle}
         backdrop="static"
         keyboard={false}
