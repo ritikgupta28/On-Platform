@@ -13,8 +13,16 @@ export default class navbar extends React.Component {
 	render() {
 		return (
 			<Router>
-					<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
-           <Navbar.Brand>Platform-Up</Navbar.Brand>
+			<div>
+					<Navbar 
+					 collapseOnSelect 
+					 expand="lg" 
+					 bg="dark" 
+					 variant="dark" 
+					 sticky="top"
+					 onSelect={this.handleSelect}
+					 >
+           <Navbar.Brand >Platform-Up</Navbar.Brand>
            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -75,6 +83,7 @@ export default class navbar extends React.Component {
 					    	/>
 					    	<Redirect to="/user/finalcontest" />
 				    	</Switch>
+		    		</div>
 		    		</div>
 			</Router>
 		)
