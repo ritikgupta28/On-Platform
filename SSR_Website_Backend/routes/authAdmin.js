@@ -17,14 +17,17 @@ router.put('/signup', [
 			})
 		})
 		.normalizeEmail(),
-		body('password')
+	body('password',
+		'Please enter a password with only numbers and text and at least 6 characters.'
+	)
 		.trim()
-		.isLength({ min: 5 }),
-		body('name')
+		.isLength({ min: 6 })
+		.isAlphanumeric(),
+	body('name')
 		.trim()
 		.not()
 		.isEmpty()
-	], 
+	],
 	authAdminController.signup
 );
 

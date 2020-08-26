@@ -18,9 +18,9 @@ const transporter = nodemailer.createTransport(
 exports.signup = (req, res, next) => {
 	const errors = validationResult(req);
 	if(!errors.isEmpty()) {
-	 	const error = new Error('Validation faild.');
+	 	const error = new Error(errors.array()[0].msg);
 	 	error.statusCode = 422;
-	 	error.data = error.array();
+	 	error.data = errors.array()[0].msg;
 	 	throw error;
 	}
 	const email = req.body.email;
@@ -41,6 +41,7 @@ exports.signup = (req, res, next) => {
 				message: 'Admin created!',
 				adminId: result._id
 			});
+			console.log(result);
 			return transporter.sendMail({
 				to: email,
 				from: 'rgritik001@gmail.com',
