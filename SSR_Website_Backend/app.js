@@ -5,6 +5,7 @@ const cors = require('cors');
 
 const feedRoutes = require('./routes/feed');
 const ideRoutes = require('./routes/ide');
+const sendMessageRoutes = require('./routes/sendMessage')
 const authUserRoutes = require('./routes/authUser');
 const authAdminRoutes = require('./routes/authAdmin');
 
@@ -25,11 +26,14 @@ app.use('/feed', feedRoutes);
 app.use('/authUser', authUserRoutes);
 app.use('/authAdmin', authAdminRoutes);
 app.use(ideRoutes);
+app.use(sendMessageRoutes);
 
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
+  console.log(status);
+  console.log(message);
   res.status(status).json({
     message: message,
     data: data

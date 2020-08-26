@@ -1,33 +1,68 @@
 import React from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
+import ErrorHandler from '../error_handler/ErrorHandler'
 
 export default class Contact extends React.Component {
-	state = {
+  constructor() {
+    super();
+	this.state = {
+    error: null,
 		name: '',
 		email: '',
 		message: ''
 	}
+  this.handler = this.handler.bind(this);
+}
+
 	onNameChange = (e) => {
 		this.setState({
 			name: e.target.value
 		})
 	}
+
 	onEmailChange = (e) => {
 		this.setState({
 			email: e.target.value
 		})
 	}
+
 	onMessageChange = (e) => {
 		this.setState({
 			message: e.target.value
 		})
 	}
-	onSend = () => {
-		console.log(this.state.message)
+
+	handler = (e) => {
+    const { name, email, message } = this.state;
+		fetch('http://localhost:8000/sendMessage', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        message: message
+      })
+    })
+    .then(res => {
+        return res.json();
+      })
+    .catch(err => console.log(err));
 	}
+
+  catchError = error => {
+    this.setState({ error: error })
+  }
+  
+  errorHandler = () => {
+    this.setState({ error: null });
+  }
+
 	render() {
 		return (
 			<Container style={{ padding: '30px 150px' }}>
+      <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 			 <h1 style={{ textAlign: 'center' }}>Contact Us</h1>
 			 <Form>
 					 <Form.Group controlId="formBasicName">
@@ -67,7 +102,7 @@ export default class Contact extends React.Component {
            <Button 
             variant="primary" 
             type="submit"
-            onClick={this.onSend}
+            onClick={this.handler}
             >
             Send
            </Button>
