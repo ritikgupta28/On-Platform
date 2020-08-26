@@ -10,6 +10,7 @@ import ErrorHandler from './components/error_handler/ErrorHandler'
 
 class App extends Component {
   state = {
+    status: null,
     isUserAuth: false,
     isAdminAuth: false,
     userAdmin: 'admin',
@@ -132,15 +133,16 @@ class App extends Component {
       })
     })
       .then(res => {
-        if(res.status === 422) {
-          throw new Error('Validation failed!');
-        }
-        if(res.status !== 200 && res.status !== 201) {
-          throw new Error('Could not authenticate you!');
-        }
+        this.setState({ status: res.status })
         return res.json();
       })
       .then(resData => {
+        if(this.state.status === 401) {
+          throw new Error(resData.message);
+        }
+        if(this.state.status !== 200 && this.state.status !== 201) {
+          throw new Error(resData.message);
+        }
         this.setState({
           isAdminAuth: true,
           token: resData.token,
