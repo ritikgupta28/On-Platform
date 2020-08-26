@@ -64,17 +64,16 @@ class App extends Component {
       })
     })
       .then(res => {
-        if(res.status === 422) {
-          console.log(res);
-          throw new Error(res.message);
-        }
-        if(res.status !== 200 && res.status !== 201) {
-          console.log(res.message);
-          throw new Error(res.message);
-        }
+        this.setState({ status: res.status });
         return res.json();
       })
       .then(resData => {
+        if(this.state.status === 422) {
+          throw new Error(resData.message);
+        }
+        if(this.state.status !== 200 && this.state.status !== 201) {
+          throw new Error(resData.message);
+        }
         this.setState({ isAdminAuth: false });
         this.props.history.replace('/');
       })
@@ -99,16 +98,17 @@ class App extends Component {
         password: authData.password
       })
     })
-    .then(res => {
-        if(res.status === 422) {
-          throw new Error("Validation failed! Make sure the email address isn't used yet!");
-        }
-        if(res.status !== 200 && res.status !== 201) {
-          throw new Error('Creating a user failed');
-        }
+      .then(res => {
+        this.setState({ status: res.status });
         return res.json();
       })
       .then(resData => {
+        if(this.state.status === 422) {
+          throw new Error(resData.message);
+        }
+        if(this.state.status !== 200 && this.state.status !== 201) {
+          throw new Error(resData.message);
+        }
         this.setState({ isUserAuth: false });
         this.props.history.replace('/');
       })
@@ -157,7 +157,6 @@ class App extends Component {
         localStorage.setItem('expiryDate', expiryDate.toISOString());
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           isAdminAuth: false,
           error: err
@@ -178,15 +177,16 @@ class App extends Component {
       })
     })
       .then(res => {
-        if (res.status === 422) {
-          throw new Error('Validation failed.');
-        }
-        if (res.status !== 200 && res.status !== 201) {
-          throw new Error('Could not authenticate you!');
-        }
+        this.setState({ status: res.status })
         return res.json();
       })
       .then(resData => {
+        if(this.state.status === 401) {
+          throw new Error(resData.message);
+        }
+        if(this.state.status !== 200 && this.state.status !== 201) {
+          throw new Error(resData.message);
+        }
         this.setState({
           isUserAuth: true,
           token: resData.token,

@@ -18,9 +18,9 @@ const transporter = nodemailer.createTransport(
 exports.signup = (req, res, next) => {
 	const errors = validationResult(req);
 	if(!errors.isEmpty()) {
-	 	const error = new Error('Validation faild.');
+	 	const error = new Error(errors.array()[0].msg);
 	 	error.statusCode = 422;
-	 	error.data = error.array();
+	 	error.data = errors.array()[0].msg;
 	 	throw error;
 	}
 	const email = req.body.email;
@@ -61,8 +61,8 @@ exports.login = (req, res, next) => {
 	let loadedUser; 
 	User.findOne({ email: email })
 	.then(user => {
-		if (!user) {
-			const error = new Error('User not found');
+		if(!user) {
+			const error = new Error('E-mail is not registered!');
 			error.statusCode = 401;
 			throw error;
 		}
@@ -70,8 +70,8 @@ exports.login = (req, res, next) => {
 		return bcrypt.compare(password, user.password);
 	})
 	.then(isEqual => {
-		if (!isEqual) {
-			const error = new Error('Wrong password');
+		if(!isEqual) {
+			const error = new Error('Wrong password!');
 			error.statusCode = 401;
 			throw error;
 		}

@@ -19,7 +19,6 @@ const errorHandler = props => (
        </Modal.Body>
        <Modal.Footer>
         <Button variant="secondary" onClick={props.onHandle}>Close</Button>
-        <Button variant="primary" onClick={props.onHandle}>Accept</Button>
        </Modal.Footer>
        </Modal.Dialog>
        </Modal>

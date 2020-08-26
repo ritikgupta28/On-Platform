@@ -77,7 +77,7 @@ export default class Register extends React.Component {
              onChange={this.onPasswordChange.bind(this)}
              />
             <Form.Text className="text-muted">
-             Please enter password with min 6 length and atleast 1 numerical and 1 alphabatical character.
+             Please enter a password with only numbers and text and at least 6 characters.
             </Form.Text>
            </Form.Group>
            <Form.Group controlId="exampleForm.ControlSelect1">

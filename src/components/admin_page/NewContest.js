@@ -9,6 +9,7 @@ class Contest extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			status: null,
 			loading: true,
 			questions: [],
 			cName: "",
@@ -37,25 +38,26 @@ class Contest extends Component {
 	componentDidMount() {
 		setTimeout(() => {
 			fetch('http://localhost:8000/feed/newcontest', {
-			headers: {
-				Authorization: 'Bearer ' + this.props.token,
-				'Content-Type': 'application/json'
-			}
-		})
-			.then(res => {
-				if (res.status !== 200) {
-					throw new Error('error');
+				headers: {
+					Authorization: 'Bearer ' + this.props.token,
+					'Content-Type': 'application/json'
 				}
+			})
+			.then(res => {
+				this.setState({ status : res.status });
 				return res.json();
 			})
 			.then(resData => {
+				if(this.state.status !== 200) {
+					throw new Error(resData.message);
+				}
 				this.setState({
 					loading: false,
 					questions: resData.questions
 				});
 			})
 			.catch(this.catchError)
-			}, 3000);
+		}, 1000);
 	};
 
 	catchError = (error) => {
@@ -74,15 +76,21 @@ class Contest extends Component {
 			})
 		})
 		.then(res => {
-				if (res.status !== 200) {
-					throw new Error('error');
-				}
-				return res.json();
-			})
+			this.setState({ status : res.status });
+			return res.json();
+		})
+		.then(resData => {
+			if(this.state.status !== 200) {
+				throw new Error(resData.message);
+			}
+			return resData;
+		})
 		.catch(this.catchError);
 	}
 
-	handler = (e) => {
+	handler = (event) => {
+		event.preventDefault();
+		console.log(event);
 		fetch('http://localhost:8000/feed/finalcontest', {
 			method: 'POST',
 			headers: {
@@ -94,11 +102,18 @@ class Contest extends Component {
 			})
 		})
 		.then(res => {
-				if (res.status !== 200) {
-					throw new Error('error');
-				}
-				return res.json();
-			})
+			console.log(res);
+			this.setState({ status : res.status });
+			console.log(res);
+			return res.json();
+		})
+		.then(resData => {
+			console.log(resData);
+			if(this.state.status !== 200) {
+				throw new Error(resData.message);
+			}
+			return resData;
+		})
 		.catch(this.catchError);
 	}
 
@@ -128,11 +143,6 @@ class Contest extends Component {
 							onChange={this.handling}
 						/>
 					</Form.Group>
-					<Form.Group style={{ textAlign: 'center' }}>
-					<Link to='/admin/finalcontest'>
-						<Button style={{ marginBottom: '10px' }} onClick={this.handler}>Host</Button>
-					</Link>
-					</Form.Group>
 				</Form>
 				{
 					this.state.questions.map(q => (
@@ -146,6 +156,13 @@ class Contest extends Component {
 						/>
 					))
 				}
+				<Form>
+					<Form.Group style={{ textAlign: 'center', marginTop: '10px' }}>
+					<Link to='/admin/finalcontest'>
+						<Button style={{ marginBottom: '10px' }} onClick={this.handler.bind(this)}>Host</Button>
+					</Link>
+					</Form.Group>
+				</Form>
 			</Container>
 		)
 	}

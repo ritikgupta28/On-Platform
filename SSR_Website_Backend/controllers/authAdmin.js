@@ -41,7 +41,6 @@ exports.signup = (req, res, next) => {
 				message: 'Admin created!',
 				adminId: result._id
 			});
-			console.log(result);
 			return transporter.sendMail({
 				to: email,
 				from: 'rgritik001@gmail.com',
@@ -63,8 +62,8 @@ exports.login = (req, res, next) => {
 	let loadedAdmin; 
 	Admin.findOne({ email: email })
 	.then(admin => {
-		if (!admin) {
-			const error = new Error('Admin not found');
+		if(!admin) {
+			const error = new Error('E-mail is not registered!');
 			error.statusCode = 401;
 			throw error;
 		}

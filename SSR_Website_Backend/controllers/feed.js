@@ -123,18 +123,18 @@ exports.getNewContest = (req, res, next) => {
 				});
 			})
 			.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+				if(!err.statusCode) {
+					err.statusCode = 500;
+				}
+				next(err);
+			});
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+			if(!err.statusCode) {
+				err.statusCode = 500;
+			}
+			next(err);
+		});
 };
 
 exports.postNewContestDeleteQuestion = (req, res, next) => {
@@ -148,22 +148,28 @@ exports.postNewContestDeleteQuestion = (req, res, next) => {
 				});
 			})
 			.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+				if(!err.statusCode) {
+					err.statusCode = 500;
+				}
+				next(err);
+			});
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+			if(!err.statusCode) {
+				err.statusCode = 500;
+			}
+			next(err);
+		});
 };
 
 exports.postFinalContest = (req, res, next) => {
 	const cName = req.body.cName;
+	if(!cName) {
+		const error = new Error('Enter a valid contest name!');
+	 	error.statusCode = 400;
+	 	error.data = 'Enter a valid contest name!';
+	 	throw error;
+	}
 	Admin.findById(req.adminId)
 	.then(admn => {
 		admn.populate('contest.items.questionId')
@@ -172,6 +178,12 @@ exports.postFinalContest = (req, res, next) => {
 			const questions = admin.contest.items.map(i => {
 				return { questionId: { ...i.questionId } };
 			});
+			if(!questions) {
+				const error = new Error('Please add questions!');
+		 		error.statusCode = 400;
+	 			error.data = 'Please add questions!';
+	 			throw error;
+			}
 			const finalcontest = new FinalContest({
 				admin: {
 					name: admn.name,
