@@ -120,8 +120,9 @@ class App extends React.Component {
            <Row>
            <Col xs='8'>
            <Form.Group controlId="exampleForm.ControlTextarea1">
+           <Form.Label>Input</Form.Label>
            <Form.Control 
-            placeholder="Input"
+            placeholder="Enter input here"
             as="textarea" 
             rows="3" 
             name="input"
@@ -138,10 +139,9 @@ class App extends React.Component {
           </Col>
           </Row>
           <br />
-          {
-            this.state.output
-            ?
+          {this.state.output && (
             <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Output</Form.Label>
              <Form.Control 
               as="textarea" 
               rows="4" 
@@ -149,9 +149,7 @@ class App extends React.Component {
               value={this.state.result.data.body.output}
               />
            </Form.Group>
-            :
-            null
-          }
+           )}
           </Form>
       </Container>
     );

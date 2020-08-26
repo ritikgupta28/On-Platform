@@ -41,6 +41,7 @@ class FinalContest extends Component {
 	}
 
 	componentDidMount() {
+		setTimeout(() => {
 		fetch('http://localhost:8000/feed/finalcontest', {
 			headers: {
         Authorization: 'Bearer ' + this.props.token,
@@ -60,6 +61,7 @@ class FinalContest extends Component {
 				});
 			})
 			.catch(this.catchError);
+		}, 3000);
 	};
 
 	render() {

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-
+import { Spinner } from 'react-bootstrap'
 import Card from '../QuestionContestCard';
 import ErrorHandler from '../../error_handler/ErrorHandler'
 
 class AllContestsQuestions extends Component {
   state = {
+    loading: true,
     questions: [],
     error: null
   };
@@ -18,6 +19,7 @@ class AllContestsQuestions extends Component {
   };
 
   componentDidMount() {
+    setTimeout(() => {
     const contestId = this.props.match.params.id;
     fetch('http://localhost:8000/feed/allcontests/questions/' + contestId, {
       headers: {
@@ -33,15 +35,27 @@ class AllContestsQuestions extends Component {
       })
       .then(resData => {
         this.setState({
-          questions: resData.questions
+          questions: resData.questions,
+          loading: false
         });
       })
       .catch(this.catchError);
+    }, 3000);
   }
 
   render() {
     return (
       <div>
+      {this.state.loading && (
+     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+     <Spinner 
+      size='lg'
+      variant="primary"
+      animation="border" 
+      role="status"
+      />
+      </div>
+      )}
         <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
       {
           this.state.questions.map(q=> (

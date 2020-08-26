@@ -8,7 +8,7 @@ export default class Card extends React.Component {
 	renderTooltip = (props) => (
 		<Tooltip id="button-tooltip" {...props}>
          {this.props.value}
-        </Tooltip>
+    </Tooltip>
     );
 
 	render() {

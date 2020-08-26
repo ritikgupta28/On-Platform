@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Container, Button, Spinner } from 'react-bootstrap';
 import Ide from '../../ide/Ide'
 
 import ErrorHandler from '../../error_handler/ErrorHandler';
@@ -8,6 +8,7 @@ class Result extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			loading: true,
 			code: null,
 			showCode: false,
 			participants: [],
@@ -24,6 +25,7 @@ class Result extends Component {
 	};
 
 	componentDidMount() {
+		setTimeout(() => {
 		const contestId = this.props.match.params.id;
 		fetch('http://localhost:8000/feed/result/' + contestId, {
 			headers: {
@@ -40,10 +42,12 @@ class Result extends Component {
 		.then(resData=> {
 			console.log(resData.participants)
 			this.setState({
-				participants: resData.participants
+				participants: resData.participants,
+				loading: false
 			});
 		})
 		.catch(this.catchError);
+	}, 3000);
 	}
 	onShowCode = (e) => {
 		this.setState({ showCode: true, code: e.target.value })

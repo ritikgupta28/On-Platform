@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react'
-
+import React, { Component } from 'react'
+import { Spinner } from 'react-bootstrap'
 import AllContestsCard from './AllContestsCard'
 import ErrorHandler from '../../error_handler/ErrorHandler'
 
@@ -7,20 +7,22 @@ class AllContests extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			loading: true,
 			allcontest: [],
 			error: null
 		}
 	};
 
-	catchError = error => {
+  catchError = error => {
     this.setState({ error: error })
   }
-   errorHandler = () => {
+  errorHandler = () => {
     this.setState({ error: null });
   };
 
-	componentDidMount() {
-		fetch('http://localhost:8000/feed/allcontests', {
+		componentDidMount() {
+		setTimeout(() => {
+			fetch('http://localhost:8000/feed/allcontests', {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -34,15 +36,27 @@ class AllContests extends Component {
       })
 		.then(resData => {
 			this.setState({
-				allcontest: resData.allcontest
+				allcontest: resData.allcontest,
+				loading: false
 			});
 		})
-		.catch(this.catchError);
-	};
+		.catch(this.catchError)
+    }, 3000);
+	}
 
 	render() {
 		return (
-			<Fragment>
+			<div>
+		 {this.state.loading && (
+     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+	   <Spinner 
+      size='lg'
+      variant="primary"
+      animation="border" 
+      role="status"
+      />
+      </div>
+      )}
 			<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 			{
 					this.state.allcontest.map(contest => (
@@ -53,9 +67,9 @@ class AllContests extends Component {
 						id={contest._id}
 						questions={contest.questions}
 					/>
-				    ))
+				  ))
 				}
-			</Fragment>
+			</div>
 		)
 	}
 }

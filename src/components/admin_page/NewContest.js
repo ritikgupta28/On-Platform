@@ -35,7 +35,8 @@ class Contest extends Component {
 	};
 
 	componentDidMount() {
-		fetch('http://localhost:8000/feed/newcontest', {
+		setTimeout(() => {
+			fetch('http://localhost:8000/feed/newcontest', {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -53,7 +54,8 @@ class Contest extends Component {
 					questions: resData.questions
 				});
 			})
-			.catch(this.catchError);
+			.catch(this.catchError)
+			}, 3000);
 	};
 
 	catchError = (error) => {
@@ -102,10 +104,7 @@ class Contest extends Component {
 
 	render() {
 		return (
-			<Container style={{ padding: '10px 50px'}}>
-			 {this.state.questionLoading && (
-			 	<p>Loading</p>
-			 	)}
+			<Container style={{ padding: '10px 50px' }}>
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				<Form>
 					<Form.Group controlId="exampleForm.ControlTextarea1">

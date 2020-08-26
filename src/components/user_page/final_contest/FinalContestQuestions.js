@@ -17,6 +17,7 @@ class FinalContestQuestions extends Component {
 	};
 
 	componentDidMount() {
+		setTimeout(() => {
 		const contestId = this.props.match.params.id;
 		fetch('http://localhost:8000/feed/userfinalcontest/questions/' + contestId, {
 			headers: {
@@ -36,6 +37,7 @@ class FinalContestQuestions extends Component {
 			});
 		})
 		.catch(this.catchError);
+	}, 3000);
 	}
 
 	render() {

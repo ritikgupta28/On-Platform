@@ -18,6 +18,27 @@ class FinalContestQuestions extends Component {
   };
 
   componentDidMount() {
+    setTimeout(() => {
+      const contestId = this.props.match.params.id;
+    fetch('http://localhost:8000/feed/finalcontest/questions/' + contestId, {
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+        'Content-Type': 'application/json'
+      }
+      })
+      .then(res => {
+        if (res.status !== 200) {
+          throw new Error('error');
+        }
+        return res.json();
+      })
+      .then(resData => {
+        this.setState({
+          questions: resData.questions
+        });
+      })
+      .catch(this.catchError);
+    }, 3000);
     const contestId = this.props.match.params.id;
     fetch('http://localhost:8000/feed/finalcontest/questions/' + contestId, {
       headers: {

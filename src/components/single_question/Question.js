@@ -21,6 +21,7 @@ class Question extends React.Component {
   };
 
 	componentDidMount() {
+	setTimeout(() => {
 	const questionId = this.props.match.params.id;
     fetch('http://localhost:8000/feed/question/' + questionId)
       .then(res => {
@@ -38,6 +39,7 @@ class Question extends React.Component {
         });
       })
       .catch(this.catchError);
+    }, 3000);
   }
 
 	render() {
