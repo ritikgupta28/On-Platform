@@ -64,10 +64,12 @@ class App extends Component {
     })
       .then(res => {
         if(res.status === 422) {
-          throw new Error("Validation failed! Make sure the email address isn't used yet!");
+          console.log(res);
+          throw new Error(res.message);
         }
         if(res.status !== 200 && res.status !== 201) {
-          throw new Error('Creating a admin failed');
+          console.log(res.message);
+          throw new Error(res.message);
         }
         return res.json();
       })
