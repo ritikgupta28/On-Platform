@@ -17,10 +17,10 @@ import About from '../About'
 export default class navbar extends React.Component {
 	render() {
 		return (
-			<Router >
-				<div className='na'>
+			<Router>
+				<div>
 					<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
-				    	<Navbar.Brand href="#home">Platform-Up</Navbar.Brand>
+				    	<Navbar.Brand>Platform-Up</Navbar.Brand>
 				    	<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				    	<Navbar.Collapse id="responsive-navbar-nav">
 					    	<Nav className="mr-auto">

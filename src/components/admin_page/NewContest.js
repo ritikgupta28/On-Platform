@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Spinner } from 'react-bootstrap';
 
 import ErrorHandler from '../error_handler/ErrorHandler';
 import Card from './QuestionCard';
@@ -9,7 +9,7 @@ class Contest extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			questionLoading: true,
+			loading: true,
 			questions: [],
 			cName: "",
 			error: null
@@ -50,7 +50,7 @@ class Contest extends Component {
 			})
 			.then(resData => {
 				this.setState({
-					questionLoading: false,
+					loading: false,
 					questions: resData.questions
 				});
 			})
@@ -105,6 +105,16 @@ class Contest extends Component {
 	render() {
 		return (
 			<Container style={{ padding: '10px 50px' }}>
+			{this.state.loading && (
+     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+	   <Spinner 
+      size='lg'
+      variant="primary"
+      animation="border" 
+      role="status"
+      />
+      </div>
+      )}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				<Form>
 					<Form.Group controlId="exampleForm.ControlTextarea1">

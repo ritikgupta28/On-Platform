@@ -12,8 +12,7 @@ import About from '../About'
 export default class navbar extends React.Component {
 	render() {
 		return (
-			<Router >
-				<div className='na'>
+			<Router>
 					<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
            <Navbar.Brand>Platform-Up</Navbar.Brand>
            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -77,7 +76,6 @@ export default class navbar extends React.Component {
 					    	<Redirect to="/user/finalcontest" />
 				    	</Switch>
 		    		</div>
-				</div>
 			</Router>
 		)
 	}

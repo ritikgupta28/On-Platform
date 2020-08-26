@@ -56,6 +56,16 @@ class Result extends Component {
 	render() {
 		return (
 			<div>
+			{this.state.loading && (
+     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+	   <Spinner 
+      size='lg'
+      variant="primary"
+      animation="border" 
+      role="status"
+      />
+      </div>
+      )}
 			    <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 			    {this.state.showCode
 			    	?

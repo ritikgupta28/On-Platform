@@ -2,10 +2,11 @@ import React from 'react'
 import './Question.css'
 import ErrorHandler from '../error_handler/ErrorHandler'
 import Ide from '../ide/Ide'
-import { Container } from 'react-bootstrap'
+import { Container, Spinner } from 'react-bootstrap'
 
 class Question extends React.Component {
 	state = {
+		loading: true,
 		title: '',
 		content: '',
 		sinput: '',
@@ -32,6 +33,7 @@ class Question extends React.Component {
       })
       .then(resData => {
         this.setState({
+        	loading: false,
           title: resData.question.title,
           content: resData.question.content,
           sinput: resData.question.sinput,
@@ -45,6 +47,16 @@ class Question extends React.Component {
 	render() {
 		return (
 			<Container>
+			{this.state.loading && (
+     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+	   <Spinner 
+      size='lg'
+      variant="primary"
+      animation="border" 
+      role="status"
+      />
+      </div>
+      )}
 			 <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				<div className='tit'>
 			    <h2>{this.state.title}</h2>

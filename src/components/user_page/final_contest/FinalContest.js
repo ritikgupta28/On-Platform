@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import FinalContestCard from './FinalContestCard'
 import ErrorHandler from '../../error_handler/ErrorHandler'
+import { Spinner } from 'react-bootstrap'
 
 class FinalContest extends Component {
 	constructor(props) {
     super(props);
     this.state = {
+    	loading: true,
 			finalcontest: [],
 			error: null
 		}
@@ -35,7 +37,8 @@ class FinalContest extends Component {
 		})
 		.then(resData=> {
 			this.setState({
-				finalcontest: resData.finalcontest
+				finalcontest: resData.finalcontest,
+				loading: false
 			});
 		})
 		.catch(this.catchError);
@@ -45,6 +48,16 @@ class FinalContest extends Component {
 	render() {
 		return (
 			<Fragment>
+			  {this.state.loading && (
+     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+	   <Spinner 
+      size='lg'
+      variant="primary"
+      animation="border" 
+      role="status"
+      />
+      </div>
+      )}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{
 					this.state.finalcontest.map(contest => (

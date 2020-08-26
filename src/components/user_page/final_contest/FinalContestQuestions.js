@@ -4,6 +4,7 @@ import ErrorHandler from '../../error_handler/ErrorHandler'
 
 class FinalContestQuestions extends Component {
 	state = {
+		loading: true,
 		questions: [],
 		error: null
 	};
@@ -33,7 +34,8 @@ class FinalContestQuestions extends Component {
 		})
 		.then(resData => {
 			this.setState({
-				questions: resData.questions
+				questions: resData.questions,
+				loading: false
 			});
 		})
 		.catch(this.catchError);

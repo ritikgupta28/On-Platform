@@ -10,7 +10,7 @@ const errorHandler = props => (
         backdrop="static"
         keyboard={false}
       >
-      <Modal.Dialog>
+      <Modal.Dialog style={{ margin: '0px'}}>
        <Modal.Header closeButton>
         <Modal.Title>An Error Occurred</Modal.Title>
        </Modal.Header>

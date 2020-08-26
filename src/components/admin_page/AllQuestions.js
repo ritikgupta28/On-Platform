@@ -38,7 +38,6 @@ class AllQuestions extends Component {
   }
 
 	componentDidMount() {
-    setTimeout(() => {
 		fetch('http://localhost:8000/feed/questions', {
       headers: {
         Authorization: 'Bearer ' + this.props.token,
@@ -57,7 +56,6 @@ class AllQuestions extends Component {
       .catch(this.catchError);
 
       this.loadQuestions();
-    }, 3000);
 	};
 
   loadQuestions = direction => {
