@@ -9,6 +9,7 @@ class Contest extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			questionLoading: true,
 			questions: [],
 			cName: "",
 			error: null
@@ -46,9 +47,10 @@ class Contest extends Component {
 				}
 				return res.json();
 			})
-			.then(resData=> {
+			.then(resData => {
 				this.setState({
-					questions: resData.questions,
+					questionLoading: false,
+					questions: resData.questions
 				});
 			})
 			.catch(this.catchError);
@@ -101,19 +103,10 @@ class Contest extends Component {
 	render() {
 		return (
 			<Container style={{ padding: '10px 50px'}}>
+			 {this.state.questionLoading && (
+			 	<p>Loading</p>
+			 	)}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-				{
-					this.state.questions.map(q => (
-						<Card
-							value="Remove"
-							sign={'-'}
-							handle={this.handle}
-							key={q.questionId._id}
-							id={q.questionId._id}
-							title={q.questionId.title}
-						/>
-					))
-				}
 				<Form>
 					<Form.Group controlId="exampleForm.ControlTextarea1">
 						<Form.Label>Contest Name</Form.Label>
@@ -126,10 +119,24 @@ class Contest extends Component {
 							onChange={this.handling}
 						/>
 					</Form.Group>
+					<Form.Group style={{ textAlign: 'center' }}>
 					<Link to='/admin/finalcontest'>
-						<Button className='but' value='s' style={{ marginBottom: '10px' }} onClick={this.handler}>Host</Button>
+						<Button style={{ marginBottom: '10px' }} onClick={this.handler}>Host</Button>
 					</Link>
+					</Form.Group>
 				</Form>
+				{
+					this.state.questions.map(q => (
+						<Card
+							value="Remove"
+							sign={'-'}
+							handle={this.handle}
+							key={q.questionId._id}
+							id={q.questionId._id}
+							title={q.questionId.title}
+						/>
+					))
+				}
 			</Container>
 		)
 	}

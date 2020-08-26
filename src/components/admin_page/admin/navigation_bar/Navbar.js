@@ -24,18 +24,18 @@ export default class navbar extends React.Component {
 				    	<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				    	<Navbar.Collapse id="responsive-navbar-nav">
 					    	<Nav className="mr-auto">
-					    		<Link to='/admin/questions'><Nav.Link href='/admin/questions'>Questions</Nav.Link></Link>
-					    		<Link to='/admin/addquestion'><Nav.Link href='/admin/addquestion'>Add Question</Nav.Link></Link>
+					    		<Nav.Link as={Link} to='/admin/questions'>Questions</Nav.Link>
+					    		<Nav.Link as={Link} to='/admin/addquestion'>Add Question</Nav.Link>
 					    		<NavDropdown title="Contest" id="collasible-nav-dropdown">
-					    			<Link to='/admin/newcontest'><NavDropdown.Item href='/admin/newcontest'>New Contest</NavDropdown.Item></Link>
-					    			<Link to='/admin/finalcontest'><NavDropdown.Item href='/admin/finalcontest'>Final Contest</NavDropdown.Item></Link>
+					    			<NavDropdown.Item as={Link} to='/admin/newcontest'>New Contest</NavDropdown.Item>
+					    			<NavDropdown.Item as={Link} to='/admin/finalcontest'>Final Contest</NavDropdown.Item>
 					    			<NavDropdown.Divider />
-					    			<Link to='/admin/allcontests'><NavDropdown.Item href='/admin/allcontests'>All Contests</NavDropdown.Item></Link>
+					    			<NavDropdown.Item as={Link} to='/admin/allcontests'>All Contests</NavDropdown.Item>
 					    		</NavDropdown>
 					    	</Nav>
-					    	<Nav>
-					    		<Link to='/admin/about'><Nav.Link href='/admin/about'>About</Nav.Link></Link>
-					    		<Link to='/'><Button eventKey={2} onClick={this.props.logout} href='/'>Sign Out</Button></Link>
+					    	<Nav fill>
+					    		<Nav.Link as={Link} to='/admin/about'>About</Nav.Link>
+					    		<Button eventkey={2} onClick={this.props.logout}>Sign Out</Button>
 					    	</Nav>
 						</Navbar.Collapse>
 					</Navbar>
@@ -46,7 +46,6 @@ export default class navbar extends React.Component {
 						    	exact
 						    	render = {props => (
 						    		<AllQuestions
-						    			{...props}
 										token={this.props.token}
 						    		/>
 					    		)}
@@ -74,7 +73,7 @@ export default class navbar extends React.Component {
 						    	render = {props => (
 					    			<FinalContest
 					    				{...props}
-					    				adminId={this.props.adminId}
+					    			adminId={this.props.adminId}
 										token={this.props.token}
 						    		/>
 						    	)}

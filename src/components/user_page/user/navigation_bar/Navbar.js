@@ -15,16 +15,16 @@ export default class navbar extends React.Component {
 			<Router >
 				<div className='na'>
 					<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
-           <Navbar.Brand href="#home">Platform-Up</Navbar.Brand>
+           <Navbar.Brand>Platform-Up</Navbar.Brand>
            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Link to='user/finalcontest'><Nav.Link href='user/finalcontest'>Contest</Nav.Link></Link>
-            <Link to='/ide'><Nav.Link href='/ide'>Online IDE</Nav.Link></Link>
+            <Nav.Link as={Link} to='user/finalcontest'>Contest</Nav.Link>
+            <Nav.Link as={Link} to='/ide'>Online IDE</Nav.Link>
           </Nav>
-          <Nav>
-           <Link to='/user/about'><Nav.Link href='/user/about'>About</Nav.Link></Link>
-           <Link to='/'><Button eventKey={2} onClick={this.props.logout} href='/'>Sign Out</Button></Link>
+          <Nav fill>
+           <Nav.Link as={Link} to='/user/about'>About</Nav.Link>
+           <Button eventkey={2} onClick={this.props.logout} >Sign Out</Button>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
