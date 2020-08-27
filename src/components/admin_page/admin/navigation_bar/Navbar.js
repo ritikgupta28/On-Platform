@@ -52,6 +52,7 @@ class navbar extends React.Component {
 						    	exact
 						    	render = {props => (
 						    		<AllQuestions
+						    		{...props}
 										token={this.props.token}
 						    		/>
 					    		)}
@@ -61,6 +62,7 @@ class navbar extends React.Component {
 						    	exact
 						    	render = {props => (
 						    		<AddQuestion
+						    		 {...props}
 					    				token={this.props.token}
 					    			/>
 						    	)}

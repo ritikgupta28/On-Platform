@@ -5,60 +5,39 @@ import Pagination from '../pagination/Pagination'
 import ErrorHandler from '../error_handler/ErrorHandler'
 
 class AllQuestions extends Component {
-    state = {
-			questions: [],
-      questionsLoading: true,
-      totalQuestions: 0,
-      questionPage: 1,
-      status: '',
-      error: null
-		}
+  state = {
+		questions: [],
+    loading: true,
+    totalQuestions: 0,
+    questionPage: 1,
+    error: null
+	}
 
-  catchError = error => {
-    this.setState({ error: error, questionsLoading: false })
-  } 
-
-  errorHandler = () => {
-    this.setState({ error: null });
-  };
-
-	handle = (e) => {
-    fetch('http://localhost:8000/feed/newcontest', {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + this.props.token,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        questionId: e.target.value
-    	})
-    })
-    .then(response => response.json())
-    .catch(err => console.log(err));
-  }
-
-	componentDidMount() {
-		fetch('http://localhost:8000/feed/questions', {
+  componentDidMount() {
+    let status;
+    fetch('http://localhost:8000/feed/questions', {
       headers: {
         Authorization: 'Bearer ' + this.props.token,
         'Content-Type': 'application/json'
       }
     })
-      .then(res => {
-        if (res.status !== 200) {
-          throw new Error('Failed to fetch user status.');
-        }
-        return res.json();
-      })
-      .then(resData => {
-        this.setState({ status: resData.status });
-      })
-      .catch(this.catchError);
+    .then(res => {
+      status=res.status;
+      return res.json();
+    })
+    .then(resData => {
+      this.setState({ loading: false });
+      if(status !== 200) {
+        throw new Error(resData.message);
+      }
+    })
+    .catch(this.catchError);
 
-      this.loadQuestions();
-	};
+    this.loadQuestions();
+  };
 
   loadQuestions = direction => {
+    let status;
     if (direction) {
       this.setState({ questionsLoading: true, questions: [] });
     }
@@ -79,19 +58,56 @@ class AllQuestions extends Component {
       }
     })
     .then(res => {
-        if (res.status !== 200) {
-          throw new Error('Failed to fetch user status.');
-        }
-        return res.json();
+      status=res.status;
+      return res.json();
     })
     .then(resData => {
-        this.setState({
+      this.setState({ loading: false });
+      if(status !== 200) {
+        throw new Error(resData.message);
+      }
+      this.setState({
           questions: resData.questions,
-          totalQuestions: resData.totalQuestions,
-          questionsLoading: false
+          totalQuestions: resData.totalQuestions
         });
      })
      .catch(this.catchError);
+  };
+
+	handle = (e) => {
+    let status;
+    fetch('http://localhost:8000/feed/newcontest', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + this.props.token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        questionId: e.target.value
+    	})
+    })
+    .then(res => {
+      console.log('12',res.status)
+      status=res.status;
+      return res.json()
+    })
+    .then(resData => {
+      if(status === 200) {
+        this.props.history.push('/admin/newcontest');
+      }  
+      else {
+        throw new Error(resData.message)
+      }
+    })
+    .catch(this.catchError);
+  }
+
+  catchError = error => {
+    this.setState({ error: error, questionsLoading: false })
+  } 
+
+  errorHandler = () => {
+    this.setState({ error: null });
   };
 
 	render() {
@@ -116,19 +132,17 @@ class AllQuestions extends Component {
       currentPage={this.state.questionPage}
      >
 		 
-      {
-      this.state.questions.map(q => (
+      {this.state.questions.map(q => (
       <Card
-              value="Add to Contest"
-              sign={'+'}
-              hoverText={'Add to Contest'}
-              handle={this.handle}
-              key={q._id}
-              id={q._id}
-              title={q.title}
-            />
-      ))
-     }
+          value="Add to Contest"
+          sign={'+'}
+          hoverText={'Add to Contest'}
+          handle={this.handle}
+          key={q._id}
+          id={q._id}
+          title={q.title}
+      />
+      ))}
      <br/>
      </Pagination>
      )}

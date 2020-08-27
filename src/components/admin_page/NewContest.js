@@ -8,7 +8,6 @@ class Contest extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			status: null,
 			loading: true,
 			questions: [],
 			cName: '',
@@ -16,39 +15,30 @@ class Contest extends Component {
 		};
 	}
 
-	errorHandler = () => {
-		this.setState({ error: null });
-	};
-
 	componentDidMount() {
-		console.log(this.props.token)
-		setTimeout(() => {
-			fetch('http://localhost:8000/feed/newcontest', {
+		let status;
+		fetch('http://localhost:8000/feed/newcontest', {
 				headers: {
 					Authorization: 'Bearer ' + this.props.token,
 					'Content-Type': 'application/json'
 				}
 			})
 			.then(res => {
+				status=res.status;
 				return res.json();
 			})
 			.then(resData => {
-				//throw new Error(resData.message);
-				this.setState({
-					loading: false,
-					questions: resData.questions
-				});
+				this.setState({ loading: false })
+				if(status !== 200) {
+				  throw new Error(resData.message);
+				}
+				else {
+				  this.setState({
+					  questions: resData.questions
+				  });
+			  }
 			})
 			.catch(this.catchError)
-		}, 1000);
-	};
-
-	catchError = (error) => {
-		this.setState({ error: error })
-	}
-
-	handling = (e) => {
-		this.setState({ cName: e.target.value })
 	}
 
 	handle = (e) => {
@@ -72,8 +62,8 @@ class Contest extends Component {
 	}
 
 	handler = (e) => {
+		let status;
 		e.preventDefault();
-		let cstatus = null;
 		fetch('http://localhost:8000/feed/finalcontest', {
 			method: 'POST',
 			headers: {
@@ -85,11 +75,11 @@ class Contest extends Component {
 			})
 		})
 		.then(res => {
-			cstatus=res.status;
+			status=res.status;
 			return res.json();
 		})
 		.then(resData => {
-		  if(cstatus === 200) {
+		  if(status === 200) {
 		  	this.props.history.push('/admin/finalcontest')
 		  }
 		  else {
@@ -97,6 +87,18 @@ class Contest extends Component {
 		  }
 		})
 		.catch(this.catchError);
+	}
+
+	catchError = (error) => {
+		this.setState({ error: error })
+	}
+
+	errorHandler = () => {
+		this.setState({ error: null });
+	}
+
+	handling = (e) => {
+		this.setState({ cName: e.target.value })
 	}
 
 	render() {

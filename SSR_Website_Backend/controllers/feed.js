@@ -22,16 +22,25 @@ exports.getQuestions = (req, res, next) => {
 				});
 			})
 			.catch(err => {
-      next(err);
-    });
+        const error = new Error;
+			  error.message = 'faild to fetch questions'
+        next(error);
+      });
 		})
 		.catch(err => {
-      next(err);
+      const error = new Error;
+			error.message = 'admin not found'
+      next(error);
     });
 };
 
 exports.createQuestion = (req, res, next) => {
 	const { title, content, sinput, soutput, inputfile, outputfile } = req.body;
+	if(!title || !content || !sinput || !soutput || !inputfile || !outputfile) {
+		const error = new Error;
+		error.message = 'Please add details carefully'
+    next(error);
+	}
 	const question = new Question({
 		title: title,
 		content: content,
@@ -41,24 +50,25 @@ exports.createQuestion = (req, res, next) => {
 		outputfile: outputfile,
 		adminId: req.adminId
 	});
+
 	question
 		.save()
 		.then(result => {
-			return Admin.findById(req.adminId)
-			.then(admin => {
+			 return Admin.findById(req.adminId).then(admin => {
 				admin.totalQuestions++;
 				admin.questions.push(question);
 				return admin.save();
 			})
 		})
 		.then(result => {
-			res.status(200).json({
-				message: 'Question created successfully!',
-				question: question
+				res.status(200).json({
+				message: 'Question created successfully!'
 			});
 		})
 		.catch(err => {
-      next(err);
+			const error = new Error;
+			error.message = 'faild to add question'
+      next(error);
     });
 };
 
@@ -82,9 +92,8 @@ exports.postNewContest = (req, res, next) => {
 		.then(result => {
 			return Admin.findById(req.adminId)
 				.then(admin => {
-				  admin.addToContest(result);
-			   })
-			   .catch(err => console.log(err));
+				  return admin.addToContest(result);
+			  })
 		})
 		.then(resData => {
 			res.status(200).json({
@@ -92,7 +101,9 @@ exports.postNewContest = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-      next(err);
+			const error = new Error;
+			error.message = 'faild to add question';
+      next(error);
     });
 };
 
@@ -104,15 +115,20 @@ exports.getNewContest = (req, res, next) => {
 			.then(admin => {
 				const questions = admin.contest.items;
 				res.status(200).json({
+					message: 'successfully',
 					questions: questions
 				});
 			})
 			.catch(err => {
-				next(err);
+				const error = new Error;
+			  error.message = 'faild to fetch question';
+        next(error);
 			});
 		})
 		.catch(err => {
-			next(err);
+			const error = new Error;
+			error.message = 'faild to find admin';
+      next(error);
 		});
 };
 
@@ -127,20 +143,24 @@ exports.postNewContestDeleteQuestion = (req, res, next) => {
 				});
 			})
 			.catch(err => {
-				next(err);
+				const error = new Error;
+			  error.message = 'faild to remove question';
+        next(error);
 			});
 		})
 		.catch(err => {
-			next(err);
+			const error = new Error;
+			error.message = 'faild to find admin';
+      next(error);
 		});
 };
 
 exports.postFinalContest = (req, res, next) => {
 	const cName = req.body.cName;
 	if(!cName) {
-		const error = new Error('Enter a valid contest name!');
+		const error = new Error;
+		error.message = 'Enter a valid contest name!';
 	 	error.statusCode = 400;
-	 	error.data = 'Enter a valid contest name!';
 	 	throw error;
 	}
 	Admin.findById(req.adminId)
@@ -152,9 +172,9 @@ exports.postFinalContest = (req, res, next) => {
 				return { questionId: { ...i.questionId } };
 			});
 			if(!questions.length) {
-				const error = new Error('Please add questions!');
+				const error = new Error;
 		 		error.statusCode = 400;
-	 			error.data = 'Please add questions!';
+	 			error.message = 'Please add questions!';
 	 			throw error;
 			}
 			const finalcontest = new FinalContest({
@@ -174,11 +194,15 @@ exports.postFinalContest = (req, res, next) => {
 			return admn.clearContest();
 		})
 		.catch(err => {
-      next(err);
-    });
-	})
-	.catch(err => {
-      next(err);
+      const error = new Error;
+		 	error.message = 'faild';
+	 			next(error);
+      });
+	  })
+	  .catch(err => {
+      const error = new Error;
+	 		error.message = 'admin not found';
+	 		next(error);
     });
 }
 

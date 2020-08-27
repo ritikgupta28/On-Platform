@@ -23,9 +23,7 @@ export default class Card extends React.Component {
 					delay={{ show: 250, hide: 400 }}
 					overlay={this.renderTooltip}
 					>
-					<Link to="/admin/newcontest">
-						<Button value={this.props.id} onClick={this.props.handle}>{this.props.sign}</Button> 
-					</Link>
+					<Button value={this.props.id} onClick={this.props.handle}>{this.props.sign}</Button> 
 					</OverlayTrigger>
 				</Row>
 			</Container>

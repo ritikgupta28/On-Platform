@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Container, Form, Row, Col, Button } from 'react-bootstrap'
 
 import ErrorHandler from '../error_handler/ErrorHandler'
@@ -19,15 +18,8 @@ class Addques extends React.Component {
 		this.handler = this.handler.bind(this);
 	}
 	
-	catchError = error => {
-		this.setState({ error: error })
-	}
-	
-	errorHandler = () => {
-		this.setState({ error: null });
-	};
-	
 	handle = (e) => {
+		let status;
 		const { title, content, sinput, soutput, inputfile, outputfile } = this.state;
 		fetch('http://localhost:8000/feed/question', {
 			method: 'POST',
@@ -45,12 +37,28 @@ class Addques extends React.Component {
 			})
 		})
 		.then(res => {
-				if (res.status !== 200) {
-					throw new Error('error');
-				}
-				return res.json();
-			})
+			console.log('1',res.status)
+			status=res.status;
+			return res.json();
+		})
+		.then(resData => {
+			console.log('2', status)
+			if(status === 200) {
+			  this.props.history.push('/admin/questions');
+		  }
+		  else {
+		  	throw new Error(resData.message);
+		  }
+		})
 		.catch(this.catchError);
+	}
+
+	catchError = error => {
+		this.setState({ error: error })
+	}
+	
+	errorHandler = () => {
+		this.setState({ error: null });
 	}
 
 	handler(event) {
@@ -61,6 +69,7 @@ class Addques extends React.Component {
 			[name] : value
 		});
 	}
+
 	render() {
 		return (
 			<Container style={{ padding: '10px 50px'}}>
@@ -144,9 +153,7 @@ class Addques extends React.Component {
              </Form.Group>
             </Col>
            </Row>
-           <Link to='/admin/questions'>
-						<Button value='pcon' type='submit' onClick={this.handle}>ADD Question</Button>
-					 </Link>
+					 <Button onClick={this.handle}>ADD Question</Button>
 					</Form>
 			</Container>
 		)
