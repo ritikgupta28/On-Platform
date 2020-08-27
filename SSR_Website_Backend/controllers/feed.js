@@ -195,9 +195,11 @@ exports.postFinalContest = (req, res, next) => {
 			return finalcontest.save();
 		})
 		.then(result => {
+			console.log(result);
 			return admn.clearContest();
 		})
 		.catch(err => {
+			console.log(err);
       if (!err.statusCode) {
         err.statusCode = 500;
       }

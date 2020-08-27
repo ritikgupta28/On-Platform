@@ -70,6 +70,7 @@ export default class navbar extends React.Component {
 				    	   		exact
 			    		   		render = {props => (
 			    		   			<NewContest
+			    		   				{...props}
 			    	   					token={this.props.token}
 			    	  				/>
 				    	   		)}

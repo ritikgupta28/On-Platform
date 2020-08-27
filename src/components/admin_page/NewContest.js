@@ -93,10 +93,10 @@ class Contest extends Component {
 
 	}
 
-	handler = (event) => {
-		event.preventDefault();
-		console.log(event);
-		event.state.linking = false;
+	handler = (e) => {
+		console.log(this.state.linking);
+		this.state.linking = false;
+		console.log(this.state.linking);
 		fetch('http://localhost:8000/feed/finalcontest', {
 			method: 'POST',
 			headers: {
@@ -109,7 +109,7 @@ class Contest extends Component {
 		})
 		.then(res => {
 			console.log(res);
-			event.state.status = res.status;
+			this.state.status = res.status;
 			console.log(res);
 			return res.json();
 		})
@@ -118,7 +118,9 @@ class Contest extends Component {
 			if(this.state.status !== 200) {
 				throw new Error(resData.message);
 			}
-			this.setState({ linking : true });
+			console.log(this.state.linking);
+			this.state.linking = true;
+			console.log(this.state.linking);
 			return resData;
 		})
 		.catch(this.catchError);
@@ -165,15 +167,10 @@ class Contest extends Component {
 				}
 				<Form>
 					<Form.Group style={{ textAlign: 'center', marginTop: '10px' }}>
-						<Button style={{ marginBottom: '10px' }} onClick={this.handler.bind(this)}>Host</Button>
+						<Button style={{ marginBottom: '10px' }} onClick={this.handler}>Host</Button>
 						{console.log(this.state.linking)}
 					</Form.Group>
 				</Form>
-				<div>
-				{this.state.linking && (
-					<Link to='/admin/finalcontest' />
-				)}
-				</div>
 			</Container>
 		)
 	}
