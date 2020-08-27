@@ -13,7 +13,8 @@ class Contest extends Component {
 			loading: true,
 			questions: [],
 			cName: "",
-			error: null
+			error: null,
+			linking: false
 		};
 		this.handling = this.handling.bind(this);
 	}
@@ -88,9 +89,14 @@ class Contest extends Component {
 		.catch(this.catchError);
 	}
 
+	linkingHandle = (e) => {
+
+	}
+
 	handler = (event) => {
 		event.preventDefault();
 		console.log(event);
+		event.state.linking = false;
 		fetch('http://localhost:8000/feed/finalcontest', {
 			method: 'POST',
 			headers: {
@@ -103,7 +109,7 @@ class Contest extends Component {
 		})
 		.then(res => {
 			console.log(res);
-			this.setState({ status : res.status });
+			event.state.status = res.status;
 			console.log(res);
 			return res.json();
 		})
@@ -112,6 +118,7 @@ class Contest extends Component {
 			if(this.state.status !== 200) {
 				throw new Error(resData.message);
 			}
+			this.setState({ linking : true });
 			return resData;
 		})
 		.catch(this.catchError);
@@ -120,16 +127,16 @@ class Contest extends Component {
 	render() {
 		return (
 			<Container style={{ padding: '10px 50px' }}>
-			{this.state.loading && (
-     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-	   <Spinner 
-      size='lg'
-      variant="primary"
-      animation="border" 
-      role="status"
-      />
-      </div>
-      )}
+				{this.state.loading && (
+					<div style={{ textAlign: 'center', marginTop: '2rem' }}>
+						<Spinner
+							size='lg'
+							variant="primary"
+							animation="border"
+							role="status"
+						/>
+					</div>
+				)}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				<Form>
 					<Form.Group controlId="exampleForm.ControlTextarea1">
@@ -158,11 +165,15 @@ class Contest extends Component {
 				}
 				<Form>
 					<Form.Group style={{ textAlign: 'center', marginTop: '10px' }}>
-					<Link to='/admin/finalcontest'>
 						<Button style={{ marginBottom: '10px' }} onClick={this.handler.bind(this)}>Host</Button>
-					</Link>
+						{console.log(this.state.linking)}
 					</Form.Group>
 				</Form>
+				<div>
+				{this.state.linking && (
+					<Link to='/admin/finalcontest' />
+				)}
+				</div>
 			</Container>
 		)
 	}
