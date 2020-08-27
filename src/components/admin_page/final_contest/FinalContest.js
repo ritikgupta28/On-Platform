@@ -13,15 +13,32 @@ class FinalContest extends Component {
 		}
 	};
 
-  catchError = error => {
-    this.setState({ error: error })
-  }
-
-   errorHandler = () => {
-    this.setState({ error: null });
-  };
+	componentDidMount() {
+		let status;
+		fetch('http://localhost:8000/feed/finalcontest', {
+			headers: {
+        Authorization: 'Bearer ' + this.props.token,
+				'Content-Type': 'application/json'
+      }
+    })
+			.then(res => {
+				status = res.status;
+        return res.json();
+      })
+			.then(resData=> {
+				this.setState({ loading: false });
+				if(status === 200) {
+				  this.setState({ finalcontest: resData.finalcontest });
+				}
+				else {
+					throw new Error(resData.message);
+				}
+			})
+			.catch(this.catchError);
+	};
 
 	handler = (e) => {
+		let status;
 		fetch('http://localhost:8000/feed/allcontests', {
       method: 'POST',
       headers: {
@@ -33,38 +50,28 @@ class FinalContest extends Component {
       })
     })
     .then(res => {
-        if (res.status !== 200) {
-          throw new Error('error');
+    	  console.log(res.status)
+    	  status = res.status;
+    	  return res.json();
+     })
+     .then(resData => {
+     	 if(status === 500) {
+     	 	  throw new Error(resData.message);
         }
-        return res.json();
-      })
+        else {
+        	this.props.history.push('/admin/allcontests');
+        }
+     })
     .catch(this.catchError);
 	}
 
-	componentDidMount() {
-		setTimeout(() => {
-		fetch('http://localhost:8000/feed/finalcontest', {
-			headers: {
-        Authorization: 'Bearer ' + this.props.token,
-				'Content-Type': 'application/json'
-      }
-    })
-			.then(res => {
-        if (res.status !== 200) {
-          throw new Error('error');
-        }
-        return res.json();
-      })
-			.then(resData=> {
-				console.log(resData);
-				this.setState({
-					finalcontest: resData.finalcontest,
-					loading: false
-				});
-			})
-			.catch(this.catchError);
-		}, 3000);
-	};
+  catchError = error => {
+    this.setState({ error: error })
+  }
+
+   errorHandler = () => {
+    this.setState({ error: null });
+  }
 
 	render() {
 		return (
@@ -79,7 +86,7 @@ class FinalContest extends Component {
       />
       </div>
       )}
-			   <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+			  <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{
 					this.state.finalcontest.map(contest => (
 					<FinalContestCard
@@ -91,7 +98,7 @@ class FinalContest extends Component {
 						questions={contest.questions}
 						admin={contest.admin.name}
 					/>
-				    ))
+				  ))
 				}
 			</Fragment>
 		)

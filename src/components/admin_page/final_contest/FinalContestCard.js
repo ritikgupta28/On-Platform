@@ -12,9 +12,7 @@ export default class CardContest extends React.Component {
 				<Link to={`/finalcontest/questions/${this.props.id}`}>
 					<p>{this.props.title}</p>
 				</Link>
-				<Link to="/admin/allcontests">
-					<Button value={this.props.id} onClick={this.props.handle}>{this.props.sign}</Button> 
-				</Link>
+				<Button value={this.props.id} onClick={this.props.handle}>{this.props.sign}</Button> 
 			</div>
 			</Container>
 		)

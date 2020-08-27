@@ -13,15 +13,8 @@ class AllContests extends Component {
 		}
 	};
 
-  catchError = error => {
-    this.setState({ error: error })
-  }
-  errorHandler = () => {
-    this.setState({ error: null });
-  };
-
-		componentDidMount() {
-		setTimeout(() => {
+	componentDidMount() {
+		  let status;
 			fetch('http://localhost:8000/feed/allcontests', {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
@@ -29,20 +22,27 @@ class AllContests extends Component {
 			}
 		})
 		.then(res => {
-        if (res.status !== 200) {
-          throw new Error('error');
-        }
+        status = res.status
         return res.json();
       })
 		.then(resData => {
-			this.setState({
-				allcontest: resData.allcontest,
-				loading: false
-			});
+			this.setState({ loading: false })
+			if(status === 200) {
+ 			  this.setState({ allcontest: resData.allcontest });
+ 		  } 
+ 		  else {
+ 		  	throw new Error(resData.message);
+ 		  }
 		})
 		.catch(this.catchError)
-    }, 3000);
 	}
+
+  catchError = error => {
+    this.setState({ error: error })
+  }
+  errorHandler = () => {
+    this.setState({ error: null });
+  };
 
 	render() {
 		return (

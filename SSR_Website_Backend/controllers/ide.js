@@ -5,7 +5,6 @@ const FinalContest = require('../models/finalcontest');
 
 // #include<bits/stdc++.h>
 // using namespace std;
-
 // int main() {
 //   int t;
 //   cin>>t;

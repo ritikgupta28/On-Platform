@@ -10,16 +10,8 @@ class FinalContestQuestions extends Component {
     error: null
   };
 
-  catchError = error => {
-    this.setState({ error: error })
-  }
-
-   errorHandler = () => {
-    this.setState({ error: null });
-  };
-
   componentDidMount() {
-    setTimeout(() => {
+    let status;
     const contestId = this.props.match.params.id;
     fetch('http://localhost:8000/feed/finalcontest/questions/' + contestId, {
       headers: {
@@ -28,23 +20,29 @@ class FinalContestQuestions extends Component {
       }
       })
       .then(res => {
-        if (res.status !== 200) {
-          throw new Error('error');
-        }
+        status=res.status;
         return res.json();
       })
       .then(resData => {
-        this.setState({
-          questions: resData.questions,
-          loading: false
-        });
+        this.setState({ loading: false });
+        if (status !== 200) {
+          throw new Error(resData.message);
+        }
+        else {
+          this.setState({
+            questions: resData.questions
+          });
+        }
       })
       .catch(this.catchError);
-    }, 3000);
   }
 
-  handle = (e) => {
-    console.log(e.target.value);
+  catchError = error => {
+    this.setState({ error: error })
+  }
+
+  errorHandler = () => {
+    this.setState({ error: null });
   }
 
   render() {
@@ -60,12 +58,11 @@ class FinalContestQuestions extends Component {
       />
       </div>
       )}
-         <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+      <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
       {
           this.state.questions.map(q=> (
             <Card
             sign={'view'}
-            handle={this.handle}
             key={q.questionId._id}
             id={q.questionId._id}
             title={q.questionId.title}

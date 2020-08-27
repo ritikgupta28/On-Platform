@@ -22,16 +22,10 @@ exports.getQuestions = (req, res, next) => {
 				});
 			})
 			.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       next(err);
     });
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       next(err);
     });
 };
@@ -64,9 +58,6 @@ exports.createQuestion = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       next(err);
     });
 };
@@ -81,9 +72,6 @@ exports.getQuestion = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       next(err);
     });
 };
@@ -104,9 +92,6 @@ exports.postNewContest = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       next(err);
     });
 };
@@ -123,16 +108,10 @@ exports.getNewContest = (req, res, next) => {
 				});
 			})
 			.catch(err => {
-				if(!err.statusCode) {
-					err.statusCode = 500;
-				}
 				next(err);
 			});
 		})
 		.catch(err => {
-			if(!err.statusCode) {
-				err.statusCode = 500;
-			}
 			next(err);
 		});
 };
@@ -148,16 +127,10 @@ exports.postNewContestDeleteQuestion = (req, res, next) => {
 				});
 			})
 			.catch(err => {
-				if(!err.statusCode) {
-					err.statusCode = 500;
-				}
 				next(err);
 			});
 		})
 		.catch(err => {
-			if(!err.statusCode) {
-				err.statusCode = 500;
-			}
 			next(err);
 		});
 };
@@ -211,18 +184,17 @@ exports.postFinalContest = (req, res, next) => {
 
 exports.getFinalContest = (req, res, next) => {
 	FinalContest.find({ 'admin.adminId' : req.adminId })
-	.then(contest => {
+	.then(contests => {
 		res.status(200).json({
 				message: 'Fetched question successfully!',
-				finalcontest: contest
+				finalcontest: contests
 		});
 	})
 	.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+		const error = new Error;
+		error.message = 'Faild to fetch contests'
+    next(error);
+  });
 }
 
 exports.getUserFinalContest = (req, res, next) => {
@@ -234,9 +206,6 @@ exports.getUserFinalContest = (req, res, next) => {
 		});
 	})
 	.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       next(err);
     });
 }
@@ -255,17 +224,15 @@ exports.getFinalContestQuestions = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
+			const error = new Error;
+			error.message = 'Faild to fetch contest questions'
+      next(error);
     });
 	})
 	.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
+		  const error = new Error;
+			error.message = 'Faild to fetch contest'
+      next(error);
     });
 }
 
@@ -285,18 +252,27 @@ exports.getUserFinalContestQuestions = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       next(err);
     });
 	})
 	.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       next(err);
     });
+}
+
+exports.getAllContests = (req, res, next) => {
+	AllContest.find({ 'admin.adminId': req.adminId })
+	.then(contests => {
+		res.status(200).json({
+				message: 'Fetched question successfully!',
+				allcontest: contests
+		});
+	})
+	.catch(err => {
+		const error = new Error;
+		error.message = 'Faild to fetch all contest';
+    next(error);
+  });
 }
 
 exports.postAllContests = (req, res, next) => {
@@ -313,33 +289,23 @@ exports.postAllContests = (req, res, next) => {
 			return allcontest.save();
 		})
 		.then(result => {
-			return FinalContest.deleteOne(
-				{ _id: contestId },
-				function (err) {
-					if(err) console.log(err);
-			});
+			FinalContest
+			.deleteOne({ _id: contestId })
+			.then(function(){ 
+			   res.status(200).json({
+			   	message: 'Contest deleted'
+			   }) 
+			 })
+			.catch(function(err){ 
+				const error = new Error;
+			  error.message = 'faild to delete contest'
+        next(error);
+			}); 
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
-}
-
-exports.getAllContests = (req, res, next) => {
-	AllContest.find({ 'admin.adminId': req.adminId })
-	.then(contests => {
-		res.status(200).json({
-				message: 'Fetched question successfully!',
-				allcontest: contests
-		});
-	})
-	.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
+			const error = new Error;
+			error.message = 'faild to find contest'
+      next(error);
     });
 }
 
@@ -357,17 +323,16 @@ exports.getAllContestsQuestions = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
+			const error = new Error;
+			error.message = 'Faild to fetch all contest questions'
+      next(error);
     });
 	})
 	.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
+      const error = new Error;
+			error.message = 'Faild to fetch Admin';
+			error.statusCode = 400;
+      next(error);
     });
 }
 
@@ -385,16 +350,14 @@ exports.getResult = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-			if(!err.statusCode) {
-				err.statusCode = 500;
-			}
-			next(err);
+			const error = new Error;
+			error.message = 'Failed to fetch participants'
+			next(error);
 		})
 	})
 	.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
+	    const error = new Error;
+			error.message = 'Failed to fetch result' 
+      next(error);
     });
 }
