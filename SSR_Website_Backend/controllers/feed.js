@@ -6,7 +6,7 @@ const ObjectId = require('mongodb').ObjectID;
 
 exports.getQuestions = (req, res, next) => {
   const currentPage = req.query.page || 1;
-  const perPage = 2;
+  const perPage = 4;
   let totalQuestions;
 	Admin.findById(req.adminId)
 		.then(admin => {

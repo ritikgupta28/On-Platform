@@ -7,7 +7,7 @@ import Navbar from './navigation_bar/Navbar'
 export default class Admin extends React.Component {
 	render() {
 		return (
-			<div className='Adm'>
+			<div>
 				<Navbar 
 				 adminId={this.props.adminId} 
 				 token={this.props.token} 

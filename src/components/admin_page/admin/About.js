@@ -8,11 +8,13 @@ export default class About extends React.Component {
 		loading: true
 	}
 	}
+
 	componentDidMount() {
 		setTimeout(() => {
 			this.setState({ loading: false })
 		}, 3000);
 	}
+	
 	render() {
 		return (
 			<div>
