@@ -1,37 +1,36 @@
 import React from 'react'
-import { Route, Link, Redirect, Switch, BrowserRouter as Router } from 'react-router-dom'
+import { Route, Link, Redirect, Switch, BrowserRouter as Router, withRouter } from 'react-router-dom'
 import { Navbar, Nav, Button } from 'react-bootstrap'
 
-import './Navbar.css'
 import FinalContest from '../../final_contest/FinalContest'
 import FinalContestQuestions from '../../final_contest/FinalContestQuestions'
 import Question from '../../../single_question/Question'
 import Ide from '../../../ide/Ide'
 import About from '../About'
 
-export default class navbar extends React.Component {
+class navbar extends React.Component {
 	render() {
 		return (
 			<Router>
 			<div>
 					<Navbar 
+					 activekey={1} 
 					 collapseOnSelect 
 					 expand="lg" 
 					 bg="dark" 
 					 variant="dark" 
 					 sticky="top"
-					 onSelect={this.handleSelect}
 					 >
-           <Navbar.Brand >Platform-Up</Navbar.Brand>
+           <Navbar.Brand eventkey={0}>Platform-Up</Navbar.Brand>
            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link as={Link} to='user/finalcontest'>Contest</Nav.Link>
-            <Nav.Link as={Link} to='/ide'>Online IDE</Nav.Link>
+            <Nav.Link eventkey={1} as={Link} to='user/finalcontest'>Contest</Nav.Link>
+            <Nav.Link eventkey={2}as={Link} to='/ide'>Online IDE</Nav.Link>
           </Nav>
           <Nav fill>
-           <Nav.Link as={Link} to='/user/about'>About</Nav.Link>
-           <Button eventkey={2} onClick={this.props.logout} >Sign Out</Button>
+           <Nav.Link eventkey={3} as={Link} to='/user/about'>About</Nav.Link>
+           <Button eventkey={4} onClick={this.props.logout} >Sign Out</Button>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -59,8 +58,9 @@ export default class navbar extends React.Component {
 					    		exact
 					    		render = {props => (
 					    			<About
-			    	   				token = {this.props.token}
-			    	   				/>
+					    			  {...props}
+			    	   				token={this.props.token}
+			    	   			/>
 					    		)}
 					    	/>
 					    	<Route
@@ -68,7 +68,7 @@ export default class navbar extends React.Component {
 					    		render = {props => (
 					    			<Question
 					    				{...props}
-			    	   					token={this.props.token}
+			    	   				token={this.props.token}
 			    	   				/>
 					    		)}
 					    	/>
@@ -77,8 +77,9 @@ export default class navbar extends React.Component {
 					    		exact
 					    		render = {props => (
 					    			<Ide
-			    	   					token={this.props.token}
-			    	   				/>
+					    			  {...props}
+			    	   			  token={this.props.token}
+			    	   			/>
 					    		)}
 					    	/>
 					    	<Redirect to="/user/finalcontest" />
@@ -89,3 +90,5 @@ export default class navbar extends React.Component {
 		)
 	}
 }
+
+export default withRouter(navbar);

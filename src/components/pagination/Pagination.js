@@ -6,21 +6,15 @@ const paginator = props => (
   <div className="paginator">
     {props.children}
     <div className="paginator__controls">
-      {
-        props.currentPage > 1 && (
+      {props.currentPage > 1 && (
         <Button className="paginator__control" onClick={props.onPrevious}>Previous</Button>
-        )
-      }
-      {
-        props.currentPage > 1 && props.currentPage < props.lastPage && (
-          <Button className="paginator__control">{props.currentPage}</Button>
-        )
-      }
-      {
-        props.currentPage < props.lastPage && (
+      )}
+      {props.currentPage > 1 && props.currentPage < props.lastPage && (
+        <Button className="paginator__control">{props.currentPage}</Button>
+      )}
+      {props.currentPage < props.lastPage && (
         <Button className="paginator__control" onClick={props.onNext}>Next</Button>
-        )
-      }
+      )}
     </div>
   </div>
 );

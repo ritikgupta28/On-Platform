@@ -11,7 +11,6 @@ export default class Contact extends React.Component {
 		email: '',
 		message: ''
 	}
-  this.handler = this.handler.bind(this);
 }
 
 	onNameChange = (e) => {
@@ -98,11 +97,14 @@ export default class Contact extends React.Component {
 						onChange={this.onMessageChange}
             />
            </Form.Group>
+           <Form.Text className="text-muted">
+             We'll touch with you shortly.
+            </Form.Text>
            <Form.Group style={{ textAlign: 'center' }}>
            <Button 
             variant="primary" 
             type="submit"
-            onClick={this.handler}
+            onClick={this.handler.bind(this)}
             >
             Send
            </Button>

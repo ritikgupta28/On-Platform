@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Link, Switch, BrowserRouter as Router, withRouter } from 'react-router-dom'
 import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap'
 
-import './Navbar.css'
 import AllQuestions from '../../AllQuestions'
 import AddQuestion from '../../AddQuestion'
 import NewContest from '../../NewContest'

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import FinalContestCard from './FinalContestCard'
+import Card from './Card'
 import ErrorHandler from '../../error_handler/ErrorHandler'
 import { Spinner } from 'react-bootstrap'
 
@@ -13,16 +13,7 @@ class FinalContest extends Component {
 		}
 	};
 
-	catchError = error => {
-		this.setState({ error: error })
-	}
-
-	errorHandler = () => {
-		this.setState({ error: null });
-	};
-
-	componentDidMount() {
-		setTimeout(() => {
+  componentDidMount() {
 		fetch('http://localhost:8000/feed/userfinalcontest', {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
@@ -42,33 +33,41 @@ class FinalContest extends Component {
 			});
 		})
 		.catch(this.catchError);
-	}, 3000);
+	};
+
+	catchError = error => {
+		this.setState({ error: error })
+	}
+
+	errorHandler = () => {
+		this.setState({ error: null });
 	};
 
 	render() {
 		return (
 			<Fragment>
 			  {this.state.loading && (
-     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-	   <Spinner 
-      size='lg'
-      variant="primary"
-      animation="border" 
-      role="status"
-      />
-      </div>
-      )}
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+	         <Spinner 
+            size='lg'
+            variant="primary"
+            animation="border" 
+            role="status"
+           />
+          </div>
+        )}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{
 					this.state.finalcontest.map(contest => (
-					<FinalContestCard
+					<Card
+					  path={`/finalcontest/questions/${contest._id}`}
 						key={contest._id}
 						title={contest.contestName}
 						id={contest._id}
 						questions={contest.questions}
 						admin={contest.admin.name}
 					/>
-				    ))
+				  ))
 				}
 			</Fragment>
 		)

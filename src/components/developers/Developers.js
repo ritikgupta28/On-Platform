@@ -6,7 +6,7 @@ export default class Developers extends React.Component {
 	render() {
 		return (
 			<div>
-			    <Header />
+			  <Header />
 				<Cardlist />
 			</div>
 		)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from './QuestionContestCard';
+import Card from './Card';
 import ErrorHandler from '../../error_handler/ErrorHandler'
 
 class FinalContestQuestions extends Component {
@@ -9,16 +9,7 @@ class FinalContestQuestions extends Component {
 		error: null
 	};
 
-	catchError = error => {
-		this.setState({ error: error })
-	}
-
-	errorHandler = () => {
-		this.setState({ error: null });
-	};
-
 	componentDidMount() {
-		setTimeout(() => {
 		const contestId = this.props.match.params.id;
 		fetch('http://localhost:8000/feed/userfinalcontest/questions/' + contestId, {
 			headers: {
@@ -39,8 +30,16 @@ class FinalContestQuestions extends Component {
 			});
 		})
 		.catch(this.catchError);
-	}, 3000);
 	}
+
+
+	catchError = error => {
+		this.setState({ error: error })
+	}
+
+	errorHandler = () => {
+		this.setState({ error: null });
+	};
 
 	render() {
 		return (
@@ -49,9 +48,10 @@ class FinalContestQuestions extends Component {
 				{
 					this.state.questions.map(q=> (
 						<Card
-							key={q.questionId._id}
-							id={q.questionId._id}
-							title={q.questionId.title}
+						 path={`/question/${q.questionId._id}`}
+						 key={q.questionId._id}
+						 id={q.questionId._id}
+						 title={q.questionId.title}
 						/>
 					))
 				}

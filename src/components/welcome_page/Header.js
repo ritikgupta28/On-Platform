@@ -5,6 +5,7 @@ class Header extends React.Component {
   state = {
     route: 'Register'
   }
+
   onRChange = (e) => {
     if(this.state.route === 'Login') {
       this.setState({ route: 'Register' })
@@ -16,7 +17,7 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <Container fluid className='h'>
+      <Container fluid style={{ padding: '10px', backgroundColor: 'black', color: 'white' }}>
        <Row>
        <Col xs='9'>
         <h1>Platform-Up</h1>

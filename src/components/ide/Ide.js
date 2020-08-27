@@ -117,10 +117,10 @@ class App extends React.Component {
               className="code"
             />
            </Form.Group>
+           <Form.Label>Input</Form.Label>
            <Row>
            <Col xs='8'>
            <Form.Group controlId="exampleForm.ControlTextarea1">
-           <Form.Label>Input</Form.Label>
            <Form.Control 
             placeholder="Enter input here"
             as="textarea" 

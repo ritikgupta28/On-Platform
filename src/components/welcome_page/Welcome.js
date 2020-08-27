@@ -1,6 +1,5 @@
 import React from 'react';
 import Contact from './Contact'
-import './Welcome.css';
 import Header from './Header';
 import Footer from './Footer'
 import Login from './Login'
@@ -11,11 +10,13 @@ export default class Welcome extends React.Component {
     state = {
         route: 'login'
     }
+
     onRouteChange = (text) => {
         this.setState({
             route: text
         })
     }
+    
    render() {
 		return (
 			<div>
