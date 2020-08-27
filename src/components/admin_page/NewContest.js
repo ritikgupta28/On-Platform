@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Container, Form, Button, Spinner } from 'react-bootstrap';
 
 import ErrorHandler from '../error_handler/ErrorHandler';
@@ -12,24 +11,9 @@ class Contest extends Component {
 			status: null,
 			loading: true,
 			questions: [],
-			cName: "",
-			error: null,
-			linking: false
+			cName: '',
+			error: null
 		};
-		this.handling = this.handling.bind(this);
-	}
-
-	handling(event) {
-		const target = event.target ;
-		const value = target.value ;
-		const name = target.name ;
-		this.setState ({
-			[name] : value
-		});
-	}
-
-	catchError = error => {
-		this.setState({ error: error })
 	}
 
 	errorHandler = () => {
@@ -37,6 +21,7 @@ class Contest extends Component {
 	};
 
 	componentDidMount() {
+		console.log(this.props.token)
 		setTimeout(() => {
 			fetch('http://localhost:8000/feed/newcontest', {
 				headers: {
@@ -45,13 +30,10 @@ class Contest extends Component {
 				}
 			})
 			.then(res => {
-				this.setState({ status : res.status });
 				return res.json();
 			})
 			.then(resData => {
-				if(this.state.status !== 200) {
-					throw new Error(resData.message);
-				}
+				//throw new Error(resData.message);
 				this.setState({
 					loading: false,
 					questions: resData.questions
@@ -63,6 +45,10 @@ class Contest extends Component {
 
 	catchError = (error) => {
 		this.setState({ error: error })
+	}
+
+	handling = (e) => {
+		this.setState({ cName: e.target.value })
 	}
 
 	handle = (e) => {
@@ -77,26 +63,17 @@ class Contest extends Component {
 			})
 		})
 		.then(res => {
-			this.setState({ status : res.status });
 			return res.json();
 		})
 		.then(resData => {
-			if(this.state.status !== 200) {
-				throw new Error(resData.message);
-			}
-			return resData;
+			throw new Error(resData.message);
 		})
 		.catch(this.catchError);
 	}
 
-	linkingHandle = (e) => {
-
-	}
-
 	handler = (e) => {
-		console.log(this.state.linking);
-		this.state.linking = false;
-		console.log(this.state.linking);
+		e.preventDefault();
+		let cstatus = null;
 		fetch('http://localhost:8000/feed/finalcontest', {
 			method: 'POST',
 			headers: {
@@ -108,20 +85,16 @@ class Contest extends Component {
 			})
 		})
 		.then(res => {
-			console.log(res);
-			this.state.status = res.status;
-			console.log(res);
+			cstatus=res.status;
 			return res.json();
 		})
 		.then(resData => {
-			console.log(resData);
-			if(this.state.status !== 200) {
-				throw new Error(resData.message);
-			}
-			console.log(this.state.linking);
-			this.state.linking = true;
-			console.log(this.state.linking);
-			return resData;
+		  if(cstatus === 200) {
+		  	this.props.history.push('/admin/finalcontest')
+		  }
+		  else {
+		  	throw new Error(resData.message)
+		  }
 		})
 		.catch(this.catchError);
 	}
@@ -145,11 +118,10 @@ class Contest extends Component {
 						<Form.Label>Contest Name</Form.Label>
 						<Form.Control 
 							placeholder="Contest Name"
-							name="cName"
 							as="textarea" 
 							rows="1" 
 							value={this.state.cName}
-							onChange={this.handling}
+							onChange={this.handling.bind(this)}
 						/>
 					</Form.Group>
 				</Form>
@@ -167,8 +139,7 @@ class Contest extends Component {
 				}
 				<Form>
 					<Form.Group style={{ textAlign: 'center', marginTop: '10px' }}>
-						<Button style={{ marginBottom: '10px' }} onClick={this.handler}>Host</Button>
-						{console.log(this.state.linking)}
+						<Button onClick={this.handler}>Host</Button>
 					</Form.Group>
 				</Form>
 			</Container>

@@ -178,7 +178,7 @@ exports.postFinalContest = (req, res, next) => {
 			const questions = admin.contest.items.map(i => {
 				return { questionId: { ...i.questionId } };
 			});
-			if(!questions) {
+			if(!questions.length) {
 				const error = new Error('Please add questions!');
 		 		error.statusCode = 400;
 	 			error.data = 'Please add questions!';
@@ -195,21 +195,16 @@ exports.postFinalContest = (req, res, next) => {
 			return finalcontest.save();
 		})
 		.then(result => {
-			console.log(result);
+			res.status(200).json({
+				message: 'successfully'
+			})
 			return admn.clearContest();
 		})
 		.catch(err => {
-			console.log(err);
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       next(err);
     });
 	})
 	.catch(err => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
       next(err);
     });
 }

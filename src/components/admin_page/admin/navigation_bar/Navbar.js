@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Link, Switch, BrowserRouter as Router } from 'react-router-dom'
+import { Route, Link, Switch, BrowserRouter as Router, withRouter } from 'react-router-dom'
 import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap'
 
 import './Navbar.css'
@@ -14,7 +14,7 @@ import Question from '../../../single_question/Question'
 import Result from '../../all_contests/Result'
 import About from '../About'
 
-export default class navbar extends React.Component {
+class navbar extends React.Component {
 	render() {
 		return (
 			<Router>
@@ -148,3 +148,5 @@ export default class navbar extends React.Component {
 		)
 	}
 }
+
+export default withRouter(navbar);
