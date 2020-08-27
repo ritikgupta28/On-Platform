@@ -14,18 +14,20 @@ class Question extends React.Component {
 		error: null
 	};
 
-	componentDidMount() {
+componentDidMount() {
+	let status;
 	const questionId = this.props.match.params.id;
     fetch('http://localhost:8000/feed/question/' + questionId)
       .then(res => {
-        if (res.status !== 200) {
-          throw new Error('error');
-        }
+      	status=res.status;
         return res.json();
       })
       .then(resData => {
+      	this.setState({ loading: false })
+      	if(status !== 200) {
+          throw new Error(resData.message);
+        }
         this.setState({
-        	loading: false,
           title: resData.question.title,
           content: resData.question.content,
           sinput: resData.question.sinput,

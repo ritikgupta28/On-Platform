@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Button, Spinner } from 'react-bootstrap';
+import { Container, Button, Spinner, Row, Col } from 'react-bootstrap';
 import Ide from '../../ide/Ide'
 
 import ErrorHandler from '../../error_handler/ErrorHandler';
@@ -74,14 +74,20 @@ class Result extends Component {
 			    	<div>
 				{
 					this.state.participants.map(user => (
-						<Container style={{ fontSize: '20px', textAlign: 'center', border: '1px solid black'}}>
-								<p>{user.userId.name}</p>
-								{
-									user.questions.map(q => (
+						<Container style={{ padding: '8px', fontSize: '20px', border: '1px solid black'}}>
+						  <Row>
+						    <Col xs='5'>
+								 <p>{user.userId.name}</p>
+								</Col>
+								<Col xs='5'>
+								{user.questions.map(q => (
 								 <Button value={q.code} onClick={this.onShowCode} >{q.questionId}</Button>
-								))
-								}
+								))}
+								</Col>
+								<Col xs='1'>
 								<p style={{paddingLeft: '20px'}}>{user.totalScore}</p>
+								</Col>
+							</Row>
 						</Container>
 				    ))
 				}

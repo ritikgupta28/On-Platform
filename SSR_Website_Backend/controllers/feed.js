@@ -82,7 +82,9 @@ exports.getQuestion = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-      next(err);
+      const error = new Error;
+			error.message = 'faild to fetch question'
+      next(error);
     });
 };
 

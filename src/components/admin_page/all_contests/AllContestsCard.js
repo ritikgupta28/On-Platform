@@ -5,9 +5,9 @@ import { Container, Button, Row, Col } from 'react-bootstrap';
 export default class AllContestsCard extends React.Component {
 	render() {
 		return (
-			<Container style={{ padding: '5px', fontSize: '20px', border: '1px solid black'}}>
+			<Container style={{ padding: '8px', fontSize: '20px', border: '1px solid black'}}>
 			<Row>
-			<Col xd='8'>
+			<Col xs='10'>
 				<Link to={`/allcontests/questions/${this.props.id}`}>
 					<p>{this.props.title}</p>
 				</Link>
@@ -15,7 +15,7 @@ export default class AllContestsCard extends React.Component {
 				<Link to={`/result/${this.props.id}`}>
 					<Button value={this.props.id}>{this.props.sign}</Button> 
 				</Link>
-				</Row>
+			</Row>
 			</Container>
 		)
 	}

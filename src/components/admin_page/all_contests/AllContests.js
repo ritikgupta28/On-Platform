@@ -40,6 +40,7 @@ class AllContests extends Component {
   catchError = error => {
     this.setState({ error: error })
   }
+  
   errorHandler = () => {
     this.setState({ error: null });
   };
