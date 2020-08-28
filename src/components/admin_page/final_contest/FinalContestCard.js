@@ -16,7 +16,7 @@ export default class CardContest extends React.Component {
 						</Link>
 					</Col>
 					<Col xs='8'>
-						<Time />
+						<Time onTimeChange={this.props.onTimeChange}/>
 					</Col>
 					<Col xs='2'>
 						<Button value={this.props.id} onClick={this.props.handle}>{this.props.sign}</Button>

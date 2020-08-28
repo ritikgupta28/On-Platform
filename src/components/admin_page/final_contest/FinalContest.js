@@ -7,9 +7,10 @@ class FinalContest extends Component {
 	constructor(props) {
     	super(props);
     	this.state = {
+    		start: false,
     		loading: true,
-			finalcontest: [],
-			error: null
+			  finalcontest: [],
+			  error: null
 		}
 	};
 
@@ -65,11 +66,15 @@ class FinalContest extends Component {
     .catch(this.catchError);
 	}
 
-  catchError = error => {
+	onTimeChange = (text) => {
+		this.setState({ start: text })
+	}
+
+  catchError = (error) => {
     this.setState({ error: error })
   }
 
-   errorHandler = () => {
+   errorHandler = (bool) => {
     this.setState({ error: null });
   }
 
@@ -90,6 +95,7 @@ class FinalContest extends Component {
 				{
 					this.state.finalcontest.map(contest => (
 					<FinalContestCard
+					  onTimeChange={this.onTimeChange}
 						sign={'End'}
 						handle={this.handler}
 						key={contest._id}

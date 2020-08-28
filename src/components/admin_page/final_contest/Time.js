@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Time() {
+function Time({onTimeChange}) {
   const calculateTimeLeft = () => {
     let year = new Date().getFullYear();
     const difference = +new Date('2020-10-1') - +new Date();
@@ -13,6 +13,9 @@ function Time() {
         mins: Math.floor((difference / 1000 / 60) % 60),
         secs: Math.floor((difference / 1000) % 60),
       };
+    }
+    else {
+      onTimeChange(true);
     }
 
     return timeLeft;
