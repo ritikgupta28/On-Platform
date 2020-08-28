@@ -27,6 +27,14 @@ const allContestSchema = new Schema({
 		type: String,
 		required: true
 	},
+	contestDate: {
+		type: String,
+		required: true
+	},
+	contestTime: {
+		type: String,
+		required: true
+	},
 	participant: {
 		users: [
 			{

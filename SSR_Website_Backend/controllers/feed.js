@@ -22,16 +22,16 @@ exports.getQuestions = (req, res, next) => {
 				});
 			})
 			.catch(err => {
-        const error = new Error;
-			  error.message = 'faild to fetch questions'
-        next(error);
-      });
+        		const error = new Error;
+        		error.message = 'Failed to fetch questions'
+        		next(error);
+        	});
 		})
 		.catch(err => {
-      const error = new Error;
+			const error = new Error;
 			error.message = 'admin not found'
-      next(error);
-    });
+			next(error);
+		});
 };
 
 exports.createQuestion = (req, res, next) => {
@@ -159,9 +159,23 @@ exports.postNewContestDeleteQuestion = (req, res, next) => {
 
 exports.postFinalContest = (req, res, next) => {
 	const cName = req.body.cName;
+	const cdate = req.body.cdate;
+	const ctime = req.body.ctime;
 	if(!cName) {
 		const error = new Error;
 		error.message = 'Enter a valid contest name!';
+	 	error.statusCode = 400;
+	 	throw error;
+	}
+	if(!cdate) {
+		const error = new Error;
+		error.message = 'Enter a valid date!';
+	 	error.statusCode = 400;
+	 	throw error;
+	}
+	if(!ctime) {
+		const error = new Error;
+		error.message = 'Enter a valid time!';
 	 	error.statusCode = 400;
 	 	throw error;
 	}
@@ -185,6 +199,8 @@ exports.postFinalContest = (req, res, next) => {
 					adminId: req.adminId
 				},
 				contestName: cName,
+				contestDate: cdate,
+				contestTime: ctime,
 				questions: questions
 			});
 			return finalcontest.save();
@@ -286,6 +302,42 @@ exports.getUserFinalContestQuestions = (req, res, next) => {
     });
 }
 
+exports.postAllContests = (req, res, next) => {
+	const contestId = req.body.contestId;
+	FinalContest.findById(contestId)
+		.then(contest => {
+			contest.sortUsers();
+			const allcontest = new AllContest({
+				admin: contest.admin,
+				questions: contest.questions,
+				contestName: contest.contestName,
+				contestDate: contest.contestDate,
+				contestTime: contest.contestTime,
+				participant: contest.participant
+			});
+			return allcontest.save();
+		})
+		.then(result => {
+			FinalContest
+			.deleteOne({ _id: contestId })
+			.then(function() { 
+				res.status(200).json({
+					message: 'Contest Deleted!'
+				}) 
+			})
+			.catch(function(err) { 
+				const error = new Error;
+				error.message = 'Failed to delete contest!'
+				next(error);
+			}); 
+		})
+		.catch(err => {
+			const error = new Error;
+			error.message = 'Failed!'
+			next(error);
+		});
+}
+
 exports.getAllContests = (req, res, next) => {
 	AllContest.find({ 'admin.adminId': req.adminId })
 	.then(contests => {
@@ -299,40 +351,6 @@ exports.getAllContests = (req, res, next) => {
 		error.message = 'Faild to fetch all contest';
     next(error);
   });
-}
-
-exports.postAllContests = (req, res, next) => {
-	const contestId = req.body.contestId;
-	FinalContest.findById(contestId)
-		.then(contest => {
-			contest.sortUsers();
-			const allcontest = new AllContest({
-				admin: contest.admin,
-				questions: contest.questions,
-				contestName: contest.contestName,
-				participant: contest.participant
-			});
-			return allcontest.save();
-		})
-		.then(result => {
-			FinalContest
-			.deleteOne({ _id: contestId })
-			.then(function(){ 
-			   res.status(200).json({
-			   	message: 'Contest deleted'
-			   }) 
-			 })
-			.catch(function(err){ 
-				const error = new Error;
-			  error.message = 'faild to delete contest'
-        next(error);
-			}); 
-		})
-		.catch(err => {
-			const error = new Error;
-			error.message = 'faild to find contest'
-      next(error);
-    });
 }
 
 exports.getAllContestsQuestions = (req, res, next) => {

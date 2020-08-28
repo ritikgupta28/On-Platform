@@ -9,8 +9,8 @@ class FinalContest extends Component {
     	this.state = {
     		start: false,
     		loading: true,
-			  finalcontest: [],
-			  error: null
+			finalcontest: [],
+			error: null
 		}
 	};
 
@@ -18,65 +18,64 @@ class FinalContest extends Component {
 		let status;
 		fetch('http://localhost:8000/feed/finalcontest', {
 			headers: {
-        Authorization: 'Bearer ' + this.props.token,
+        		Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
-      }
-    })
-			.then(res => {
-				status = res.status;
-        return res.json();
-      })
-			.then(resData=> {
-				this.setState({ loading: false });
-				if(status === 200) {
-				  this.setState({ finalcontest: resData.finalcontest });
-				}
-				else {
-					throw new Error(resData.message);
-				}
-			})
-			.catch(this.catchError);
+			}
+		})
+		.then(res => {
+			status = res.status;
+        	return res.json();
+        })
+		.then(resData=> {
+			this.setState({ loading: false });
+			if(status === 200) {
+				this.setState({ finalcontest: resData.finalcontest });
+			}
+			else {
+				throw new Error(resData.message);
+			}
+		})
+		.catch(this.catchError);
 	};
 
 	handler = (e) => {
 		let status;
 		fetch('http://localhost:8000/feed/allcontests', {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + this.props.token,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        contestId: e.target.value
-      })
-    })
-    .then(res => {
-    	  console.log(res.status)
-    	  status = res.status;
-    	  return res.json();
-     })
-     .then(resData => {
-     	 if(status === 500) {
-     	 	  throw new Error(resData.message);
-        }
-        else {
-        	this.props.history.push('/admin/allcontests');
-        }
-     })
-    .catch(this.catchError);
+			method: 'POST',
+			headers: {
+				Authorization: 'Bearer ' + this.props.token,
+				'Content-Type': 'application/json'
+        	},
+        	body: JSON.stringify({
+        		contestId: e.target.value
+        	})
+        })
+        .then(res => {
+        	status = res.status;
+        	return res.json();
+        })
+        .then(resData => {
+        	if(status === 500) {
+        		throw new Error(resData.message);
+        	}
+        	else {
+        		this.props.history.push('/admin/allcontests');
+        	}
+        })
+        .catch(this.catchError);
 	}
 
-	onTimeChange = (text) => {
-		this.setState({ start: text })
+	onTimeChange = (bool) => {
+		this.setState({ start: bool })
 	}
 
-  catchError = (error) => {
-    this.setState({ error: error })
-  }
+	catchError = (error) => {
+    	this.setState({ error: error })
+    }
 
-   errorHandler = (bool) => {
-    this.setState({ error: null });
-  }
+    errorHandler = (bool) => {
+    	this.setState({ error: null });
+    }
 
 	render() {
 		return (
@@ -92,10 +91,12 @@ class FinalContest extends Component {
 					</div>
 				)}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-				{
-					this.state.finalcontest.map(contest => (
+				{this.state.finalcontest.map(contest => (
 					<FinalContestCard
-					  onTimeChange={this.onTimeChange}
+						start={this.state.start}
+						date={contest.contestDate}
+						time={contest.contestTime}
+						onTimeChange={this.onTimeChange}
 						sign={'End'}
 						handle={this.handler}
 						key={contest._id}
@@ -104,8 +105,7 @@ class FinalContest extends Component {
 						questions={contest.questions}
 						admin={contest.admin.name}
 					/>
-				  ))
-				}
+				))}
 			</Fragment>
 		)
 	}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Form, Button, Spinner } from 'react-bootstrap';
+import { Container, Form, Button, Spinner, Row, Col } from 'react-bootstrap';
 
 import ErrorHandler from '../error_handler/ErrorHandler';
 import Card from './QuestionCard';
@@ -11,8 +11,11 @@ class Contest extends Component {
 			loading: true,
 			questions: [],
 			cName: '',
+			cdate: '',
+			ctime: '',
 			error: null
 		};
+		this.handling = this.handling.bind(this);
 	}
 
 	componentDidMount() {
@@ -42,6 +45,7 @@ class Contest extends Component {
 	}
 
 	handle = (e) => {
+		let status;
 		fetch('http://localhost:8000/feed/newcontest-delete-question', {
 			method: 'POST',
 			headers: {
@@ -53,17 +57,20 @@ class Contest extends Component {
 			})
 		})
 		.then(res => {
-			return res.json();
+			status=res.status;
+			return res.json(); 
 		})
 		.then(resData => {
-			throw new Error(resData.message);
+			if(status !== 200) {
+				throw new Error(resData.message);
+			}
 		})
 		.catch(this.catchError);
 	}
 
 	handler = (e) => {
 		let status;
-		e.preventDefault();
+		// e.preventDefault();
 		fetch('http://localhost:8000/feed/finalcontest', {
 			method: 'POST',
 			headers: {
@@ -71,7 +78,9 @@ class Contest extends Component {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				cName: this.state.cName
+				cName: this.state.cName,
+				cdate: this.state.cdate,
+				ctime: this.state.ctime
 			})
 		})
 		.then(res => {
@@ -97,8 +106,13 @@ class Contest extends Component {
 		this.setState({ error: null });
 	}
 
-	handling = (e) => {
-		this.setState({ cName: e.target.value })
+	handling(event) {
+		const target = event.target ;
+		const value = target.value ;
+		const name = target.name ;
+		this.setState ({
+			[name] : value
+		});
 	}
 
 	render() {
@@ -120,12 +134,41 @@ class Contest extends Component {
 						<Form.Label>Contest Name</Form.Label>
 						<Form.Control 
 							placeholder="Contest Name"
+							name="cName"
 							as="textarea" 
 							rows="1" 
 							value={this.state.cName}
-							onChange={this.handling.bind(this)}
+							onChange={this.handling}
 						/>
 					</Form.Group>
+					<Row>
+						<Col>
+							<Form.Group controlId="exampleForm.ControlTextarea1">
+								<Form.Label>Date</Form.Label>
+								<Form.Control 
+									placeholder="YYYY-MM-DD"
+									name="cdate"
+									as="textarea" 
+									rows="1"
+									value={this.state.cdate}
+									onChange={this.handling}
+								/>
+							</Form.Group>
+						</Col>
+						<Col>
+							<Form.Group controlId="exampleForm.ControlTextarea1">
+								<Form.Label>Time</Form.Label>
+								<Form.Control
+									placeholder="HH-MM"
+									name="ctime"
+									as="textarea"
+									rows="1"
+									value={this.state.ctime}
+									onChange={this.handling}
+								/>
+							</Form.Group>
+						</Col>
+					</Row>
 				</Form>
 				{
 					this.state.questions.map(q => (

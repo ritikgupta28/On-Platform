@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Card from './Card';
+
+import Card from './QuestionContestCard';
 import ErrorHandler from '../../error_handler/ErrorHandler'
 
 class FinalContestQuestions extends Component {

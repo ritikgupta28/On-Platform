@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import Card from './Card'
+import Card from './FinalContestCard'
 import ErrorHandler from '../../error_handler/ErrorHandler'
 import { Spinner } from 'react-bootstrap'
 
@@ -7,7 +7,8 @@ class FinalContest extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-    	loading: true,
+    		start: false,
+    		loading: true,
 			finalcontest: [],
 			error: null
 		}
@@ -35,6 +36,10 @@ class FinalContest extends Component {
 		.catch(this.catchError);
 	};
 
+	onTimeChange = (bool) => {
+		this.setState({ start: bool })
+	}
+
 	catchError = error => {
 		this.setState({ error: error })
 	}
@@ -46,21 +51,24 @@ class FinalContest extends Component {
 	render() {
 		return (
 			<Fragment>
-			  {this.state.loading && (
-          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-	         <Spinner 
-            size='lg'
-            variant="primary"
-            animation="border" 
-            role="status"
-           />
-          </div>
-        )}
+				{this.state.loading && (
+			  		<div style={{ textAlign: 'center', marginTop: '2rem' }}>
+			  			<Spinner 
+			  				size='lg'
+			  				variant="primary"
+			  				animation="border"
+			  				role="status"
+			  			/>
+			  		</div>
+			  	)}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{
 					this.state.finalcontest.map(contest => (
 					<Card
-					  path={`/finalcontest/questions/${contest._id}`}
+						start={this.state.start}
+						date={contest.contestDate}
+						time={contest.contestTime}
+						onTimeChange={this.onTimeChange}
 						key={contest._id}
 						title={contest.contestName}
 						id={contest._id}
