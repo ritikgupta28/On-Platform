@@ -5,9 +5,9 @@ import ErrorHandler from '../../error_handler/ErrorHandler'
 
 class FinalContest extends Component {
 	constructor(props) {
-    super(props);
-    this.state = {
-    	loading: true,
+    	super(props);
+    	this.state = {
+    		loading: true,
 			finalcontest: [],
 			error: null
 		}
@@ -76,17 +76,17 @@ class FinalContest extends Component {
 	render() {
 		return (
 			<Fragment>
-			{this.state.loading && (
-     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-	   <Spinner 
-      size='lg'
-      variant="primary"
-      animation="border" 
-      role="status"
-      />
-      </div>
-      )}
-			  <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+				{this.state.loading && (
+					<div style={{ textAlign: 'center', marginTop: '2rem' }}>
+						<Spinner 
+							size='lg'
+							variant="primary"
+							animation="border" 
+							role="status"
+						/>
+					</div>
+				)}
+				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{
 					this.state.finalcontest.map(contest => (
 					<FinalContestCard
