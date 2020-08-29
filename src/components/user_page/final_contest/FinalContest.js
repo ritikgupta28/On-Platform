@@ -51,6 +51,10 @@ class FinalContest extends Component {
 		this.setState({ error: null });
 	};
 
+	onRegChange = () => {
+		this.setState({ reg: 'Registration completed' })
+	}
+
 	render() {
 		return (
 			<Fragment>
@@ -67,6 +71,8 @@ class FinalContest extends Component {
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{this.state.finalcontest.map(contest => (
 					<Card
+					  reg={this.state.reg}
+					  onRegChange={this.onRegChange}
 						start={this.state.start}
 						date={contest.contestStartDate}
 						time={contest.contestStartTime}
