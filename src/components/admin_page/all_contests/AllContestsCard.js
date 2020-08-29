@@ -12,9 +12,11 @@ export default class AllContestsCard extends React.Component {
 					<p>{this.props.title}</p>
 				</Link>
 			</Col>
+			<Col xs='2'> 
 				<Link to={`/result/${this.props.id}`}>
 					<Button value={this.props.id}>{this.props.sign}</Button> 
 				</Link>
+			</Col>
 			</Row>
 			</Container>
 		)

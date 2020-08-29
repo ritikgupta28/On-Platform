@@ -11,8 +11,10 @@ class Contest extends Component {
 			loading: true,
 			questions: [],
 			cName: '',
-			cdate: '',
-			ctime: '',
+			csdate: '',
+			cstime: '',
+			cedate: '',
+			cetime: '',
 			error: null
 		};
 		this.handling = this.handling.bind(this);
@@ -70,7 +72,6 @@ class Contest extends Component {
 
 	handler = (e) => {
 		let status;
-		// e.preventDefault();
 		fetch('http://localhost:8000/feed/finalcontest', {
 			method: 'POST',
 			headers: {
@@ -79,8 +80,10 @@ class Contest extends Component {
 			},
 			body: JSON.stringify({
 				cName: this.state.cName,
-				cdate: this.state.cdate,
-				ctime: this.state.ctime
+				csdate: this.state.csdate,
+				cstime: this.state.cstime,
+				cedate: this.state.cedate,
+				cetime: this.state.cetime
 			})
 		})
 		.then(res => {
@@ -144,26 +147,54 @@ class Contest extends Component {
 					<Row>
 						<Col>
 							<Form.Group controlId="exampleForm.ControlTextarea1">
-								<Form.Label>Date</Form.Label>
-								<Form.Control 
+								<Form.Label>Start Date</Form.Label>
+								<Form.Control
 									placeholder="YYYY-MM-DD"
-									name="cdate"
+									name="csdate"
 									as="textarea" 
 									rows="1"
-									value={this.state.cdate}
+									value={this.state.csdate}
 									onChange={this.handling}
 								/>
 							</Form.Group>
 						</Col>
 						<Col>
 							<Form.Group controlId="exampleForm.ControlTextarea1">
-								<Form.Label>Time</Form.Label>
+								<Form.Label>Start Time</Form.Label>
 								<Form.Control
 									placeholder="HH-MM"
-									name="ctime"
+									name="cstime"
 									as="textarea"
 									rows="1"
-									value={this.state.ctime}
+									value={this.state.cstime}
+									onChange={this.handling}
+								/>
+							</Form.Group>
+						</Col>
+					</Row>
+					<Row>
+						<Col>
+							<Form.Group controlId="exampleForm.ControlTextarea1">
+								<Form.Label>End Date</Form.Label>
+								<Form.Control
+									placeholder="YYYY-MM-DD"
+									name="cedate"
+									as="textarea" 
+									rows="1"
+									value={this.state.cedate}
+									onChange={this.handling}
+								/>
+							</Form.Group>
+						</Col>
+						<Col>
+							<Form.Group controlId="exampleForm.ControlTextarea1">
+								<Form.Label>End Time</Form.Label>
+								<Form.Control
+									placeholder="HH-MM"
+									name="cetime"
+									as="textarea"
+									rows="1"
+									value={this.state.cetime}
 									onChange={this.handling}
 								/>
 							</Form.Group>

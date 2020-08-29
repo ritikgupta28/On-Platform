@@ -29,7 +29,9 @@ class FinalContest extends Component {
 		.then(resData=> {
 			this.setState({ loading: false });
 			if(status === 200) {
-				this.setState({ finalcontest: resData.finalcontest });
+				this.setState({
+					finalcontest: resData.finalcontest
+				});
 			}
 			else {
 				throw new Error(resData.message);
@@ -38,7 +40,7 @@ class FinalContest extends Component {
 		.catch(this.catchError);
 	};
 
-	handler = (e) => {
+	handler = (event) => {
 		let status;
 		fetch('http://localhost:8000/feed/allcontests', {
 			method: 'POST',
@@ -47,7 +49,7 @@ class FinalContest extends Component {
 				'Content-Type': 'application/json'
         	},
         	body: JSON.stringify({
-        		contestId: e.target.value
+        		contestId: event.target.value
         	})
         })
         .then(res => {
@@ -94,8 +96,8 @@ class FinalContest extends Component {
 				{this.state.finalcontest.map(contest => (
 					<FinalContestCard
 						start={this.state.start}
-						date={contest.contestDate}
-						time={contest.contestTime}
+						date={contest.contestStartDate}
+						time={contest.contestStartTime}
 						onTimeChange={this.onTimeChange}
 						sign={'End'}
 						handle={this.handler}

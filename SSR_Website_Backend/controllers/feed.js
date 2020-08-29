@@ -38,8 +38,8 @@ exports.createQuestion = (req, res, next) => {
 	const { title, content, sinput, soutput, inputfile, outputfile } = req.body;
 	if(!title || !content || !sinput || !soutput || !inputfile || !outputfile) {
 		const error = new Error;
-		error.message = 'Please add details carefully'
-    next(error);
+		error.message = 'Enter valid credentials!'
+    	next(error);
 	}
 	const question = new Question({
 		title: title,
@@ -68,8 +68,8 @@ exports.createQuestion = (req, res, next) => {
 		.catch(err => {
 			const error = new Error;
 			error.message = 'faild to add question'
-      next(error);
-    });
+			next(error);
+		});
 };
 
 exports.getQuestion = (req, res, next) => {
@@ -146,36 +146,26 @@ exports.postNewContestDeleteQuestion = (req, res, next) => {
 			})
 			.catch(err => {
 				const error = new Error;
-			  error.message = 'faild to remove question';
+			  error.message = 'failed to remove question';
         next(error);
 			});
 		})
 		.catch(err => {
 			const error = new Error;
-			error.message = 'faild to find admin';
+			error.message = 'failed to find admin';
       next(error);
 		});
 };
 
 exports.postFinalContest = (req, res, next) => {
 	const cName = req.body.cName;
-	const cdate = req.body.cdate;
-	const ctime = req.body.ctime;
-	if(!cName) {
+	const csdate = req.body.csdate;
+	const cstime = req.body.cstime;
+	const cedate = req.body.cedate;
+	const cetime = req.body.cetime;
+	if(!cName || !csdate || !cstime || !cedate || !cetime) {
 		const error = new Error;
-		error.message = 'Enter a valid contest name!';
-	 	error.statusCode = 400;
-	 	throw error;
-	}
-	if(!cdate) {
-		const error = new Error;
-		error.message = 'Enter a valid date!';
-	 	error.statusCode = 400;
-	 	throw error;
-	}
-	if(!ctime) {
-		const error = new Error;
-		error.message = 'Enter a valid time!';
+		error.message = 'Enter valid credentials!';
 	 	error.statusCode = 400;
 	 	throw error;
 	}
@@ -199,8 +189,10 @@ exports.postFinalContest = (req, res, next) => {
 					adminId: req.adminId
 				},
 				contestName: cName,
-				contestDate: cdate,
-				contestTime: ctime,
+				contestStartDate: csdate,
+				contestStartTime: cstime,
+				contestEndDate: cedate,
+				contestEndTime: cetime,
 				questions: questions
 			});
 			return finalcontest.save();
@@ -212,15 +204,11 @@ exports.postFinalContest = (req, res, next) => {
 			return admn.clearContest();
 		})
 		.catch(err => {
-      const error = new Error;
-		 	error.message = 'faild';
-	 			next(error);
-      });
-	  })
-	  .catch(err => {
-      const error = new Error;
-	 		error.message = 'admin not found';
-	 		next(error);
+	 		next(err);
+	 	});
+	})
+	.catch(err => {
+	 	next(err);
     });
 }
 
@@ -259,22 +247,24 @@ exports.getFinalContestQuestions = (req, res, next) => {
 		contest.populate('questions.questionId')
 		.execPopulate()
 		.then(contest => {
+			const ceDate = contest.contestEndDate;
+			const ceTime = contest.contestEndTime;
 			const questions = contest.questions;
 			res.status(200).json({
 				message: 'Fetched Contest Questions Successfully',
+				ceDate: ceDate,
+				ceTime: ceTime,
 				questions: questions
 			});
 		})
 		.catch(err => {
-			const error = new Error;
-			error.message = 'Faild to fetch contest questions'
-      next(error);
-    });
+    		next(err);
+    	});
 	})
 	.catch(err => {
-		  const error = new Error;
-			error.message = 'Faild to fetch contest'
-      next(error);
+		const error = new Error;
+		error.message = 'Faild to fetch contest'
+      	next(error);
     });
 }
 
@@ -287,18 +277,22 @@ exports.getUserFinalContestQuestions = (req, res, next) => {
 		contest.populate('questions.questionId')
 		.execPopulate()
 		.then(contest => {
+			const ceDate = contest.contestEndDate;
+			const ceTime = contest.contestEndTime;
 			const questions = contest.questions;
 			res.status(200).json({
 				message: 'Fetched Contest Questions Successfully',
+				ceDate: ceDate,
+				ceTime: ceTime,
 				questions: questions
 			});
 		})
 		.catch(err => {
-      next(err);
-    });
+			next(err);
+		});
 	})
 	.catch(err => {
-      next(err);
+		next(err);
     });
 }
 
@@ -311,8 +305,10 @@ exports.postAllContests = (req, res, next) => {
 				admin: contest.admin,
 				questions: contest.questions,
 				contestName: contest.contestName,
-				contestDate: contest.contestDate,
-				contestTime: contest.contestTime,
+				contestStartDate: contest.contestStartDate,
+				contestStartTime: contest.contestStartTime,
+				contestEndDate: contest.contestEndDate,
+				contestEndTime: contest.contestEndTime,
 				participant: contest.participant
 			});
 			return allcontest.save();

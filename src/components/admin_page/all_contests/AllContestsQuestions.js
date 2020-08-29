@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Spinner } from 'react-bootstrap'
-import Card from '../QuestionContestCard';
+import Card from './QuestionCard';
 import ErrorHandler from '../../error_handler/ErrorHandler'
 
 class AllContestsQuestions extends Component {

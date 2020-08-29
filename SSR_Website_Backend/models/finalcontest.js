@@ -27,11 +27,19 @@ const finalContestSchema = new Schema({
 		type: String,
 		required: true
 	},
-	contestDate: {
+	contestStartDate: {
 		type: String,
 		required: true
 	},
-	contestTime: {
+	contestStartTime: {
+		type: String,
+		required: true
+	},
+	contestEndDate: {
+		type: String,
+		required: true
+	},
+	contestEndTime: {
 		type: String,
 		required: true
 	},

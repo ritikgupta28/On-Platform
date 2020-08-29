@@ -66,8 +66,8 @@ class FinalContest extends Component {
 					this.state.finalcontest.map(contest => (
 					<Card
 						start={this.state.start}
-						date={contest.contestDate}
-						time={contest.contestTime}
+						date={contest.contestStartDate}
+						time={contest.contestStartTime}
 						onTimeChange={this.onTimeChange}
 						key={contest._id}
 						title={contest.contestName}
