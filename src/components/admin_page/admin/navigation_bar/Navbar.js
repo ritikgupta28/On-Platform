@@ -129,6 +129,7 @@ class navbar extends React.Component {
 			    		   		exact
 			    		   		render = {props => (
 			    	   				<About
+			    	   				{...props}
 			    	   					token={this.props.token}
 			    	   				/>
 				    	   		)}
