@@ -17,7 +17,7 @@ class navbar extends React.Component {
 	render() {
 		return (
 			<Router>
-				<div>
+				<div style={{ fontSize: '1.5rem'}}>
 					<Navbar 
 					activekey={1} 
 					collapseOnSelect 
@@ -46,7 +46,7 @@ class navbar extends React.Component {
 					    			<NavDropdown.Item eventkey={6} as={Link} to='/admin/about'>
 					    			 <Button block variant="outline-dark">About</Button>
 					    			</NavDropdown.Item>
-					    			<NavDropdown.Item eventkey={7}>
+					    			<NavDropdown.Item eventkey={7} as={Link} to='/'>
 					    			 <Button block variant="outline-dark" onClick={this.props.logout}>Sign Out</Button>
 					    			</NavDropdown.Item>
 					    		</NavDropdown>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Button, Spinner, Row, Col } from 'react-bootstrap';
+import { Container, Button, Spinner, Row, Col, Dropdown, ButtonGroup } from 'react-bootstrap';
 import Ide from '../../ide/Ide'
 
 import ErrorHandler from '../../error_handler/ErrorHandler';
@@ -76,15 +76,25 @@ class Result extends Component {
 					this.state.participants.map(user => (
 						<Container style={{ padding: '8px', fontSize: '20px', border: '1px solid black'}}>
 						  <Row>
-						    <Col xs='5'>
+						    <Col>
 								 <p>{user.userId.name}</p>
 								</Col>
-								<Col xs='5'>
-								{user.questions.map(q => (
-								 <Button value={q.code} onClick={this.onShowCode} >{q.questionId}</Button>
+								<Col>
+								<Dropdown as={ButtonGroup}>
+								 <Button>Questions</Button>
+                <Dropdown.Toggle split id="dropdown-split-basic" />
+                <Dropdown.Menu>
+                {user.questions.map(q => (
+								  <Dropdown.Item>
+								   <Button variant="outline-primary" value={q.code} onClick={this.onShowCode}>
+								    {q.questionId}
+								   </Button>
+								  </Dropdown.Item>
 								))}
+                </Dropdown.Menu>
+                </Dropdown>
 								</Col>
-								<Col xs='1'>
+								<Col md="auto">
 								<p style={{paddingLeft: '20px'}}>{user.totalScore}</p>
 								</Col>
 							</Row>
