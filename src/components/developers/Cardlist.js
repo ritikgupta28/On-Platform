@@ -8,8 +8,8 @@ import { CardDeck, Card, Container, Row, Col, Image } from 'react-bootstrap'
 
 const Cardlist = () => {
 	 return (
-	 	<Container>
-	    <CardDeck style={{ margin: '80px'}}>
+	 	<Container style={{ padding: '0px 40px' }}>
+	    <CardDeck style={{ margin: '60px'}}>
        <Card>
         <Card.Img style={{ height: '300px', padding: '20px'}} variant="top" src={sahil} />
         <Card.Body>

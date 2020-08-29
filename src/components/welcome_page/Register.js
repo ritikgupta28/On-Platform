@@ -48,7 +48,7 @@ export default class Register extends React.Component {
           <h1 style={{ textAlign: 'center', fontSize: '70px' }}>Register</h1>
           <hr />
           <Row>
-          <Col xs='6'>
+          <Col md="auto">
            <Image style={{ height: '400px'}} src={svg} rounded />
           </Col>
           <Col>

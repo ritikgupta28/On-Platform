@@ -5,7 +5,7 @@ import svg from '../svg/contact.svg'
 
 export default class Contact extends React.Component {
   constructor() {
-    super();
+  super();
 	this.state = {
     error: null,
 		name: '',
@@ -61,12 +61,12 @@ export default class Contact extends React.Component {
 
 	render() {
 		return (
-			<Container>
+			<Container style={{ marginTop: '40px'}}>
        <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 			 <h1 style={{ textAlign: 'center', fontSize: '70px' }}>Contact Us</h1>
        <hr />
        <Row>
-       <Col xs='6'>
+       <Col>
 			 <Form>
 					 <Form.Group controlId="formBasicName">
            <Form.Label>Name</Form.Label>
@@ -110,12 +110,12 @@ export default class Contact extends React.Component {
             type="submit"
             onClick={this.handler.bind(this)}
             >
-            Send
+            Send Message
            </Button>
            </Form.Group>
            </Form>
            </Col>
-           <Col>
+           <Col md="auto">
             <Image style={{ height: '350px'}} src={svg} rounded />
            </Col>
           </Row>

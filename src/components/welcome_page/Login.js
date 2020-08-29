@@ -37,7 +37,7 @@ export default class Login extends React.Component {
         <h1 style={{ textAlign: 'center', fontSize: '70px' }}>Login</h1>
         <hr />
         <Row>
-        <Col >
+        <Col md="auto">
          <Image style={{ height: '350px'}} src={svg} rounded />
          </Col>
          <Col>

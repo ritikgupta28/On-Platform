@@ -13,7 +13,7 @@ export default class Card extends React.Component {
 		return (
 			<Container style={{ padding: '8px', fontSize: '20px', border: '1px solid black' }}>
 			  <Row>
-			  <Col xs='10'>
+			  <Col>
 					<Link to={`/question/${this.props.id}`}>
 						<p>{this.props.title}</p>
 					</Link>
@@ -23,7 +23,7 @@ export default class Card extends React.Component {
 					delay={{ show: 250, hide: 400 }}
 					overlay={this.renderTooltip}
 					>
-					<Col xs='1'>
+					<Col md='auto'>
 					 <Button value={this.props.id} onClick={this.props.handle}>{this.props.sign}</Button> 
 					</Col>
 					</OverlayTrigger>

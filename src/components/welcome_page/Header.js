@@ -19,9 +19,10 @@ class Header extends React.Component {
     return (
       <Container fluid style={{ padding: '10px', backgroundColor: 'black', color: 'white' }}>
        <Row>
-       <Col xs='9'>
-        <h1>Platform-Up</h1>
+        <Col>
+         <h1>Platform-Up</h1>
         </Col>
+        <Col md="auto">
         <Nav fill variant="tabs">
          <Nav.Item>
           <Nav.Link href="/ide">IDE</Nav.Link>
@@ -30,9 +31,13 @@ class Header extends React.Component {
           <Nav.Link href="/developers">Developers</Nav.Link>
          </Nav.Item>
          <Nav.Item>
+          <Nav.Link href="/contact">Contact Us</Nav.Link>
+         </Nav.Item>
+         <Nav.Item>
           <Button onClick={this.onRChange}>{this.state.route}</Button>
          </Nav.Item>
          </Nav>
+         </Col>
         </Row>
       </Container>
     );

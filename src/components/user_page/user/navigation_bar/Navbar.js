@@ -23,25 +23,28 @@ class navbar extends React.Component {
 					 >
            <Navbar.Brand eventkey={0}>Platform-Up</Navbar.Brand>
            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <Navbar.Collapse id="responsive-navbar-nav" >
           <Nav className="mr-auto">
             <Nav.Link eventkey={1} as={Link} to='user/finalcontest'>Contest</Nav.Link>
             <Nav.Link eventkey={2}as={Link} to='/ide'>Online IDE</Nav.Link>
           </Nav>
-          <Nav fill style={{ marginRight: '10px' }}>
+          <Nav md="auto" >
 					    <Nav.Link eventkey={6} as={Link} to='/user/about'>
-					    	<Image src={svg} rounded style={{ height: '40px'}} />
+					    	<Image src={svg} rounded style={{ height: '50px'}} />
 					    </Nav.Link>
 					    <NavDropdown alignRight id="collasible-nav-dropdown">
-					    	<NavDropdown.Item eventkey={6} as={Link} to='/user/about'>About</NavDropdown.Item>
+					    	<NavDropdown.Item eventkey={6} as={Link} to='/user/about'>
+					    	 <Button block variant="outline-dark">About</Button>
+					    	</NavDropdown.Item>
 					    	<NavDropdown.Item eventkey={7}>
-					    		<Button onClick={this.props.logout}>Sign Out</Button>
+					    		<Button block variant="outline-dark" onClick={this.props.logout}>Sign Out</Button>
 					    	</NavDropdown.Item>
 					    </NavDropdown>
 					</Nav>
         </Navbar.Collapse>
       </Navbar>
-					<div className='coc'>
+      <br />
+					<div>
 						<Switch>
 							<Route path="/user/finalcontest"
 								exact

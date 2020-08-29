@@ -12,9 +12,7 @@ export default class Welcome extends React.Component {
     }
 
     onRouteChange = (text) => {
-        this.setState({
-            route: text
-        })
+        this.setState({ route: text })
     }
     
    render() {

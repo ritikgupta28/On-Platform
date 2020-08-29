@@ -6,7 +6,8 @@ import Ide from './components/ide/Ide'
 import Admin from './components/admin_page/admin/Admin';
 import User from './components/user_page/user/User';
 import Developers from './components/developers/Developers';
-import ErrorHandler from './components/error_handler/ErrorHandler'
+import ErrorHandler from './components/error_handler/ErrorHandler';
+import Contact from './components/welcome_page/Contact'
 
 class App extends Component {
   state = {
@@ -256,6 +257,13 @@ class App extends Component {
           exact
           render = {props => (
             <Ide />
+          )}
+        />
+        <Route
+          path="/contact"
+          exact
+          render = {props => (
+            <Contact />
           )}
         />
         <Redirect to="/" />

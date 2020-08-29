@@ -9,7 +9,7 @@ class Header extends React.Component {
             <Col xs='5'>
              <h1>Platform-Up</h1>
              </Col>
-             <Col>
+             <Col md="auto">
              <h1>Developers</h1>
              </Col>
              </Row>

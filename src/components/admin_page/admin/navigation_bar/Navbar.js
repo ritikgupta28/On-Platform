@@ -35,24 +35,26 @@ class navbar extends React.Component {
 					    		<NavDropdown title="Contest" id="collasible-nav-dropdown">
 					    			<NavDropdown.Item eventkey={3} as={Link} to='/admin/newcontest'>New Contest</NavDropdown.Item>
 					    			<NavDropdown.Item eventkey={4} as={Link} to='/admin/finalcontest'>Final Contest</NavDropdown.Item>
-					    			<NavDropdown.Divider />
-					    			<NavDropdown.Item eventkey={5} as={Link} to='/admin/allcontests'>All Contests</NavDropdown.Item>
+					    			<NavDropdown.Item eventkey={5} as={Link} to='/admin/allcontests'>All Contest</NavDropdown.Item>
 					    		</NavDropdown>
 					    	</Nav>
-					    	<Nav fill style={{ marginRight: '10px' }}>
+					    	<Nav md="auto">
 					    		<Nav.Link eventkey={6} as={Link} to='/admin/about'>
-					    		 <Image src={svg} rounded style={{ height: '40px'}} />
+					    		 <Image src={svg} rounded style={{ height: '50px'}} />
 					    		</Nav.Link>
 					    		<NavDropdown alignRight id="collasible-nav-dropdown">
-					    			<NavDropdown.Item eventkey={6} as={Link} to='/admin/about'>About</NavDropdown.Item>
+					    			<NavDropdown.Item eventkey={6} as={Link} to='/admin/about'>
+					    			 <Button block variant="outline-dark">About</Button>
+					    			</NavDropdown.Item>
 					    			<NavDropdown.Item eventkey={7}>
-					    			 <Button onClick={this.props.logout}>Sign Out</Button>
+					    			 <Button block variant="outline-dark" onClick={this.props.logout}>Sign Out</Button>
 					    			</NavDropdown.Item>
 					    		</NavDropdown>
 					    	</Nav>
 						</Navbar.Collapse>
 					</Navbar>
-			    	<div className='coc'>
+					<br />
+			    	<div>
 			    		<Switch>
 					    	<Route
 					    		path="/admin/questions"
