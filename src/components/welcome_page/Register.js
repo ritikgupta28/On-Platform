@@ -1,5 +1,6 @@
 import React from 'react'
-import { Container, Button, Form } from 'react-bootstrap'
+import { Container, Button, Form, Row, Col, Image } from 'react-bootstrap'
+import svg from '../svg/register.svg'
 
 export default class Register extends React.Component {
 	constructor(props) {
@@ -43,9 +44,14 @@ export default class Register extends React.Component {
 
   render() {
     return (
-      <Container style={{ padding: '30px 150px' }}>
-          <h1 style={{ textAlign: 'center' }}>Register</h1>
+      <Container style={{ marginTop: '10px' }}>
+          <h1 style={{ textAlign: 'center', fontSize: '70px' }}>Register</h1>
           <hr />
+          <Row>
+          <Col xs='6'>
+           <Image style={{ height: '400px'}} src={svg} rounded />
+          </Col>
+          <Col>
           <Form>
            <Form.Group controlId="formBasicName">
             <Form.Label>Name</Form.Label>
@@ -109,6 +115,8 @@ export default class Register extends React.Component {
           }
           </Form.Group>
           </Form>
+           </Col>
+          </Row>
       </Container>
     )
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Link, Switch, BrowserRouter as Router, withRouter } from 'react-router-dom'
-import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap'
-
+import { Navbar, Nav, NavDropdown, Button, Image } from 'react-bootstrap'
+import svg from '../../../svg/profile.svg'
 import AllQuestions from '../../AllQuestions'
 import AddQuestion from '../../AddQuestion'
 import NewContest from '../../NewContest'
@@ -39,9 +39,16 @@ class navbar extends React.Component {
 					    			<NavDropdown.Item eventkey={5} as={Link} to='/admin/allcontests'>All Contests</NavDropdown.Item>
 					    		</NavDropdown>
 					    	</Nav>
-					    	<Nav fill>
-					    		<Nav.Link eventkey={6} as={Link} to='/admin/about'>About</Nav.Link>
-					    		<Button eventkey={7} onClick={this.props.logout}>Sign Out</Button>
+					    	<Nav fill style={{ marginRight: '10px' }}>
+					    		<Nav.Link eventkey={6} as={Link} to='/admin/about'>
+					    		 <Image src={svg} rounded style={{ height: '40px'}} />
+					    		</Nav.Link>
+					    		<NavDropdown alignRight id="collasible-nav-dropdown">
+					    			<NavDropdown.Item eventkey={6} as={Link} to='/admin/about'>About</NavDropdown.Item>
+					    			<NavDropdown.Item eventkey={7}>
+					    			 <Button onClick={this.props.logout}>Sign Out</Button>
+					    			</NavDropdown.Item>
+					    		</NavDropdown>
 					    	</Nav>
 						</Navbar.Collapse>
 					</Navbar>

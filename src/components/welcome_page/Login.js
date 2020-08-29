@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button, Container, Form } from 'react-bootstrap'
+import { Button, Container, Form, Row, Image, Col } from 'react-bootstrap'
+import svg from '../svg/login.svg'
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -32,9 +33,14 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <Container style={{ padding: '30px 150px' }}>
-          <h1 style={{ textAlign: 'center' }}>Login</h1>
-          <hr />
+      <Container style={{ marginTop: '10px' }}>
+        <h1 style={{ textAlign: 'center', fontSize: '70px' }}>Login</h1>
+        <hr />
+        <Row>
+        <Col >
+         <Image style={{ height: '350px'}} src={svg} rounded />
+         </Col>
+         <Col>
           <Form>
            <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
@@ -83,6 +89,8 @@ export default class Login extends React.Component {
           }
           </Form.Group>
           </Form>
+          </Col>
+          </Row>
       </Container>
     )
   }
