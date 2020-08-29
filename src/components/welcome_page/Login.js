@@ -33,7 +33,7 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <Container style={{ marginTop: '10px' }}>
+      <Container style={{ marginTop: '40px', marginBottom: '40px' }}>
         <h1 style={{ textAlign: 'center', fontSize: '70px' }}>Login</h1>
         <hr />
         <Row>

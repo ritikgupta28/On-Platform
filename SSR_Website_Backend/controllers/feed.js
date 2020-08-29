@@ -386,7 +386,8 @@ exports.getResult = (req, res, next) => {
 			const participants = contest.participant.users;
 			res.status(200).json({
 				message: 'Fetched Participant Successfully',
-				participants: participants
+				participants: participants,
+				count: contest.participant.users.length
 			});
 		})
 		.catch(err => {

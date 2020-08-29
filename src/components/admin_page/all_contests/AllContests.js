@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Spinner } from 'react-bootstrap'
-import AllContestsCard from './AllContestsCard'
+import Card from './AllContestsCard'
 import ErrorHandler from '../../error_handler/ErrorHandler'
 
 class AllContests extends Component {
@@ -61,7 +61,7 @@ class AllContests extends Component {
 			<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 			{
 					this.state.allcontest.map(contest => (
-					<AllContestsCard
+					<Card
 						sign={'Result'}
 						key={contest._id}
 						title={contest.contestName}

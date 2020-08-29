@@ -12,6 +12,7 @@ class Result extends Component {
 			code: null,
 			showCode: false,
 			participants: [],
+			count: '0',
 			error: null
 		}
 	};
@@ -32,7 +33,10 @@ class Result extends Component {
 		.then(resData=> {
 			this.setState({ loading: false });
 			if(status === 200) {
-			  this.setState({ participants: resData.participants });
+			  this.setState({ 
+			  	participants: resData.participants,
+			  	count: resData.count 
+			  });
 		  }
 		  else {
 		  	throw new Error(resData.message);
@@ -72,9 +76,10 @@ class Result extends Component {
 			    	<Ide code={this.state.code} />
 			    	:
 			    	<div>
+			    	<h2 style={{ textAlign: 'center', margin: '10px' }}>Total Number of participants is: {this.state.count}</h2>
 				{
 					this.state.participants.map(user => (
-						<Container style={{ padding: '8px', fontSize: '20px', border: '1px solid black'}}>
+						<Container style={{ padding: '10px 50px', fontSize: '20px', border: '1px solid black'}}>
 						  <Row>
 						    <Col>
 								 <p>{user.userId.name}</p>

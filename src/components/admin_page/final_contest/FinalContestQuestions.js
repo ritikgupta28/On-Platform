@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Spinner } from 'react-bootstrap'
+import { Spinner, Container } from 'react-bootstrap'
 import Card from './QuestionCard';
 import ErrorHandler from '../../error_handler/ErrorHandler'
 import Time from '../../Time';
@@ -58,7 +58,7 @@ class FinalContestQuestions extends Component {
 
 	render() {
 		return (
-			<div>
+			<Container>
 				{this.state.loading && (
 					<div style={{ textAlign: 'center', marginTop: '2rem' }}>
 						<Spinner
@@ -70,10 +70,15 @@ class FinalContestQuestions extends Component {
 					</div>
 				)}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-				{console.log(this.state.loading)}
+				<div style={{ marginBottom: '20px', textAlign: 'right' }}>
 				{!this.state.loading && (
-					this.state.end ? <span> Contest Over </span> : <Time onTimeChange={this.onTimeChange} date={this.state.date} time={this.state.time} />
+					this.state.end 
+					? 
+					<span> Contest Over </span> 
+					: 
+					<Time onTimeChange={this.onTimeChange} date={this.state.date} time={this.state.time} />
 				)}
+				</div>
 				{this.state.questions.map(q=> (
 					<Card
 						sign={'view'}
@@ -82,7 +87,7 @@ class FinalContestQuestions extends Component {
 						title={q.questionId.title}
 					/>
 				))}
-			</div>
+			</Container>
 		)
 	}
 }
