@@ -23,19 +23,19 @@ class Header extends React.Component {
          <h1>Platform-Up</h1>
         </Col>
         <Col md="auto">
-        <Nav fill variant="tabs">
-         <Nav.Item>
-          <Nav.Link href="/ide">IDE</Nav.Link>
-         </Nav.Item>
-         <Nav.Item>
-          <Nav.Link href="/developers">Developers</Nav.Link>
-         </Nav.Item>
-         <Nav.Item>
-          <Nav.Link href="/contact">Contact Us</Nav.Link>
-         </Nav.Item>
-         <Nav.Item>
+        <Nav fill>
+          <Nav.Link href="/ide">
+           <Button>IDE</Button>
+          </Nav.Link>
+          <Nav.Link href="/developers">
+           <Button>Developers</Button>
+          </Nav.Link>
+          <Nav.Link href="/contact">
+           <Button>Contact Us</Button>
+          </Nav.Link>
+         <Nav.Link>
           <Button onClick={this.onRChange}>{this.state.route}</Button>
-         </Nav.Item>
+         </Nav.Link>
          </Nav>
          </Col>
         </Row>

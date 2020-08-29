@@ -72,7 +72,7 @@ class Addques extends React.Component {
 
 	render() {
 		return (
-			<Container style={{ padding: '10px 50px'}}>
+			<Container style={{ padding: '8px 50px'}}>
 					<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 					<Form>
 					 <Form.Group controlId="exampleForm.ControlTextarea1">
@@ -153,7 +153,9 @@ class Addques extends React.Component {
              </Form.Group>
             </Col>
            </Row>
-					 <Button onClick={this.handle}>ADD Question</Button>
+           <Form.Group style={{ textAlign: 'center' }}>
+					  <Button onClick={this.handle}>ADD Question</Button>
+					 </Form.Group>
 					</Form>
 			</Container>
 		)

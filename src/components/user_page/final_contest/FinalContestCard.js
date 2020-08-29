@@ -12,11 +12,8 @@ export default class CardContest extends React.Component {
 			  		<Col xs='2'>
 			  			{this.props.start ? <Link to={`/finalcontest/questions/${this.props.id}`}> <p>{this.props.title}</p> </Link> : <p>{this.props.title}</p> }
 					</Col>
-					<Col xs='8'>
+					<Col xs='10'>
 						{this.props.start ? <span> 00:00:00 </span> : <Time onTimeChange={this.props.onTimeChange} date={this.props.date} time={this.props.time} />}
-					</Col>
-					<Col xs='2'>
-						Register
 					</Col>
 				</Row>
 			</Container>

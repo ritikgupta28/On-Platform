@@ -5,16 +5,18 @@ import { Spinner } from 'react-bootstrap'
 
 class FinalContest extends Component {
 	constructor(props) {
-    super(props);
-    this.state = {
+    	super(props);
+    	this.state = {
     		start: false,
     		loading: true,
 			finalcontest: [],
-			error: null
+			error: null,
+			reg: 'Register'
 		}
 	};
 
-  componentDidMount() {
+	componentDidMount() {
+		let status;
 		fetch('http://localhost:8000/feed/userfinalcontest', {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
@@ -22,12 +24,13 @@ class FinalContest extends Component {
 			}
 		})
 		.then(res => {
-			if (res.status !== 200) {
-				throw new Error('error');
-			}
+			status = res.status;
 			return res.json();
 		})
 		.then(resData=> {
+			if(status !== 200) {
+				throw new Error(resData.message);
+			}
 			this.setState({
 				finalcontest: resData.finalcontest,
 				loading: false
@@ -62,8 +65,7 @@ class FinalContest extends Component {
 			  		</div>
 			  	)}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-				{
-					this.state.finalcontest.map(contest => (
+				{this.state.finalcontest.map(contest => (
 					<Card
 						start={this.state.start}
 						date={contest.contestStartDate}
@@ -75,8 +77,7 @@ class FinalContest extends Component {
 						questions={contest.questions}
 						admin={contest.admin.name}
 					/>
-				  ))
-				}
+				))}
 			</Fragment>
 		)
 	}
