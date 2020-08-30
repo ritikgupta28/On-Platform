@@ -74,7 +74,10 @@ class FinalContestQuestions extends Component {
 				{!this.state.loading && (
 					this.state.end 
 					? 
+					<div>
+					{window.location.reload()}
 					<span> Contest Over </span> 
+					</div>
 					: 
 					<Time onTimeChange={this.onTimeChange} date={this.state.date} time={this.state.time} />
 				)}
