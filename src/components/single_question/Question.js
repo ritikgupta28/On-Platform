@@ -17,7 +17,7 @@ class Question extends React.Component {
 componentDidMount() {
 	let status;
 	const questionId = this.props.match.params.id;
-    fetch('http://localhost:8000/feed/question/' + questionId)
+    fetch('https://on-platform-api.herokuapp.com/feed/question/' + questionId)
       .then(res => {
       	status=res.status;
         return res.json();

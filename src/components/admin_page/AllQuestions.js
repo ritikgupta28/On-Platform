@@ -15,7 +15,7 @@ class AllQuestions extends Component {
 
 	componentDidMount() {
 		let status;
-		fetch('http://localhost:8000/feed/questions', {
+		fetch('https://on-platform-api.herokuapp.com/feed/questions', {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ class AllQuestions extends Component {
 			this.setState({ questionPage: page });
 		}
 
-		fetch('http://localhost:8000/feed/questions?page=' + page , {
+		fetch('https://on-platform-api.herokuapp.com/feed/questions?page=' + page , {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ class AllQuestions extends Component {
 
 	handle = (e) => {
 		let status;
-		fetch('http://localhost:8000/feed/newcontest', {
+		fetch('https://on-platform-api.herokuapp.com/feed/newcontest', {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,

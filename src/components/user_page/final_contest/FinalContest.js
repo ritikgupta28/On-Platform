@@ -17,7 +17,7 @@ class FinalContest extends Component {
 
 	componentDidMount() {
 		let status;
-		fetch('http://localhost:8000/feed/userfinalcontest', {
+		fetch('https://on-platform-api.herokuapp.com/feed/userfinalcontest', {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ class FinalContest extends Component {
 	onRegChange = (id) => {
 		let status;
 		const contestId = id;
-		fetch('http://localhost:8000/feed/userfinalcontest/registration/' + contestId, {
+		fetch('https://on-platform-api.herokuapp.com/feed/userfinalcontest/registration/' + contestId, {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'

@@ -16,7 +16,7 @@ class FinalContest extends Component {
 
 	componentDidMount() {
 		let status;
-		fetch('http://localhost:8000/feed/finalcontest', {
+		fetch('https://on-platform-api.herokuapp.com/feed/finalcontest', {
 			headers: {
         		Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ class FinalContest extends Component {
 
 	handler = (event) => {
 		let status;
-		fetch('http://localhost:8000/feed/allcontests', {
+		fetch('https://on-platform-api.herokuapp.com/feed/allcontests', {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,

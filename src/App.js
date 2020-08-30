@@ -53,7 +53,7 @@ class App extends Component {
 
   signupAdminHandler = (event, authData) => {
     event.preventDefault();
-    fetch('http://localhost:8000/authAdmin/signup', {
+    fetch('https://on-platform-api.herokuapp.com/authAdmin/signup', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ class App extends Component {
 
   signupUserHandler = (event, authData) => {
     event.preventDefault();
-    fetch('http://localhost:8000/authUser/signup', {
+    fetch('https://on-platform-api.herokuapp.com/authUser/signup', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ class App extends Component {
 
   loginAdminHandler = (event, authData) => {
     event.preventDefault();
-    fetch('http://localhost:8000/authAdmin/login', {
+    fetch('https://on-platform-api.herokuapp.com/authAdmin/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -167,7 +167,7 @@ class App extends Component {
 
   loginUserHandler = (event, authData) => {
     event.preventDefault();
-    fetch('http://localhost:8000/authUser/login', {
+    fetch('https://on-platform-api.herokuapp.com/authUser/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

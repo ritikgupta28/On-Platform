@@ -21,7 +21,7 @@ class Addques extends React.Component {
 	handle = (e) => {
 		let status;
 		const { title, content, sinput, soutput, inputfile, outputfile } = this.state;
-		fetch('http://localhost:8000/feed/question', {
+		fetch('https://on-platform-api.herokuapp.com/feed/question', {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
