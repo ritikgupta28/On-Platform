@@ -29,7 +29,7 @@ exports.getQuestions = (req, res, next) => {
 		})
 		.catch(err => {
 			const error = new Error;
-			error.message = 'admin not found'
+			error.message = 'Admin not found'
 			next(error);
 		});
 };
@@ -67,7 +67,7 @@ exports.createQuestion = (req, res, next) => {
 		})
 		.catch(err => {
 			const error = new Error;
-			error.message = 'faild to add question'
+			error.message = 'Failed to add question'
 			next(error);
 		});
 };
@@ -83,7 +83,7 @@ exports.getQuestion = (req, res, next) => {
 		})
 		.catch(err => {
       const error = new Error;
-			error.message = 'faild to fetch question'
+			error.message = 'Failed to fetch question'
       next(error);
     });
 };
@@ -104,7 +104,7 @@ exports.postNewContest = (req, res, next) => {
 		})
 		.catch(err => {
 			const error = new Error;
-			error.message = 'faild to add question';
+			error.message = 'Failed to add question';
       next(error);
     });
 };
@@ -123,13 +123,13 @@ exports.getNewContest = (req, res, next) => {
 			})
 			.catch(err => {
 				const error = new Error;
-			  error.message = 'faild to fetch question';
+			  error.message = 'Failed to fetch question';
         next(error);
 			});
 		})
 		.catch(err => {
 			const error = new Error;
-			error.message = 'faild to find admin';
+			error.message = 'Failed to find admin';
       next(error);
 		});
 };
@@ -152,7 +152,7 @@ exports.postNewContestDeleteQuestion = (req, res, next) => {
 		})
 		.catch(err => {
 			const error = new Error;
-			error.message = 'failed to find admin';
+			error.message = 'Failed to find admin';
       next(error);
 		});
 };
@@ -199,17 +199,21 @@ exports.postFinalContest = (req, res, next) => {
 		})
 		.then(result => {
 			res.status(200).json({
-				message: 'successfully'
+				message: 'Successfully added'
 			})
 			return admn.clearContest();
 		})
 		.catch(err => {
-	 		next(err);
+	 		const error = new Error;
+		  error.message = 'Failed to add question'
+      next(error);
 	 	});
 	})
 	.catch(err => {
-	 	next(err);
-    });
+	 	const error = new Error;
+		error.message = 'Failed to fetch admin'
+    next(error);
+  });
 }
 
 exports.getFinalContest = (req, res, next) => {
@@ -222,7 +226,7 @@ exports.getFinalContest = (req, res, next) => {
 	})
 	.catch(err => {
 		const error = new Error;
-		error.message = 'Faild to fetch contests'
+		error.message = 'Failed to fetch contests'
     next(error);
   });
 }
@@ -236,8 +240,10 @@ exports.getUserFinalContest = (req, res, next) => {
 		});
 	})
 	.catch(err => {
-      next(err);
-    });
+    const error = new Error;
+		error.message = 'Failed to fetch questions'
+    next(error);
+  });
 }
 
 exports.getUserFinalContestRegistration = (req, res, next) => {
@@ -251,8 +257,10 @@ exports.getUserFinalContestRegistration = (req, res, next) => {
 		});
 	})
 	.catch(err => {
-		next(err);
-    });
+		const error = new Error;
+		error.message = 'Registeration Unuccessfull'
+    next(error);
+  });
 }
 
 exports.getFinalContestQuestions = (req, res, next) => {
@@ -273,14 +281,16 @@ exports.getFinalContestQuestions = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-    		next(err);
-    	});
+    	const error = new Error;
+		  error.message = 'Failed to fetch questions'
+      next(error);
+    });
 	})
 	.catch(err => {
 		const error = new Error;
-		error.message = 'Faild to fetch contest'
-      	next(error);
-    });
+		error.message = 'Failed to fetch contest'
+    next(error);
+  });
 }
 
 exports.getUserFinalContestQuestions = (req, res, next) => {
@@ -303,12 +313,16 @@ exports.getUserFinalContestQuestions = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-			next(err);
+			const error = new Error;
+		  error.message = 'Failed to fetch contest questions'
+      next(error);
 		});
 	})
 	.catch(err => {
-		next(err);
-    });
+		const error = new Error;
+		error.message = 'Failed to fetch contest'
+    next(error);
+  });
 }
 
 exports.postAllContests = (req, res, next) => {
@@ -359,7 +373,7 @@ exports.getAllContests = (req, res, next) => {
 	})
 	.catch(err => {
 		const error = new Error;
-		error.message = 'Faild to fetch all contest';
+		error.message = 'Failed to fetch all contest';
     next(error);
   });
 }
@@ -379,13 +393,13 @@ exports.getAllContestsQuestions = (req, res, next) => {
 		})
 		.catch(err => {
 			const error = new Error;
-			error.message = 'Faild to fetch all contest questions'
+			error.message = 'Failed to fetch all contest questions'
       next(error);
     });
 	})
 	.catch(err => {
       const error = new Error;
-			error.message = 'Faild to fetch Admin';
+			error.message = 'Failed to fetch Contest';
 			error.statusCode = 400;
       next(error);
     });
@@ -395,15 +409,19 @@ exports.getResult = (req, res, next) => {
 	const contestId = req.params.contestId;
 	AllContest.findById(contestId)
 	.then(contest => {
-		contest.populate('participant.users.userId')
+		contest.populate('participant.users.questions.questionId')
 		.execPopulate()
 		.then(contest => {
-			const participants = contest.participant.users;
-			res.status(200).json({
-				message: 'Fetched Participant Successfully',
-				participants: participants,
-				count: contest.participant.users.length
-			});
+			contest.populate('participant.users.userId')
+			.execPopulate()
+			.then(contest => {
+			  const participants = contest.participant.users;
+			  res.status(200).json({
+				  message: 'Fetched Participant Successfully',
+				  participants: participants,
+				  count: contest.participant.users.length
+			  });
+		  })
 		})
 		.catch(err => {
 			const error = new Error;

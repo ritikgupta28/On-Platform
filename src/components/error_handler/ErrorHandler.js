@@ -12,7 +12,12 @@ const errorHandler = props => (
       >
       <Modal.Dialog style={{ margin: '0px'}}>
        <Modal.Header closeButton>
+       {props.result
+        ?
+        <Modal.Title>Message</Modal.Title>
+        :
         <Modal.Title>An Error Occurred</Modal.Title>
+       }
        </Modal.Header>
        <Modal.Body>
         <p>{props.error.message}</p>

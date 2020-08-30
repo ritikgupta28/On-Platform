@@ -91,7 +91,7 @@ class Result extends Component {
                 								{user.questions.map(q => (
 								  					<Dropdown.Item>
 														<Button variant="outline-primary" value={q.code} onClick={this.onShowCode}>
-															{q.questionId}
+															{q.questionId.title} -> {q.score}
 														</Button>
 													</Dropdown.Item>
 												))}

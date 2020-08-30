@@ -7,6 +7,7 @@ class FinalContest extends Component {
 	constructor(props) {
     	super(props);
     	this.state = {
+    		result: false,
     		start: false,
     		loading: true,
 			finalcontest: [],
@@ -68,6 +69,7 @@ class FinalContest extends Component {
 				throw new Error(resData.message);
 			}
 			else {
+				this.setState({ result: true })
 				throw new Error(resData.message);
 			}
 		})
@@ -87,7 +89,7 @@ class FinalContest extends Component {
 			  			/>
 			  		</div>
 			  	)}
-				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+				<ErrorHandler result={this.state.result} error={this.state.error} onHandle={this.errorHandler} />
 				{this.state.finalcontest.map(contest => (
 					<Card
 						onRegChange={this.onRegChange}
