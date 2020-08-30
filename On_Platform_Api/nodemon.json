@@ -1,0 +1,8 @@
+{
+	"env": {
+		"MONGO_USER": "ritikgupta",
+		"MONGO_PASSWORD": "ZU5DvtmxnizGbPsu",
+		"MONGO_DATABASE_NAME": "on_platform",
+		"SENDGRID_KEY": "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"
+	}
+}
