@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Form, Button, Row, Col, Image } from 'react-bootstrap'
 import ErrorHandler from '../error_handler/ErrorHandler'
 import svg from '../svg/contact.svg'
+import Footer from './Footer'
 
 export default class Contact extends React.Component {
   constructor() {
@@ -61,9 +62,10 @@ export default class Contact extends React.Component {
 
 	render() {
 		return (
+      <div>
+      <h1 style={{ backgroundColor: 'black', textAlign: 'center', fontSize: '70px', color: 'white' }}>Contact Us</h1>
 			<Container style={{ marginTop: '40px'}}>
        <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-			 <h1 style={{ textAlign: 'center', fontSize: '70px' }}>Contact Us</h1>
        <hr />
        <Row>
        <Col>
@@ -116,10 +118,14 @@ export default class Contact extends React.Component {
            </Form>
            </Col>
            <Col md="auto">
-            <Image style={{ height: '350px'}} src={svg} rounded />
+            <Image style={{ height: '400px'}} src={svg} rounded />
            </Col>
           </Row>
-			</Container>
+          </Container>
+          <div style={{ marginTop: '40px'}}>
+          <Footer />
+          </div>
+			</div>
 		)
 	}
 }

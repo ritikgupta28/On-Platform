@@ -8,6 +8,7 @@ export default class Admin extends React.Component {
 		return (
 			<div>
 				<Navbar 
+				 hpath={this.props.hpath}
 				 adminId={this.props.adminId} 
 				 token={this.props.token} 
 				 logout={this.props.logout} 

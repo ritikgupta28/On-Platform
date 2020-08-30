@@ -51,7 +51,7 @@ class FinalContest extends Component {
 		this.setState({ error: null });
 	};
 
-	onRegChange = () => {
+	onRegChange = (id) => {
 		this.setState({ reg: 'Registration completed' })
 	}
 

@@ -271,9 +271,9 @@ class App extends Component {
     );
     if(this.state.isAdminAuth) {
       routes = (
-        <Switch>
+      	<Switch>
           <Route
-            path="/admin/questions"
+            path="/"
             exact
             render = {props => (
               <Admin
@@ -283,76 +283,19 @@ class App extends Component {
               />
             )}
           />
-          <Route
-            path="/admin/question/id"
-            render = {props => (
-              <Admin
-                token = {this.state.token}
-              />
-            )}
-          />
-          <Route
-            path="/admin/newcontest"
-            exact
-            render = {props => (
-              <Admin
-                {...props}
-                token = {this.state.token}
-              />
-            )}
-          />
-          <Route
-            path="/admin/finalcontest"
-            exact
-            render = {props => (
-              <Admin
-                {...props}
-                token = {this.state.token}
-              />
-            )}
-          />
-          <Route
-            path="/admin/allcontests"
-            exact
-            render = {props => (
-              <Admin
-                {...props}
-                token = {this.state.token}
-              />
-            )}
-          />
-          <Route
-            path="/admin/about"
-            exact
-            render = {props => (
-              <Admin
-                {...props}
-                token = {this.state.token}
-              />
-            )}
-          />
           <Redirect to="/admin/questions" />
-        </Switch>
+          </Switch>
       );
     }
     if(this.state.isUserAuth) {
       routes = (
         <Switch>
           <Route
-            path="/user/contest"
+            path="/"
             exact
             render = {props => (
               <User
                 logout={this.logoutHandler}
-                token = {this.state.token}
-              />
-            )}
-          />
-          <Route
-            path="/user/about"
-            exact
-            render = {props => (
-              <User
                 token = {this.state.token}
               />
             )}

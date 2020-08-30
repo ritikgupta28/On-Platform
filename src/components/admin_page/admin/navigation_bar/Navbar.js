@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Link, Switch, BrowserRouter as Router, withRouter } from 'react-router-dom'
+import { Route, Link, Switch, BrowserRouter as Router, withRouter, Redirect } from 'react-router-dom'
 import { Navbar, Nav, NavDropdown, Button, Image } from 'react-bootstrap'
 import svg from '../../../svg/profile.svg'
 import AllQuestions from '../../AllQuestions'
@@ -42,7 +42,7 @@ class navbar extends React.Component {
 					    		<Nav.Link eventkey={6} as={Link} to='/admin/about'>
 					    		 <Image src={svg} rounded style={{ height: '50px'}} />
 					    		</Nav.Link>
-					    		<NavDropdown alignRight id="collasible-nav-dropdown">
+					    		<NavDropdown title="" alignRight id="collasible-nav-dropdown">
 					    			<NavDropdown.Item eventkey={6} as={Link} to='/admin/about'>
 					    			 <Button block variant="outline-dark">About</Button>
 					    			</NavDropdown.Item>
@@ -152,6 +152,7 @@ class navbar extends React.Component {
 			    	   				/>
 				    	   		)}
 				    	   	/>
+				    	   	<Redirect to="/admin/questions" />
 					    </Switch>
 		    		</div>
 				</div>

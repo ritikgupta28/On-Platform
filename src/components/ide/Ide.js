@@ -16,7 +16,8 @@ class App extends React.Component {
       result: '',
       code: this.props.code,
       language: 'text/x-c++src',
-      output: false
+      output: false,
+      inputShow: false
     };
     this.handleCompile = this.handleCompile.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -117,9 +118,25 @@ class App extends React.Component {
               className="code"
             />
            </Form.Group>
-           <Form.Label>Input</Form.Label>
+           <Form.Group style={{ marginLeft: '20px' }}>
            <Row>
-           <Col xs='8'>
+           <Col>
+           <Row>
+           <Form.Check onClick={() => this.setState({ inputShow: !this.state.inputShow })}/>
+           <Form.Label>Input</Form.Label>
+           </Row>
+           </Col>
+           <Col md="auto">
+           <Button variant="outline-success" onClick={this.handleCompile}>Run Code</Button>
+          </Col>
+          <Col md="auto">
+           <Button variant="outline-primary" onClick={this.handleSubmit}>Submit</Button>
+          </Col>
+           </Row>
+           </Form.Group>
+           <Row>
+           <Col>
+           {this.state.inputShow && (
            <Form.Group controlId="exampleForm.ControlTextarea1">
            <Form.Control 
             placeholder="Enter input here"
@@ -130,15 +147,10 @@ class App extends React.Component {
             onChange={this.onInputDataChange}
             />
            </Form.Group>
+           )}
            </Col>
-           <Col xs='2'>
-          <Button onClick={this.handleCompile}>Compile</Button>
-          </Col>
-          <Col xs='2'>
-          <Button onClick={this.handleSubmit}>Submit</Button>
-          </Col>
           </Row>
-          <br />
+          
           {this.state.output && (
             <Form.Group controlId="exampleForm.ControlTextarea1">
             <Form.Label>Output</Form.Label>
