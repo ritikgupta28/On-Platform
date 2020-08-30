@@ -5,7 +5,7 @@ class Footer extends React.Component {
     render() {
         return (
             <Container fluid style={{ padding: '10px', backgroundColor: 'black', color: 'white', textAlign: 'center' }}>
-                <h1>Contact Us.</h1>
+                <h1>Coding Life</h1>
                 <p>© 2020 Platfrom-Up | All right reserved.</p>
             </Container>
         );

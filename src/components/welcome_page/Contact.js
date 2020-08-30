@@ -3,6 +3,7 @@ import { Container, Form, Button, Row, Col, Image } from 'react-bootstrap'
 import ErrorHandler from '../error_handler/ErrorHandler'
 import svg from '../svg/contact.svg'
 import Footer from './Footer'
+import Header from './ContactHeader' 
 
 export default class Contact extends React.Component {
   constructor() {
@@ -63,7 +64,7 @@ export default class Contact extends React.Component {
 	render() {
 		return (
       <div>
-      <h1 style={{ backgroundColor: 'black', textAlign: 'center', fontSize: '70px', color: 'white' }}>Contact Us</h1>
+      <Header />
 			<Container style={{ marginTop: '40px'}}>
        <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
        <hr />
