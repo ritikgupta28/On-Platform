@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import Card from './QuestionCard';
-import { Spinner } from 'react-bootstrap'
+import { Spinner, Container } from 'react-bootstrap'
 import Pagination from '../pagination/Pagination'
 import ErrorHandler from '../error_handler/ErrorHandler'
 
@@ -39,7 +39,7 @@ class AllQuestions extends Component {
 	loadQuestions = direction => {
 		let status;
 		if (direction) {
-			this.setState({ questionsLoading: true, questions: [] });
+			this.setState({ loading: true, questions: [] });
 		}
 		let page = this.state.questionPage;
 		if (direction === 'next') {
@@ -111,9 +111,9 @@ class AllQuestions extends Component {
 
 	render() {
 		return (
-		<Fragment>
+		<Container>
 			<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-			{this.state.questionsLoading && (
+			{this.state.loading && (
 				<div style={{ textAlign: 'center', marginTop: '2rem' }}>
 					<Spinner 
 						size='lg'
@@ -123,7 +123,6 @@ class AllQuestions extends Component {
 					/>
 		 		</div>
 			)}
-			{!this.state.questionsLoading && (
 				<Pagination
 					onPrevious={this.loadQuestions.bind(this, 'previous')}
 					onNext={this.loadQuestions.bind(this, 'next')}
@@ -143,8 +142,7 @@ class AllQuestions extends Component {
 				))}
 		 		<br/>
 		 		</Pagination>
-		 	)}
-		 </Fragment>
+		 </Container>
 		)
 	}
 }

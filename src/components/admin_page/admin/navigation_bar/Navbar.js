@@ -12,6 +12,7 @@ import AllContestsQuestions from '../../all_contests/AllContestsQuestions'
 import Question from '../../../single_question/Question'
 import Result from '../../all_contests/Result'
 import About from '../About'
+import Help from '../Help'
 
 class navbar extends React.Component {
 	render() {
@@ -45,6 +46,9 @@ class navbar extends React.Component {
 					    		<NavDropdown title="" alignRight id="collasible-nav-dropdown">
 					    			<NavDropdown.Item eventkey={6} as={Link} to='/admin/about'>
 					    			 <Button block variant="outline-dark">About</Button>
+					    			</NavDropdown.Item>
+					    			<NavDropdown.Item eventkey={6} as={Link} to='/admin/help'>
+					    			 <Button block variant="outline-dark">Help</Button>
 					    			</NavDropdown.Item>
 					    			<NavDropdown.Item eventkey={7} as={Link} to='/'>
 					    			 <Button block variant="outline-dark" onClick={this.props.logout}>Sign Out</Button>
@@ -147,6 +151,15 @@ class navbar extends React.Component {
 				    	  		path="/result/:id"
 			    		   		render = {props => (
 			    		   			<Result
+			    	   					{...props}
+			    	   					token={this.props.token}
+			    	   				/>
+				    	   		)}
+				    	   	/>
+				    	   	 <Route
+				    	  		path="/admin/help"
+			    		   		render = {props => (
+			    		   			<Help
 			    	   					{...props}
 			    	   					token={this.props.token}
 			    	   				/>

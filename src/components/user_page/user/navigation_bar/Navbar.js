@@ -7,6 +7,7 @@ import FinalContestQuestions from '../../final_contest/FinalContestQuestions'
 import Question from '../../../single_question/Question'
 import Ide from '../../../ide/Ide'
 import About from '../About'
+import Help from '../Help'
 
 class navbar extends React.Component {
 	render() {
@@ -35,6 +36,9 @@ class navbar extends React.Component {
 					    <NavDropdown alignRight id="collasible-nav-dropdown">
 					    	<NavDropdown.Item eventkey={6} as={Link} to='/user/about'>
 					    	 <Button block variant="outline-dark">About</Button>
+					    	</NavDropdown.Item>
+					    	<NavDropdown.Item eventkey={6} as={Link} to='/user/help'>
+					    	 <Button block variant="outline-dark">Help</Button>
 					    	</NavDropdown.Item>
 					    	<NavDropdown.Item eventkey={7} as={Link} to='/'>
 					    		<Button block variant="outline-dark" onClick={this.props.logout}>Sign Out</Button>
@@ -87,6 +91,16 @@ class navbar extends React.Component {
 					    		exact
 					    		render = {props => (
 					    			<Ide
+					    			  {...props}
+			    	   			  token={this.props.token}
+			    	   			/>
+					    		)}
+					    	/>
+					    	<Route
+					    		path="/user/help"
+					    		exact
+					    		render = {props => (
+					    			<Help
 					    			  {...props}
 			    	   			  token={this.props.token}
 			    	   			/>

@@ -1,19 +1,18 @@
 import React from 'react';
 import { Button } from 'react-bootstrap'
-import './Pagination.css';
 
 const paginator = props => (
-  <div className="paginator">
+  <div>
     {props.children}
-    <div className="paginator__controls">
+    <div style={{ textAlign: 'center' }}>
       {props.currentPage > 1 && (
-        <Button className="paginator__control" onClick={props.onPrevious}>Previous</Button>
+        <Button style={{ margin: '10px' }} variant="outline-primary" onClick={props.onPrevious}>Previous</Button>
       )}
       {props.currentPage > 1 && props.currentPage < props.lastPage && (
-        <Button className="paginator__control">{props.currentPage}</Button>
+        <Button style={{ margin: '10px' }} variant="outline-primary" >{props.currentPage}</Button>
       )}
       {props.currentPage < props.lastPage && (
-        <Button className="paginator__control" onClick={props.onNext}>Next</Button>
+        <Button style={{ margin: '10px' }} variant="outline-primary" onClick={props.onNext}>Next</Button>
       )}
     </div>
   </div>
