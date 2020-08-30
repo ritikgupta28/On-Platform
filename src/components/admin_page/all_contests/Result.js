@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Container, Button, Spinner, Row, Col, Dropdown, ButtonGroup } from 'react-bootstrap';
 import Ide from '../../ide/Ide'
 
@@ -33,14 +33,14 @@ class Result extends Component {
 		.then(resData=> {
 			this.setState({ loading: false });
 			if(status === 200) {
-			  this.setState({ 
-			  	participants: resData.participants,
-			  	count: resData.count 
-			  });
-		  }
-		  else {
-		  	throw new Error(resData.message);
-		  }
+				this.setState({ 
+					participants: resData.participants,
+					count: resData.count 
+				});
+			}
+			else {
+		  		throw new Error(resData.message);
+			}
 		})
 		.catch(this.catchError);
 	}
@@ -59,56 +59,54 @@ class Result extends Component {
 
 	render() {
 		return (
-			<div>
-			{this.state.loading && (
-     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-	   <Spinner 
-      size='lg'
-      variant="primary"
-      animation="border" 
-      role="status"
-      />
-      </div>
-      )}
-			<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+			<Fragment>
+				{this.state.loading && (
+    				<div style={{ textAlign: 'center', marginTop: '2rem' }}>
+    					<Spinner
+    						size='lg'
+    						variant="primary"
+    						animation="border"
+    						role="status"
+    					/>
+    				</div>
+    			)}
+    			<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 			    {this.state.showCode
 			    	?
 			    	<Ide code={this.state.code} />
 			    	:
 			    	<div>
-			    	<h2 style={{ textAlign: 'center', margin: '10px' }}>Total Number of participants is: {this.state.count}</h2>
-				{
-					this.state.participants.map(user => (
-						<Container style={{ padding: '10px 50px', fontSize: '20px', border: '1px solid black'}}>
-						  <Row>
-						    <Col>
-								 <p>{user.userId.name}</p>
-								</Col>
-								<Col>
-								<Dropdown as={ButtonGroup}>
-								 <Button>Questions</Button>
-                <Dropdown.Toggle split id="dropdown-split-basic" />
-                <Dropdown.Menu>
-                {user.questions.map(q => (
-								  <Dropdown.Item>
-								   <Button variant="outline-primary" value={q.code} onClick={this.onShowCode}>
-								    {q.questionId}
-								   </Button>
-								  </Dropdown.Item>
-								))}
-                </Dropdown.Menu>
-                </Dropdown>
-								</Col>
-								<Col md="auto">
-								<p style={{paddingLeft: '20px'}}>{user.totalScore}</p>
-								</Col>
-							</Row>
-						</Container>
-				    ))
+			    		<h4 style={{ textAlign: 'center', margin: '10px' }}>Total Participants : {this.state.count}</h4>
+						{this.state.participants.map(user => (
+							<Container style={{ padding: '10px 50px', fontSize: '20px', border: '1px solid black'}}>
+							  	<Row>
+							    	<Col xs='2'>
+										<p>{user.userId.name}</p>
+									</Col>
+									<Col xs='9'>
+										<Dropdown as={ButtonGroup}>
+											<Button>Questions</Button>
+                							<Dropdown.Toggle split id="dropdown-split-basic" />
+                							<Dropdown.Menu>
+                								{user.questions.map(q => (
+								  					<Dropdown.Item>
+														<Button variant="outline-primary" value={q.code} onClick={this.onShowCode}>
+															{q.questionId}
+														</Button>
+													</Dropdown.Item>
+												))}
+											</Dropdown.Menu>
+										</Dropdown>
+									</Col>
+									<Col xs='1'>
+										<p>{user.totalScore}</p>
+									</Col>
+								</Row>
+							</Container>
+				    	))}
+					</div>
 				}
-				</div>
-			}
-			</div>
+			</Fragment>
 		)
 	}
 }

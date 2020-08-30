@@ -44,11 +44,11 @@ class Addques extends React.Component {
 		.then(resData => {
 			console.log('2', status)
 			if(status === 200) {
-			  this.props.history.push('/admin/questions');
-		  }
-		  else {
-		  	throw new Error(resData.message);
-		  }
+				this.props.history.push('/admin/questions');
+			}
+			else {
+		  		throw new Error(resData.message);
+			}
 		})
 		.catch(this.catchError);
 	}
@@ -73,30 +73,30 @@ class Addques extends React.Component {
 	render() {
 		return (
 			<Container style={{ padding: '8px 50px'}}>
-					<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-					<Form>
-					 <Form.Group controlId="exampleForm.ControlTextarea1">
-           <Form.Label>Title</Form.Label>
-           <Form.Control 
-            placeholder="Title"
-            name="title"
-            as="textarea" 
-            rows="1" 
-            value={this.state.title}
-					  onChange={this.handler}
-            />
-           </Form.Group>
-           <Form.Group controlId="exampleForm.ControlTextarea1">
-           <Form.Label>Content</Form.Label>
-           <Form.Control 
-            placeholder="Content"
-            name="content"
-            as="textarea" 
-            rows="5" 
-            value={this.state.content}
-						onChange={this.handler}
-            />
-           </Form.Group>
+				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+				<Form>
+					<Form.Group controlId="exampleForm.ControlTextarea1">
+						<Form.Label>Title</Form.Label>
+						<Form.Control
+							placeholder="Title"
+							name="title"
+							as="textarea"
+							rows="1"
+							value={this.state.title}
+							onChange={this.handler}
+						/>
+					</Form.Group>
+					<Form.Group controlId="exampleForm.ControlTextarea1">
+						<Form.Label>Content</Form.Label>
+						<Form.Control
+							placeholder="Content"
+							name="content"
+							as="textarea"
+							rows="5"
+							value={this.state.content}
+							onChange={this.handler}
+						/>
+					</Form.Group>
            <Row>
             <Col>
              <Form.Group controlId="exampleForm.ControlTextarea1">

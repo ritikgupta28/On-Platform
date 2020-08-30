@@ -10,8 +10,7 @@ class FinalContest extends Component {
     		start: false,
     		loading: true,
 			finalcontest: [],
-			error: null,
-			reg: 'Register'
+			error: null
 		}
 	};
 
@@ -52,7 +51,27 @@ class FinalContest extends Component {
 	};
 
 	onRegChange = (id) => {
-		this.setState({ reg: 'Registration completed' })
+		let status;
+		const contestId = id;
+		fetch('http://localhost:8000/feed/userfinalcontest/registration/' + contestId, {
+			headers: {
+				Authorization: 'Bearer ' + this.props.token,
+				'Content-Type': 'application/json'
+			}
+		})
+		.then(res => {
+			status=res.status;
+			return res.json();
+		})
+		.then(resData => {
+			if (status !== 200) {
+				throw new Error(resData.message);
+			}
+			else {
+				throw new Error(resData.message);
+			}
+		})
+		.catch(this.catchError);
 	}
 
 	render() {
@@ -71,8 +90,7 @@ class FinalContest extends Component {
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
 				{this.state.finalcontest.map(contest => (
 					<Card
-					  reg={this.state.reg}
-					  onRegChange={this.onRegChange}
+						onRegChange={this.onRegChange}
 						start={this.state.start}
 						date={contest.contestStartDate}
 						time={contest.contestStartTime}

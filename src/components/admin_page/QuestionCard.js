@@ -13,17 +13,17 @@ export default class Card extends React.Component {
 		return (
 			<Container style={{ padding: '10px 50px', fontSize: '20px', border: '1px solid black' }}>
 				<Row>
-					<Col>
+					<Col xs='11'>
 						<Link to={`/question/${this.props.id}`}>
 							<p>{this.props.title}</p>
 						</Link>
 					</Col>
 					<OverlayTrigger
-						placement="right"
+						placement="bottom"
 						delay={{ show: 250, hide: 400 }}
 						overlay={this.renderTooltip}
 					>
-						<Col md="auto">
+						<Col xs='1'>
 							<Button value={this.props.id} onClick={this.props.handle}>{this.props.sign}</Button> 
 						</Col>
 					</OverlayTrigger>

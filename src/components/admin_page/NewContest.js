@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Container, Form, Button, Spinner, Row, Col } from 'react-bootstrap';
 
 import ErrorHandler from '../error_handler/ErrorHandler';
@@ -120,7 +120,7 @@ class Contest extends Component {
 
 	render() {
 		return (
-			<Container style={{ padding: '10px 50px' }}>
+			<Fragment>
 				{this.state.loading && (
 					<div style={{ textAlign: 'center', marginTop: '2rem' }}>
 						<Spinner
@@ -132,93 +132,91 @@ class Contest extends Component {
 					</div>
 				)}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-				<Form>
-					<Form.Group controlId="exampleForm.ControlTextarea1">
-						<Form.Label>Contest Name</Form.Label>
-						<Form.Control 
-							placeholder="Contest Name"
-							name="cName"
-							as="textarea" 
-							rows="1" 
-							value={this.state.cName}
-							onChange={this.handling}
-						/>
-					</Form.Group>
-					<Row>
-						<Col>
-							<Form.Group controlId="exampleForm.ControlTextarea1">
-								<Form.Label>Start Date</Form.Label>
-								<Form.Control
-									placeholder="YYYY-MM-DD"
-									name="csdate"
-									as="textarea" 
-									rows="1"
-									value={this.state.csdate}
-									onChange={this.handling}
-								/>
-							</Form.Group>
-						</Col>
-						<Col>
-							<Form.Group controlId="exampleForm.ControlTextarea1">
-								<Form.Label>Start Time</Form.Label>
-								<Form.Control
-									placeholder="HH-MM"
-									name="cstime"
-									as="textarea"
-									rows="1"
-									value={this.state.cstime}
-									onChange={this.handling}
-								/>
-							</Form.Group>
-						</Col>
-					</Row>
-					<Row>
-						<Col>
-							<Form.Group controlId="exampleForm.ControlTextarea1">
-								<Form.Label>End Date</Form.Label>
-								<Form.Control
-									placeholder="YYYY-MM-DD"
-									name="cedate"
-									as="textarea" 
-									rows="1"
-									value={this.state.cedate}
-									onChange={this.handling}
-								/>
-							</Form.Group>
-						</Col>
-						<Col>
-							<Form.Group controlId="exampleForm.ControlTextarea1">
-								<Form.Label>End Time</Form.Label>
-								<Form.Control
-									placeholder="HH-MM"
-									name="cetime"
-									as="textarea"
-									rows="1"
-									value={this.state.cetime}
-									onChange={this.handling}
-								/>
-							</Form.Group>
-						</Col>
-					</Row>
-				</Form>
-				{
-					this.state.questions.map(q => (
-						<Card
-							value="Remove"
-							sign={'-'}
-							handle={this.handle}
-							key={q.questionId._id}
-							id={q.questionId._id}
-							title={q.questionId.title}
-						/>
-					))
-				}
-				<Form>
-					<Form.Group style={{ textAlign: 'center', marginTop: '10px' }}>
-						<Button onClick={this.handler}>Host</Button>
-					</Form.Group>
-				</Form>
-			</Container>
+				{this.state.questions.map(q => (
+					<Card
+						value="Remove"
+						sign={'-'}
+						handle={this.handle}
+						key={q.questionId._id}
+						id={q.questionId._id}
+						title={q.questionId.title}
+					/>
+				))}
+				<Container>
+					<Form>
+						<Form.Group controlId="exampleForm.ControlTextarea1">
+							<Form.Label>Contest Name</Form.Label>
+							<Form.Control
+								placeholder="Contest Name"
+								name="cName"
+								as="textarea" 
+								rows="1" 
+								value={this.state.cName}
+								onChange={this.handling}
+							/>
+						</Form.Group>
+						<Row>
+							<Col>
+								<Form.Group controlId="exampleForm.ControlTextarea1">
+									<Form.Label>Start Date</Form.Label>
+									<Form.Control
+										placeholder="YYYY-MM-DD"
+										name="csdate"
+										as="textarea" 
+										rows="1"
+										value={this.state.csdate}
+										onChange={this.handling}
+									/>
+								</Form.Group>
+							</Col>
+							<Col>
+								<Form.Group controlId="exampleForm.ControlTextarea1">
+									<Form.Label>Start Time</Form.Label>
+									<Form.Control
+										placeholder="HH-MM"
+										name="cstime"
+										as="textarea"
+										rows="1"
+										value={this.state.cstime}
+										onChange={this.handling}
+									/>
+								</Form.Group>
+							</Col>
+						</Row>
+						<Row>
+							<Col>
+								<Form.Group controlId="exampleForm.ControlTextarea1">
+									<Form.Label>End Date</Form.Label>
+									<Form.Control
+										placeholder="YYYY-MM-DD"
+										name="cedate"
+										as="textarea" 
+										rows="1"
+										value={this.state.cedate}
+										onChange={this.handling}
+									/>
+								</Form.Group>
+							</Col>
+							<Col>
+								<Form.Group controlId="exampleForm.ControlTextarea1">
+									<Form.Label>End Time</Form.Label>
+									<Form.Control
+										placeholder="HH-MM"
+										name="cetime"
+										as="textarea"
+										rows="1"
+										value={this.state.cetime}
+										onChange={this.handling}
+									/>
+								</Form.Group>
+							</Col>
+						</Row>
+						<Form.Group style={{ textAlign: 'center', marginTop: '10px' }}>
+							<Button onClick={this.handler}>Host</Button>
+						</Form.Group>
+					</Form>
+				</Container>
+			</Fragment>
 		)
 	}
 }

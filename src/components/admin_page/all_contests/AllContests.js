@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Spinner } from 'react-bootstrap'
 import Card from './AllContestsCard'
 import ErrorHandler from '../../error_handler/ErrorHandler'
@@ -47,20 +47,19 @@ class AllContests extends Component {
 
 	render() {
 		return (
-			<div>
-		 {this.state.loading && (
-     <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-	   <Spinner 
-      size='lg'
-      variant="primary"
-      animation="border" 
-      role="status"
-      />
-      </div>
-      )}
-			<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-			{
-					this.state.allcontest.map(contest => (
+			<Fragment>
+				{this.state.loading && (
+    				<div style={{ textAlign: 'center', marginTop: '2rem' }}>
+						<Spinner 
+      						size='lg'
+      						variant="primary"
+      						animation="border"
+      						role="status"
+      					/>
+      				</div>
+      			)}
+				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+				{this.state.allcontest.map(contest => (
 					<Card
 						sign={'Result'}
 						key={contest._id}
@@ -68,9 +67,8 @@ class AllContests extends Component {
 						id={contest._id}
 						questions={contest.questions}
 					/>
-				  ))
-				}
-			</div>
+				))}
+			</Fragment>
 		)
 	}
 }

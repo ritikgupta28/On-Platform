@@ -111,40 +111,39 @@ class AllQuestions extends Component {
 
 	render() {
 		return (
-		 <Fragment>
-		 <ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-		 {this.state.questionsLoading && (
-		 <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-		 <Spinner 
-			size='lg'
-			variant="primary"
-			animation="border" 
-			role="status"
-			/>
-		 </div>
-		 )}
-		 {!this.state.questionsLoading && (
-		 <Pagination
-			onPrevious={this.loadQuestions.bind(this, 'previous')}
-			onNext={this.loadQuestions.bind(this, 'next')}
-			lastPage={Math.ceil(this.state.totalQuestions / 2)}
-			currentPage={this.state.questionPage}
-		 >
-		 
-			{this.state.questions.map(q => (
-			<Card
-					value="Add to Contest"
-					sign={'+'}
-					hoverText={'Add to Contest'}
-					handle={this.handle}
-					key={q._id}
-					id={q._id}
-					title={q.title}
-			/>
-			))}
-		 <br/>
-		 </Pagination>
-		 )}
+		<Fragment>
+			<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+			{this.state.questionsLoading && (
+				<div style={{ textAlign: 'center', marginTop: '2rem' }}>
+					<Spinner 
+						size='lg'
+						variant="primary"
+						animation="border" 
+						role="status"
+					/>
+		 		</div>
+			)}
+			{!this.state.questionsLoading && (
+				<Pagination
+					onPrevious={this.loadQuestions.bind(this, 'previous')}
+					onNext={this.loadQuestions.bind(this, 'next')}
+					lastPage={Math.ceil(this.state.totalQuestions / 2)}
+					currentPage={this.state.questionPage}
+				>
+				{this.state.questions.map(q => (
+					<Card
+						value="Add to Contest"
+						sign={'+'}
+						hoverText={'Add to Contest'}
+						handle={this.handle}
+						key={q._id}
+						id={q._id}
+						title={q.title}
+					/>
+				))}
+		 		<br/>
+		 		</Pagination>
+		 	)}
 		 </Fragment>
 		)
 	}

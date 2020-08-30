@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Spinner, Container } from 'react-bootstrap'
-import Card from './QuestionCard';
+import React, { Component, Fragment } from 'react';
+import { Spinner } from 'react-bootstrap'
+import Card from '../../QuestionNameCard';
 import ErrorHandler from '../../error_handler/ErrorHandler'
 import Time from '../../Time';
 
@@ -58,7 +58,7 @@ class FinalContestQuestions extends Component {
 
 	render() {
 		return (
-			<Container>
+			<Fragment>
 				{this.state.loading && (
 					<div style={{ textAlign: 'center', marginTop: '2rem' }}>
 						<Spinner
@@ -87,7 +87,7 @@ class FinalContestQuestions extends Component {
 						title={q.questionId.title}
 					/>
 				))}
-			</Container>
+			</Fragment>
 		)
 	}
 }

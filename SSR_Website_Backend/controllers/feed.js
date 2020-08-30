@@ -240,6 +240,21 @@ exports.getUserFinalContest = (req, res, next) => {
     });
 }
 
+exports.getUserFinalContestRegistration = (req, res, next) => {
+	const contestId = req.params.contestId;
+	req.contestId = contestId;
+	FinalContest.findById(contestId)
+	.then(contest => {
+		contest.addToParticipant(req.userId);
+		res.status(200).json({
+			message: 'Registeration Successfully!',
+		});
+	})
+	.catch(err => {
+		next(err);
+    });
+}
+
 exports.getFinalContestQuestions = (req, res, next) => {
 	const contestId = req.params.contestId;
 	FinalContest.findById(contestId)

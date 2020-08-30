@@ -24,6 +24,8 @@ router.get('/finalcontest', isAuthAdmin, feedController.getFinalContest);
 
 router.get('/userfinalcontest', isAuthUser, feedController.getUserFinalContest);
 
+router.get('/userfinalcontest/registration/:contestId', isAuthUser, feedController.getUserFinalContestRegistration);
+
 router.post('/finalcontest', isAuthAdmin, feedController.postFinalContest);
 
 router.get('/finalcontest/questions/:contestId', isAuthAdmin, feedController.getFinalContestQuestions);
