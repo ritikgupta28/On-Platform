@@ -3,21 +3,6 @@ const request = require('request');
 const Question = require('../models/question');
 const FinalContest = require('../models/finalcontest');
 
-// #include<bits/stdc++.h>
-// using namespace std;
-// int main() {
-//   int t;
-//   cin>>t;
-//   int a,b;
-//   cin>>a>>b;
-//   cout<<a+b;
-//   t--;
-//   while(t--) {
-//     cin>>a>>b;
-//     cout<<"\n"<<a+b;
-//   }
-// }
-
 exports.ideResult = async (req, res, next) => {
   const questionId = req.body.questionId;
   FinalContest.find()
@@ -33,9 +18,8 @@ exports.ideResult = async (req, res, next) => {
     language,
     stdin,
     versionIndex: '2',
-    clientId: 'cf4c0271c233d2c0054bc2cbfda4c862',
-    clientSecret:
-      '2f833880fe11fbf11552243c97065ca567e9a64018544505aaead61d45b0697f'
+    clientId: process.env.IDE_clientId,
+    clientSecret: process.env.IDE_clientSecret
   };
   request({
       url: 'https://api.jdoodle.com/v1/execute',
@@ -72,9 +56,8 @@ exports.inputFile = async (req, res) => {
       language,
       stdin,
       versionIndex: '2',
-      clientId: 'cf4c0271c233d2c0054bc2cbfda4c862',
-      clientSecret:
-        '2f833880fe11fbf11552243c97065ca567e9a64018544505aaead61d45b0697f'
+      clientId: process.env.IDE_clientId,
+      clientSecret: process.env.IDE_clientSecret
     };
     request({
         url: 'https://api.jdoodle.com/v1/execute',

@@ -3,6 +3,8 @@
 		"MONGO_USER": "ritikgupta",
 		"MONGO_PASSWORD": "ZU5DvtmxnizGbPsu",
 		"MONGO_DATABASE_NAME": "on_platform",
-		"SENDGRID_KEY": "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"
+		"SENDGRID_KEY": "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",
+		"IDE_clientId": "cf4c0271c233d2c0054bc2cbfda4c862",
+		"IDE_clientSecret": "2f833880fe11fbf11552243c97065ca567e9a64018544505aaead61d45b0697f"
 	}
 }

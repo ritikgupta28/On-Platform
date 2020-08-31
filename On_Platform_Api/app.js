@@ -17,6 +17,8 @@ const compression = require('compression');
 
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-mzunh.mongodb.net/${process.env.MONGO_DATABASE_NAME}?retryWrites=true&w=majority`;
 
+app.use(helmet());
+app.use(compression());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -32,9 +34,6 @@ app.use('/feed', feedRoutes);
 app.use('/authUser', authUserRoutes);
 app.use('/authAdmin', authAdminRoutes);
 app.use(ideRoutes);
-
-app.use(helmet());
-app.use(compression());
 
 app.use(sendMessageRoutes);
 app.use('/findAdmin', isAuthAdmin, (req, res, next) => {
