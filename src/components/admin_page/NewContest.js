@@ -22,7 +22,7 @@ class Contest extends Component {
 
 	componentDidMount() {
 		let status;
-		fetch('https://on-platform-api.herokuapp.com/feed/newcontest', {
+		fetch('https://agile-lowlands-72745.herokuapp.com/feed/newcontest', {
 				headers: {
 					Authorization: 'Bearer ' + this.props.token,
 					'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ class Contest extends Component {
 
 	handle = (e) => {
 		let status;
-		fetch('https://on-platform-api.herokuapp.com/feed/newcontest-delete-question', {
+		fetch('https://agile-lowlands-72745.herokuapp.com/feed/newcontest-delete-question', {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
@@ -72,7 +72,7 @@ class Contest extends Component {
 
 	handler = (e) => {
 		let status;
-		fetch('https://on-platform-api.herokuapp.com/feed/finalcontest', {
+		fetch('https://agile-lowlands-72745.herokuapp.com/feed/finalcontest', {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,

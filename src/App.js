@@ -53,7 +53,7 @@ class App extends Component {
 
   signupAdminHandler = (event, authData) => {
     event.preventDefault();
-    fetch('https://on-platform-api.herokuapp.com/authAdmin/signup', {
+    fetch('https://agile-lowlands-72745.herokuapp.com/authAdmin/signup', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ class App extends Component {
 
   signupUserHandler = (event, authData) => {
     event.preventDefault();
-    fetch('https://on-platform-api.herokuapp.com/authUser/signup', {
+    fetch('https://agile-lowlands-72745.herokuapp.com/authUser/signup', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ class App extends Component {
 
   loginAdminHandler = (event, authData) => {
     event.preventDefault();
-    fetch('https://on-platform-api.herokuapp.com/authAdmin/login', {
+    fetch('https://agile-lowlands-72745.herokuapp.com/authAdmin/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -167,7 +167,7 @@ class App extends Component {
 
   loginUserHandler = (event, authData) => {
     event.preventDefault();
-    fetch('https://on-platform-api.herokuapp.com/authUser/login', {
+    fetch('https://agile-lowlands-72745.herokuapp.com/authUser/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

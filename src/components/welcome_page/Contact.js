@@ -36,7 +36,7 @@ export default class Contact extends React.Component {
 
 	handler = (e) => {
     const { name, email, message } = this.state;
-		fetch('https://on-platform-api.herokuapp.com/sendMessage', {
+		fetch('https://agile-lowlands-72745.herokuapp.com/sendMessage', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

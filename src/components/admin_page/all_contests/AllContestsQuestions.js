@@ -13,7 +13,7 @@ class AllContestsQuestions extends Component {
 	componentDidMount() {
 		let status;
 		const contestId = this.props.match.params.id;
-		fetch('https://on-platform-api.herokuapp.com/feed/allcontests/questions/' + contestId, {
+		fetch('https://agile-lowlands-72745.herokuapp.com/feed/allcontests/questions/' + contestId, {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'

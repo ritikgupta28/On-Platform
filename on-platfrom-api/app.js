@@ -11,17 +11,21 @@ const authUserRoutes = require('./routes/authUser');
 const authAdminRoutes = require('./routes/authAdmin');
 const Admin = require('./models/admin')
 const User = require('./models/user')
-const app = express();
 const helmet = require('helmet');
 const compression = require('compression');
+const http = require('http');
+const path = require('path');
 
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-mzunh.mongodb.net/${process.env.MONGO_DATABASE_NAME}?retryWrites=true&w=majority`;
 
+const app = express();
 app.use(helmet());
 app.use(compression());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use((req, res, next) => {
 		res.setHeader('Access-Control-Allow-Origin', '*');
@@ -30,6 +34,7 @@ app.use((req, res, next) => {
 		next();
 });
 
+app.get('/' , (req, res) => { res.send('working!!') })
 app.use('/feed', feedRoutes);
 app.use('/authUser', authUserRoutes);
 app.use('/authAdmin', authAdminRoutes);
@@ -79,9 +84,13 @@ app.use((error, req, res, next) => {
 	});
 })
 
+const port = process.env.PORT || '8000';
+app.set('port', port);
+const server = http.createServer(app);
+
 mongoose
 	.connect(MONGODB_URI)
 	.then(result => {
-		app.listen(process.env.PORT || 8000);
+		server.listen(port, () => console.log(`Running on localhost:${port}`));
 	})
 	.catch(err => console.log(err));

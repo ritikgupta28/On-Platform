@@ -17,7 +17,7 @@ class FinalContestQuestions extends Component {
 	componentDidMount() {
 		let status;
 		const contestId = this.props.match.params.id;
-		fetch('https://on-platform-api.herokuapp.com/feed/userfinalcontest/questions/' + contestId, {
+		fetch('https://agile-lowlands-72745.herokuapp.com/feed/userfinalcontest/questions/' + contestId, {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'

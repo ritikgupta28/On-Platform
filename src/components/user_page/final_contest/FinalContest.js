@@ -17,7 +17,7 @@ class FinalContest extends Component {
 
 	componentDidMount() {
 		let status;
-		fetch('https://on-platform-api.herokuapp.com/feed/userfinalcontest', {
+		fetch('https://agile-lowlands-72745.herokuapp.com/feed/userfinalcontest', {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ class FinalContest extends Component {
 	onRegChange = (id) => {
 		let status;
 		const contestId = id;
-		fetch('https://on-platform-api.herokuapp.com/feed/userfinalcontest/registration/' + contestId, {
+		fetch('https://agile-lowlands-72745.herokuapp.com/feed/userfinalcontest/registration/' + contestId, {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
