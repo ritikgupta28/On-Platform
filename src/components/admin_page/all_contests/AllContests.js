@@ -59,6 +59,9 @@ class AllContests extends Component {
       				</div>
       			)}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+				{!this.state.loading && this.state.allcontest.length === 0 && (
+					<h2 style={{ textAlign: 'center' }}>Sorry! no contest is created by you.</h2>
+				)}
 				{this.state.allcontest.map(contest => (
 					<Card
 						sign={'Result'}

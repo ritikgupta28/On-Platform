@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer'
-import Login from './Login'
-import Register from './Register'
+import Login from './auth/Login'
+import Register from './auth/Register'
 
 
 export default class Welcome extends React.Component {

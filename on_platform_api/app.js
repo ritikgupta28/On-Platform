@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 		next();
 });
 
-app.get('/' , (req, res) => { res.send('working!!') })
+// app.get('/' , (req, res) => { res.send('working!!') })
 app.use('/feed', feedRoutes);
 app.use('/authUser', authUserRoutes);
 app.use('/authAdmin', authAdminRoutes);
@@ -44,7 +44,6 @@ app.use(sendMessageRoutes);
 app.use('/findAdmin', isAuthAdmin, (req, res, next) => {
 	Admin.findById(req.adminId)
 	.then(admin => {
-		console.log(admin)
 		res.status(200).json({
 			id: admin._id,
 			name: admin.name,
@@ -77,7 +76,6 @@ app.use((error, req, res, next) => {
 	const status = error.statusCode || 500;
 	const message = error.message;
 	const data = error.data;
-	console.log(message)
 	res.status(status).json({
 		message: message,
 		data: data
@@ -91,6 +89,6 @@ const server = http.createServer(app);
 mongoose
 	.connect(MONGODB_URI)
 	.then(result => {
-		server.listen(port, () => console.log(`Running on localhost:${port}`));
+		server.listen(port);
 	})
 	.catch(err => console.log(err));

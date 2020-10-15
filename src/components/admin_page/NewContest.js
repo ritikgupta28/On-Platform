@@ -63,10 +63,22 @@ class Contest extends Component {
 			return res.json(); 
 		})
 		.then(resData => {
-			if(status !== 200) {
-				throw new Error(resData.message);
-			}
+		  if(status !== 200) {
+		  	throw new Error(resData.message)
+		  }
+		  else {
+		  	// this.setState({
+				 //  loading: false,
+				 //  questions: resData.questions
+			  // });
+			  // this.props.history.push('/admin/newcontest')
+			  this.componentDidMount();
+		  }
+		  // return true;
 		})
+		// .then(result => {
+
+		// })
 		.catch(this.catchError);
 	}
 
@@ -132,16 +144,19 @@ class Contest extends Component {
 					</div>
 				)}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+				{!this.state.loading && this.state.questions.length === 0 && (
+					<h2 style={{ textAlign: 'center' }}>Please add some questions!</h2>
+				)}
 				{this.state.questions.map(q => (
-					<Card
-						value="Remove"
-						sign={'-'}
-						handle={this.handle}
-						key={q.questionId._id}
-						id={q.questionId._id}
-						title={q.questionId.title}
-					/>
-				))}
+						<Card
+							value="Remove"
+							sign={'-'}
+							handle={this.handle}
+							key={q.questionId._id}
+							id={q.questionId._id}
+							title={q.questionId.title}
+						/>
+					))}
 				<Container>
 					<Form>
 						<Form.Group controlId="exampleForm.ControlTextarea1">

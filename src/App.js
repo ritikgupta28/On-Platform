@@ -5,9 +5,10 @@ import Welcome from './components/welcome_page/Welcome';
 import Ide from './components/ide/Ide'
 import Admin from './components/admin_page/admin/Admin';
 import User from './components/user_page/user/User';
-import Developers from './components/developers/Developers';
+import Developers from './components/welcome_page/developers/Developers';
 import ErrorHandler from './components/error_handler/ErrorHandler';
-import Contact from './components/welcome_page/Contact'
+import Contact from './components/welcome_page/contact/Contact'
+import Help from './components/welcome_page/help/Help'
 
 class App extends Component {
   state = {
@@ -76,7 +77,7 @@ class App extends Component {
           throw new Error(resData.message);
         }
         this.setState({ isAdminAuth: false });
-        this.props.history.replace('/');
+        this.props.history.replace('/login');
       })
       .catch(err => {
         this.setState({
@@ -111,7 +112,7 @@ class App extends Component {
           throw new Error(resData.message);
         }
         this.setState({ isUserAuth: false });
-        this.props.history.replace('/');
+        this.props.history.replace('/login');
       })
       .catch(err => {
         this.setState({
@@ -264,6 +265,13 @@ class App extends Component {
           exact
           render = {props => (
             <Contact />
+          )}
+        />
+        <Route
+          path="/help"
+          exact
+          render = {props => (
+            <Help />
           )}
         />
         <Redirect to="/" />

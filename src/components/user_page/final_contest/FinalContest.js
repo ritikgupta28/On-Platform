@@ -90,6 +90,12 @@ class FinalContest extends Component {
 			  		</div>
 			  	)}
 				<ErrorHandler result={this.state.result} error={this.state.error} onHandle={this.errorHandler} />
+				{!this.state.loading && this.state.finalcontest.length === 0 && (
+					<div style={{ textAlign: 'center' }}>
+						<h1>No Contest Available !!!</h1>
+						<h6>If any contest is running, contact the host immediately.</h6>
+					</div>
+				)}
 				{this.state.finalcontest.map(contest => (
 					<Card
 						onRegChange={this.onRegChange}

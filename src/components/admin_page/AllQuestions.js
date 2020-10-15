@@ -111,26 +111,29 @@ class AllQuestions extends Component {
 
 	render() {
 		return (
-		<Container>
-			<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
-			{this.state.loading && (
-				<div style={{ textAlign: 'center', marginTop: '2rem' }}>
-					<Spinner 
-						size='lg'
-						variant="primary"
-						animation="border" 
-						role="status"
-					/>
-		 		</div>
-			)}
+			<Container>
+				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+				{this.state.loading && (
+					<div style={{ textAlign: 'center', marginTop: '2rem' }}>
+						<Spinner 
+							size='lg'
+							variant="primary"
+							animation="border" 
+							role="status"
+						/>
+		 			</div>
+				)}
 				<Pagination
 					onPrevious={this.loadQuestions.bind(this, 'previous')}
 					onNext={this.loadQuestions.bind(this, 'next')}
 					lastPage={Math.ceil(this.state.totalQuestions / 2)}
 					currentPage={this.state.questionPage}
 				>
+				{!this.state.loading && this.state.questions.length === 0 && (
+					<h3 style={{ textAlign: 'center' }}>No Questions</h3>
+				)}
 				{this.state.questions.map(q => (
-					<Card
+						<Card
 						value="Add to Contest"
 						sign={'+'}
 						hoverText={'Add to Contest'}
@@ -139,7 +142,7 @@ class AllQuestions extends Component {
 						id={q._id}
 						title={q.title}
 					/>
-				))}
+					))}
 		 		<br/>
 		 		</Pagination>
 		 </Container>

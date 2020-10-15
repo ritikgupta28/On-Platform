@@ -1,10 +1,12 @@
 import React from 'react';
-import sahil from '../images/sahil.jpg'
-import ritik from '../images/ritik.jpg'
-import Insta from '../images/instagram.jfif'
-import linke from '../images/linkedin.png'
-import gmail from '../images/gmail.png'
 import { CardDeck, Card, Container, Row, Col, Image } from 'react-bootstrap'
+
+import sahil from '../../images/sahil.jpg'
+import ritik from '../../images/ritik.jpg'
+import Insta from '../../images/instagram.jfif'
+import linke from '../../images/linkedin.png'
+import gmail from '../../images/gmail.png'
+
 
 const Cardlist = () => {
 	 return (

@@ -37,12 +37,10 @@ class Addques extends React.Component {
 			})
 		})
 		.then(res => {
-			console.log('1',res.status)
 			status=res.status;
 			return res.json();
 		})
 		.then(resData => {
-			console.log('2', status)
 			if(status === 200) {
 				this.props.history.push('/admin/questions');
 			}

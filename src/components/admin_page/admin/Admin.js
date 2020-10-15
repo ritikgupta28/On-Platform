@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Footer from './Footer'
-import Navbar from './navigation_bar/Navbar'
+import Navbar from './Navbar'
 
 export default class Admin extends React.Component {
 	render() {

@@ -1,15 +1,27 @@
 import React from 'react'
-import { Button, Container, Form, Row, Image, Col } from 'react-bootstrap'
-import svg from '../svg/login.svg'
+import { Container, Button, Form, Row, Col, Image } from 'react-bootstrap'
 
-export default class Login extends React.Component {
-  constructor(props) {
+import svg from '../../svg/register.svg'
+
+export default class Register extends React.Component {
+	constructor(props) {
     super(props);
     this.state = {
+      name: '',
       email : '',
       password: '',
       userAdmin: 'admin'
     };
+  }
+
+  onRChange = (e) => {
+    this.props.onRouteChange(e.target.value)
+  }
+
+  onNameChange = (e) => {
+    this.setState ({
+      name : e.target.value
+    });
   }
 
   onEmailChange = (e) => {
@@ -25,23 +37,32 @@ export default class Login extends React.Component {
   }
 
   onUserAdminChange = (e) => {
-    this.setState({
-      userAdmin: e.target.value
-    })
+  	this.setState({
+  		userAdmin: e.target.value
+  	})
     this.props.onChangeUserAdmin(e.target.value);
   }
 
   render() {
     return (
-      <Container style={{ marginTop: '40px', marginBottom: '40px' }}>
-        <h1 style={{ textAlign: 'center', fontSize: '70px' }}>Login</h1>
-        <hr />
-        <Row>
-        <Col md="auto">
-         <Image style={{ height: '350px'}} src={svg} rounded />
-         </Col>
-         <Col>
+      <Container style={{ marginTop: '10px' }}>
+          <h1 style={{ textAlign: 'center', fontSize: '70px' }}>Register</h1>
+          <hr />
+          <Row>
+          <Col md="auto">
+           <Image style={{ height: '400px'}} src={svg} rounded />
+          </Col>
+          <Col>
           <Form>
+           <Form.Group controlId="formBasicName">
+            <Form.Label>Name</Form.Label>
+            <Form.Control 
+             type="text"
+             placeholder="Name"
+             value={this.state.name}
+             onChange={this.onNameChange.bind(this)}
+             />
+           </Form.Group>
            <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control 
@@ -50,6 +71,9 @@ export default class Login extends React.Component {
              value={this.state.email}
              onChange={this.onEmailChange.bind(this)}
              />
+            <Form.Text className="text-muted">
+             We'll never share your email with anyone else.
+            </Form.Text>
            </Form.Group>
            <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
@@ -59,9 +83,12 @@ export default class Login extends React.Component {
              value={this.state.password}
              onChange={this.onPasswordChange.bind(this)}
              />
+            <Form.Text className="text-muted">
+             Please enter a password with only numbers and text and at least 6 characters.
+            </Form.Text>
            </Form.Group>
            <Form.Group controlId="exampleForm.ControlSelect1">
-            <Form.Label>Login As.</Form.Label>
+            <Form.Label>Register as</Form.Label>
             <Form.Control as="select" value={this.state.userAdmin} onChange={this.onUserAdminChange.bind(this)}>
              <option value="admin">Admin</option>
              <option value="user">User</option>
@@ -74,22 +101,22 @@ export default class Login extends React.Component {
            <Button 
             variant="primary" 
             type="submit"
-            onClick={e => this.props.onAdminlogin(e, this.state)}
+            onClick={e => this.props.onAdminsignup(e, this.state)}
             >
-            Login
+            Register
            </Button>
            :
            <Button 
             variant="primary" 
             type="submit"
-            onClick={e => this.props.onUserlogin(e, this.state)}
+            onClick={e => this.props.onUsersignup(e, this.state)}
             >
-            Login
+            Register
            </Button>
           }
           </Form.Group>
           </Form>
-          </Col>
+           </Col>
           </Row>
       </Container>
     )

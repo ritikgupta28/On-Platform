@@ -123,14 +123,14 @@ exports.getNewContest = (req, res, next) => {
 			})
 			.catch(err => {
 				const error = new Error;
-			  error.message = 'Failed to fetch question';
-        next(error);
+				error.message = 'Failed to fetch question';
+				next(error);
 			});
 		})
 		.catch(err => {
 			const error = new Error;
 			error.message = 'Failed to find admin';
-      next(error);
+			next(error);
 		});
 };
 
@@ -141,19 +141,19 @@ exports.postNewContestDeleteQuestion = (req, res, next) => {
 			admin.removeFromContest(quesId)
 			.then(result => {
 				res.status(200).json({
-					message: 'Remove question successfully!'
+					message: 'Remove question successfully!',
 				});
 			})
 			.catch(err => {
 				const error = new Error;
-			  error.message = 'failed to remove question';
-        next(error);
+				error.message = 'failed to remove question';
+				next(error);
 			});
 		})
 		.catch(err => {
 			const error = new Error;
 			error.message = 'Failed to find admin';
-      next(error);
+			next(error);
 		});
 };
 
@@ -205,30 +205,30 @@ exports.postFinalContest = (req, res, next) => {
 		})
 		.catch(err => {
 	 		const error = new Error;
-		  error.message = 'Failed to add question'
-      next(error);
+	 		error.message = 'Failed to add contest';
+	 		next(error);
 	 	});
 	})
 	.catch(err => {
 	 	const error = new Error;
-		error.message = 'Failed to fetch admin'
-    next(error);
-  });
+		error.message = 'Failed to fetch admin';
+		next(error);
+	});
 }
 
 exports.getFinalContest = (req, res, next) => {
 	FinalContest.find({ 'admin.adminId' : req.adminId })
 	.then(contests => {
 		res.status(200).json({
-				message: 'Fetched question successfully!',
-				finalcontest: contests
+			message: 'Fetched question successfully!',
+			finalcontest: contests
 		});
 	})
 	.catch(err => {
 		const error = new Error;
-		error.message = 'Failed to fetch contests'
-    next(error);
-  });
+		error.message = 'Failed to fetch contests';
+		next(error);
+	});
 }
 
 exports.getUserFinalContest = (req, res, next) => {
@@ -240,10 +240,10 @@ exports.getUserFinalContest = (req, res, next) => {
 		});
 	})
 	.catch(err => {
-    const error = new Error;
-		error.message = 'Failed to fetch questions'
-    next(error);
-  });
+		const error = new Error;
+		error.message = 'Failed to fetch contests'
+		next(error);
+	});
 }
 
 exports.getUserFinalContestRegistration = (req, res, next) => {
@@ -258,8 +258,8 @@ exports.getUserFinalContestRegistration = (req, res, next) => {
 	})
 	.catch(err => {
 		const error = new Error;
-		error.message = 'Registeration Unuccessfull'
-    next(error);
+		error.message = 'Registeration Unuccessfull';
+		next(error);
   });
 }
 
@@ -281,16 +281,16 @@ exports.getFinalContestQuestions = (req, res, next) => {
 			});
 		})
 		.catch(err => {
-    	const error = new Error;
-		  error.message = 'Failed to fetch questions'
-      next(error);
-    });
+    		const error = new Error;
+    		error.message = 'Failed to fetch questions';
+    		next(error);
+    	});
 	})
 	.catch(err => {
 		const error = new Error;
 		error.message = 'Failed to fetch contest'
-    next(error);
-  });
+		next(error);
+	});
 }
 
 exports.getUserFinalContestQuestions = (req, res, next) => {
@@ -314,15 +314,15 @@ exports.getUserFinalContestQuestions = (req, res, next) => {
 		})
 		.catch(err => {
 			const error = new Error;
-		  error.message = 'Failed to fetch contest questions'
-      next(error);
+			error.message = 'Failed to fetch contest questions';
+			next(error);
 		});
 	})
 	.catch(err => {
 		const error = new Error;
-		error.message = 'Failed to fetch contest'
-    next(error);
-  });
+		error.message = 'Failed to fetch contest';
+		next(error);
+	});
 }
 
 exports.postAllContests = (req, res, next) => {
@@ -374,8 +374,8 @@ exports.getAllContests = (req, res, next) => {
 	.catch(err => {
 		const error = new Error;
 		error.message = 'Failed to fetch all contest';
-    next(error);
-  });
+		next(error);
+	});
 }
 
 exports.getAllContestsQuestions = (req, res, next) => {
@@ -393,15 +393,15 @@ exports.getAllContestsQuestions = (req, res, next) => {
 		})
 		.catch(err => {
 			const error = new Error;
-			error.message = 'Failed to fetch all contest questions'
-      next(error);
-    });
+			error.message = 'Failed to fetch all contest questions';
+			next(error);
+		});
 	})
 	.catch(err => {
-      const error = new Error;
-			error.message = 'Failed to fetch Contest';
-			error.statusCode = 400;
-      next(error);
+		const error = new Error;
+		error.message = 'Failed to fetch Contest';
+		error.statusCode = 400;
+		next(error);
     });
 }
 
@@ -415,23 +415,23 @@ exports.getResult = (req, res, next) => {
 			contest.populate('participant.users.userId')
 			.execPopulate()
 			.then(contest => {
-			  const participants = contest.participant.users;
-			  res.status(200).json({
-				  message: 'Fetched Participant Successfully',
-				  participants: participants,
-				  count: contest.participant.users.length
-			  });
-		  })
+				const participants = contest.participant.users;
+				res.status(200).json({
+					message: 'Fetched Participant Successfully',
+					participants: participants,
+					count: contest.participant.users.length
+				});
+			})
 		})
 		.catch(err => {
 			const error = new Error;
-			error.message = 'Failed to fetch participants'
+			error.message = 'Failed to fetch participants';
 			next(error);
 		})
 	})
 	.catch(err => {
 	    const error = new Error;
-			error.message = 'Failed to fetch result' 
-      next(error);
+		error.message = 'Failed to fetch result';
+		next(error);
     });
 }

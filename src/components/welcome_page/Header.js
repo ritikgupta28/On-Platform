@@ -33,6 +33,9 @@ class Header extends React.Component {
           <Nav.Link href="/contact">
            <Button>Contact Us</Button>
           </Nav.Link>
+          <Nav.Link href="/help">
+           <Button>Help</Button>
+          </Nav.Link>
          <Nav.Link>
           <Button onClick={this.onRChange}>{this.state.route}</Button>
          </Nav.Link>

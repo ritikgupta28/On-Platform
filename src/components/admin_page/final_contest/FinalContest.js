@@ -16,7 +16,7 @@ class FinalContest extends Component {
 
 	componentDidMount() {
 		let status;
-		fetch('https://on-platform-api.herokuapp.com/feed/finalcontest', {
+		fetch('https://agile-lowlands-72745.herokuapp.com/feed/finalcontest', {
 			headers: {
         		Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ class FinalContest extends Component {
 
 	handler = (event) => {
 		let status;
-		fetch('https://on-platform-api.herokuapp.com/feed/allcontests', {
+		fetch('https://agile-lowlands-72745.herokuapp.com/feed/allcontests', {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
@@ -93,6 +93,9 @@ class FinalContest extends Component {
 					</div>
 				)}
 				<ErrorHandler error={this.state.error} onHandle={this.errorHandler} />
+				{!this.state.loading && this.state.finalcontest.length === 0 && (
+					<h1 style={{ textAlign: 'center' }}>No Contest Available !!!</h1>
+				)}
 				{this.state.finalcontest.map(contest => (
 					<FinalContestCard
 						start={this.state.start}
