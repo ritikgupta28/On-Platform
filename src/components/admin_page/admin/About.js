@@ -17,7 +17,7 @@ export default class About extends React.Component {
 
 	componentDidMount() {
 		let status;
-		fetch('https://agile-lowlands-72745.herokuapp.com/findAdmin', {
+		fetch('https://on-platform-api.herokuapp.com/findAdmin', {
 			headers : {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'

@@ -20,7 +20,7 @@ class Result extends Component {
 	componentDidMount() {
 		let status;
 		const contestId = this.props.match.params.id;
-		fetch('https://agile-lowlands-72745.herokuapp.com/feed/result/' + contestId, {
+		fetch('https://on-platform-api.herokuapp.com/feed/result/' + contestId, {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'

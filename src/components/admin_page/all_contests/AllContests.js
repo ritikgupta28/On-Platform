@@ -15,7 +15,7 @@ class AllContests extends Component {
 
 	componentDidMount() {
 		  let status;
-			fetch('https://agile-lowlands-72745.herokuapp.com/feed/allcontests', {
+			fetch('https://on-platform-api.herokuapp.com/feed/allcontests', {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'

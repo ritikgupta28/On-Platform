@@ -49,7 +49,7 @@ class App extends React.Component {
     else language = 'cpp';
     let questionId = this.props.questionId;
     let stdin = this.state.inputdata;
-    this.state.result = await axios.post('https://agile-lowlands-72745.herokuapp.com/ide', {
+    this.state.result = await axios.post('https://on-platform-api.herokuapp.com/ide', {
       script,
       language,
       questionId,
@@ -73,7 +73,7 @@ class App extends React.Component {
     if (this.state.language === 'python') language = 'python3';
     else language = 'cpp';
     let questionId = this.props.questionId;
-    this.state.result = await axios.post('https://agile-lowlands-72745.herokuapp.com/ide/input',{
+    this.state.result = await axios.post('https://on-platform-api.herokuapp.com/ide/input',{
       script,
       language,
       questionId

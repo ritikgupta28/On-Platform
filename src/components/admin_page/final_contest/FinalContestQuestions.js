@@ -17,7 +17,7 @@ class FinalContestQuestions extends Component {
 	componentDidMount() {
 		let status;
 		const contestId = this.props.match.params.id;
-		fetch('https://agile-lowlands-72745.herokuapp.com/feed/userfinalcontest/questions/' + contestId, {
+		fetch('https://on-platform-api.herokuapp.com/feed/finalcontest/questions/' + contestId, {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -74,10 +74,7 @@ class FinalContestQuestions extends Component {
 				{!this.state.loading && (
 					this.state.end 
 					? 
-					<div>
-					{window.location.reload()}
 					<span> Contest Over </span> 
-					</div>
 					: 
 					<Time onTimeChange={this.onTimeChange} date={this.state.date} time={this.state.time} />
 				)}

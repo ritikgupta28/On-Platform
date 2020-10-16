@@ -54,7 +54,7 @@ class App extends Component {
 
   signupAdminHandler = (event, authData) => {
     event.preventDefault();
-    fetch('https://agile-lowlands-72745.herokuapp.com/authAdmin/signup', {
+    fetch('https://on-platform-api.herokuapp.com/authAdmin/signup', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ class App extends Component {
 
   signupUserHandler = (event, authData) => {
     event.preventDefault();
-    fetch('https://agile-lowlands-72745.herokuapp.com/authUser/signup', {
+    fetch('https://on-platform-api.herokuapp.com/authUser/signup', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -124,7 +124,7 @@ class App extends Component {
 
   loginAdminHandler = (event, authData) => {
     event.preventDefault();
-    fetch('https://agile-lowlands-72745.herokuapp.com/authAdmin/login', {
+    fetch('https://on-platform-api.herokuapp.com/authAdmin/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -152,7 +152,7 @@ class App extends Component {
         });
         localStorage.setItem('token', resData.token);
         localStorage.setItem('adminId', resData.adminId);
-        const remainingMilliseconds = 60 * 60 * 1000;
+        const remainingMilliseconds = 5 * 60 * 1000;
         const expiryDate = new Date(
           new Date().getTime() + remainingMilliseconds
         );
@@ -168,7 +168,7 @@ class App extends Component {
 
   loginUserHandler = (event, authData) => {
     event.preventDefault();
-    fetch('https://agile-lowlands-72745.herokuapp.com/authUser/login', {
+    fetch('https://on-platform-api.herokuapp.com/authUser/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -196,7 +196,7 @@ class App extends Component {
         });
         localStorage.setItem('token', resData.token);
         localStorage.setItem('userId', resData.userId);
-        const remainingMilliseconds = 60 * 60 * 1000;
+        const remainingMilliseconds = 5 * 60 * 60 * 1000;
         const expiryDate = new Date(
           new Date().getTime() + remainingMilliseconds
         );

@@ -38,8 +38,7 @@ const Cardlist = () => {
         <Card.Body>
          <Card.Title>Ritik Gupta</Card.Title>
          <Card.Text>
-          I am a student and enthusiastic to gain knowledge and always want to experience new things. 
-          i always optimistic towards results.
+          Full Stack Web Developer with good problem solving skills
          </Card.Text>
          <Row style={{padding: '0px 40px'}}>
           <Col>
