@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Link, Switch, BrowserRouter as Router, withRouter, Redirect } from 'react-router-dom'
+import { Route, Link, Switch, HashRouter as Router, withRouter, Redirect } from 'react-router-dom'
 import { Navbar, Nav, NavDropdown, Button, Image } from 'react-bootstrap'
 import svg from '../../svg/profile.svg'
 import AllQuestions from '../AllQuestions'

@@ -17,7 +17,7 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <Container fluid style={{ padding: '10px', backgroundColor: 'black', color: 'white' }}>
+      <Container fluid style={{ padding: '8px', margin: '0px', backgroundColor: 'black', color: 'white' }}>
        <Row>
         <Col>
          <h1>Platform-Up</h1>

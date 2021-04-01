@@ -50,7 +50,7 @@ export default class Register extends React.Component {
           <hr />
           <Row>
           <Col md="auto">
-           <Image style={{ height: '400px'}} src={svg} rounded />
+           <Image style={{ height: '330px', width: '480px' }} src={svg} rounded />
           </Col>
           <Col>
           <Form>

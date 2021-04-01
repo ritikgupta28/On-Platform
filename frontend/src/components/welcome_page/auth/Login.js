@@ -39,7 +39,7 @@ export default class Login extends React.Component {
         <hr />
         <Row>
         <Col md="auto">
-         <Image style={{ height: '350px'}} src={svg} rounded />
+         <Image style={{ height: '330px', width: '480px'}} src={svg} rounded />
          </Col>
          <Col>
           <Form>
