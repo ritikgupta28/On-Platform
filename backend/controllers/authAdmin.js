@@ -80,7 +80,7 @@ exports.login = (req, res, next) => {
 			adminId: loadedAdmin._id.toString()
 		}, 
 		'somesupersecretsecret', 
-		{ expiresIn: '5h' }
+		{ expiresIn: '3h' }
 		);
 		res.status(200).json({ 
 			token: token,

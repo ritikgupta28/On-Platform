@@ -87,7 +87,10 @@ app.set('port', port);
 const server = http.createServer(app);
 
 mongoose
-	.connect(MONGODB_URI)
+	.connect(MONGODB_URI, { 
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
 	.then(result => {
 		server.listen(port);
 	})
