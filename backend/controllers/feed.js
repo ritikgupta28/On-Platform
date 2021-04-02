@@ -216,6 +216,24 @@ exports.postFinalContest = (req, res, next) => {
 	});
 }
 
+exports.postFinalContestStart = (req, res, next) => {
+	const id = req.body.id;
+	FinalContest.findById(id)
+	.then(contest => {
+		return contest.changeStart();
+	})
+	.then(result => {
+		res.status(200).json({
+			message: 'Successfully!'
+		})
+	})
+	.catch(err => {
+	 	const error = new Error;
+		error.message = 'Failed to save start';
+		next(error);
+	});
+}
+
 exports.getFinalContest = (req, res, next) => {
 	FinalContest.find({ 'admin.adminId' : req.adminId })
 	.then(contests => {
@@ -273,11 +291,13 @@ exports.getFinalContestQuestions = (req, res, next) => {
 			const ceDate = contest.contestEndDate;
 			const ceTime = contest.contestEndTime;
 			const questions = contest.questions;
+			const contestEnd = contest.contestEnd;
 			res.status(200).json({
 				message: 'Fetched Contest Questions Successfully',
 				ceDate: ceDate,
 				ceTime: ceTime,
-				questions: questions
+				questions: questions,
+				contestEnd: contestEnd
 			});
 		})
 		.catch(err => {
@@ -305,11 +325,13 @@ exports.getUserFinalContestQuestions = (req, res, next) => {
 			const ceDate = contest.contestEndDate;
 			const ceTime = contest.contestEndTime;
 			const questions = contest.questions;
+			const contestEnd = contest.contestEnd;
 			res.status(200).json({
 				message: 'Fetched Contest Questions Successfully',
 				ceDate: ceDate,
 				ceTime: ceTime,
-				questions: questions
+				questions: questions,
+				contestEnd: contestEnd
 			});
 		})
 		.catch(err => {
@@ -327,6 +349,7 @@ exports.getUserFinalContestQuestions = (req, res, next) => {
 
 exports.postAllContests = (req, res, next) => {
 	const contestId = req.body.contestId;
+	console.log(contestId);
 	FinalContest.findById(contestId)
 		.then(contest => {
 			contest.sortUsers();

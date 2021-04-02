@@ -43,6 +43,14 @@ const finalContestSchema = new Schema({
 		type: String,
 		required: true
 	},
+	contestStart: {
+		type: Boolean,
+		default: false
+	},
+	contestEnd: {
+		type: Boolean,
+		default: false
+	},
 	participant: {
 		users: [
 			{
@@ -76,6 +84,16 @@ const finalContestSchema = new Schema({
 		]
 	}
 });
+
+finalContestSchema.methods.changeStart = function() {
+	this.contestStart = true;
+  return this.save();
+};
+
+finalContestSchema.methods.changeEnd = function() {
+	this.contestEnd = true;
+  return this.save();
+};
 
 finalContestSchema.methods.addToParticipant = function(id) {
   const participantUserIndex = this.participant.users.findIndex(pu => {

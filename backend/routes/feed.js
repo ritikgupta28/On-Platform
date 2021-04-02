@@ -22,9 +22,11 @@ router.post('/newcontest-delete-question', isAuthAdmin, feedController.postNewCo
 
 router.get('/finalcontest', isAuthAdmin, feedController.getFinalContest);
 
-router.get('/userfinalcontest', isAuthUser, feedController.getUserFinalContest);
+router.get('/userfinalcontest', feedController.getUserFinalContest);
 
 router.get('/userfinalcontest/registration/:contestId', isAuthUser, feedController.getUserFinalContestRegistration);
+
+router.post('/finalcontest/start', isAuthAdmin, feedController.postFinalContestStart);
 
 router.post('/finalcontest', isAuthAdmin, feedController.postFinalContest);
 
@@ -34,7 +36,7 @@ router.get('/userfinalcontest/questions/:contestId', isAuthUser, feedController.
 
 router.get('/allcontests', isAuthAdmin, feedController.getAllContests);
 
-router.post('/allcontests', isAuthAdmin, feedController.postAllContests);
+router.post('/allcontests', feedController.postAllContests);
 
 router.get('/allcontests/questions/:contestId', isAuthAdmin, feedController.getAllContestsQuestions);
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-function Time({onTimeChange, date, time}) {
+function Time({onTimeChange, id, startEnd, date, time}) {
+  console.log(id, startEnd, date, time);
   const calculateTimeLeft = () => {
     let difference = +new Date(date) - +new Date();
     let x = (60*(time[0]-0)*10) + (60*(time[1]-0)) + ((time[3]-0)*10) + (time[4]-0);
@@ -16,8 +17,8 @@ function Time({onTimeChange, date, time}) {
         secs: Math.floor((difference / 1000) % 60),
       };
     }
-    else {
-      onTimeChange(true);
+    else if(startEnd === false) {
+      onTimeChange(id);
     }
 
     return timeLeft;
@@ -46,7 +47,7 @@ function Time({onTimeChange, date, time}) {
   });
   return (
     <div>
-      {timerComponents.length ? timerComponents : <span>Time's up!</span>}
+      {timerComponents.length ? timerComponents : <span>00:00:00</span>}
     </div>
   );
 }

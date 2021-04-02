@@ -17,7 +17,7 @@ class FinalContestQuestions extends Component {
 	componentDidMount() {
 		let status;
 		const contestId = this.props.match.params.id;
-		fetch('https://on-platform-api.herokuapp.com/feed/userfinalcontest/questions/' + contestId, {
+		fetch('http://localhost:8000/feed/userfinalcontest/questions/' + contestId, {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -36,17 +36,42 @@ class FinalContestQuestions extends Component {
 						date: resData.ceDate,
 						time: resData.ceTime,
 						questions: resData.questions,
+						end: resData.contestEnd
 					});
 				}
 				this.setState({ loading: false });
-				console.log(resData);
 			})
 			.catch(this.catchError);
 	}
 
-	onTimeChange = (bool) => {
-		this.setState({ end: bool })
-	}
+	onEndTimeChange = (id) => {
+		console.log(id);
+		let status;
+		fetch('http://localhost:8000/feed/allcontests', {
+			method: 'POST',
+			headers: {
+				Authorization: 'Bearer ' + this.props.token,
+				'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+       	contestId: this.props.match.params.id
+      })
+    })
+    .then(res => {
+     	status = res.status;
+     	return res.json();
+    })
+    .then(resData => {
+     	if(status === 500) {
+     		throw new Error(resData.message);
+     	}
+     	else {
+     		this.setState({ end: true });
+     		this.props.history.push('/user/finalcontest');
+     	}
+    })
+    .catch(this.catchError);
+  }
 
 	catchError = error => {
 		this.setState({ error: error })
@@ -75,11 +100,10 @@ class FinalContestQuestions extends Component {
 					this.state.end 
 					? 
 					<div>
-					{window.location.reload()}
 					<span> Contest Over </span> 
 					</div>
 					: 
-					<Time onTimeChange={this.onTimeChange} date={this.state.date} time={this.state.time} />
+					<Time onTimeChange={this.onEndTimeChange} id={this.props.match.params.id} startEnd={this.state.end} date={this.state.date} time={this.state.time} />
 				)}
 				</div>
 				{this.state.questions.map(q=> (
