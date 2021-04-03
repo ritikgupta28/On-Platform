@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 function Time({onTimeChange, id, startEnd, date, time}) {
-  console.log(id, startEnd, date, time);
   const calculateTimeLeft = () => {
     let difference = +new Date(date) - +new Date();
     let x = (60*(time[0]-0)*10) + (60*(time[1]-0)) + ((time[3]-0)*10) + (time[4]-0);

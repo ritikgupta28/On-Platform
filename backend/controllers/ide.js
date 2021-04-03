@@ -37,6 +37,32 @@ exports.ideResult = async (req, res, next) => {
   );
 }
 
+exports.ideCompile = async (req, res, next) => {
+  let { script, language, stdin } = req.body;
+  let program = {
+    script,
+    language,
+    stdin,
+    versionIndex: '2',
+    clientId: process.env.IDE_clientId,
+    clientSecret: process.env.IDE_clientSecret
+  };
+  request({
+      url: 'https://api.jdoodle.com/v1/execute',
+      method: 'POST',
+      json: program
+    },
+    function(error, response, body) {
+      if(!error) {
+        res.send(response).status(200);
+      }
+      else {
+        res.send(error).status(404);
+      }
+    }
+  );
+}
+
 exports.inputFile = async (req, res) => {
   const questionId = req.body.questionId;
   FinalContest.find()

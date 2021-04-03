@@ -7,8 +7,10 @@ const ideController = require('../controllers/ide');
 const router = express.Router();
 
 //POST /ide
-router.post('/ide', isAuthUser, isAuthAdmin, ideController.ideResult);
+router.post('/ide/compile', ideController.ideCompile);
 
 router.post('/ide/input', isAuthUser, isAuthAdmin, ideController.inputFile);
+
+router.post('/ide', isAuthUser, isAuthAdmin, ideController.ideResult);
 
 module.exports = router;

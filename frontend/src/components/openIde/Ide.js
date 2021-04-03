@@ -14,19 +14,31 @@ class App extends React.Component {
     this.state = {
       name: 'CodeMirror',
       result: '',
-      code: this.props.code,
       language: 'text/x-c++src',
+      code: '',
       output: false,
       inputShow: true
     };
     this.handleCompile = this.handleCompile.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onLangChange = (e) => {
     this.setState({ 
       language: e.target.value
     })
+    if(this.state.code === '') {
+      if (this.state.language === 'text/x-c++src') {
+        this.updateCode(`#include <iostream>
+          using namespace std;
+          int main() {
+              cout<<"Hello World!";
+          }`
+        )
+      }
+      else {
+        this.updateCode(`print("Hello World!")}`)
+      }      
+    }
   }
 
   updateCode(newCode) {
@@ -47,48 +59,17 @@ class App extends React.Component {
     let language = null;
     if (this.state.language === 'python') language = 'python3';
     else language = 'cpp';
-    let questionId = this.props.questionId;
     let stdin = this.state.inputdata;
-    this.state.result = await axios.post('https://on-platform-api.herokuapp.com/ide', {
+    this.state.result = await axios.post('https://on-platform-api.herokuapp.com/ide/compile', {
       script,
       language,
-      questionId,
       stdin
-      },
-      {
-        headers: {
-          Authorization: 'Bearer ' + this.props.token,
-          'Content-Type': 'application/json'
-        }
       }
     );
     this.setState({
       output: true
     });
   }
-
-  async handleSubmit(e) {
-    let script = this.state.code;
-    let language = null;
-    if (this.state.language === 'python') language = 'python3';
-    else language = 'cpp';
-    let questionId = this.props.questionId;
-    this.state.result = await axios.post('https://on-platform-api.herokuapp.com/ide/input',{
-      script,
-      language,
-      questionId
-      },
-      {
-        headers: {
-          Authorization: 'Bearer ' + this.props.token,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-    this.setState({
-      output: true
-    });
-  } 
 
   render() {
     let options = {
@@ -128,9 +109,6 @@ class App extends React.Component {
            </Col>
            <Col md="auto">
            <Button variant="outline-success" onClick={this.handleCompile}>Run Code</Button>
-          </Col>
-          <Col md="auto">
-           <Button variant="outline-primary" onClick={this.handleSubmit}>Submit</Button>
           </Col>
            </Row>
            </Form.Group>

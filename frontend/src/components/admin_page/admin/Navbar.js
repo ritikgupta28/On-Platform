@@ -156,7 +156,7 @@ class navbar extends React.Component {
 	    	   					token={this.props.token}
 	    	   				/>
 		    	   		)}
-		    	   	/>
+							/>
 	    	   		<Route
 		    	  		path="/admin/help"
 	    		   		render = {props => (
