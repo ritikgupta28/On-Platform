@@ -10,13 +10,14 @@ class FinalContest extends Component {
     	result: false,
     	loading: true,
 			finalcontest: [],
-			error: null
+			error: null,
+			userId: ''
 		}
 	};
 
 	componentDidMount() {
 		let status;
-		fetch('https://on-platform-api.herokuapp.com/feed/userfinalcontest', {
+		fetch('http://localhost:8000/feed/userfinalcontest', {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -32,6 +33,7 @@ class FinalContest extends Component {
 			}
 			this.setState({
 				finalcontest: resData.finalcontest,
+				userId: resData.userId,
 				loading: false
 			});
 		})
@@ -49,7 +51,7 @@ class FinalContest extends Component {
 	onRegChange = (id) => {
 		let status;
 		const contestId = id;
-		fetch('https://on-platform-api.herokuapp.com/feed/userfinalcontest/registration/' + contestId, {
+		fetch('http://localhost:8000/feed/userfinalcontest/registration/' + contestId, {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -65,7 +67,8 @@ class FinalContest extends Component {
 			}
 			else {
 				this.setState({ result: true })
-				throw new Error(resData.message);
+				// throw new Error(resData.message);
+				window.location.reload();
 			}
 		})
 		.catch(this.catchError);
@@ -73,7 +76,7 @@ class FinalContest extends Component {
 
 	onStartTimeChange = (id) => {
 		let status;
-		fetch('https://on-platform-api.herokuapp.com/feed/finalcontest/start', {
+		fetch('http://localhost:8000/feed/finalcontest/start', {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
@@ -99,7 +102,6 @@ class FinalContest extends Component {
   }
 
   onEndTimeChange = (id) => {
-  	console.log(id);
 		let status;
 		fetch('https://on-platform-api.herokuapp.com/feed/allcontests', {
 			method: 'POST',
@@ -160,6 +162,8 @@ class FinalContest extends Component {
 						key={contest._id}
 						title={contest.contestName}
 						id={contest._id}
+						userId={this.state.userId}
+						users={contest.usersId}
 						questions={contest.questions}
 						admin={contest.admin.name}
 					/>

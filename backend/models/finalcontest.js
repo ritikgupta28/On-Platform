@@ -82,7 +82,13 @@ const finalContestSchema = new Schema({
 				}
 			}
 		]
-	}
+	},
+	usersId: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'User'
+		}
+	]
 });
 
 finalContestSchema.methods.changeStart = function() {

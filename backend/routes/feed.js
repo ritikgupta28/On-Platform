@@ -22,7 +22,7 @@ router.post('/newcontest-delete-question', isAuthAdmin, feedController.postNewCo
 
 router.get('/finalcontest', isAuthAdmin, feedController.getFinalContest);
 
-router.get('/userfinalcontest', feedController.getUserFinalContest);
+router.get('/userfinalcontest', isAuthUser, feedController.getUserFinalContest);
 
 router.get('/userfinalcontest/registration/:contestId', isAuthUser, feedController.getUserFinalContestRegistration);
 

@@ -116,7 +116,7 @@ exports.getNewContest = (req, res, next) => {
 			.execPopulate()
 			.then(admin => {
 				const questions = admin.contest.items;
-				res.status(200).json({
+-				res.status(200).json({
 					message: 'successfully',
 					questions: questions
 				});
@@ -254,7 +254,8 @@ exports.getUserFinalContest = (req, res, next) => {
 	.then(contest => {
 		res.status(200).json({
 			message: 'Fetched question successfully!',
-			finalcontest: contest
+			finalcontest: contest,
+			userId: req.userId
 		});
 	})
 	.catch(err => {
@@ -268,6 +269,10 @@ exports.getUserFinalContestRegistration = (req, res, next) => {
 	const contestId = req.params.contestId;
 	req.contestId = contestId;
 	FinalContest.findById(contestId)
+	.then(contest => {
+		contest.usersId.push(req.userId);
+		return contest.save();
+	})
 	.then(contest => {
 		contest.addToParticipant(req.userId);
 		res.status(200).json({
@@ -349,7 +354,6 @@ exports.getUserFinalContestQuestions = (req, res, next) => {
 
 exports.postAllContests = (req, res, next) => {
 	const contestId = req.body.contestId;
-	console.log(contestId);
 	FinalContest.findById(contestId)
 		.then(contest => {
 			contest.sortUsers();
