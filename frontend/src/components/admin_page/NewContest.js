@@ -84,7 +84,7 @@ class Contest extends Component {
 
 	handler = (e) => {
 		let status;
-		fetch('http://localhost:8000/feed/finalcontest', {
+		fetch('https://on-platform-api.herokuapp.com/feed/finalcontest', {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,

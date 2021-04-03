@@ -7,7 +7,7 @@ class Header extends React.Component {
             <Container fluid style={{ backgroundColor: 'black', color: 'white', padding: '10px' }}>
             <Row>
             <Col xs='5'>
-             <h1>Platform-Up</h1>
+             <h1>On-Platform</h1>
              </Col>
              <Col md="auto">
              <h1>Contact Us</h1>

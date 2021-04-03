@@ -27,7 +27,7 @@ class navbar extends React.Component {
 						variant="dark" 
 						sticky="top"
 					>
-				   	<Navbar.Brand eventkey={0}>Platform-Up</Navbar.Brand>
+				   	<Navbar.Brand eventkey={0}>On-Platform</Navbar.Brand>
 				   	<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				   	<Navbar.Collapse id="responsive-navbar-nav">
 					   	<Nav className="mr-auto">

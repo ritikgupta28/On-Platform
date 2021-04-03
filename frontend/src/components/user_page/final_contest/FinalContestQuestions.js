@@ -17,7 +17,7 @@ class FinalContestQuestions extends Component {
 	componentDidMount() {
 		let status;
 		const contestId = this.props.match.params.id;
-		fetch('http://localhost:8000/feed/userfinalcontest/questions/' + contestId, {
+		fetch('https://on-platform-api.herokuapp.com/feed/userfinalcontest/questions/' + contestId, {
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
 				'Content-Type': 'application/json'
@@ -47,7 +47,7 @@ class FinalContestQuestions extends Component {
 	onEndTimeChange = (id) => {
 		console.log(id);
 		let status;
-		fetch('http://localhost:8000/feed/allcontests', {
+		fetch('https://on-platform-api.herokuapp.com/feed/allcontests', {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,

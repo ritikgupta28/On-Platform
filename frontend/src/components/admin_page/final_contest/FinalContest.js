@@ -41,7 +41,7 @@ class FinalContest extends Component {
 
 	onStartTimeChange = (id) => {
 		let status;
-		fetch('http://localhost:8000/feed/finalcontest/start', {
+		fetch('https://on-platform-api.herokuapp.com/feed/finalcontest/start', {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
@@ -69,7 +69,7 @@ class FinalContest extends Component {
   onEndTimeChange = (id) => {
   	console.log(id);
 		let status;
-		fetch('http://localhost:8000/feed/allcontests', {
+		fetch('https://on-platform-api.herokuapp.com/feed/allcontests', {
 			method: 'POST',
 			headers: {
 				Authorization: 'Bearer ' + this.props.token,
