@@ -45,7 +45,6 @@ class FinalContestQuestions extends Component {
 	}
 
 	onEndTimeChange = (id) => {
-		console.log(id);
 		let status;
 		fetch('https://on-platform-api.herokuapp.com/feed/allcontests', {
 			method: 'POST',
