@@ -10,23 +10,14 @@ export default class Help extends React.Component {
 			  <div style={{ textAlign: 'center' }}>
 			   <Image src={svg} rounded />
 			  </div>
-				<p>1. Firstly, Create an Account.</p>
-				<p>2. In the tab of Questions, you see your previously added questions and a (+) sign with all questions.</p>
-				<p>3. In the tab of Add Questions, you can Add question in the questions list of yours.
-				(Please Note that you fill all details in the respective Input Space).</p>
-				<p>4. After pressing the button in all questions tab your question send to the New Contest tab, 
-				here you can Host a Contest after filling all mentiond details. here a (-) sign button is also there 
-				which is used for removing question from the contest.</p>
-				<p>5. After Host a contest you can see it in the tab of Final Contest
-				(here you see all contest which are currentlly running).
-				Here a End button is also there which is used for the end the contest manually
-				(if you don't press it don't worry it will automatically ended after the Time's Up).</p>
-				<p>6. After ending the contest it will goes to All Contest tab
-				(here you see all ended contest which were held previously).
-				Here a Result button is also there which is help you to see the leaderboard where you can see 
-				all the paricipants in the contest and their Total Score and 
-				if you want to see a particular question code of a user you can also see it.</p>
-				<p>7. Here a online IDE is also available for 2 languages(C++ and python).</p>
+				<p>1. Create account as an Admin.</p>
+				<p>2. After login, all questions added by admin are there.</p>
+				<p>3. With (+) sign admin can add that question to new contest.</p>
+				<p>4. In tab of add question admin can create and add new question.</p>
+				<p>5. Admin can host new contest by adding questions with start and end time and date.</p>
+				<p>6. When contest is started all users who are registered now able to participate in the contest.</p>
+				<p>7. When contest is over, contest will automatically hide.</p>
+				<p>8. After contest is over only admin can see that contest with leader board on All Contests page.​</p>
 			</Container>
 		)
 	}

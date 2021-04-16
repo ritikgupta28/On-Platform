@@ -17,8 +17,7 @@ const Cardlist = () => {
         <Card.Body>
          <Card.Title>Sahil Goyal</Card.Title>
          <Card.Text>
-          I am a student and enthusiastic to gain knowledge and always want to experience new things. 
-          i always optimistic towards results.
+          I am a student, enthusiastic to gain knowledge and always want to experience new things.
          </Card.Text>
          <Row style={{padding: '0px 40px'}}>
           <Col>

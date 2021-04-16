@@ -10,13 +10,12 @@ export default class Help extends React.Component {
 			  <div style={{ textAlign: 'center' }}>
 			   <Image src={svg} rounded />
 			  </div>
-				<p>1. Firstly, Create an Account.</p>
-				<p>2. Here a online IDE is also available for 2 languages(C++ and python).</p>
-				<p>3. After Login, you can see a Contest Tab here you see all the Running contests</p>
-				<p>4. You can Register yourself after clicking the Register button</p>
-				<p>5. Time is also there in the given duration you can Run the Code and submit it.</p>
-				<p>6. After Times Up the contest will gone</p>
-				<p>Happy Coding :)</p>   
+				<p>1. Create an account as an User.​</p>
+				<p>2. After login, there is a Contest Tab where you see all the running contests.​</p>
+				<p>3. User must register before attempt any contest.​</p>
+				<p>4. After register and contest is started user can participate in that contest.</p>
+				<p>5. User submit their code on an online IDE which supports 2 languages (C++ and Python).</p>
+				<p>6. After contest is over user not submit their solution.</p>
 			</Container>
 		)
 	}
